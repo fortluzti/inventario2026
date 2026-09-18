@@ -1,4 +1,5 @@
 import './ReportTemplate.css'
+import { logoUrl, hasLogo } from '../api/configuracoes.js'
 
 export default function ReportTemplate({ empresa, title, subtitle, filters, columns, rows, total, onClose, onExportCsv, loading }) {
   const now = new Date()
@@ -16,6 +17,8 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
     if (value === null || value === undefined || value === '') return '—'
     return value
   }
+
+  const logoSrc = empresa && hasLogo(empresa) ? logoUrl(empresa.empresa_logo) : ''
 
   return (
     <div className="rpt-overlay">
@@ -44,8 +47,8 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
           <div className="a4-content">
             <header className="rpt-header-institucional">
               <div className="rpt-logo-wrap">
-                {empresa && empresa.empresa_logo ? (
-                  <img src={empresa.empresa_logo} alt="Logo da empresa" className="rpt-logo" />
+                {logoSrc ? (
+                  <img src={logoSrc} alt="Logo da empresa" className="rpt-logo" />
                 ) : (
                   <div className="rpt-logo-fallback">FL</div>
                 )}
@@ -69,10 +72,7 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
             <div className="rpt-divider" />
 
             <div className="rpt-title-block">
-              <div className="rpt-title-row">
-                <h1 className="rpt-title">{title}</h1>
-                <span className="rpt-badge">TEMPLATE MESTRE DINÂMICO</span>
-              </div>
+              <h1 className="rpt-title">{title}</h1>
               {subtitle && <p className="rpt-subtitle">{subtitle}</p>}
               <div className="rpt-metadata">
                 <span><strong>Data de Emissão:</strong> {dataEmissao} às {horaEmissao}</span>
@@ -82,7 +82,6 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
             </div>
 
             <div className="rpt-table-wrap">
-              <div className="rpt-table-title">Demonstrativo Geral de Parque Instalado</div>
               <table className="rpt-table">
                 <thead>
                   <tr>
@@ -117,12 +116,14 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
                   )}
                 </tbody>
               </table>
-              {rows.length > 0 && (
-                <p className="rpt-footnote">
-                  * O relatório completo contém {total} registros distribuídos em {Math.ceil(total / 30)} páginas A4 impressas sob demanda pelo módulo FortLuz ERP.
-                </p>
-              )}
             </div>
+
+            {rows.length > 0 && (
+              <p className="rpt-footnote">
+                * Relatório com {total} registros distribuídos em múltiplas páginas A4 conforme necessário.
+                <br />Documento oficial gerado para controle patrimonial interno pelo módulo FortLuz ERP.
+              </p>
+            )}
           </div>
 
           <footer className="rpt-footer">
@@ -130,7 +131,7 @@ export default function ReportTemplate({ empresa, title, subtitle, filters, colu
             <div className="rpt-footer-content">
               <span>Inventário FortLuz ERP • Módulo de Relatórios Corporativos</span>
               <span>Documento oficial gerado para controle patrimonial interno</span>
-              <span>Página 1 de 1</span>
+              <span className="rpt-page-number"></span>
             </div>
           </footer>
         </section>
