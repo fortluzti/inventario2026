@@ -1,0 +1,13 @@
+# Bloqueia listagem e acesso direto a arquivos sensiveis
+Options -Indexes
+
+<FilesMatch "\.(env|md|sql|log|cnt)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Tudo passa pelo front controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>

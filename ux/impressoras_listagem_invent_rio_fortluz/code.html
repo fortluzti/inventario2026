@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-primary":"#ffffff","on-error":"#ffffff","surface-variant":"#d5e3fc","on-surface":"#0d1c2e","on-tertiary-fixed-variant":"#00504a","surface-container-highest":"#d5e3fc","background":"#f8f9ff","on-secondary-fixed-variant":"#6e3900","secondary":"#904d00","tertiary-container":"#005852","surface-dim":"#ccdbf3","surface-container-low":"#eff4ff","outline":"#8d706d","primary-fixed-dim":"#ffb4ac","secondary-fixed":"#ffdcc3","error":"#ba1a1a","outline-variant":"#e1bfbb","primary-container":"#991b1b","on-error-container":"#93000a","surface":"#f8f9ff","on-secondary-container":"#663500","surface-container-lowest":"#ffffff","on-secondary-fixed":"#2f1500","on-primary-container":"#ffaaa1","surface-tint":"#b02d29","surface-container-high":"#dce9ff","tertiary-fixed-dim":"#80d5cb","primary-fixed":"#ffdad6","error-container":"#ffdad6","secondary-container":"#fe932c","on-secondary":"#ffffff","on-primary-fixed-variant":"#8e1214","inverse-surface":"#233144","tertiary-fixed":"#9cf2e8","on-tertiary-container":"#79cec4","on-background":"#0d1c2e","on-tertiary-fixed":"#00201d","secondary-fixed-dim":"#ffb77d","on-surface-variant":"#59413e","inverse-primary":"#ffb4ac","surface-container":"#e6eeff","primary":"#760009","on-primary-fixed":"#410002","surface-bright":"#f8f9ff","inverse-on-surface":"#eaf1ff","tertiary":"#003f3a","on-tertiary":"#ffffff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xl":"1rem","margin":"0.75rem","space-xs":"0.125rem","space-md":"0.5rem","space-lg":"0.75rem","space-sm":"0.25rem","gutter":"0.5rem"},fontFamily:{"body-sm":["IBM Plex Sans"],"code-dense":["JetBrains Mono"],"label-md":["IBM Plex Sans"],"body-lg":["IBM Plex Sans"],"label-sm":["IBM Plex Sans"],"label-lg":["IBM Plex Sans"],"headline-sm":["IBM Plex Sans"],"body-md":["IBM Plex Sans"],"headline-md":["IBM Plex Sans"],"headline-lg":["IBM Plex Sans"]},fontSize:{"body-sm":["11px",{lineHeight:"14px",fontWeight:"400"}],"code-dense":["11px",{lineHeight:"14px",fontWeight:"400"}],"label-md":["11px",{lineHeight:"14px",letterSpacing:"0.01em",fontWeight:"500"}],"body-lg":["13px",{lineHeight:"18px",fontWeight:"400"}],"label-sm":["10px",{lineHeight:"12px",letterSpacing:"0.04em",fontWeight:"600"}],"label-lg":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"headline-sm":["14px",{lineHeight:"20px",fontWeight:"600"}],"body-md":["12px",{lineHeight:"16px",fontWeight:"400"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-background"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-12 w-full px-margin flex items-center justify-between border-b border-surface-container-high"><div class="flex items-center gap-space-md"><img alt="FortLuz Inventário ERP Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold border-r border-surface-container-high pr-space-md hidden sm:inline">Inventário FortLuz ERP</span><button class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Recolher Menu Lateral" type="button"><span class="material-symbols-outlined text-[18px]">menu</span></button><div class="hidden md:flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">terminal</span><span>Ativos TI</span><span class="text-outline-variant">/</span><span class="text-on-surface font-semibold">Console Central</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden lg:flex items-center"><span class="material-symbols-outlined absolute left-2 text-on-surface-variant text-[16px]">search</span><input class="w-64 h-7 pl-7 pr-14 bg-surface-container-low rounded border border-outline-variant font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" placeholder="Pesquisar patrimônio, serial, IP..." type="text"/><span class="absolute right-1.5 font-code-dense text-label-sm bg-surface-container px-1 py-0.5 rounded text-on-surface-variant border border-surface-container-high">Ctrl+K</span></div><div class="relative"><button class="relative w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Notificações e Alertas do Sistema" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error rounded-full font-label-sm text-[9px] flex items-center justify-center font-bold">5</span></button></div><div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container-high"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-end gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container inline-block"></span>Admin TI</div><div class="font-label-sm text-label-sm text-on-surface-variant">Terminal 01 - Almoxarifado</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button class="w-6 h-6 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Menu do Usuário" type="button"><span class="material-symbols-outlined text-[16px]">expand_more</span></button></div></div></div><div class="h-9 w-full px-margin bg-surface-container-low flex items-center justify-between border-b border-surface-container-high"><div class="flex items-center gap-space-xs font-label-md text-label-md"><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px] text-tertiary-container">refresh</span><span>Atualizar</span><span class="font-code-dense text-label-sm text-on-surface-variant">(F5)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-primary text-on-primary hover:bg-primary-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">add_box</span><span>Novo Ativo</span><span class="font-code-dense text-label-sm text-primary-fixed-dim">(Ctrl+N)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">travel_explore</span><span>Busca Global</span><span class="font-code-dense text-label-sm text-on-surface-variant">(Ctrl+K)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">download</span><span>Exportar</span></button></div><div class="hidden md:flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-secondary">dns</span>450 Ativos Conectados</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary-container">verified_user</span>Licença Corporativa Ativa</span></div></div></header><aside class="fixed left-0 top-[84px] bottom-6 w-60 bg-surface-container-lowest z-40 flex flex-col border-r border-surface-container-high overflow-y-auto"><div class="px-space-md py-space-sm font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider font-bold bg-surface-container-low border-b border-surface-container-high">Módulos do Sistema</div><nav class="flex-1 px-space-xs py-space-sm space-y-space-xs" data-active-classes="bg-primary-container text-on-primary font-semibold rounded"><div class="font-label-sm text-label-sm px-2 pt-1 text-outline uppercase tracking-wider font-semibold">1. Painel Principal</div><a aria-current="page" class="flex items-center gap-space-sm px-2 py-1.5 transition-colors bg-primary-container text-on-primary font-semibold rounded" data-path="dashboard-geral" href="#"><span class="material-symbols-outlined text-[16px]">dashboard</span>Dashboard Geral</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">2. Equipamentos &amp; TI</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="estacoes-de-trabalho" href="#"><span class="material-symbols-outlined text-[16px]">computer</span>Estações de Trabalho</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="monitores" href="#"><span class="material-symbols-outlined text-[16px]">desktop_windows</span>Monitores</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="impressoras" href="#"><span class="material-symbols-outlined text-[16px]">print</span>Impressoras</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="celulares-corporativos" href="#"><span class="material-symbols-outlined text-[16px]">smartphone</span>Celulares Corporativos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="nobreaks" href="#"><span class="material-symbols-outlined text-[16px]">battery_charging_full</span>Nobreaks</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ativos-diversos" href="#"><span class="material-symbols-outlined text-[16px]">devices_other</span>Ativos Diversos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="softwares" href="#"><span class="material-symbols-outlined text-[16px]">terminal</span>Softwares</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="servicos-online" href="#"><span class="material-symbols-outlined text-[16px]">cloud_done</span>Serviços Online</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">3. Estoque &amp; Insumos</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="toners" href="#"><span class="material-symbols-outlined text-[16px]">inventory_2</span>Toners em Estoque</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="recebimento-de-toners" href="#"><span class="material-symbols-outlined text-[16px]">move_to_inbox</span>Recebimento de Toners</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="historico-de-trocas" href="#"><span class="material-symbols-outlined text-[16px]">history</span>Histórico de Trocas</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">4. Manutenção &amp; Suporte</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ordens-e-manutencoes" href="#"><span class="material-symbols-outlined text-[16px]">build</span>Ordens &amp; Manutenções</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="orcamentos" href="#"><span class="material-symbols-outlined text-[16px]">request_quote</span>Orçamentos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="chamados-ti" href="#"><span class="material-symbols-outlined text-[16px]">support_agent</span>Chamados TI</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">5. Cadastros Básicos</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="empresas" href="#"><span class="material-symbols-outlined text-[16px]">corporate_fare</span>Empresas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="setores" href="#"><span class="material-symbols-outlined text-[16px]">schema</span>Setores</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="funcionarios" href="#"><span class="material-symbols-outlined text-[16px]">badge</span>Funcionários</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="fornecedores" href="#"><span class="material-symbols-outlined text-[16px]">local_shipping</span>Fornecedores</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">6. Etiquetas &amp; Patrimônio</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="gerar-qr-codes-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">qr_code_2</span>Gerar QR / Etiquetas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="impressoras-de-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">label</span>Impressoras de Etiquetas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="modelos-de-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">style</span>Modelos</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">7. Relatórios</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ativos-x-funcionarios" href="#"><span class="material-symbols-outlined text-[16px]">assignment_ind</span>Ativos x Funcionários</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">8. Administração</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="usuarios-e-perfis" href="#"><span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>Usuários &amp; Perfis (RBAC)</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="permissoes" href="#"><span class="material-symbols-outlined text-[16px]">lock_person</span>Permissões</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="configuracoes-do-sistema" href="#"><span class="material-symbols-outlined text-[16px]">settings</span>Configurações do Sistema</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="banco-de-dados" href="#"><span class="material-symbols-outlined text-[16px]">database</span>Banco de Dados</a></nav></aside><div class="pl-60 min-h-screen flex flex-col"><main class="flex-1 w-full pt-[84px] pb-8 px-space-md bg-background"><div class="flex flex-col w-full">
+<!-- SCRIPT DE SINCRONIZAÇÃO DO MENU LATERAL (Ativa o item Impressoras) -->
+<script>
+    (function () {
+      const activePath = "impressoras";
+      const navLinks = document.querySelectorAll('aside nav a[data-path]');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === activePath) {
+          link.className = "flex items-center gap-space-sm px-2 py-1.5 rounded bg-primary-container text-on-primary font-semibold transition-colors font-body-sm text-body-sm shadow-sm";
+          const icon = link.querySelector('.material-symbols-outlined');
+          if (icon) icon.className = "material-symbols-outlined text-[16px] text-on-primary";
+        }
+      });
+    })();
+  </script>
+<!-- 1. CABEÇALHO & BREADCRUMB & BARRA DE AÇÕES -->
+<div class="flex flex-col gap-space-sm mb-space-md">
+<!-- Breadcrumb Corporativo -->
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Ativos</span>
+<span class="text-outline-variant font-code-dense">/</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Hardware</span>
+<span class="text-outline-variant font-code-dense">/</span>
+<span class="text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">print</span>
+        Impressoras
+      </span>
+</div>
+<!-- Título com Contagem de Itens e Barra de Ações Alinhada -->
+<div class="flex flex-wrap items-center justify-between gap-space-md bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">print</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Impressoras</h1>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">
+            24 itens
+          </span>
+</div>
+</div>
+<!-- 4 Botões Exatos na Ordem Requerida -->
+<div class="flex items-center gap-space-sm">
+<!-- 1. + Nova Impressora -->
+<button class="h-8 px-space-md flex items-center gap-1.5 rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md font-semibold transition-colors shadow-sm active:translate-y-px" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>+ Nova Impressora</span>
+</button>
+<!-- 2. Modelos -->
+<button class="h-8 px-space-md flex items-center gap-1.5 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors active:translate-y-px" type="button">
+<span class="material-symbols-outlined text-[16px]">list</span>
+<span>Modelos</span>
+</button>
+<!-- 3. Imprimir -->
+<button class="h-8 px-space-md flex items-center gap-1.5 rounded bg-secondary-container text-on-secondary-container hover:brightness-95 font-label-md text-label-md font-semibold transition-all shadow-sm active:translate-y-px" type="button">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Imprimir</span>
+</button>
+<!-- 4. Filtros (Toggle) -->
+<button class="h-8 px-space-md flex items-center gap-1.5 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors active:translate-y-px" id="toggle-filter-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">filter_alt</span>
+<span>Filtros</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. CAMPO DE PESQUISA E FILTROS AVANÇADOS -->
+<div class="flex flex-col gap-space-sm mb-space-md">
+<!-- Card de Pesquisa Global -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="relative w-full flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-24 bg-surface-container-low rounded font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="printer-search" placeholder="Pesquisar por modelo, série ou IP..." type="text"/>
+<div class="absolute right-2 flex items-center gap-1">
+<span class="hidden sm:inline font-code-dense text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface-variant">ESC limpar</span>
+</div>
+</div>
+</div>
+<!-- Área de Filtros Avançados (Somente Status e Botões de Ação) -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-lg shadow-sm" id="advanced-filters-panel">
+<div class="flex flex-wrap items-end justify-between gap-space-md">
+<!-- Seletor Único: Status -->
+<div class="flex flex-col gap-1 w-full max-w-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold flex items-center gap-1" for="filter-status">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+            Status
+          </label>
+<div class="relative">
+<select class="w-full h-8 pl-2 pr-7 bg-surface-container-low text-on-surface rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer" id="filter-status">
+<option value="">Todos os Status</option>
+<option value="Em Uso">Em Uso</option>
+<option value="Em Estoque">Em Estoque</option>
+<option value="Em Manutenção">Em Manutenção</option>
+<option value="Danificado">Danificado</option>
+<option value="Descartado">Descartado</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Botões Compactos: Aplicar e Limpar Filtro -->
+<div class="flex items-center gap-space-sm ml-auto">
+<button class="h-8 px-space-md flex items-center gap-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors active:translate-y-px" id="btn-clear-filter" type="button">
+<span class="material-symbols-outlined text-[15px]">restart_alt</span>
+<span>Limpar Filtro</span>
+</button>
+<button class="h-8 px-space-lg flex items-center gap-1 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-semibold transition-colors shadow-sm active:translate-y-px" id="btn-apply-filter" type="button">
+<span class="material-symbols-outlined text-[15px]">check</span>
+<span>Aplicar</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. TABELA DE IMPRESSORAS (DATAGRID CORPORATIVA DE ALTA DENSIDADE) -->
+<div class="w-full bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden mb-space-md flex flex-col">
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[850px]">
+<!-- Cabeçalho 7 Colunas -->
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider h-8 select-none">
+<!-- 1. Código com Ordenação -->
+<th class="px-space-md py-1 font-semibold cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-1">
+<span>Código</span>
+<span class="material-symbols-outlined text-[13px] text-primary">arrow_downward</span>
+</div>
+</th>
+<!-- 2. Modelo -->
+<th class="px-space-md py-1 font-semibold">Modelo</th>
+<!-- 3. Setor -->
+<th class="px-space-md py-1 font-semibold">Setor</th>
+<!-- 4. Nº Série -->
+<th class="px-space-md py-1 font-semibold">Nº Série</th>
+<!-- 5. Status com Ordenação -->
+<th class="px-space-md py-1 font-semibold cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-1">
+<span>Status</span>
+<span class="material-symbols-outlined text-[13px] text-outline">unfold_more</span>
+</div>
+</th>
+<!-- 6. Compra -->
+<th class="px-space-md py-1 font-semibold">Compra</th>
+<!-- 7. Ações -->
+<th class="px-space-md py-1 font-semibold text-right w-28">Ações</th>
+</tr>
+</thead>
+<!-- Linhas de Dados de Alta Densidade (28px a 32px de altura) -->
+<tbody class="divide-y divide-surface-container-low font-body-md text-body-md text-on-surface" id="printer-table-body">
+<!-- Linha 1 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-001</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">HP LaserJet Pro M404dn</td>
+<td class="px-space-md py-1">Financeiro</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">BR123456789</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">14/03/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-1')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-1">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 2 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-002</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Epson EcoTank L3250</td>
+<td class="px-space-md py-1">RH</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">VND3K09812</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">08/11/2022</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-2')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-2">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 3 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-003</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Brother HL-L6202DW</td>
+<td class="px-space-md py-1">Faturamento</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">E3N7201948</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">19/07/2024</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-3')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-3">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 4 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-004</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Zebra ZD220 (Etiquetas)</td>
+<td class="px-space-md py-1">Almoxarifado</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">ZB99482110</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">02/02/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-4')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-4">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 5 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-005</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Samsung ProXpress M4020ND</td>
+<td class="px-space-md py-1">TI</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">SS48210382</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant inline-block"></span>
+                Em Estoque
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">11/05/2021</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-5')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-5">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 6 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-006</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Canon imageCLASS MF445dw</td>
+<td class="px-space-md py-1">Diretoria</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">CN88319201</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-secondary-fixed text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block"></span>
+                Em Manutenção
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">29/09/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-6')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-6">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 7 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-007</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">HP DeskJet Ink Advantage 2774</td>
+<td class="px-space-md py-1">-</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">HPDJ009822</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-error-container text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error inline-block"></span>
+                Danificado
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">10/01/2020</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-7')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-7">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 8 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-008</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Epson FX-890II Matricial</td>
+<td class="px-space-md py-1">Expedição</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">EPFX892011</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">25/08/2021</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-8')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-8">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 9 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-009</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Brother DCP-L2540DW</td>
+<td class="px-space-md py-1">Jurídico</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">BRDCP99182</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">15/06/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-9')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-9">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 10 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-010</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Lexmark MS417dn</td>
+<td class="px-space-md py-1">-</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">LX41700918</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-dim text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline inline-block"></span>
+                Descartado
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">18/04/2018</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-10')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-10">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 11 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-011</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Zebra ZD421 Térmica</td>
+<td class="px-space-md py-1">Logística</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">ZB42119932</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">12/01/2024</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-11')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-11">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 12 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-012</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">HP LaserJet Enterprise M507dn</td>
+<td class="px-space-md py-1">Controladoria</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">HP50788321</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">30/08/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-12')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-12">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 13 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-013</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Epson EcoTank L8180 Fotográfica</td>
+<td class="px-space-md py-1">Marketing</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">EP81809012</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">14/11/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-13')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-13">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 14 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-014</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Argox OS-214 Plus</td>
+<td class="px-space-md py-1">TI</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">AG21498110</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant inline-block"></span>
+                Em Estoque
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">N/A</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-14')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-14">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+<!-- Linha 15 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low/70 transition-colors h-8">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">IMP-015</td>
+<td class="px-space-md py-1 font-semibold text-on-surface">Kyocera ECOSYS M2040dn</td>
+<td class="px-space-md py-1">Compras</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">KC20409819</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed/30 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+                Em Uso
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">05/05/2023</td>
+<td class="px-space-md py-1 text-right relative">
+<button class="h-6 px-2 rounded bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-on-surface flex items-center gap-0.5 ml-auto" onclick="toggleRowMenu('menu-15')">
+<span>Ações</span>
+<span class="material-symbols-outlined text-[13px]">expand_more</span>
+</button>
+<div class="dropdown-actions hidden absolute right-2 top-8 z-30 w-32 bg-surface-container-lowest rounded shadow-md py-1 text-left" id="menu-15">
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">visibility</span>Visualizar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">edit</span>Editar</a>
+<a class="flex items-center gap-1.5 px-3 py-1 text-error hover:bg-error-container font-label-md text-label-md" href="#"><span class="material-symbols-outlined text-[14px]">delete</span>Excluir</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 4. RODAPÉ E PAGINAÇÃO -->
+<div class="px-space-md py-space-sm bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm select-none">
+<!-- Lado Esquerdo: Estatísticas -->
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
+<span>Mostrando <span class="font-semibold text-on-surface">1 a 15</span> de <span class="font-semibold text-on-surface">24</span> registros</span>
+<span class="text-outline-variant font-code-dense">•</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">
+          Total de registros: 24
+        </span>
+</div>
+<!-- Lado Direito: Controles de Paginação -->
+<div class="flex items-center gap-1">
+<!-- Anterior (Desabilitado) -->
+<button class="h-7 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface-variant/40 cursor-not-allowed font-label-sm text-label-sm" disabled="" type="button">
+<span class="material-symbols-outlined text-[14px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<!-- Página 1 Ativa -->
+<button class="h-7 w-7 flex items-center justify-center rounded bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm" type="button">
+          1
+        </button>
+<!-- Página 2 -->
+<button class="h-7 w-7 flex items-center justify-center rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" type="button">
+          2
+        </button>
+<!-- Próximo (Ativo) -->
+<button class="h-7 px-2 flex items-center gap-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span>Próximo</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- INTERATIVIDADE CLIENT-SIDE LEVE -->
+<script>
+    // Gerenciador do Menu Dropdown de Ações
+    function toggleRowMenu(menuId) {
+      const allMenus = document.querySelectorAll('.dropdown-actions');
+      allMenus.forEach(menu => {
+        if (menu.id !== menuId) {
+          menu.classList.add('hidden');
+        }
+      });
+      const targetMenu = document.getElementById(menuId);
+      if (targetMenu) {
+        targetMenu.classList.toggle('hidden');
+      }
+    }
+
+    // Fechar menus ao clicar fora
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('td')) {
+        document.querySelectorAll('.dropdown-actions').forEach(menu => menu.classList.add('hidden'));
+      }
+    });
+
+    // Toggle da Área de Filtros
+    const toggleFilterBtn = document.getElementById('toggle-filter-btn');
+    const filtersPanel = document.getElementById('advanced-filters-panel');
+    if (toggleFilterBtn && filtersPanel) {
+      toggleFilterBtn.addEventListener('click', () => {
+        filtersPanel.classList.toggle('hidden');
+      });
+    }
+
+    // Filtragem em tempo real na Tabela
+    const searchInput = document.getElementById('printer-search');
+    const statusSelect = document.getElementById('filter-status');
+    const clearFilterBtn = document.getElementById('btn-clear-filter');
+    const applyFilterBtn = document.getElementById('btn-apply-filter');
+    const tableRows = document.querySelectorAll('#printer-table-body tr');
+
+    function filterTable() {
+      const searchTerm = (searchInput.value || '').toLowerCase().trim();
+      const selectedStatus = (statusSelect.value || '').trim();
+
+      tableRows.forEach(row => {
+        const textContent = row.textContent.toLowerCase();
+        const statusCell = row.children[4].textContent.trim();
+
+        const matchesSearch = !searchTerm || textContent.includes(searchTerm);
+        const matchesStatus = !selectedStatus || statusCell.includes(selectedStatus);
+
+        if (matchesSearch && matchesStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterTable);
+    if (applyFilterBtn) applyFilterBtn.addEventListener('click', filterTable);
+    if (statusSelect) statusSelect.addEventListener('change', filterTable);
+
+    if (clearFilterBtn) {
+      clearFilterBtn.addEventListener('click', () => {
+        if (statusSelect) statusSelect.value = '';
+        if (searchInput) searchInput.value = '';
+        filterTable();
+      });
+    }
+
+    // Atalho ESC para limpar pesquisa
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        filterTable();
+      }
+    });
+  </script>
+</div></main></div><footer class="fixed bottom-0 left-0 right-0 h-6 bg-inverse-surface text-inverse-on-surface font-code-dense text-label-sm z-50 flex items-center justify-between px-space-md border-t border-inverse-surface"><div class="flex items-center gap-space-md"><span class="flex items-center gap-1 text-tertiary-fixed"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed inline-block"></span>Conectado ao Servidor FortLuz ERP (API REST v2.4)</span><span class="text-outline">|</span><span class="text-surface-variant">DB: fortluz_db_prod</span><span class="text-outline">|</span><span class="text-surface-variant">Latência: 18ms</span></div><div class="flex items-center gap-space-md"><span class="hidden lg:inline text-surface-variant">Licença: Corporativa TI - 450 Ativos Registrados</span><span class="text-outline hidden lg:inline">|</span><span class="text-surface-variant">Versão: Build 2025.2.4-web</span><span class="text-outline">|</span><span class="bg-surface-container-highest/20 px-1 py-0.2 rounded text-tertiary-fixed-dim">CAPS</span><span class="bg-surface-container-highest/20 px-1 py-0.2 rounded text-tertiary-fixed-dim">NUM</span></div></footer></body></html>

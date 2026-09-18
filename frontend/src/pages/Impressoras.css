@@ -1,0 +1,84 @@
+/* Impressoras — estilos (adaptado do padrão Monitores) */
+.imp-page { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.imp-page-header, .imp-toolbar-row, .imp-pagination, .imp-dialog-header, .imp-dialog-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.imp-page-header { padding: 6px 0 8px; }
+.imp-page-header h1 { display: flex; align-items: center; gap: 8px; font-size: 20px; }
+.imp-page-header h1 .mat { color: var(--primary); }
+.imp-page-header p { margin: 4px 0 0; color: var(--text-muted); }
+.imp-breadcrumb { color: var(--text-muted); font-size: 10px; margin-bottom: 4px; }
+.imp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 28px; padding: 3px 10px; border: 1px solid transparent; border-radius: var(--radius); background: var(--surface-container-low); color: var(--on-surface); font: 600 11px var(--font); cursor: pointer; white-space: nowrap; }
+.imp-btn .mat { font-size: 16px; }
+.imp-btn:hover { background: var(--surface-container-high); }
+.imp-btn:disabled { opacity: .5; cursor: not-allowed; }
+.imp-btn-primary { background: var(--primary); color: var(--on-primary); }
+.imp-btn-primary:hover { background: var(--primary-hover); }
+.imp-btn-secondary { background: var(--secondary); color: var(--on-primary); }
+.imp-btn-secondary:hover { background: #7a3a00; }
+.imp-btn-icon { width: 26px; min-height: 26px; padding: 2px; background: transparent; }
+.imp-btn-icon.danger:hover { color: var(--crit-fg); background: var(--crit-bg); }
+.imp-actions { display: flex; align-items: center; gap: 4px; }
+.imp-toolbar, .imp-grid { background: var(--surface-container-lowest); border-radius: var(--radius); box-shadow: 0 1px 2px #0000000d; }
+.imp-toolbar { padding: 8px; }
+.imp-toolbar-row { flex-wrap: wrap; }
+.imp-search { display: flex; align-items: center; gap: 5px; padding-left: 7px; background: var(--surface-container-low); border-radius: var(--radius); flex: 1; max-width: 420px; min-width: 200px; }
+.imp-search .mat { font-size: 17px; color: var(--text-muted); }
+.imp-search input { width: 100%; min-width: 0; height: 28px; border: 0; background: transparent; padding: 4px; font: inherit; color: inherit; }
+.imp-filters { margin-top: 8px; padding: 6px; background: var(--surface-container-low); display: flex; align-items: center; flex-wrap: wrap; gap: 12px; border-radius: var(--radius); }
+.imp-filters label { font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.imp-filters .imp-actions { margin-left: auto; }
+.imp-table-scroll { overflow: auto; }
+.imp-table { width: 100%; min-width: 700px; border-collapse: collapse; text-align: left; font-size: 11px; }
+.imp-table th { height: 32px; background: var(--surface-container-low); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); padding: 6px 10px; }
+.imp-table td { height: 36px; padding: 4px 10px; }
+.imp-table tbody tr:nth-child(even) { background: var(--row-alt); }
+.imp-table tbody tr:hover { background: var(--surface-container-low); }
+.imp-code { font-family: var(--font-mono); font-size: 11px; }
+.imp-mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+.imp-medium { font-weight: 500; }
+.imp-status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px; white-space: nowrap; border-radius: 3px; font-size: 10px; font-weight: 600; background: var(--surface-container-high); }
+.imp-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.imp-status.in-use { background: #b5f2e5; color: #005852; }
+.imp-status.in-stock { background: #eff4ff; color: #0d1c2e; }
+.imp-status.maintenance { background: var(--warn-bg); color: var(--warn-fg); }
+.imp-status.damaged { background: var(--crit-bg); color: var(--crit-fg); }
+.imp-status.discarded { background: var(--row-alt); color: var(--text-muted); }
+.imp-table .imp-empty { padding: 40px 12px; text-align: center; color: var(--text-muted); }
+.imp-pagination { flex-wrap: wrap; padding: 8px 10px; border-top: 1px solid var(--border-light); font-size: 11px; }
+.imp-message { background: var(--ok-bg); color: var(--ok-fg); padding: 8px; border-radius: var(--radius); display: flex; align-items: center; gap: 8px; }
+.imp-message.error { background: var(--crit-bg); color: var(--crit-fg); }
+.imp-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Modal de Impressoras (Dialog) */
+.imp-overlay { position: fixed; inset: 0; z-index: 200; background: #0d1c2e80; backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.imp-dialog { width: 680px; max-width: 96vw; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; border-radius: 5px; background: var(--surface-container-lowest); box-shadow: 0 20px 60px #0005; overflow: hidden; outline: none; }
+.imp-dialog-header { min-height: 42px; padding: 6px 12px; background: var(--surface-container-low); gap: 8px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.imp-dialog-header h2 { font-size: 14px; flex: 1; font-weight: 600; }
+.imp-dialog-icon { font-size: 17px; padding: 4px; background: var(--primary); color: white; border-radius: 4px; }
+.imp-mode { background: #005852; color: white; font: 9px var(--font-mono); padding: 4px 6px; border-radius: 3px; }
+.imp-mode.view { background: var(--text-muted); }
+.imp-mode.edit { background: var(--warn-fg); }
+.imp-dialog-header .imp-btn-icon { width: 28px; height: 28px; padding: 4px; }
+.imp-form { padding: 16px; flex: 1; min-height: 0; overflow-y: auto; }
+.imp-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.imp-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.imp-field.full { grid-column: 1 / -1; }
+.imp-field label { font-size: 11px; font-weight: 600; color: var(--on-surface); }
+.imp-required { color: var(--primary); }
+.imp-hint { font-size: 10px; color: var(--text-muted); }
+.imp-label-block { font-size: 11px; font-weight: 600; color: var(--on-surface); margin-bottom: 4px; display: block; }
+.imp-input { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); }
+.imp-input:focus { outline: 2px solid var(--primary); border-color: var(--primary); }
+.imp-input:hover { border-color: var(--border-light); }
+.imp-input-readonly { background: var(--surface-container-low); cursor: not-allowed; font-family: var(--font-mono); }
+.imp-select { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); cursor: pointer; }
+.imp-select-wrapper { position: relative; }
+.imp-dialog-footer { padding: 12px; background: var(--surface-container-low); flex-shrink: 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.imp-dialog-footer small { color: var(--text-muted); font: 10px var(--font-mono); }
+.imp-btn-primary[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 640px) {
+  .imp-form-grid { grid-template-columns: 1fr; }
+  .imp-dialog { width: 96vw; max-height: calc(100dvh - 60px); }
+  .imp-dialog-footer small, .imp-mode { display: none; }
+  .imp-dialog-footer { justify-content: flex-end; }
+}

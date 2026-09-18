@@ -1,0 +1,5 @@
+node_modules
+dist
+.env.local
+.smoke/app.mjs
+.smoke/*.txt

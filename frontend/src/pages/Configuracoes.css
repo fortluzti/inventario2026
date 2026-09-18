@@ -1,0 +1,601 @@
+/* ==========================================================
+   Configuracoes do Sistema — estilos do módulo
+   ========================================================== */
+
+.cfg-page {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cfg-page-header {
+  padding: 4px 0 8px;
+}
+.cfg-page-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cfg-page-logo {
+  height: 48px;
+  max-width: 200px;
+  width: auto;
+  object-fit: contain;
+  border: 1px solid var(--card-border, #e0e0e0);
+  border-radius: 4px;
+  padding: 4px;
+}
+.cfg-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cfg-page-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 4px;
+}
+.cfg-page-header h1 .mat { color: var(--primary); }
+.cfg-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 15px;
+}
+
+/* ---------- Tabs ---------- */
+.cfg-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.cfg-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+.cfg-tab:hover { background: var(--surface-container); color: var(--on-surface); }
+.cfg-tab.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--primary-dark);
+}
+.cfg-tab .mat { font-size: 15px; }
+.cfg-tab .badge-dev {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--on-primary);
+  border: none;
+  font-size: 7px;
+  height: 16px;
+  padding: 0 4px;
+  margin-left: 4px;
+}
+
+/* ---------- Tab panels ---------- */
+.cfg-tabpanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- Sections ---------- */
+.cfg-section {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.cfg-section-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.cfg-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+.cfg-section-subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 2px 0 8px;
+  line-height: 14px;
+}
+
+/* ---------- Sub-titles (Manutenção / Integrações) ---------- */
+.cfg-sub-title h2 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0 0 2px;
+}
+.cfg-sub-title p {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  line-height: 14px;
+}
+
+/* ---------- Formulário ---------- */
+.cfg-form { display: flex; flex-direction: column; gap: 16px; }
+.cfg-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.cfg-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cfg-field.full { grid-column: 1 / -1; }
+.cfg-field label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cfg-label-block {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 6px;
+}
+.cfg-required { color: var(--primary); }
+.cfg-hint { font-size: 10px; color: var(--text-muted); line-height: 14px; }
+.cfg-hint.error { color: var(--crit-fg); }
+.cfg-input {
+  width: 100%;
+  height: var(--input-h);
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  font: inherit;
+  font-size: 11px;
+  color: var(--on-surface);
+}
+.cfg-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+  border-color: var(--primary);
+}
+.cfg-input.monospace { font-family: var(--font-mono); }
+.cfg-input:disabled {
+  background: var(--surface-container-low);
+  cursor: not-allowed;
+}
+
+/* ---------- Botões ---------- */
+.cfg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: var(--btn-h);
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  color: #334155;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.cfg-btn:hover { background: var(--row-hover); border-color: #94a3b8; }
+.cfg-btn:active { transform: translateY(1px); }
+.cfg-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.cfg-btn-primary {
+  background: var(--primary);
+  border-color: var(--primary-dark);
+  color: var(--on-primary);
+}
+.cfg-btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.cfg-btn-icon {
+  width: 26px;
+  min-height: 26px;
+  padding: 2px;
+  background: transparent;
+}
+.cfg-btn-icon.danger:hover {
+  color: var(--on-primary);
+  background: var(--crit-fg);
+  border-color: var(--crit-fg);
+}
+.cfg-btn-icon.danger { color: var(--crit-fg); border-color: var(--crit-bd); }
+
+/* ---------- Mensagens ---------- */
+.cfg-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-size: 11px;
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+  border: 1px solid var(--ok-bd);
+}
+.cfg-message.error {
+  background: var(--crit-bg);
+  color: var(--crit-fg);
+  border-color: var(--crit-bd);
+}
+.cfg-message button { margin-left: auto; }
+.cfg-save-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.cfg-save-status.ok { color: var(--ok-fg); }
+.cfg-save-status.error { color: var(--crit-fg); }
+
+/* ---------- Actions ---------- */
+.cfg-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cfg-actions .cfg-btn { height: 26px; padding: 0 8px; font-size: 10px; }
+
+/* ---------- Tabela ---------- */
+.cfg-table-wrap { overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.cfg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  min-width: 720px;
+}
+.cfg-table caption { caption-side: top; padding: 4px 8px; font-weight: 600; color: var(--text-muted); }
+.cfg-table thead th {
+  height: 28px;
+  background: var(--surface-container-low);
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.cfg-table tbody td {
+  height: 28px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--border-faint);
+  vertical-align: middle;
+}
+.cfg-table tbody tr:nth-child(even) { background: var(--row-alt); }
+.cfg-table tbody tr:hover { background: var(--row-hover); }
+.cfg-table .mono { font-family: var(--font-mono); font-size: 10px; }
+.cfg-table .actions { display: flex; align-items: center; gap: 2px; }
+
+/* ---------- Empty state ---------- */
+.cfg-empty {
+  text-align: center;
+  padding: 32px 12px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.cfg-empty .mat { font-size: 32px; margin-bottom: 8px; }
+.cfg-empty p { margin: 4px 0; }
+
+/* ---------- Cards (Manutenção) ---------- */
+.cfg-maintenance { display: flex; flex-direction: column; gap: 8px; }
+.cfg-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.cfg-card + .cfg-card { margin-top: 0; }
+.cfg-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cfg-card-icon {
+  font-size: 20px;
+  color: var(--on-surface);
+  margin-top: 2px;
+  min-width: 20px;
+  text-align: center;
+}
+.cfg-card h3 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 2px;
+  color: var(--on-surface);
+}
+.cfg-card p {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 14px;
+  margin: 0;
+}
+.cfg-card-body { padding: 0 0 8px; }
+
+.cfg-backup-result .cfg-message { margin-bottom: 8px; }
+.cfg-backup-info {
+  font-size: 10px;
+  line-height: 16px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin: 8px 0;
+}
+.cfg-backup-info strong { color: var(--on-surface); font-family: var(--font-mono); font-size: 9px; }
+
+.cfg-verify-result .cfg-message { margin-bottom: 8px; }
+.cfg-verify-summary {
+  font-size: 10px;
+  line-height: 16px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 8px;
+}
+.cfg-verify-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+.cfg-verify-row:last-child { border-bottom: none; }
+.cfg-verify-row span { color: var(--text-muted); }
+.cfg-verify-row strong { color: var(--on-surface); }
+
+.cfg-adapt-result .cfg-message { margin-bottom: 8px; }
+
+/* ---------- Dropzone ---------- */
+.cfg-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 140px;
+  border: 1.5px dashed var(--border-light);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cfg-dropzone:hover {
+  background: var(--surface-container-low);
+  border-color: var(--primary);
+}
+.cfg-dropzone:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+.cfg-dropzone:focus-within .cfg-btn { border-color: var(--primary); }
+.cfg-logo-preview {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-container-low);
+}
+.cfg-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.cfg-logo-overlay {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.cfg-logo-preview:hover .cfg-logo-overlay { opacity: 1; }
+
+/* ---------- Form actions (Rodapé da aba empresa) ---------- */
+.cfg-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ---------- Integrations ---------- */
+.cfg-integrations .cfg-section { margin-bottom: 0; }
+
+/* ---------- Badges ---------- */
+.badge-dev {
+  background: rgba(0, 88, 82, 0.08);
+  color: #005852;
+  border: 1px solid rgba(0, 88, 82, 0.3);
+}
+
+/* ---------- Screen reader ---------- */
+.cfg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Animação de spin ---------- */
+@keyframes cfg-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---------- Modais ---------------- */
+.cfg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cfg-dialog {
+  width: 560px;
+  max-width: 96vw;
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.08);
+  overflow: hidden;
+  outline: none;
+}
+.cfg-dialog-header {
+  min-height: 42px;
+  padding: 6px 12px;
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.cfg-dialog-header h2 {
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cfg-dialog-icon {
+  font-size: 18px;
+  padding: 3px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cfg-dialog-header .cfg-btn-icon {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+}
+.cfg-dialog-body {
+  padding: 12px;
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+}
+.cfg-dialog-footer {
+  flex-shrink: 0;
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 12px;
+}
+.cfg-dialog-footer .cfg-actions .cfg-btn { height: 26px; }
+
+/* ---------- Formulário dentro de modal ---------- */
+.cfg-form { gap: 12px; }
+.cfg-field { min-width: 0; }
+.cfg-permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+.cfg-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--on-surface);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.cfg-checkbox:hover { background: var(--surface-container); }
+.cfg-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.cfg-copied-indicator {
+  position: absolute;
+  top: -24px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ok-fg);
+  background: var(--ok-bg);
+  border: 1px solid var(--ok-bd);
+  border-radius: var(--radius);
+  padding: 2px 8px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 768px) {
+  .cfg-form-grid { grid-template-columns: 1fr; }
+  .cfg-table { min-width: 0; }
+  .cfg-permission-grid { grid-template-columns: 1fr; }
+  .cfg-dialog { width: 96vw; }
+}

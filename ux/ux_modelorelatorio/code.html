@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; } @media print { body { background: transparent !important; } }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed-dim": "#80d5cb", "surface-container-low": "#eff4ff", "surface-container": "#e6eeff", "on-secondary-fixed": "#2f1500", "surface-dim": "#ccdbf3", "inverse-on-surface": "#eaf1ff", "surface-container-lowest": "#ffffff", "surface": "#f8f9ff", "on-surface": "#0d1c2e", "surface-container-high": "#dce9ff", "tertiary": "#003f3a", "on-tertiary-fixed-variant": "#00504a", "secondary": "#904d00", "on-primary-fixed": "#410002", "background": "#f8f9ff", "error-container": "#ffdad6", "primary-fixed-dim": "#ffb4ac", "secondary-fixed": "#ffdcc3", "tertiary-container": "#005852", "on-primary-container": "#ffaaa1", "surface-variant": "#d5e3fc", "on-secondary-fixed-variant": "#6e3900", "primary-container": "#991b1b", "outline-variant": "#e1bfbb", "on-primary": "#ffffff", "on-background": "#0d1c2e", "error": "#ba1a1a", "outline": "#8d706d", "secondary-container": "#fe932c", "surface-bright": "#f8f9ff", "on-secondary": "#ffffff", "secondary-fixed-dim": "#ffb77d", "on-primary-fixed-variant": "#8e1214", "primary-fixed": "#ffdad6", "tertiary-fixed": "#9cf2e8", "on-tertiary-fixed": "#00201d", "on-tertiary": "#ffffff", "on-error": "#ffffff", "inverse-surface": "#233144", "surface-tint": "#b02d29", "inverse-primary": "#ffb4ac", "on-secondary-container": "#663500", "on-tertiary-container": "#79cec4", "on-surface-variant": "#59413e", "primary": "#760009", "on-error-container": "#93000a", "surface-container-highest": "#d5e3fc" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "0.5rem", "space-lg": "0.75rem", "space-xl": "1rem", "space-sm": "0.25rem", "space-xs": "0.125rem", "space-md": "0.5rem", "margin": "0.75rem" }, "fontFamily": { "headline-lg": ["IBM Plex Sans"], "label-sm": ["IBM Plex Sans"], "body-sm": ["IBM Plex Sans"], "label-md": ["IBM Plex Sans"], "label-lg": ["IBM Plex Sans"], "code-dense": ["JetBrains Mono"], "body-lg": ["IBM Plex Sans"], "headline-md": ["IBM Plex Sans"], "headline-sm": ["IBM Plex Sans"], "body-md": ["IBM Plex Sans"] }, "fontSize": { "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "600" }], "body-sm": ["11px", { "lineHeight": "14px", "fontWeight": "400" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" }], "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "code-dense": ["11px", { "lineHeight": "14px", "fontWeight": "400" }], "body-lg": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-md": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "body-md": ["12px", { "lineHeight": "16px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface-dim font-body-md text-body-md text-on-surface antialiased min-h-screen"><main class="w-full"><div class="flex flex-col w-full">
+<style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .print-canvas {
+        background-color: transparent !important;
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+      .a4-sheet {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        min-height: 100% !important;
+        page-break-after: always;
+        break-after: page;
+      }
+    }
+  </style>
+<header class="no-print sticky top-0 z-40 w-full bg-surface-container-lowest shadow-md">
+<div class="flex flex-wrap items-center justify-between px-space-xl py-space-sm gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs bg-primary-container text-on-primary px-space-md py-space-xs rounded">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span class="font-headline-sm text-headline-sm">Visualizador de Impressão A4</span>
+</div>
+<span class="text-on-surface-variant font-body-sm text-body-sm hidden md:inline">
+          Template Mestre • FortLuz Inventário ERP
+        </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-space-xs bg-primary-container text-on-primary hover:opacity-90 active:scale-95 px-space-md py-space-xs rounded shadow-sm transition-all font-label-md text-label-md" onclick="window.print()">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Imprimir Relatório (Ctrl+P)</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container text-on-surface hover:bg-surface-container-high active:scale-95 px-space-md py-space-xs rounded transition-all font-label-md text-label-md" onclick="alert('Exportando PDF em formato A4 regulamentar...')">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span>Exportar PDF</span>
+</button>
+<div class="h-4 w-px bg-outline-variant mx-space-xs"></div>
+<button class="flex items-center gap-space-xs bg-surface-container-low text-on-surface hover:bg-surface-container px-space-md py-space-xs rounded transition-all font-label-md text-label-md" id="toggle-empty-btn" onclick="toggleEmptyState()">
+<span class="material-symbols-outlined text-[16px]">rule</span>
+<span id="toggle-text">Exibir Estado Vazio</span>
+</button>
+<div class="flex items-center bg-surface-container-low px-space-md py-space-xs rounded gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">zoom_in</span>
+<span>Zoom: 100% (A4 Real)</span>
+</div>
+</div>
+</div>
+</header>
+<div class="print-canvas flex flex-col items-center py-space-xl px-space-md gap-space-xl bg-surface-dim min-h-screen">
+<div class="flex flex-col items-center gap-space-xl w-full max-w-[794px]" id="report-view-container">
+<!-- FOLHA 1 (PÁGINA 1 DE 2) -->
+<section class="a4-sheet bg-surface-container-lowest text-on-surface w-[794px] min-h-[1123px] p-[38px] shadow-xl flex flex-col justify-between box-border select-none relative">
+<div class="flex flex-col w-full">
+<!-- 1. ReportHeader (Cabeçalho Institucional) -->
+<header class="flex items-start justify-between pb-space-md gap-space-lg">
+<div class="flex flex-col w-[320px]">
+<div class="h-16 w-full flex items-center">
+<img alt="FORTLUZ INVENTÁRIO ERP LOGO" class="max-h-14 max-w-full object-contain object-left" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/>
+</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] text-primary-container">domain</span>
+<span class="uppercase tracking-wider">Origem: Dados da Empresa S.A.</span>
+</div>
+</div>
+<div class="flex flex-col items-end text-right font-body-sm text-body-sm text-on-surface leading-tight max-w-[420px]">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">FORTLUZ SISTEMAS INDUSTRIAIS E COMPONENTES S.A.</span>
+<span class="font-code-dense text-code-dense text-on-surface-variant mt-0.5">CNPJ: 12.345.678/0001-90 • IE: 109.876.543.110</span>
+<span class="text-on-surface-variant">Avenida Paulista, 1578, Conj. 402 - Bela Vista, São Paulo - SP</span>
+<span class="text-on-surface-variant font-code-dense text-code-dense">CEP: 01310-100 • Tel: (11) 3456-7890 • contato@fortluz.com.br</span>
+</div>
+</header>
+<div class="w-full h-px bg-outline-variant my-space-xs"></div>
+<!-- 2. ReportTitle (Identificação do Relatório) -->
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg uppercase text-primary-container tracking-tight">
+                  Relatório de Inventário Geral de Ativos
+                </h1>
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-space-xs py-0.5 rounded">
+                  TEMPLATE MESTRE DINÂMICO
+                </span>
+</div>
+<span class="font-code-dense text-code-dense text-on-surface-variant bg-surface-container-low px-space-sm py-0.5 rounded">
+                FL-REL-20250224-8841A
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Demonstrativo consolidado de ativos de infraestrutura de TI, equipamentos cadastrados e status operacional.
+            </p>
+<div class="flex items-center justify-between bg-surface-container-low px-space-md py-space-xs rounded text-on-surface-variant font-code-dense text-code-dense mt-space-xs">
+<span><strong>Data de Emissão:</strong> 24/02/2025 às 14:45</span>
+<span><strong>Operador:</strong> marcos.silva (Terminal 01 - Almoxarifado Central)</span>
+<span><strong>Autenticação:</strong> SHA256-VALIDATED</span>
+</div>
+</div>
+<!-- 3. ReportFilters (Filtros Aplicados) -->
+<div class="bg-surface-container-lowest p-space-sm rounded my-space-sm flex items-center gap-space-sm shadow-sm">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[13px] text-primary-container">filter_alt</span>
+              Filtros:
+            </span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface font-label-sm text-label-sm px-space-sm py-0.5 rounded">
+                Unidade: <strong>FortLuz Matriz (SP)</strong>
+</span>
+<span class="bg-surface-container text-on-surface font-label-sm text-label-sm px-space-sm py-0.5 rounded">
+                Status: <strong>Em Uso, Em Estoque, Em Manutenção</strong>
+</span>
+<span class="bg-surface-container text-on-surface font-label-sm text-label-sm px-space-sm py-0.5 rounded">
+                Aquisição: <strong>Todos os Registros</strong>
+</span>
+</div>
+</div>
+<!-- 4. ReportSummary (Resumo Executivo) -->
+<div class="grid grid-cols-4 gap-space-sm mb-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Total Registrado</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">148</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">itens patrimoniados</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Em Operação / Uso</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-tertiary">112</span>
+<span class="font-label-sm text-label-sm text-tertiary-container font-semibold">(75,7%)</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Estoque / Reserva</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-secondary">24</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">(16,2%)</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Em Manutenção</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-primary-container">12</span>
+<span class="font-label-sm text-label-sm text-primary-container font-semibold">(8,1%)</span>
+</div>
+</div>
+</div>
+<!-- 5. ReportTable (Tabela Parte 1) -->
+<div class="w-full mt-space-xs overflow-hidden rounded bg-surface-container-lowest">
+<table class="w-full text-left font-body-sm text-body-sm table-fixed">
+<thead>
+<tr class="bg-surface-container-high text-on-surface uppercase font-label-sm text-label-sm h-7">
+<th class="w-[85px] px-space-sm py-1 font-semibold">Código</th>
+<th class="w-[180px] px-space-sm py-1 font-semibold">Descrição / Modelo</th>
+<th class="w-[90px] px-space-sm py-1 font-semibold">Categoria</th>
+<th class="w-[95px] px-space-sm py-1 font-semibold">Lotação</th>
+<th class="w-[95px] px-space-sm py-1 font-semibold">Nº Série</th>
+<th class="w-[80px] px-space-sm py-1 font-semibold">Status</th>
+<th class="w-[70px] px-space-sm py-1 font-semibold">Aquisição</th>
+<th class="w-[75px] px-space-sm py-1 text-right font-semibold">Valor (R$)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01042</td>
+<td class="px-space-sm py-1 font-medium truncate">Dell Latitude 5430 i7 16GB 512SSD</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Notebook</td>
+<td class="px-space-sm py-1 text-on-surface-variant">TI - Infra</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">DL-882914-BR</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">14/03/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">6.450,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01043</td>
+<td class="px-space-sm py-1 font-medium truncate">Monitor Dell UltraSharp U2723QE 4K</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Monitores</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Engenharia</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">CN-0U2723-8</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">22/05/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">3.890,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01044</td>
+<td class="px-space-sm py-1 font-medium truncate">Servidor Rack PowerEdge R750xs 64GB</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Datacenter</td>
+<td class="px-space-sm py-1 text-on-surface-variant">CPD Central</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">SRV-PE-9092</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">10/01/2022</td>
+<td class="px-space-sm py-1 text-right font-code-dense">42.100,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01045</td>
+<td class="px-space-sm py-1 font-medium truncate">Switch Cisco Catalyst 9300 48P PoE</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Redes</td>
+<td class="px-space-sm py-1 text-on-surface-variant">CPD Central</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">FCW2348L01B</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">11/02/2022</td>
+<td class="px-space-sm py-1 text-right font-code-dense">18.720,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01046</td>
+<td class="px-space-sm py-1 font-medium truncate">Nobreak APC Smart-UPS 3000VA 230V</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Energia</td>
+<td class="px-space-sm py-1 text-on-surface-variant">CPD Central</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">APC-SMT-7162</td>
+<td class="px-space-sm py-1">
+<span class="bg-error-container text-on-error-container px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">MANUTENÇÃO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">05/09/2021</td>
+<td class="px-space-sm py-1 text-right font-code-dense">7.200,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">IMP-00088</td>
+<td class="px-space-sm py-1 font-medium truncate">Zebra ZT411 Impressora Térmica Etiquetas</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Automação</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Expedição</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">ZB-ZT411-99</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">19/08/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">5.340,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01047</td>
+<td class="px-space-sm py-1 font-medium truncate">Coletor de Dados Zebra TC21 Android</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Dispositivos</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Almoxarifado</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">TC210K-01A2</td>
+<td class="px-space-sm py-1">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">ESTOQUE</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">02/06/2024</td>
+<td class="px-space-sm py-1 text-right font-code-dense">3.120,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01048</td>
+<td class="px-space-sm py-1 font-medium truncate">Notebook Lenovo ThinkPad T14 Gen 3</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Notebook</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Controladoria</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">PF-388192-BR</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">14/07/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">5.980,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01049</td>
+<td class="px-space-sm py-1 font-medium truncate">Workstation HP Z4 G4 Xeon 32GB RTX</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Desktop</td>
+<td class="px-space-sm py-1 text-on-surface-variant">P&amp;D / Projetos</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">CZC-0918231</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">18/11/2022</td>
+<td class="px-space-sm py-1 text-right font-code-dense">14.800,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">IMP-00089</td>
+<td class="px-space-sm py-1 font-medium truncate">Multifuncional Brother MFC-L8900CDW</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Impressoras</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Administrativo</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">BRT-MFC-891</td>
+<td class="px-space-sm py-1">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">ESTOQUE</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">03/04/2024</td>
+<td class="px-space-sm py-1 text-right font-code-dense">4.150,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01050</td>
+<td class="px-space-sm py-1 font-medium truncate">Roteador Mikrotik CCR1036-8G-2S+</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Redes</td>
+<td class="px-space-sm py-1 text-on-surface-variant">CPD Central</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">MK-CCR1036-9</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">15/09/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">6.900,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01051</td>
+<td class="px-space-sm py-1 font-medium truncate">Storage NAS Synology DiskStation DS923+</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Datacenter</td>
+<td class="px-space-sm py-1 text-on-surface-variant">CPD Backup</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">SYN-DS923-01</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">08/10/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">7.650,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-space-sm text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">
+              Continua na página seguinte...
+            </span>
+</div>
+</div>
+<!-- 6. ReportFooter (Rodapé da Folha 1) -->
+<footer class="w-full pt-space-sm">
+<div class="w-full h-px bg-outline-variant mb-space-xs"></div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Inventário FortLuz ERP • Módulo de Relatórios Corporativos</span>
+<span class="italic text-[10px]">Documento oficial gerado para controle patrimonial interno</span>
+<span class="font-code-dense text-code-dense font-bold text-on-surface">Página 1 de 2</span>
+</div>
+</footer>
+</section>
+<!-- FOLHA 2 (PÁGINA 2 DE 2) -->
+<section class="a4-sheet bg-surface-container-lowest text-on-surface w-[794px] min-h-[1123px] p-[38px] shadow-xl flex flex-col justify-between box-border select-none relative">
+<div class="flex flex-col w-full">
+<!-- Cabeçalho Compacto Recorrente (Página 2) -->
+<header class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm uppercase text-primary-container font-semibold">
+                FortLuz Sistemas Industriais • Inventário de Ativos
+              </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">
+                (Continuação)
+              </span>
+</div>
+<div class="font-code-dense text-code-dense text-on-surface-variant">
+              FL-REL-20250224-8841A • 24/02/2025
+            </div>
+</header>
+<div class="w-full h-px bg-outline-variant mb-space-sm"></div>
+<!-- Tabela Repetida / Continuação dos Dados -->
+<div class="w-full overflow-hidden rounded bg-surface-container-lowest">
+<table class="w-full text-left font-body-sm text-body-sm table-fixed">
+<thead>
+<tr class="bg-surface-container-high text-on-surface uppercase font-label-sm text-label-sm h-7">
+<th class="w-[85px] px-space-sm py-1 font-semibold">Código</th>
+<th class="w-[180px] px-space-sm py-1 font-semibold">Descrição / Modelo</th>
+<th class="w-[90px] px-space-sm py-1 font-semibold">Categoria</th>
+<th class="w-[95px] px-space-sm py-1 font-semibold">Lotação</th>
+<th class="w-[95px] px-space-sm py-1 font-semibold">Nº Série</th>
+<th class="w-[80px] px-space-sm py-1 font-semibold">Status</th>
+<th class="w-[70px] px-space-sm py-1 font-semibold">Aquisição</th>
+<th class="w-[75px] px-space-sm py-1 text-right font-semibold">Valor (R$)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01052</td>
+<td class="px-space-sm py-1 font-medium truncate">Access Point Ubiquiti UniFi U6-Pro</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Redes</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Fábrica - Setor 2</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">UB-U6P-09121</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">25/01/2024</td>
+<td class="px-space-sm py-1 text-right font-code-dense">1.490,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01053</td>
+<td class="px-space-sm py-1 font-medium truncate">Tablet Industrial Samsung Galaxy Active4</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Mobile</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Manutenção Geral</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">SM-T636B-BR</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">11/04/2024</td>
+<td class="px-space-sm py-1 text-right font-code-dense">3.600,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01054</td>
+<td class="px-space-sm py-1 font-medium truncate">Desktop OptiPlex 7090 Micro i5 16GB</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Desktop</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Recepção / SAC</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">DL-7090M-03</td>
+<td class="px-space-sm py-1">
+<span class="bg-error-container text-on-error-container px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">MANUTENÇÃO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">04/08/2022</td>
+<td class="px-space-sm py-1 text-right font-code-dense">3.950,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01055</td>
+<td class="px-space-sm py-1 font-medium truncate">Leitor Código Barras Datalogic Gryphon</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Automação</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Expedição</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">GD4500-BK-2</td>
+<td class="px-space-sm py-1">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">ESTOQUE</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">19/07/2024</td>
+<td class="px-space-sm py-1 text-right font-code-dense">1.180,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-lowest">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01056</td>
+<td class="px-space-sm py-1 font-medium truncate">Dell Latitude 5430 i7 16GB 512SSD</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Notebook</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Diretoria</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">DL-882918-BR</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">14/03/2023</td>
+<td class="px-space-sm py-1 text-right font-code-dense">6.450,00</td>
+</tr>
+<tr class="h-7 bg-surface-container-low">
+<td class="px-space-sm py-1 font-code-dense font-medium text-primary-container">PAT-01057</td>
+<td class="px-space-sm py-1 font-medium truncate">Monitor LG 29WK600 UltraWide IPS 29"</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Monitores</td>
+<td class="px-space-sm py-1 text-on-surface-variant">Contabilidade</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">LG-29WK-8819</td>
+<td class="px-space-sm py-1">
+<span class="bg-surface-container text-tertiary px-space-xs py-0.5 rounded font-label-sm text-label-sm font-semibold">EM USO</span>
+</td>
+<td class="px-space-sm py-1 font-code-dense text-code-dense text-on-surface-variant">12/09/2022</td>
+<td class="px-space-sm py-1 text-right font-code-dense">1.350,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Totalizador Consolidado Final -->
+<div class="mt-space-md p-space-md bg-surface-container-low rounded flex flex-col gap-space-sm">
+<div class="flex items-center justify-between font-label-lg text-label-lg">
+<span class="uppercase text-on-surface-variant font-bold">Totalização Geral do Período</span>
+<span class="font-code-dense text-code-dense text-on-surface font-bold text-headline-sm">
+                Valor Total Patrimoniado: R$ 123.330,00
+              </span>
+</div>
+<div class="w-full h-px bg-outline-variant"></div>
+<div class="grid grid-cols-3 text-on-surface-variant font-code-dense text-code-dense">
+<span>Total de Páginas: <strong>2 folhas regulamentares</strong></span>
+<span>Total Itens Analisados: <strong>18 ativos listados</strong></span>
+<span class="text-right">Integridade dos Dados: <strong>Auditado &amp; Conciliado</strong></span>
+</div>
+</div>
+<!-- 7. Bloco Regulamentar de Assinaturas e Vistos -->
+<div class="mt-space-xl pt-space-lg">
+<h3 class="font-label-sm text-label-sm uppercase font-bold text-on-surface-variant mb-space-xl tracking-wider text-center">
+              Termo de Conferência Física, Verificação de Lotação e Auditoria Patrimonial
+            </h3>
+<div class="grid grid-cols-2 gap-space-xl mt-space-lg">
+<div class="flex flex-col items-center">
+<div class="w-[280px] h-px bg-outline mb-space-xs"></div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Marcos Antônio da Silva</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Encarregado de Infraestrutura &amp; TI</span>
+<span class="font-code-dense text-code-dense text-on-surface-variant mt-0.5">Matrícula: FL-04928 • Almoxarifado</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-[280px] h-px bg-outline mb-space-xs"></div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dra. Renata Vasconcellos</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Controladoria Geral &amp; Auditoria Interna</span>
+<span class="font-code-dense text-code-dense text-on-surface-variant mt-0.5">CRC-SP: 1SP294819/O-1</span>
+</div>
+</div>
+<div class="mt-space-lg text-center font-code-dense text-code-dense text-on-surface-variant">
+              Carimbo de Visto ou Autenticação Digital ICP-Brasil: 
+              <span class="font-bold text-on-surface">FL-AUDIT-2025-02-B8841-SEC</span>
+</div>
+</div>
+</div>
+<!-- 6. ReportFooter (Rodapé da Folha 2) -->
+<footer class="w-full pt-space-sm">
+<div class="w-full h-px bg-outline-variant mb-space-xs"></div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Inventário FortLuz ERP • Módulo de Relatórios Corporativos</span>
+<span class="italic text-[10px]">Documento oficial gerado para controle patrimonial interno</span>
+<span class="font-code-dense text-code-dense font-bold text-on-surface">Página 2 de 2</span>
+</div>
+</footer>
+</section>
+</div>
+<!-- ESTADO VAZIO (DEMONSTRAÇÃO QUANDO NÃO HÁ DADOS) -->
+<div class="hidden flex-col items-center w-full max-w-[794px]" id="empty-state-view">
+<section class="a4-sheet bg-surface-container-lowest text-on-surface w-[794px] min-h-[1123px] p-[38px] shadow-xl flex flex-col justify-between box-border select-none relative">
+<div class="flex flex-col w-full">
+<!-- Cabeçalho -->
+<header class="flex items-start justify-between pb-space-md gap-space-lg">
+<div class="flex flex-col w-[320px]">
+<div class="h-16 w-full flex items-center">
+<img alt="FORTLUZ INVENTÁRIO ERP LOGO" class="max-h-14 max-w-full object-contain object-left" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/>
+</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] text-primary-container">domain</span>
+<span class="uppercase tracking-wider">Origem: Dados da Empresa S.A.</span>
+</div>
+</div>
+<div class="flex flex-col items-end text-right font-body-sm text-body-sm text-on-surface leading-tight max-w-[420px]">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">FORTLUZ SISTEMAS INDUSTRIAIS E COMPONENTES S.A.</span>
+<span class="font-code-dense text-code-dense text-on-surface-variant mt-0.5">CNPJ: 12.345.678/0001-90 • IE: 109.876.543.110</span>
+<span class="text-on-surface-variant">Avenida Paulista, 1578, Conj. 402 - Bela Vista, São Paulo - SP</span>
+</div>
+</header>
+<div class="w-full h-px bg-outline-variant my-space-xs"></div>
+<!-- Título -->
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="flex items-center justify-between">
+<h1 class="font-headline-lg text-headline-lg uppercase text-primary-container tracking-tight">
+                Relatório de Inventário Geral de Ativos
+              </h1>
+<span class="font-code-dense text-code-dense text-on-surface-variant bg-surface-container-low px-space-sm py-0.5 rounded">
+                FL-REL-20250224-EMPTY
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Demonstrativo consolidado de ativos de infraestrutura de TI, equipamentos cadastrados e status operacional.
+            </p>
+</div>
+<!-- Filtros Específicos que Causaram Vazio -->
+<div class="bg-surface-container-lowest p-space-sm rounded my-space-sm flex items-center gap-space-sm shadow-sm">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[13px] text-primary-container">filter_alt</span>
+              Filtros:
+            </span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface font-label-sm text-label-sm px-space-sm py-0.5 rounded">
+                Unidade: <strong>Filial Manaus (AM)</strong>
+</span>
+<span class="bg-surface-container text-on-surface font-label-sm text-label-sm px-space-sm py-0.5 rounded">
+                Status: <strong>Descartado / Leiloado</strong>
+</span>
+</div>
+</div>
+<!-- Bloco Informativo de Estado Vazio -->
+<div class="flex flex-col items-center justify-center p-space-xl mt-space-xl bg-surface-container-low rounded text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary-container mb-space-md">
+<span class="material-symbols-outlined text-[36px]">inventory_2</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">
+              Nenhum registro encontrado para os parâmetros selecionados
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[500px] mt-space-xs">
+              Não foram localizados ativos cadastrados ou movimentados correspondentes aos filtros aplicados. Verifique se os critérios de pesquisa, unidades operacionais ou períodos informados estão corretos.
+            </p>
+<div class="mt-space-lg flex items-center gap-space-sm text-on-surface-variant font-code-dense text-code-dense bg-surface-container px-space-md py-space-xs rounded">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Critério: Unidade=Filial Manaus | Status=Descartado/Leiloado | Total Retornado: 0</span>
+</div>
+</div>
+</div>
+<!-- Rodapé Folha Vazia -->
+<footer class="w-full pt-space-sm">
+<div class="w-full h-px bg-outline-variant mb-space-xs"></div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Inventário FortLuz ERP • Módulo de Relatórios Corporativos</span>
+<span class="italic text-[10px]">Documento oficial gerado para controle patrimonial interno</span>
+<span class="font-code-dense text-code-dense font-bold text-on-surface">Página 1 de 1</span>
+</div>
+</footer>
+</section>
+</div>
+</div>
+<script>
+    function toggleEmptyState() {
+      const reportView = document.getElementById('report-view-container');
+      const emptyView = document.getElementById('empty-state-view');
+      const toggleText = document.getElementById('toggle-text');
+
+      if (reportView.classList.contains('hidden')) {
+        reportView.classList.remove('hidden');
+        reportView.classList.add('flex');
+        emptyView.classList.add('hidden');
+        emptyView.classList.remove('flex');
+        toggleText.innerText = 'Exibir Estado Vazio';
+      } else {
+        reportView.classList.add('hidden');
+        reportView.classList.remove('flex');
+        emptyView.classList.remove('hidden');
+        emptyView.classList.add('flex');
+        toggleText.innerText = 'Exibir Relatório Preenchido';
+      }
+    }
+  </script>
+</div></main></body></html>

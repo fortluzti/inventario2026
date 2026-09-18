@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:root {
+  --rpt-primary: #991b1b;
+  --rpt-primary-container: #ffdad6;
+  --rpt-secondary: #904d00;
+  --rpt-secondary-container: #ffdcc3;
+  --rpt-tertiary: #005852;
+  --rpt-on-primary: #ffffff;
+  --rpt-on-secondary-container: #2f1500;
+  --rpt-on-tertiary-container: #79cec4;
+  --rpt-on-surface: #0d1c2e;
+  --rpt-on-surface-variant: #59413e;
+  --rpt-surface: #f8f9ff;
+  --rpt-surface-container: #e6eeff;
+  --rpt-surface-container-low: #eff4ff;
+  --rpt-surface-container-lowest: #ffffff;
+  --rpt-surface-container-high: #dce9ff;
+  --rpt-surface-container-highest: #d5e3fc;
+  --rpt-outline: #8d706d;
+  --rpt-outline-variant: #e1bfbb;
+  --rpt-error: #ba1a1a;
+  --rpt-on-error-container: #93000a;
+  --rpt-on-tertiary: #ffffff;
+  --rpt-scratched: #79cec4;
+  --rpt-in-use: #005852;
+  --rpt-in-stock: #0d1c2e;
+  --rpt-maintenance: #904d00;
+  --rpt-damaged: #ba1a1a;
+  --rpt-discarded: #6b7076;
+}
+
+.rpt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0d1c2e80;
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rpt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--rpt-surface-container-lowest);
+  border-bottom: 1px solid var(--rpt-outline-variant);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.rpt-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rpt-header-title {
+  font: 600 13px 'IBM Plex Sans', sans-serif;
+  color: var(--rpt-on-surface);
+}
+
+.rpt-header-left .mat {
+  font-size: 18px;
+  color: var(--rpt-secondary);
+}
+
+.rpt-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rpt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: var(--rpt-surface-container);
+  color: var(--rpt-on-surface);
+  font: 600 11px 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rpt-btn .mat {
+  font-size: 16px;
+}
+
+.rpt-btn:hover {
+  background: var(--rpt-surface-container-high);
+}
+
+.rpt-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rpt-btn-primary {
+  background: var(--rpt-secondary);
+  color: var(--rpt-on-surface);
+}
+
+.rpt-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.rpt-print-canvas {
+  flex: 1;
+  overflow: auto;
+  background: var(--rpt-surface-dim);
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.a4-sheet {
+  width: 794px;
+  min-height: 1123px;
+  background: var(--rpt-surface-container-lowest);
+  box-shadow: 0 4px 20px #00000020;
+  display: flex;
+  flex-direction: column;
+  font: 400 11px 'IBM Plex Sans', sans-serif;
+  color: var(--rpt-on-surface);
+  box-sizing: border-box;
+  page-break-after: always;
+}
+
+.a4-content {
+  flex: 1;
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rpt-header-institucional {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rpt-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 200px;
+}
+
+.rpt-logo {
+  max-height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.rpt-logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--rpt-primary);
+  color: var(--rpt-on-primary);
+  font: 700 20px 'IBM Plex Sans', sans-serif;
+  border-radius: 4px;
+}
+
+.rpt-origem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-empresa-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--rpt-on-surface);
+  max-width: 420px;
+}
+
+.rpt-empresa-nome {
+  font: 700 14px 'IBM Plex Sans', sans-serif;
+  color: var(--rpt-on-surface);
+}
+
+.rpt-empresa-cnpj,
+.rpt-empresa-endereco,
+.rpt-empresa-contato {
+  font-size: 10px;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--rpt-outline-variant);
+}
+
+.rpt-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rpt-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rpt-title {
+  font: 700 20px 'IBM Plex Sans', sans-serif;
+  color: var(--rpt-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.rpt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--rpt-surface-container-high);
+  color: var(--rpt-on-surface);
+  font: 600 10px 'IBM Plex Sans', sans-serif;
+  border-radius: 3px;
+}
+
+.rpt-subtitle {
+  font-size: 11px;
+  color: var(--rpt-on-surface-variant);
+  margin: 0;
+}
+
+.rpt-metadata {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--rpt-surface-container-low);
+  border-radius: 4px;
+}
+
+.rpt-metadata span {
+  font-size: 10px;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-metadata strong {
+  color: var(--rpt-on-surface);
+}
+
+.rpt-table-wrap {
+  margin-top: 8px;
+}
+
+.rpt-table-title {
+  font: 600 11px 'IBM Plex Sans', sans-serif;
+  color: var(--rpt-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.rpt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 11px 'JetBrains Mono', monospace;
+}
+
+.rpt-table thead tr {
+  background: var(--rpt-surface-container-high);
+  font: 600 10px 'IBM Plex Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-table th {
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.rpt-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--rpt-outline-variant);
+}
+
+.rpt-table tbody tr.rpt-row-alt {
+  background: var(--rpt-surface-container-low);
+}
+
+.rpt-table tbody tr:hover {
+  background: var(--rpt-surface-container);
+}
+
+.rpt-empty {
+  padding: 30px 12px;
+  text-align: center;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-footnote {
+  font-size: 9px;
+  color: var(--rpt-on-surface-variant);
+  font-style: italic;
+  padding-top: 6px;
+}
+
+.rpt-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font: 600 10px 'IBM Plex Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.rpt-status::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.rpt-status.in-use { background: #b5f2e5; color: var(--rpt-in-use); }
+.rpt-status.in-stock { background: #eff4ff; color: var(--rpt-on-surface); }
+.rpt-status.maintenance { background: #ffdfd8; color: var(--rpt-maintenance); }
+.rpt-status.damaged { background: #ffdad6; color: var(--rpt-error); }
+.rpt-status.discarded { background: #e0e0e0; color: var(--rpt-discarded); }
+
+.rpt-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--rpt-outline-variant);
+}
+
+.rpt-footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--rpt-on-surface-variant);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .rpt-overlay {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  .rpt-print-canvas {
+    background: transparent !important;
+    padding: 0;
+  }
+
+  .a4-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-height: 100% !important;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .rpt-table {
+    font-size: 10px;
+  }
+
+  .rpt-table th {
+    background: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}

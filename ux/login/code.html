@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-dim": "#ccdbf3", "tertiary-container": "#005852", "primary": "#760009", "secondary-container": "#fe932c", "secondary-fixed": "#ffdcc3", "surface-container-lowest": "#ffffff", "on-surface-variant": "#59413e", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4ac", "error-container": "#ffdad6", "on-primary": "#ffffff", "background": "#f8f9ff", "outline": "#8d706d", "on-tertiary-fixed": "#00201d", "primary-container": "#991b1b", "secondary": "#904d00", "on-secondary": "#ffffff", "surface-bright": "#f8f9ff", "on-background": "#0d1c2e", "tertiary-fixed": "#9cf2e8", "tertiary": "#003f3a", "on-secondary-container": "#663500", "on-error-container": "#93000a", "tertiary-fixed-dim": "#80d5cb", "surface": "#f8f9ff", "on-secondary-fixed": "#2f1500", "surface-tint": "#b02d29", "surface-container-low": "#eff4ff", "on-tertiary-fixed-variant": "#00504a", "inverse-primary": "#ffb4ac", "secondary-fixed-dim": "#ffb77d", "on-primary-fixed": "#410002", "surface-container-high": "#dce9ff", "inverse-on-surface": "#eaf1ff", "on-secondary-fixed-variant": "#6e3900", "surface-variant": "#d5e3fc", "surface-container-highest": "#d5e3fc", "primary-fixed": "#ffdad6", "error": "#ba1a1a", "on-error": "#ffffff", "surface-container": "#e6eeff", "on-tertiary-container": "#79cec4", "outline-variant": "#e1bfbb", "on-primary-fixed-variant": "#8e1214", "on-primary-container": "#ffaaa1", "inverse-surface": "#233144", "on-surface": "#0d1c2e" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xs": "0.125rem", "space-sm": "0.25rem", "margin": "0.75rem", "space-md": "0.5rem", "space-xl": "1rem", "gutter": "0.5rem", "space-lg": "0.75rem" }, "fontFamily": { "body-md": [ "IBM Plex Sans" ], "label-lg": [ "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans" ], "body-lg": [ "IBM Plex Sans" ], "label-sm": [ "IBM Plex Sans" ], "label-md": [ "IBM Plex Sans" ], "headline-md": [ "IBM Plex Sans" ], "code-dense": [ "JetBrains Mono" ], "body-sm": [ "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans" ] }, "fontSize": { "body-md": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "label-lg": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-lg": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-sm": [ "10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "headline-md": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "code-dense": [ "11px", { "lineHeight": "14px", "fontWeight": "400" } ], "body-sm": [ "11px", { "lineHeight": "14px", "fontWeight": "400" } ], "headline-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "600" } ] } } } };</script></head><body class="min-h-screen bg-surface-container-low font-body-md text-body-md text-on-surface flex flex-col justify-between selection:bg-primary selection:text-on-primary"><header class="w-full bg-surface-container-lowest/80 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-space-xl h-14 flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #991b1b
+- Font: ibmPlexSans
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FortLuz ERP</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Gestão &amp; Inventário Industrial</span></div></div><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs text-tertiary bg-surface-container px-space-md py-space-xs rounded-DEFAULT"><span class="material-symbols-outlined text-[16px]">lock</span><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">SSL / TLS Ativo</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full flex-1 flex items-center justify-center p-space-xl"><div class="flex flex-col w-full items-center justify-center py-space-xl relative">
+<!-- Subtle Industrial Geometric Backdrop (No decorative global overflow) -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-40 overflow-hidden">
+<div class="w-[720px] h-[720px] rounded-full bg-surface-container-high/60 blur-3xl -top-24 -left-20 absolute"></div>
+<div class="w-[600px] h-[600px] rounded-full bg-primary-fixed/20 blur-3xl -bottom-20 -right-20 absolute"></div>
+</div>
+<!-- Main Unified Workspace Card -->
+<div class="w-full max-w-5xl bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden flex flex-col md:flex-row relative z-10">
+<!-- Left Column: Industrial Context & System Telemetry -->
+<div class="w-full md:w-5/12 bg-surface-container p-space-xl lg:p-10 flex flex-col justify-between relative overflow-hidden">
+<!-- Decorative Brand Watermark Accent -->
+<div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[260px] text-primary">precision_manufacturing</span>
+</div>
+<div class="flex flex-col gap-space-lg relative z-10">
+<!-- Enterprise Status Badge -->
+<div class="inline-flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-space-xs rounded-full shadow-sm w-fit">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-ping"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary absolute"></span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold uppercase tracking-wider ml-1">Terminal Autenticado</span>
+</div>
+<!-- System Identification & Industrial Context -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest font-semibold">Módulo Central</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Gestão &amp; Ativos Industriais</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Plataforma corporativa de rastreabilidade física, inventário técnico e governança de infraestrutura de TI da rede industrial FortLuz.
+          </p>
+</div>
+<!-- Atmospheric Photo Asset of Industrial Facility / Datacenter -->
+<div class="relative rounded-lg overflow-hidden shadow-sm h-36 w-full bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale contrast-125 opacity-85" data-alt="Modern industrial lighting manufacturing facility combined with high-tech automated server racks and hardware storage, clean engineering aesthetic, deep red accents, soft daylighting and precision equipment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNHpzCmgYoKftfZslBcnPoALDUzn3XerCa1R-gUJ2aQ8J_B-LSTnLfJmtaxHCWSwfvmK06UlmgWtvw0pvT5pb1Q2w90nxqhAIQtuTSF2l6BUkgqEg_RR2cKiGIZ_y3MCpeKbCLJ9fVdoNqN-oRqXBEb-H8WL3wvf2hDcckUo4D9NIOC5Bi-cZs1Iafoc2t_B_E7jsxAJfyIIkEYFMaObevDbbxqrZpc8SrhDgOYRbseazKY6GHS1-rZw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent flex items-end p-space-md">
+<span class="font-label-sm text-label-sm text-on-primary font-medium tracking-wide flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">factory</span>
+              Parque Fabril • Unidade Operacional SP-01
+            </span>
+</div>
+</div>
+<!-- Audit & Compliance Quick Checklist -->
+<div class="flex flex-col gap-space-sm bg-surface-container-lowest/80 p-space-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between text-on-surface">
+<span class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Políticas de Acesso</span>
+<span class="font-code-dense text-code-dense text-tertiary font-medium">REV 4.9.2</span>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Registros gravados no SIEM institucional</span>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Sessões inativas expiram em 30 minutos</span>
+</div>
+</div>
+</div>
+<!-- Infrastructure Quick Specs (Footer of Left Column) -->
+<div class="pt-space-lg flex flex-col gap-space-xs font-code-dense text-code-dense text-on-surface-variant">
+<div class="flex items-center justify-between">
+<span>HOST: br-sp01.fortluz.net</span>
+<span class="text-tertiary font-medium">ONLINE</span>
+</div>
+<div class="flex items-center justify-between">
+<span>LATÊNCIA REDE LOCAL: 1.4ms</span>
+<span>TLS 1.3 / AES-256</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Authentication & Recovery Viewports -->
+<div class="w-full md:w-7/12 p-space-xl lg:p-10 flex flex-col justify-between bg-surface-container-lowest relative">
+<!-- Top Branding Strip inside Form Container -->
+<div class="flex items-center justify-between pb-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-[24px]">inventory_2</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">FortLuz ERP</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Gestão de Ativos &amp; TI</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified_user</span>
+<span class="hidden sm:inline">Ambiente Corporativo</span>
+</div>
+</div>
+<!-- VIEW 1: Main Login Form (Default) -->
+<div class="flex flex-col gap-space-lg transition-all duration-200" id="login-view">
+<!-- Welcome Headings -->
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Autenticação de Usuário</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Insira suas credenciais corporativas registradas no diretório FortLuz.
+          </p>
+</div>
+<form class="flex flex-col gap-space-md" id="form-login" onsubmit="handleLoginSubmit(event)">
+<!-- Unidade de Acesso / Almoxarifado -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="login-branch">
+<span>Unidade Organizacional / Almoxarifado</span>
+<span class="font-code-dense text-code-dense text-on-surface-variant">LOC: 101</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-[18px] text-on-surface-variant pointer-events-none">domain</span>
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded pl-9 pr-8 py-2 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary" id="login-branch">
+<option value="matriz_sp">FortLuz Matriz • Almoxarifado Central de TI (SP-01)</option>
+<option value="fabrica_rj">FortLuz Fábrica 2 • Suporte Industrial (RJ-02)</option>
+<option value="filial_mg">FortLuz CD • Logística e Distribuição (MG-01)</option>
+<option value="data_center">FortLuz NOC / Datacenter Privado (SP-DC)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Usuário / Matrícula / Email -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="login-username">
+                Usuário, Matrícula ou E-mail corporativo <span class="text-error">*</span>
+</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Atalho: Alt+U</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-[18px] text-on-surface-variant pointer-events-none">badge</span>
+<input accesskey="u" class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded pl-9 pr-space-md py-2 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" id="login-username" placeholder="Ex: admin.ti ou usuario@fortluz.com.br" required="" type="text" value="marcos.silva@fortluz.com.br"/>
+</div>
+</div>
+<!-- Senha de Acesso -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="login-password">
+                Senha de Acesso <span class="text-error">*</span>
+</label>
+<button class="font-label-md text-label-md text-primary font-semibold hover:underline focus:outline-none" onclick="openRecoveryView()" type="button">
+                Esqueceu sua senha?
+              </button>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-[18px] text-on-surface-variant pointer-events-none">lock</span>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded pl-9 pr-10 py-2 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary shadow-inner font-code-dense" id="login-password" placeholder="••••••••••••" required="" type="password" value="FortLuz#2025!"/>
+<button class="absolute right-space-md text-on-surface-variant hover:text-on-surface focus:outline-none flex items-center" onclick="togglePasswordVisibility('login-password', 'pwd-toggle-icon')" title="Alternar visualização da senha" type="button">
+<span class="material-symbols-outlined text-[18px]" id="pwd-toggle-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Checkboxes de Credencial -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<label class="flex items-center gap-space-md cursor-pointer group select-none">
+<input checked="" class="w-4 h-4 text-primary rounded focus:ring-primary" id="remember-terminal" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">
+                Lembrar meu usuário e manter conectado neste terminal
+              </span>
+</label>
+<label class="flex items-center gap-space-md cursor-pointer group select-none">
+<input class="w-4 h-4 text-primary rounded focus:ring-primary" id="save-device" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface">
+                Salvar parâmetros operacionais neste computador
+              </span>
+</label>
+</div>
+<!-- Botão de Ação Primária -->
+<div class="pt-space-md flex flex-col gap-space-xs">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold py-2.5 px-space-lg rounded shadow flex items-center justify-center gap-space-md active:translate-y-[1px] transition-all" type="submit">
+<span class="material-symbols-outlined text-[20px]">login</span>
+<span>Entrar no Sistema</span>
+<span class="font-code-dense text-code-dense bg-primary-container/60 px-space-xs rounded text-primary-fixed uppercase tracking-wider ml-1">Enter</span>
+</button>
+<!-- Inline feedback alert area (hidden by default) -->
+<div class="hidden items-center gap-space-sm bg-tertiary-fixed/30 text-on-tertiary-fixed p-space-sm rounded font-body-sm text-body-sm" id="login-feedback">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Credenciais validadas. Redirecionando ao painel...</span>
+</div>
+</div>
+</form>
+</div>
+<!-- VIEW 2: Password Recovery Flow (Toggled dynamically) -->
+<div class="hidden flex-col gap-space-lg transition-all duration-200" id="recovery-view">
+<div class="flex items-center gap-space-sm text-primary font-label-md text-label-md font-semibold">
+<button class="hover:underline flex items-center gap-space-xs text-on-surface-variant hover:text-primary" onclick="closeRecoveryView()" type="button">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            Voltar ao Login
+          </button>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">mark_email_read</span>
+            Recuperar Senha por E-mail
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Informe seu e-mail corporativo cadastrado (<strong>@fortluz.com.br</strong>) ou nome de usuário. Enviaremos um link seguro com código temporário para redefinir suas credenciais.
+          </p>
+</div>
+<form class="flex flex-col gap-space-md" id="form-recovery" onsubmit="handleRecoverySubmit(event)">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="recovery-email">
+              E-mail Corporativo ou Usuário <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-[18px] text-on-surface-variant pointer-events-none">mail</span>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded pl-9 pr-space-md py-2 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" id="recovery-email" placeholder="seu.nome@fortluz.com.br" required="" type="email"/>
+</div>
+</div>
+<!-- Internal IT Support Help Box -->
+<div class="p-space-md bg-surface-container-high rounded flex items-start gap-space-md">
+<span class="material-symbols-outlined text-[20px] text-secondary">contact_support</span>
+<div class="flex flex-col text-on-surface font-body-sm text-body-sm leading-snug">
+<span class="font-semibold text-on-surface">Problemas com o recebimento?</span>
+<span class="text-on-surface-variant">
+                Caso não possua mais acesso ao seu correio institucional, contate a Central de TI no <strong>ramal 4010</strong> ou solicite abertura de chamado presencial.
+              </span>
+</div>
+</div>
+<!-- Recovery Buttons -->
+<div class="flex flex-col sm:flex-row items-center gap-space-md pt-space-sm">
+<button class="w-full sm:w-1/2 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg py-2.5 px-space-md rounded active:translate-y-[1px] transition-all" onclick="closeRecoveryView()" type="button">
+              Cancelar
+            </button>
+<button class="w-full sm:w-1/2 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg py-2.5 px-space-md rounded shadow flex items-center justify-center gap-space-xs active:translate-y-[1px] transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Enviar Instruções</span>
+</button>
+</div>
+<!-- Success Alert Area -->
+<div class="hidden items-center gap-space-sm bg-tertiary-fixed/40 text-on-tertiary-fixed p-space-sm rounded font-body-sm text-body-sm" id="recovery-feedback">
+<span class="material-symbols-outlined text-[18px] text-tertiary">task_alt</span>
+<span>Solicitação registrada! Verifique sua caixa de entrada e spam.</span>
+</div>
+</form>
+</div>
+<!-- Bottom Card Metadata & Help Contact -->
+<div class="pt-space-xl flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm border-t-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">support_agent</span>
+<span>Suporte Técnico TI: <strong>Ramal 4010</strong></span>
+</div>
+<a class="hover:text-primary transition-colors flex items-center gap-space-xs" href="mailto:suporte.ti@fortluz.com.br">
+<span class="material-symbols-outlined text-[14px]">outgoing_mail</span>
+<span>suporte.ti@fortluz.com.br</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Technical Audit Bar Below Box -->
+<div class="w-full max-w-5xl mt-space-md px-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-code-dense text-code-dense">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px] text-tertiary">shield_lock</span>
+<span>Criptografia de ponta a ponta SSL/TLS 256-bit • API REST v2.4</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>FortLuz Iluminação Industrial S.A.</span>
+<span>Build 2025.2.4-prod</span>
+</div>
+</div>
+</div>
+<script>
+  function togglePasswordVisibility(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    if (!input || !icon) return;
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function openRecoveryView() {
+    const loginView = document.getElementById('login-view');
+    const recoveryView = document.getElementById('recovery-view');
+    if (loginView && recoveryView) {
+      loginView.classList.add('hidden');
+      recoveryView.classList.remove('hidden');
+      recoveryView.classList.add('flex');
+      const emailInput = document.getElementById('recovery-email');
+      if (emailInput) emailInput.focus();
+    }
+  }
+
+  function closeRecoveryView() {
+    const loginView = document.getElementById('login-view');
+    const recoveryView = document.getElementById('recovery-view');
+    if (loginView && recoveryView) {
+      recoveryView.classList.add('hidden');
+      recoveryView.classList.remove('flex');
+      loginView.classList.remove('hidden');
+      const userInput = document.getElementById('login-username');
+      if (userInput) userInput.focus();
+    }
+  }
+
+  function handleLoginSubmit(e) {
+    e.preventDefault();
+    const feedback = document.getElementById('login-feedback');
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      feedback.classList.add('flex');
+    }
+  }
+
+  function handleRecoverySubmit(e) {
+    e.preventDefault();
+    const feedback = document.getElementById('recovery-feedback');
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      feedback.classList.add('flex');
+    }
+  }
+</script></main><footer class="w-full bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="w-full px-space-xl py-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant"><div class="flex items-center gap-space-md"><span class="font-semibold text-on-surface">Inventário FortLuz ERP</span><span>© 2025 FortLuz Sistemas Industriais S.A.</span><span class="hidden md:inline text-outline-variant">•</span><span class="hidden md:inline">Todos os direitos reservados.</span></div><div class="flex items-center gap-space-lg font-code-dense text-code-dense"><span class="flex items-center gap-space-xs text-tertiary-container"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim inline-block animate-pulse"></span>Servidor Operacional: BR-SP01</span><span class="text-on-surface-variant">Build 2025.2.4-web</span><span class="text-on-surface-variant">Porta Segura 443</span></div></div></footer></body></html>

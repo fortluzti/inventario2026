@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-primary":"#ffffff","on-error":"#ffffff","surface-variant":"#d5e3fc","on-surface":"#0d1c2e","on-tertiary-fixed-variant":"#00504a","surface-container-highest":"#d5e3fc","background":"#f8f9ff","on-secondary-fixed-variant":"#6e3900","secondary":"#904d00","tertiary-container":"#005852","surface-dim":"#ccdbf3","surface-container-low":"#eff4ff","outline":"#8d706d","primary-fixed-dim":"#ffb4ac","secondary-fixed":"#ffdcc3","error":"#ba1a1a","outline-variant":"#e1bfbb","primary-container":"#991b1b","on-error-container":"#93000a","surface":"#f8f9ff","on-secondary-container":"#663500","surface-container-lowest":"#ffffff","on-secondary-fixed":"#2f1500","on-primary-container":"#ffaaa1","surface-tint":"#b02d29","surface-container-high":"#dce9ff","tertiary-fixed-dim":"#80d5cb","primary-fixed":"#ffdad6","error-container":"#ffdad6","secondary-container":"#fe932c","on-secondary":"#ffffff","on-primary-fixed-variant":"#8e1214","inverse-surface":"#233144","tertiary-fixed":"#9cf2e8","on-tertiary-container":"#79cec4","on-background":"#0d1c2e","on-tertiary-fixed":"#00201d","secondary-fixed-dim":"#ffb77d","on-surface-variant":"#59413e","inverse-primary":"#ffb4ac","surface-container":"#e6eeff","primary":"#760009","on-primary-fixed":"#410002","surface-bright":"#f8f9ff","inverse-on-surface":"#eaf1ff","tertiary":"#003f3a","on-tertiary":"#ffffff"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xl":"1rem","margin":"0.75rem","space-xs":"0.125rem","space-md":"0.5rem","space-lg":"0.75rem","space-sm":"0.25rem","gutter":"0.5rem"},fontFamily:{"body-sm":["IBM Plex Sans"],"code-dense":["JetBrains Mono"],"label-md":["IBM Plex Sans"],"body-lg":["IBM Plex Sans"],"label-sm":["IBM Plex Sans"],"label-lg":["IBM Plex Sans"],"headline-sm":["IBM Plex Sans"],"body-md":["IBM Plex Sans"],"headline-md":["IBM Plex Sans"],"headline-lg":["IBM Plex Sans"]},fontSize:{"body-sm":["11px",{lineHeight:"14px",fontWeight:"400"}],"code-dense":["11px",{lineHeight:"14px",fontWeight:"400"}],"label-md":["11px",{lineHeight:"14px",letterSpacing:"0.01em",fontWeight:"500"}],"body-lg":["13px",{lineHeight:"18px",fontWeight:"400"}],"label-sm":["10px",{lineHeight:"12px",letterSpacing:"0.04em",fontWeight:"600"}],"label-lg":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"headline-sm":["14px",{lineHeight:"20px",fontWeight:"600"}],"body-md":["12px",{lineHeight:"16px",fontWeight:"400"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-background"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-12 w-full px-margin flex items-center justify-between border-b border-surface-container-high"><div class="flex items-center gap-space-md"><img alt="FortLuz Inventário ERP Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold border-r border-surface-container-high pr-space-md hidden sm:inline">Inventário FortLuz ERP</span><button class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Recolher Menu Lateral" type="button"><span class="material-symbols-outlined text-[18px]">menu</span></button><div class="hidden md:flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">terminal</span><span>Ativos TI</span><span class="text-outline-variant">/</span><span class="text-on-surface font-semibold">Console Central</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden lg:flex items-center"><span class="material-symbols-outlined absolute left-2 text-on-surface-variant text-[16px]">search</span><input class="w-64 h-7 pl-7 pr-14 bg-surface-container-low rounded border border-outline-variant font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" placeholder="Pesquisar patrimônio, serial, IP..." type="text"/><span class="absolute right-1.5 font-code-dense text-label-sm bg-surface-container px-1 py-0.5 rounded text-on-surface-variant border border-surface-container-high">Ctrl+K</span></div><div class="relative"><button class="relative w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Notificações e Alertas do Sistema" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error rounded-full font-label-sm text-[9px] flex items-center justify-center font-bold">5</span></button></div><div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container-high"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-end gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container inline-block"></span>Admin TI</div><div class="font-label-sm text-label-sm text-on-surface-variant">Terminal 01 - Almoxarifado</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button class="w-6 h-6 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Menu do Usuário" type="button"><span class="material-symbols-outlined text-[16px]">expand_more</span></button></div></div></div><div class="h-9 w-full px-margin bg-surface-container-low flex items-center justify-between border-b border-surface-container-high"><div class="flex items-center gap-space-xs font-label-md text-label-md"><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px] text-tertiary-container">refresh</span><span>Atualizar</span><span class="font-code-dense text-label-sm text-on-surface-variant">(F5)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-primary text-on-primary hover:bg-primary-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">add_box</span><span>Novo Ativo</span><span class="font-code-dense text-label-sm text-primary-fixed-dim">(Ctrl+N)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">travel_explore</span><span>Busca Global</span><span class="font-code-dense text-label-sm text-on-surface-variant">(Ctrl+K)</span></button><button class="h-6 px-2 flex items-center gap-1 rounded bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">download</span><span>Exportar</span></button></div><div class="hidden md:flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-secondary">dns</span>450 Ativos Conectados</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary-container">verified_user</span>Licença Corporativa Ativa</span></div></div></header><aside class="fixed left-0 top-[84px] bottom-6 w-60 bg-surface-container-lowest z-40 flex flex-col border-r border-surface-container-high overflow-y-auto"><div class="px-space-md py-space-sm font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider font-bold bg-surface-container-low border-b border-surface-container-high">Módulos do Sistema</div><nav class="flex-1 px-space-xs py-space-sm space-y-space-xs" data-active-classes="bg-primary-container text-on-primary font-semibold rounded"><div class="font-label-sm text-label-sm px-2 pt-1 text-outline uppercase tracking-wider font-semibold">1. Painel Principal</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="dashboard-geral" href="#"><span class="material-symbols-outlined text-[16px]">dashboard</span>Dashboard Geral</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">2. Equipamentos &amp; TI</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="estacoes-de-trabalho" href="#"><span class="material-symbols-outlined text-[16px]">computer</span>Estações de Trabalho</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="monitores" href="#"><span class="material-symbols-outlined text-[16px]">desktop_windows</span>Monitores</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="impressoras" href="#"><span class="material-symbols-outlined text-[16px]">print</span>Impressoras</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="celulares-corporativos" href="#"><span class="material-symbols-outlined text-[16px]">smartphone</span>Celulares Corporativos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="nobreaks" href="#"><span class="material-symbols-outlined text-[16px]">battery_charging_full</span>Nobreaks</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ativos-diversos" href="#"><span class="material-symbols-outlined text-[16px]">devices_other</span>Ativos Diversos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="softwares" href="#"><span class="material-symbols-outlined text-[16px]">terminal</span>Softwares</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="servicos-online" href="#"><span class="material-symbols-outlined text-[16px]">cloud_done</span>Serviços Online</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">3. Estoque &amp; Insumos</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="toners" href="#"><span class="material-symbols-outlined text-[16px]">inventory_2</span>Toners em Estoque</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="recebimento-de-toners" href="#"><span class="material-symbols-outlined text-[16px]">move_to_inbox</span>Recebimento de Toners</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="historico-de-trocas" href="#"><span class="material-symbols-outlined text-[16px]">history</span>Histórico de Trocas</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">4. Manutenção &amp; Suporte</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ordens-e-manutencoes" href="#"><span class="material-symbols-outlined text-[16px]">build</span>Ordens &amp; Manutenções</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="orcamentos" href="#"><span class="material-symbols-outlined text-[16px]">request_quote</span>Orçamentos</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="chamados-ti" href="#"><span class="material-symbols-outlined text-[16px]">support_agent</span>Chamados TI</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">5. Cadastros Básicos</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="empresas" href="#"><span class="material-symbols-outlined text-[16px]">corporate_fare</span>Empresas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="setores" href="#"><span class="material-symbols-outlined text-[16px]">schema</span>Setores</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="funcionarios" href="#"><span class="material-symbols-outlined text-[16px]">badge</span>Funcionários</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="fornecedores" href="#"><span class="material-symbols-outlined text-[16px]">local_shipping</span>Fornecedores</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">6. Etiquetas &amp; Patrimônio</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="gerar-qr-codes-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">qr_code_2</span>Gerar QR / Etiquetas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="impressoras-de-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">label</span>Impressoras de Etiquetas</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="modelos-de-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">style</span>Modelos</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">7. Relatórios</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ativos-x-funcionarios" href="#"><span class="material-symbols-outlined text-[16px]">assignment_ind</span>Ativos x Funcionários</a><div class="font-label-sm text-label-sm px-2 pt-2 text-outline uppercase tracking-wider font-semibold">8. Administração</div><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="usuarios-e-perfis" href="#"><span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>Usuários &amp; Perfis (RBAC)</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="permissoes" href="#"><span class="material-symbols-outlined text-[16px]">lock_person</span>Permissões</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="configuracoes-do-sistema" href="#"><span class="material-symbols-outlined text-[16px]">settings</span>Configurações do Sistema</a><a class="flex items-center gap-space-sm px-2 py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="banco-de-dados" href="#"><span class="material-symbols-outlined text-[16px]">database</span>Banco de Dados</a></nav></aside><div class="pl-60 min-h-screen flex flex-col"><main class="flex-1 w-full pt-[84px] pb-8 px-space-md bg-background"><div class="flex flex-col w-full">
+<!-- BREADCRUMB & CONTEXT HEADER -->
+<section class="flex flex-col gap-space-sm mb-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>8. ADMINISTRAÇÃO</span>
+<span>/</span>
+<span class="text-primary font-semibold">Configurações do Sistema</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface text-label-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+          Ambiente Corporativo Autenticado
+        </span>
+<span class="font-code-dense text-label-sm text-on-surface-variant px-2 py-0.5 rounded bg-surface-container">
+          API v2.4 • REST: 200 OK
+        </span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Configurações do Sistema</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Módulo Administrativo e Manutenção Geral • Terminal de Operação Master</p>
+</div>
+<div class="flex items-center gap-space-xs font-code-dense text-label-sm text-on-surface-variant">
+<span class="px-2 py-0.5 bg-surface-container rounded">Host: srv-master-fortluz</span>
+<span class="px-2 py-0.5 bg-surface-container rounded">DB: fortluz_db_prod</span>
+</div>
+</div>
+</section>
+<!-- WORKSPACE CONTAINER WITH ERP TABS -->
+<div class="flex flex-col bg-surface-container-lowest rounded shadow-sm overflow-hidden">
+<!-- HORIZONTAL TABS BAR -->
+<nav class="flex items-center bg-surface-container-low px-space-md pt-space-xs gap-space-xs overflow-x-auto select-none" id="config-tabs-nav" role="tablist">
+<button class="h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md font-semibold bg-surface-container-lowest text-primary rounded-t shadow-sm transition-all duration-150" id="tab-btn-empresa" onclick="switchTab('tab-empresa')" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span>Dados da Empresa</span>
+</button>
+<button class="h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all duration-150 rounded-t" id="tab-btn-manutencao" onclick="switchTab('tab-manutencao')" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]">construction</span>
+<span>Manutenção do Sistema</span>
+</button>
+<button class="h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all duration-150 rounded-t" id="tab-btn-integracoes" onclick="switchTab('tab-integracoes')" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]">power</span>
+<span>Integrações e Licença</span>
+<span class="px-1.5 py-0.5 text-[9px] font-bold uppercase rounded bg-secondary-fixed text-on-secondary-fixed tracking-wider">Em Desenvolvimento</span>
+</button>
+</nav>
+<!-- TAB 1: DADOS DA EMPRESA -->
+<div class="tab-panel flex flex-col p-space-lg space-y-space-lg max-h-[calc(100vh-250px)] overflow-y-auto" id="tab-empresa">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-sm rounded">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dados da Empresa</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Informações utilizadas pelo sistema, relatórios operacionais e etiquetas de identificação patrimonial.</p>
+</div>
+<span class="font-code-dense text-label-sm text-on-surface-variant">ID Cadastral: EMP-0001</span>
+</div>
+<!-- CAMPOS BÁSICOS & CONTATO -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<div class="md:col-span-6 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
+            Razão Social / Nome da Empresa <span class="text-error">*</span>
+</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="text" value="FortLuz Sistemas Industriais e Componentes S.A."/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
+            CNPJ <span class="text-error">*</span>
+</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-code-dense text-code-dense text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="text" value="12.345.678/0001-90"/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Inscrição Estadual (IE)</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-code-dense text-code-dense text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="text" value="109.876.543.110"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
+            Telefone / Contato Comercial <span class="text-error">*</span>
+</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="text" value="(11) 3456-7890"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
+            E-mail Corporativo <span class="text-error">*</span>
+</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="email" value="contato@fortluz.com.br"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">E-mail Técnico / Suporte TI</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none focus:bg-surface-container-low shadow-sm" type="email" value="suporte.ti@fortluz.com.br"/>
+</div>
+</div>
+<!-- SEÇÃO ENDEREÇO -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center gap-2 bg-surface-container-low px-space-md py-1 rounded">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider">Endereço Operacional Principal</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<div class="md:col-span-2 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">CEP</label>
+<div class="flex gap-1">
+<input class="h-7 w-full px-2 bg-surface-container-lowest rounded font-code-dense text-code-dense text-on-surface outline-none shadow-sm" type="text" value="01310-100"/>
+</div>
+</div>
+<div class="md:col-span-5 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Logradouro</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm" type="text" value="Avenida Paulista"/>
+</div>
+<div class="md:col-span-2 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Número</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm" type="text" value="1578"/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Complemento</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm" type="text" value="Conjunto 402 - Torre Sul"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Bairro</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm" type="text" value="Bela Vista"/>
+</div>
+<div class="md:col-span-5 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Cidade</label>
+<input class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm" type="text" value="São Paulo"/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Estado / UF</label>
+<select class="h-7 px-2 bg-surface-container-lowest rounded font-body-md text-body-md text-on-surface outline-none shadow-sm">
+<option selected="" value="SP">SP - São Paulo</option>
+<option value="RJ">RJ - Rio de Janeiro</option>
+<option value="MG">MG - Minas Gerais</option>
+<option value="PR">PR - Paraná</option>
+</select>
+</div>
+</div>
+</div>
+<!-- SEÇÃO LOGOTIPO -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center gap-2 bg-surface-container-low px-space-md py-1 rounded">
+<span class="material-symbols-outlined text-[16px] text-primary">image</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider">Logotipo Institucional</span>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-lg p-space-md bg-surface-container-low rounded">
+<div class="flex flex-col items-center justify-center p-space-sm bg-surface-container-lowest rounded shadow-sm w-44 h-16">
+<img alt="Logotipo FortLuz ERP" class="max-h-12 max-w-full object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XVX7pBC9gNtuGjBEz0bheyVJ6Bxtr9aq0Lo4X3U_L_f4DH2QyS8iP_y6G50ceQS9L4d6-h7JswZIxMgPTHra48fazDV1cLgWvkXo5lrl9AgkOvFxBWme9V9z08fWF-7UgElIp1ZWVYcR5Lm6F45xm0gyJoGLBrJQAr6Nr19cqx4J8eY6k5qBIa_mEKv-AkscR1igJl2-QKxNzN8_85-CUaJ9CH25TSjP0OB_ObUcDY0Qvqu5NYy70ggQ0"/>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<button class="h-7 px-3 bg-surface-container-lowest text-on-surface hover:bg-surface-container rounded font-label-sm text-label-sm flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[14px]">upload_file</span>
+<span>Selecionar Arquivo</span>
+</button>
+<button class="h-7 px-2 bg-surface-container-lowest text-error hover:bg-error-container rounded font-label-sm text-label-sm flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[14px]">delete</span>
+<span>Remover</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              O logotipo será utilizado no cabeçalho de relatórios impressos, etiquetas térmicas de código de barras/QR e folhas de cautela.
+            </p>
+<p class="font-code-dense text-label-sm text-on-surface-variant">
+              Formatos aceitos: PNG, JPG ou SVG. Resolução recomendada: 320x80px com fundo transparente.
+            </p>
+</div>
+</div>
+</div>
+<!-- BARRA DE AÇÕES DO FORMULÁRIO -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-md bg-surface-container-lowest">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded text-tertiary-container font-label-sm text-label-sm font-semibold" id="save-status-msg">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Configurações salvas com sucesso em 24/02/2025 às 14:32:05</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="h-8 px-4 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md" type="button">
+            Cancelar Alterações
+          </button>
+<button class="h-8 px-5 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold flex items-center gap-1.5 shadow-sm" id="btn-save-empresa" onclick="simulateSaveEmpresa()" type="button">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Salvar Configurações</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TAB 2: MANUTENÇÃO DO SISTEMA -->
+<div class="tab-panel hidden flex-col p-space-lg space-y-space-md max-h-[calc(100vh-250px)] overflow-y-auto" id="tab-manutencao">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-sm rounded">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Manutenção do Sistema</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ferramentas administrativas para manutenção, integridade e segurança do banco de dados relacional.</p>
+</div>
+<span class="font-code-dense text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface">Motor: PostgreSQL 16.2</span>
+</div>
+<!-- CARD 1: BACKUP DO BANCO -->
+<div class="flex flex-col bg-surface-container-low rounded p-space-md gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">database</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Backup Completo do Banco de Dados</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gere uma cópia completa das tabelas, chaves estrangeiras, históricos e sequências para recuperação ou segurança.</p>
+</div>
+</div>
+<button class="h-8 px-3 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm" id="btn-trigger-backup" onclick="simulateBackup()" type="button">
+<span class="material-symbols-outlined text-[16px]">cloud_download</span>
+<span>Gerar Backup</span>
+</button>
+</div>
+<div class="mt-space-xs p-space-sm bg-surface-container-lowest rounded flex flex-col gap-space-xs" id="backup-status-area">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary-container">check_circle</span>
+              Último backup gerado com sucesso
+            </span>
+<span class="font-code-dense text-on-surface-variant">24/02/2025 - 13:10:00 (SHA-256 Validado)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low px-space-md py-1.5 rounded">
+<span class="font-code-dense text-code-dense text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">file_present</span>
+              backup_fortluz_20250224_full.sql.gz (14.2 MB)
+            </span>
+<button class="h-6 px-2 bg-surface-container-lowest text-primary hover:bg-surface-container rounded font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[14px]">download</span>
+<span>Baixar Arquivo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: VERIFICAR ESTRUTURA -->
+<div class="flex flex-col bg-surface-container-low rounded p-space-md gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-tertiary text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Verificar Estrutura do Banco</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Verifique se a estrutura física atual do banco de dados está rigorosamente compatível com o schema do sistema.</p>
+</div>
+</div>
+<button class="h-8 px-3 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md font-semibold flex items-center gap-1 shadow-sm" onclick="simulateVerification()" type="button">
+<span class="material-symbols-outlined text-[16px]">fact_check</span>
+<span>Verificar Banco</span>
+</button>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded flex flex-col gap-2">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm font-body-sm text-body-sm">
+<div class="p-2 rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase font-semibold">Integridade Geral</span>
+<span class="font-semibold text-tertiary-container flex items-center gap-1 text-label-md">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+                Estrutura Íntegra (38 tabelas)
+              </span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase font-semibold">Colunas / Tabelas Ausentes</span>
+<span class="font-code-dense text-on-surface font-bold">0 ausências detectadas</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase font-semibold">Recomendação do Otimizador</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                Criar índice idx_patrimonio_ativo
+              </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 3: ADAPTAR ESTRUTURA -->
+<div class="flex flex-col bg-surface-container-low rounded p-space-md gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">build_circle</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Adaptar Estrutura do Banco (Migrate Schema)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Crie tabelas ou altere tipos de colunas ausentes conforme os pacotes de patch. Operação de risco administrativo.</p>
+</div>
+</div>
+<button class="h-8 px-3 rounded bg-surface-container-lowest text-error hover:bg-error-container font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm" onclick="openModal('modal-confirm-adapt')" type="button">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span>
+<span>Adaptar Banco</span>
+</button>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-error">gpp_maybe</span>
+<div class="font-body-sm text-body-sm text-on-surface">
+<strong>Atenção operacional:</strong> Esta ação executa instruções DDL diretas (<code class="font-code-dense text-label-sm bg-surface-container px-1 py-0.5 rounded">ALTER TABLE / CREATE INDEX</code>). Recomenda-se gerar um backup antes de prosseguir.
+          </div>
+</div>
+</div>
+</div>
+<!-- TAB 3: INTEGRAÇÕES E LICENÇA -->
+<div class="tab-panel hidden flex-col p-space-lg space-y-space-lg max-h-[calc(100vh-250px)] overflow-y-auto" id="tab-integracoes">
+<!-- HEADER COM BADGE EM DESENVOLVIMENTO -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-sm rounded gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Integrações e Licença</h2>
+<span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded bg-secondary-fixed text-on-secondary-fixed tracking-wider">Em Desenvolvimento</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gerencie credenciais para consumo de API externa e visualize o status do licenciamento empresarial.</p>
+</div>
+<span class="font-code-dense text-label-sm text-on-surface-variant">Módulo: ERP-INT-CORE</span>
+</div>
+<!-- SEÇÃO 1: API KEYS -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Chaves de Acesso à API (API Keys)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Chaves utilizadas para autenticar coletores portáteis, leitores RFID e sistemas legados de faturamento.</p>
+</div>
+<button class="h-8 px-3 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm" onclick="openModal('modal-new-key')" type="button">
+<span class="material-symbols-outlined text-[16px]">key</span>
+<span>Nova API Key</span>
+</button>
+</div>
+<!-- COMPACT DATA GRID -->
+<div class="overflow-x-auto rounded bg-surface-container-lowest shadow-sm">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase">
+<tr>
+<th class="py-2 px-space-md font-semibold">Identificação da Aplicação</th>
+<th class="py-2 px-space-md font-semibold">Token da API Key</th>
+<th class="py-2 px-space-md font-semibold">Permissões</th>
+<th class="py-2 px-space-md font-semibold">Status</th>
+<th class="py-2 px-space-md font-semibold">Criado em</th>
+<th class="py-2 px-space-md font-semibold text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- ROW 1 -->
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-space-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">desktop_windows</span>
+                  Frontend Web - Terminal Master
+                </td>
+<td class="py-2 px-space-md font-code-dense text-code-dense text-on-surface-variant">
+<span id="key-mask-1">flz_live_••••••••••••••••</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Todas (*:*)</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                    Ativa
+                  </span>
+</td>
+<td class="py-2 px-space-md font-code-dense text-on-surface-variant">18/01/2025 09:14</td>
+<td class="py-2 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-6 h-6 rounded hover:bg-surface-container text-on-surface-variant flex items-center justify-center" onclick="copyKeyText('flz_live_89b2c8a149f8721c4e99')" title="Copiar" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+<button class="w-6 h-6 rounded hover:bg-error-container text-error flex items-center justify-center" onclick="openModal('modal-revoke-confirm')" title="Revogar Chave" type="button">
+<span class="material-symbols-outlined text-[15px]">delete_forever</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-space-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">phone_iphone</span>
+                  Coletor Mobile Almoxarifado Zebra TC21
+                </td>
+<td class="py-2 px-space-md font-code-dense text-code-dense text-on-surface-variant">
+<span id="key-mask-2">flz_live_••••••••••••••••</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Estoque:Write / Ativos:Read</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                    Ativa
+                  </span>
+</td>
+<td class="py-2 px-space-md font-code-dense text-on-surface-variant">02/02/2025 11:30</td>
+<td class="py-2 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-6 h-6 rounded hover:bg-surface-container text-on-surface-variant flex items-center justify-center" onclick="copyKeyText('flz_live_zebra_almox_224190x')" title="Copiar" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+<button class="w-6 h-6 rounded hover:bg-error-container text-error flex items-center justify-center" onclick="openModal('modal-revoke-confirm')" title="Revogar Chave" type="button">
+<span class="material-symbols-outlined text-[15px]">delete_forever</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-2 px-space-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">lan</span>
+                  ERP Faturamento Legado (Sync Contábil)
+                </td>
+<td class="py-2 px-space-md font-code-dense text-code-dense text-on-surface-variant">
+<span id="key-mask-3">flz_live_••••••••••••••••</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Ativos:Read</span>
+</td>
+<td class="py-2 px-space-md">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    Suspensa
+                  </span>
+</td>
+<td class="py-2 px-space-md font-code-dense text-on-surface-variant">10/12/2024 16:45</td>
+<td class="py-2 px-space-md text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-6 h-6 rounded hover:bg-surface-container text-on-surface-variant flex items-center justify-center" onclick="copyKeyText('flz_live_legacy_sync_092144k')" title="Copiar" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+<button class="w-6 h-6 rounded hover:bg-error-container text-error flex items-center justify-center" onclick="openModal('modal-revoke-confirm')" title="Revogar Chave" type="button">
+<span class="material-symbols-outlined text-[15px]">delete_forever</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SEÇÃO 2: LICENÇA DO SISTEMA -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center justify-between bg-surface-container-low px-space-md py-1 rounded">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider">Licenciamento Empresarial FortLuz</span>
+</div>
+<span class="px-1.5 py-0.5 text-[9px] font-bold uppercase rounded bg-secondary-fixed text-on-secondary-fixed">Em Preparação</span>
+</div>
+<div class="p-space-md bg-surface-container-low rounded flex flex-col gap-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            O sistema futuramente utilizará chaves de licença para controlar o volume de ativos suportados, nós de contingência e módulos adicionais de telemetria de TI.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-end">
+<div class="md:col-span-8 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Serial de Uso do Sistema</label>
+<input class="h-8 px-2 bg-surface-container-lowest rounded font-code-dense text-code-dense text-on-surface outline-none shadow-sm" placeholder="Informe o serial de uso do sistema" type="text" value="FLZ-ENT-9942-8812-PROD-2025"/>
+</div>
+<div class="md:col-span-4 flex items-center gap-2">
+<button class="h-8 px-4 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-semibold flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Salvar Serial</span>
+</button>
+<span class="px-2 py-1 bg-surface-container rounded font-label-sm text-label-sm text-on-surface-variant font-medium">
+                Status: Não validada (Mecanismo em preparação)
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL 1: NOVA API KEY -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm" id="modal-new-key">
+<div class="w-full max-w-md bg-surface-container-lowest rounded shadow-xl overflow-hidden flex flex-col">
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">vpn_key</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Nova API Key</span>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container" onclick="closeModal('modal-new-key')" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md font-body-sm text-body-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Identificação do Dispositivo / Aplicação</label>
+<input class="h-8 px-2 bg-surface-container-low rounded outline-none text-on-surface" id="new-key-ident" placeholder="Ex: Coletor Zebra Terminal 04" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Escopo de Permissões</label>
+<div class="flex flex-col gap-1 p-2 bg-surface-container-low rounded">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="accent-primary" name="scope" type="radio" value="all"/>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Todas as permissões (*:*)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="accent-primary" name="scope" type="radio" value="read"/>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Apenas Leitura de Ativos (Ativos:Read)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="accent-primary" name="scope" type="radio" value="stock"/>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Leitura e Escrita de Estoque (Estoque:Write)</span>
+</label>
+</div>
+</div>
+</div>
+<div class="h-12 px-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="h-8 px-3 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md" onclick="closeModal('modal-new-key')" type="button">
+          Cancelar
+        </button>
+<button class="h-8 px-4 rounded bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm" onclick="generateApiKeyAction()" type="button">
+<span>Gerar API Key</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL 2: SUCESSO AO GERAR API KEY -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm" id="modal-key-created">
+<div class="w-full max-w-md bg-surface-container-lowest rounded shadow-xl overflow-hidden flex flex-col">
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary-container">check_circle</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">API Key Criada com Sucesso</span>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container" onclick="closeModal('modal-key-created')" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="p-space-sm rounded bg-error-container text-on-error-container font-body-sm text-body-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] mt-0.5">warning</span>
+<span><strong>Importante:</strong> Copie esta chave agora. Por razões de segurança criptográfica, este token nunca mais será exibido por completo no painel.</span>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Chave de Produção Gerada</label>
+<div class="flex items-center gap-1">
+<input class="h-8 w-full px-2 bg-surface-container-low rounded font-code-dense text-code-dense text-primary font-bold outline-none" id="generated-key-val" readonly="" type="text" value="flz_live_89b2c8a149f8721c4e99"/>
+<button class="h-8 px-3 bg-primary text-on-primary rounded font-label-sm text-label-sm font-semibold flex items-center gap-1 whitespace-nowrap shadow-sm" onclick="copyKeyText('flz_live_89b2c8a149f8721c4e99')" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copiar</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-12 px-space-md bg-surface-container-low flex items-center justify-end">
+<button class="h-8 px-4 rounded bg-surface-container text-on-surface font-label-md text-label-md font-semibold" onclick="closeModal('modal-key-created')" type="button">
+          Fechar Janela
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL 3: CONFIRMAR ADAPTAÇÃO DO BANCO -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm" id="modal-confirm-adapt">
+<div class="w-full max-w-md bg-surface-container-lowest rounded shadow-xl overflow-hidden flex flex-col">
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-error">warning</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Confirmação de Operação Sensível</span>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container" onclick="closeModal('modal-confirm-adapt')" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="p-space-lg flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface">
+<p class="font-semibold text-headline-sm">Deseja realmente adaptar a estrutura do banco de dados?</p>
+<p class="text-on-surface-variant">Esta operação altera diretamente a estrutura física de esquemas do banco. Qualquer alteração de tipo incompatível ou índice poderá bloquear temporariamente transações ativas dos usuários.</p>
+<div class="p-2 bg-surface-container-low rounded font-code-dense text-label-sm text-on-surface-variant">
+          Destino: fortluz_db_prod • Porta: 5432
+        </div>
+</div>
+<div class="h-12 px-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="h-8 px-3 rounded bg-surface-container text-on-surface font-label-md text-label-md" onclick="closeModal('modal-confirm-adapt')" type="button">
+          Cancelar
+        </button>
+<button class="h-8 px-4 rounded bg-error text-on-error hover:bg-error-container font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm" onclick="executeAdaptSchema()" type="button">
+<span class="material-symbols-outlined text-[16px]">done</span>
+<span>Continuar e Executar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL 4: CONFIRMAR REVOGAÇÃO DE CHAVE -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm" id="modal-revoke-confirm">
+<div class="w-full max-w-sm bg-surface-container-lowest rounded shadow-xl overflow-hidden flex flex-col">
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-error">lock_reset</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Revogar Chave</span>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container" onclick="closeModal('modal-revoke-confirm')" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="p-space-lg font-body-sm text-body-sm text-on-surface">
+        Tem certeza que deseja revogar permanentemente esta API Key? Qualquer aplicação ou terminal conectado com este token perderá o acesso instantaneamente.
+      </div>
+<div class="h-12 px-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="h-8 px-3 rounded bg-surface-container text-on-surface font-label-md text-label-md" onclick="closeModal('modal-revoke-confirm')" type="button">
+          Cancelar
+        </button>
+<button class="h-8 px-4 rounded bg-error text-on-error font-label-md text-label-md font-bold shadow-sm" onclick="closeModal('modal-revoke-confirm')" type="button">
+          Sim, Revogar
+        </button>
+</div>
+</div>
+</div>
+<!-- TOAST FEEDBACK NOTIFICATION -->
+<div class="fixed bottom-8 right-6 z-50 hidden flex items-center gap-2 px-4 py-2 rounded bg-inverse-surface text-inverse-on-surface shadow-xl font-label-md text-label-md" id="toast-notify">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed" id="toast-icon">check_circle</span>
+<span id="toast-text">Ação executada com sucesso!</span>
+</div>
+</div>
+<script>
+  function switchTab(tabId) {
+    const panels = document.querySelectorAll('.tab-panel');
+    panels.forEach(panel => panel.classList.add('hidden'));
+
+    const activePanel = document.getElementById(tabId);
+    if (activePanel) {
+      activePanel.classList.remove('hidden');
+    }
+
+    const btnEmpresa = document.getElementById('tab-btn-empresa');
+    const btnManut = document.getElementById('tab-btn-manutencao');
+    const btnInteg = document.getElementById('tab-btn-integracoes');
+
+    [btnEmpresa, btnManut, btnInteg].forEach(btn => {
+      btn.className = 'h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all duration-150 rounded-t';
+    });
+
+    if (tabId === 'tab-empresa') {
+      btnEmpresa.className = 'h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md font-semibold bg-surface-container-lowest text-primary rounded-t shadow-sm transition-all duration-150';
+    } else if (tabId === 'tab-manutencao') {
+      btnManut.className = 'h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md font-semibold bg-surface-container-lowest text-primary rounded-t shadow-sm transition-all duration-150';
+    } else if (tabId === 'tab-integracoes') {
+      btnInteg.className = 'h-9 px-space-lg flex items-center gap-2 font-label-md text-label-md font-semibold bg-surface-container-lowest text-primary rounded-t shadow-sm transition-all duration-150';
+    }
+  }
+
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function showToast(text, isError = false) {
+    const toast = document.getElementById('toast-notify');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = document.getElementById('toast-icon');
+    if (!toast) return;
+
+    toastText.innerText = text;
+    if (isError) {
+      toastIcon.innerText = 'error';
+      toastIcon.className = 'material-symbols-outlined text-[18px] text-error';
+    } else {
+      toastIcon.innerText = 'check_circle';
+      toastIcon.className = 'material-symbols-outlined text-[18px] text-tertiary-fixed';
+    }
+
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3200);
+  }
+
+  function simulateSaveEmpresa() {
+    const btn = document.getElementById('btn-save-empresa');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Salvando...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      const statusMsg = document.getElementById('save-status-msg');
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR');
+      statusMsg.innerHTML = '<span class="material-symbols-outlined text-[16px]">check_circle</span> <span>Configurações salvas com sucesso em ' + timeStr + '</span>';
+      showToast('Dados cadastrais da empresa salvos com sucesso!');
+    }, 600);
+  }
+
+  function simulateBackup() {
+    const btn = document.getElementById('btn-trigger-backup');
+    btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Processando dump...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">cloud_download</span> Gerar Backup';
+      btn.disabled = false;
+      showToast('Backup full do banco de dados concluído!');
+    }, 900);
+  }
+
+  function simulateVerification() {
+    showToast('Verificação concluída: 38 tabelas íntegras.');
+  }
+
+  function executeAdaptSchema() {
+    closeModal('modal-confirm-adapt');
+    showToast('Estrutura adaptada e patches DDL aplicados com êxito.');
+  }
+
+  function copyKeyText(str) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(str);
+    }
+    showToast('Chave copiada para a área de transferência!');
+  }
+
+  function generateApiKeyAction() {
+    closeModal('modal-new-key');
+    openModal('modal-key-created');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const aside = document.querySelector('aside');
+    if (aside) {
+      const activeLink = aside.querySelector('a[data-path="configuracoes-do-sistema"]');
+      if (activeLink) {
+        activeLink.className = 'flex items-center gap-space-sm px-2 py-1.5 rounded bg-primary-container text-on-primary font-semibold text-body-sm';
+      }
+    }
+  });
+</script></main></div><footer class="fixed bottom-0 left-0 right-0 h-6 bg-inverse-surface text-inverse-on-surface font-code-dense text-label-sm z-50 flex items-center justify-between px-space-md border-t border-inverse-surface"><div class="flex items-center gap-space-md"><span class="flex items-center gap-1 text-tertiary-fixed"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed inline-block"></span>Conectado ao Servidor FortLuz ERP (API REST v2.4)</span><span class="text-outline">|</span><span class="text-surface-variant">DB: fortluz_db_prod</span><span class="text-outline">|</span><span class="text-surface-variant">Latência: 18ms</span></div><div class="flex items-center gap-space-md"><span class="hidden lg:inline text-surface-variant">Licença: Corporativa TI - 450 Ativos Registrados</span><span class="text-outline hidden lg:inline">|</span><span class="text-surface-variant">Versão: Build 2025.2.4-web</span><span class="text-outline">|</span><span class="bg-surface-container-highest/20 px-1 py-0.2 rounded text-tertiary-fixed-dim">CAPS</span><span class="bg-surface-container-highest/20 px-1 py-0.2 rounded text-tertiary-fixed-dim">NUM</span></div></footer></body></html>
