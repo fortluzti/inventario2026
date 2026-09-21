@@ -41,10 +41,10 @@ export const MODULES = [
     { id: 'modelos', label: 'Modelos', icon: 'style' },
   ]},
   { group: '7. Relatórios', items: [
+    { id: 'relatorio-mestre', label: 'Modelo Mestre de Relatórios', icon: 'preview' },
     { id: 'relatorio-estacoes', label: 'Relatório de Estações', icon: 'computer' },
     { id: 'relatorio-monitores', label: 'Relatório de Monitores', icon: 'desktop_windows' },
     { id: 'relatorio-impressoras', label: 'Relatório de Impressoras', icon: 'print' },
-    { id: 'ativos-funcionarios', label: 'Ativos x Funcionários', icon: 'assignment_ind' },
   ]},
   { group: '8. Administração', items: [
     { id: 'usuarios', label: 'Usuários & Perfis (RBAC)', icon: 'admin_panel_settings' },

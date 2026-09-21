@@ -1,0 +1,713 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ==========================================================================
+   FORTLUZ ENTERPRISE REPORT SYSTEM - MASTER DESIGN SYSTEM
+   Fiel à referência visual oficial (ux/exemplo_relatorio.png)
+   ========================================================================== */
+
+:root {
+  --rpt-primary: #991b1b;
+  --rpt-primary-dark: #760009;
+  --rpt-primary-blue: #0f4c81;
+  --rpt-primary-blue-hover: #0c3b64;
+  --rpt-accent-blue: #1e40af;
+
+  --rpt-bg-canvas: #ccdbf3;
+  --rpt-surface-white: #ffffff;
+  --rpt-surface-meta: #edf4fc;
+  --rpt-surface-table-head: #e2edfb;
+  --rpt-surface-table-alt: #f8fafc;
+
+  --rpt-text-dark: #0d1c2e;
+  --rpt-text-muted: #64748b;
+  --rpt-text-table-head: #1e3a8a;
+  --rpt-border-light: #e2e8f0;
+  --rpt-border-table: #f1f5f9;
+
+  /* Status Pills */
+  --rpt-pill-use-bg: #dcfce7;
+  --rpt-pill-use-fg: #15803d;
+  --rpt-pill-stock-bg: #dbeafe;
+  --rpt-pill-stock-fg: #1d4ed8;
+  --rpt-pill-maint-bg: #fef3c7;
+  --rpt-pill-maint-fg: #b45309;
+  --rpt-pill-damage-bg: #fee2e2;
+  --rpt-pill-damage-fg: #b91c1c;
+  --rpt-pill-discard-bg: #f1f5f9;
+  --rpt-pill-discard-fg: #475569;
+}
+
+/* ==========================================================================
+   1. VISUALIZADOR DE IMPRESSÃO A4 (INTERFACE NA TELA)
+   ========================================================================== */
+
+.rpt-viewer-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(13, 28, 46, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--rpt-text-dark);
+  box-sizing: border-box;
+}
+
+/* Barra Superior Fixa do Visualizador */
+.rpt-viewer-toolbar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--rpt-surface-white);
+  border-bottom: 1px solid var(--rpt-border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+/* Linha 1 da Toolbar: Título, Subtítulo e Botões de Ação */
+.rpt-toolbar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 16px;
+}
+
+.rpt-toolbar-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rpt-toolbar-icon {
+  font-size: 24px;
+  color: var(--rpt-primary-blue);
+  display: flex;
+  align-items: center;
+}
+
+.rpt-toolbar-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.rpt-toolbar-main-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rpt-text-dark);
+  line-height: 1.2;
+}
+
+.rpt-toolbar-sub-title {
+  font-size: 11px;
+  color: var(--rpt-text-muted);
+  margin-top: 1px;
+}
+
+.rpt-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rpt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.rpt-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.rpt-btn:active {
+  transform: translateY(1px);
+}
+
+.rpt-btn-outline {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.rpt-btn-outline:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.rpt-btn-primary {
+  background-color: var(--rpt-primary-blue);
+  color: #ffffff;
+  border-color: #0c3b64;
+}
+
+.rpt-btn-primary:hover {
+  background-color: var(--rpt-primary-blue-hover);
+}
+
+/* Linha 2 da Toolbar: Container dos Filtros Dinâmicos */
+.rpt-toolbar-filters-row {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 20px 10px;
+  background-color: #ffffff;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rpt-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rpt-filter-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--rpt-text-muted);
+}
+
+.rpt-filter-select,
+.rpt-filter-input {
+  height: 28px;
+  padding: 2px 8px;
+  font-size: 11.5px;
+  font-family: inherit;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: var(--rpt-text-dark);
+  outline: none;
+  min-width: 100px;
+  transition: border-color 0.15s ease;
+}
+
+.rpt-filter-select:focus,
+.rpt-filter-input:focus {
+  border-color: var(--rpt-primary-blue);
+  box-shadow: 0 0 0 1px var(--rpt-primary-blue);
+}
+
+.rpt-period-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rpt-period-separator {
+  font-size: 11px;
+  color: var(--rpt-text-muted);
+}
+
+.rpt-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.rpt-btn-filter-apply {
+  background-color: var(--rpt-primary-blue);
+  color: #ffffff;
+  height: 28px;
+  padding: 0 14px;
+  font-size: 11.5px;
+}
+
+.rpt-btn-filter-apply:hover {
+  background-color: var(--rpt-primary-blue-hover);
+}
+
+.rpt-btn-filter-clear {
+  background-color: #ffffff;
+  color: var(--rpt-text-dark);
+  border-color: #cbd5e1;
+  height: 28px;
+  padding: 0 12px;
+  font-size: 11.5px;
+}
+
+.rpt-btn-filter-clear:hover {
+  background-color: #f8fafc;
+}
+
+/* Canvas de Rolagem Vertical */
+.rpt-viewer-canvas {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  background-color: var(--rpt-bg-canvas);
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   2. DOCUMENTO A4 (FOLHA REGULAMENTAR)
+   ========================================================================== */
+
+.rpt-a4-sheet {
+  width: 794px; /* A4 em 96 DPI: 210mm = 794px */
+  min-height: 1123px; /* A4 em 96 DPI: 297mm = 1123px */
+  background-color: var(--rpt-surface-white);
+  color: var(--rpt-text-dark);
+  padding: 38px 40px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 2px;
+  user-select: text;
+}
+
+.rpt-a4-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Cabeçalho Institucional Oficial (Página 1) */
+.rpt-header-inst {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  gap: 16px;
+}
+
+.rpt-header-logo-wrap {
+  display: flex;
+  align-items: center;
+  max-width: 220px;
+}
+
+.rpt-header-logo-img {
+  max-height: 48px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.rpt-header-company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  line-height: 1.35;
+  max-width: 440px;
+}
+
+.rpt-company-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--rpt-text-dark);
+}
+
+.rpt-company-doc,
+.rpt-company-address,
+.rpt-company-contact {
+  font-size: 10px;
+  color: var(--rpt-text-muted);
+  margin-top: 1px;
+}
+
+/* Cabeçalho de Continuação Oficial (Páginas 2 a N) */
+.rpt-header-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.rpt-header-cont-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rpt-header-logo-img-cont {
+  max-height: 24px;
+  object-fit: contain;
+}
+
+.rpt-header-cont-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rpt-header-cont-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rpt-text-dark);
+}
+
+.rpt-header-cont-tag {
+  font-size: 11px;
+  color: var(--rpt-text-muted);
+}
+
+.rpt-company-name-cont {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--rpt-text-dark);
+}
+
+/* Título e Subtítulo */
+.rpt-title-block {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+.rpt-main-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--rpt-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.rpt-main-subtitle {
+  font-size: 11px;
+  color: var(--rpt-text-muted);
+  margin: 3px 0 0;
+}
+
+/* Barra de Metadados Azul Suave */
+.rpt-metadata-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--rpt-surface-meta);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  color: var(--rpt-text-dark);
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.rpt-meta-item strong {
+  font-weight: 600;
+}
+
+.rpt-meta-center {
+  text-align: center;
+}
+
+.rpt-meta-right {
+  text-align: right;
+}
+
+/* Tabela de Dados Oficial */
+.rpt-table-container {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.rpt-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 10.5px;
+}
+
+.rpt-data-table thead tr {
+  background-color: var(--rpt-surface-table-head);
+  color: var(--rpt-text-table-head);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  height: 28px;
+}
+
+.rpt-data-table th {
+  padding: 5px 8px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.rpt-data-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rpt-border-table);
+  color: var(--rpt-text-dark);
+  box-sizing: border-box;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+.rpt-data-table tbody tr {
+  min-height: 30px;
+}
+
+.rpt-data-table tbody tr.rpt-row-alt {
+  background-color: var(--rpt-surface-table-alt);
+}
+
+.rpt-data-table td.cell-code {
+  font-weight: 600;
+  color: var(--rpt-text-dark);
+}
+
+.rpt-data-table td.cell-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+}
+
+.rpt-data-table td.cell-muted {
+  color: var(--rpt-text-muted);
+}
+
+.rpt-data-table td.cell-strong {
+  font-weight: 600;
+}
+
+.rpt-data-table td.cell-right,
+.rpt-data-table th.cell-right {
+  text-align: right;
+}
+
+.rpt-data-table td.cell-center,
+.rpt-data-table th.cell-center {
+  text-align: center;
+}
+
+/* Badges de Status Tipo Pílula */
+.rpt-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 9.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rpt-status-pill.in-use {
+  background-color: var(--rpt-pill-use-bg);
+  color: var(--rpt-pill-use-fg);
+}
+
+.rpt-status-pill.in-stock {
+  background-color: var(--rpt-pill-stock-bg);
+  color: var(--rpt-pill-stock-fg);
+}
+
+.rpt-status-pill.maintenance {
+  background-color: var(--rpt-pill-maint-bg);
+  color: var(--rpt-pill-maint-fg);
+}
+
+.rpt-status-pill.damaged {
+  background-color: var(--rpt-pill-damage-bg);
+  color: var(--rpt-pill-damage-fg);
+}
+
+.rpt-status-pill.discarded {
+  background-color: var(--rpt-pill-discard-bg);
+  color: var(--rpt-pill-discard-fg);
+}
+
+/* Rodapé Oficial da Folha A4 */
+.rpt-a4-footer {
+  width: 100%;
+  padding-top: 16px;
+  margin-top: auto;
+}
+
+.rpt-footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--rpt-text-muted);
+}
+
+.rpt-footer-system {
+  font-weight: 500;
+  color: var(--rpt-text-dark);
+}
+
+.rpt-footer-date {
+  color: var(--rpt-text-muted);
+}
+
+.rpt-footer-page-num {
+  font-weight: 600;
+  color: var(--rpt-text-dark);
+}
+
+/* ==========================================================================
+   3. ESTADOS (CARREGANDO, VAZIO, ERRO)
+   ========================================================================== */
+
+.rpt-empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  margin-top: 32px;
+  background-color: var(--rpt-surface-table-alt);
+  border: 1px solid var(--rpt-border-light);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.rpt-empty-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--rpt-surface-meta);
+  color: var(--rpt-primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.rpt-empty-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rpt-text-dark);
+  margin: 0 0 4px;
+}
+
+.rpt-empty-desc {
+  font-size: 11px;
+  color: var(--rpt-text-muted);
+  max-width: 420px;
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. ISOLAMENTO TOTAL PARA IMPRESSÃO / GERAR PDF (@media print)
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 10mm 10mm 10mm;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Ocultar o aplicativo principal ao imprimir */
+  #root,
+  .app,
+  .appbar,
+  .subbar,
+  .sidebar,
+  .dash-main,
+  .dash-status-bar,
+  .no-print,
+  .rpt-viewer-toolbar {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* O Portal do Relatório vira o documento raiz de impressão */
+  .rpt-viewer-portal {
+    position: static !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .rpt-viewer-canvas {
+    position: static !important;
+    background: transparent !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .rpt-a4-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: calc(297mm - 20mm) !important;
+    height: auto !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .rpt-a4-sheet:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  .rpt-data-table {
+    width: 100% !important;
+  }
+
+  .rpt-data-table thead {
+    display: table-header-group !important;
+  }
+
+  .rpt-data-table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .rpt-metadata-bar,
+  .rpt-data-table thead tr,
+  .rpt-status-pill {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

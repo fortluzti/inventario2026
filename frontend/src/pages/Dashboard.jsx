@@ -6,6 +6,7 @@ import Configuracoes from './Configuracoes.jsx'
 import EstacoesReport from '../components/EstacoesReport.jsx'
 import MonitoresReport from '../components/MonitoresReport.jsx'
 import ImpressaoReport from '../components/ImpressaoReport.jsx'
+import { ReportShowcase } from '../components/report/ReportShowcase.jsx'
 import { api } from '../api/client.js'
 import { carregarEmpresa, hasLogo, logoUrl } from '../api/configuracoes.js'
 import {
@@ -264,6 +265,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
              {module === 'monitores' && <Monitores refreshKey={monitoresRefresh} newRequest={monitoresNew} onChanged={load} />}
              {module === 'impressoras' && <Impressoras refreshKey={impressorasRefresh} newRequest={impressorasNew} onChanged={load} />}
              {module === 'configuracoes' && <Configuracoes />}
+             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}
              {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
              {module === 'relatorio-monitores' && <MonitoresReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
              {module === 'relatorio-impressoras' && <ImpressaoReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}

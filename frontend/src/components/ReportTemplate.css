@@ -18,6 +18,7 @@
   --rpt-surface-container-lowest: #ffffff;
   --rpt-surface-container-high: #dce9ff;
   --rpt-surface-container-highest: #d5e3fc;
+  --rpt-surface-dim: #f0f4ff;
   --rpt-outline: #8d706d;
   --rpt-outline-variant: #e1bfbb;
   --rpt-error: #ba1a1a;
@@ -36,16 +37,27 @@
   margin: 20mm;
 }
 
+/* ==========================================================================
+   1. REPORT OVERLAY — container principal do visualizador
+   ========================================================================== */
+
 .rpt-overlay {
   position: fixed;
   inset: 0;
-  z-index: 200;
-  background: #0d1c2e80;
+  z-index: 9999;
+  background: rgba(13, 28, 46, 0.7);
   backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--rpt-on-surface);
+  box-sizing: border-box;
 }
+
+/* ==========================================================================
+   2. TOOLBAR DO VISUALIZADOR (NUNCA IMPRESSA)
+   ========================================================================== */
 
 .rpt-header {
   display: flex;
@@ -64,14 +76,14 @@
   gap: 8px;
 }
 
+.rpt-header-left .mat {
+  font-size: 20px;
+  color: var(--rpt-secondary);
+}
+
 .rpt-header-title {
   font: 600 13px 'IBM Plex Sans', sans-serif;
   color: var(--rpt-on-surface);
-}
-
-.rpt-header-left .mat {
-  font-size: 18px;
-  color: var(--rpt-secondary);
 }
 
 .rpt-header-actions {
@@ -111,11 +123,97 @@
 .rpt-btn-primary {
   background: var(--rpt-secondary);
   color: var(--rpt-on-surface);
+  border-color: var(--rpt-secondary);
 }
 
 .rpt-btn-primary:hover {
   opacity: 0.9;
 }
+
+.rpt-btn-outline {
+  background: var(--rpt-surface-container-lowest);
+  color: var(--rpt-on-surface);
+  border-color: var(--rpt-outline);
+}
+
+.rpt-btn-outline:hover {
+  background: var(--rpt-surface-container);
+}
+
+/* Toolbar filter row */
+.rpt-toolbar-filters-row {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 20px 10px;
+  background: var(--rpt-surface-container-lowest);
+  gap: 12px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rpt-outline-variant);
+}
+
+.rpt-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rpt-filter-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-filter-select,
+.rpt-filter-input {
+  height: 28px;
+  padding: 2px 8px;
+  font-size: 11.5px;
+  font-family: inherit;
+  background: var(--rpt-surface-container-lowest);
+  border: 1px solid var(--rpt-outline);
+  border-radius: 4px;
+  color: var(--rpt-on-surface);
+  outline: none;
+  min-width: 100px;
+}
+
+.rpt-period-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rpt-period-separator {
+  font-size: 11px;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rpt-btn-filter-apply {
+  background: var(--rpt-secondary);
+  color: var(--rpt-on-surface);
+  height: 28px;
+  padding: 0 14px;
+  font-size: 11.5px;
+}
+
+.rpt-btn-filter-clear {
+  background: var(--rpt-surface-container-lowest);
+  color: var(--rpt-on-surface);
+  border-color: var(--rpt-outline);
+  height: 28px;
+  padding: 0 12px;
+  font-size: 11.5px;
+}
+
+/* ==========================================================================
+   3. CANVAS DE ROLAGEM VERTICAL (contém as folhas A4)
+   ========================================================================== */
 
 .rpt-print-canvas {
   flex: 1;
@@ -123,13 +221,20 @@
   background: var(--rpt-surface-dim);
   padding: 16px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  scroll-behavior: smooth;
 }
+
+/* ==========================================================================
+   4. FOLHA A4 REGULAMENTAR
+   ========================================================================== */
 
 .a4-sheet {
   width: 794px;
   background: var(--rpt-surface-container-lowest);
-  box-shadow: 0 4px 20px #00000020;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   font: 400 11px 'IBM Plex Sans', sans-serif;
@@ -138,13 +243,16 @@
 }
 
 .a4-content {
-  padding: 38px;
+  padding: 38px 40px 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  width: 100%;
+  flex: 1;
 }
 
-.rpt-header-institucional {
+/* Cabeçalho Institucional (Página 1) */
+.rpt-header-inst {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -162,6 +270,8 @@
   max-height: 44px;
   width: auto;
   object-fit: contain;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .rpt-logo-fallback {
@@ -206,12 +316,60 @@
   color: var(--rpt-on-surface-variant);
 }
 
+/* Cabeçalho de Continuação (Páginas 2+) */
+.rpt-header-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rpt-outline-variant);
+}
+
+.rpt-header-cont_left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rpt-logo-cont {
+  max-height: 24px;
+  width: auto;
+  object-fit: contain;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.rpt-header-cont_title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rpt-header-cont_name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rpt-on-surface);
+}
+
+.rpt-header-cont_tag {
+  font-size: 11px;
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-company_name-cont {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--rpt-on-surface);
+}
+
+/* Divisor */
 .rpt-divider {
   width: 100%;
   height: 1px;
   background: var(--rpt-outline-variant);
 }
 
+/* Bloco de Título */
 .rpt-title-block {
   display: flex;
   flex-direction: column;
@@ -232,6 +390,7 @@
   margin: 0;
 }
 
+/* Barra de Metadados */
 .rpt-metadata {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -242,17 +401,26 @@
   border-radius: 4px;
 }
 
-.rpt-metadata span {
+.rpt-meta-item {
   font-size: 10px;
   color: var(--rpt-on-surface-variant);
 }
 
-.rpt-metadata strong {
+.rpt-meta-item strong {
   color: var(--rpt-on-surface);
 }
 
+.rpt-meta-center {
+  text-align: center;
+}
+
+.rpt-meta-right {
+  text-align: right;
+}
+
+/* Tabela de Dados */
 .rpt-table-wrap {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .rpt-table {
@@ -263,45 +431,72 @@
   word-break: break-word;
 }
 
+.rpt-table thead {
+  display: table-header-group;
+}
+
 .rpt-table thead tr {
   background: var(--rpt-surface-container-high);
   font: 600 10px 'IBM Plex Sans', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--rpt-on-surface-variant);
+  height: 28px;
 }
 
 .rpt-table th {
-  padding: 6px 8px;
+  padding: 5px 8px;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .rpt-table td {
   padding: 4px 8px;
   border-bottom: 1px solid var(--rpt-outline-variant);
   word-break: break-word;
+  line-height: 1.35;
+}
+
+.rpt-table tbody tr {
+  min-height: 24px;
 }
 
 .rpt-table tbody tr.rpt-row-alt {
   background: var(--rpt-surface-container-low);
 }
 
-.rpt-empty {
-  padding: 30px 12px;
+.rpt-table td.cell-code {
+  font-weight: 600;
+  color: var(--rpt-on-surface);
+}
+
+.rpt-table td.cell-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+}
+
+.rpt-table td.cell-muted {
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-table td.cell-strong {
+  font-weight: 600;
+}
+
+.rpt-table td.cell-right,
+.rpt-table th.cell-right {
+  text-align: right;
+}
+
+.rpt-table td.cell-center,
+.rpt-table th.cell-center {
   text-align: center;
-  color: var(--rpt-on-surface-variant);
 }
 
-.rpt-footnote {
-  font-size: 9px;
-  color: var(--rpt-on-surface-variant);
-  font-style: italic;
-  padding-top: 6px;
-}
-
+/* Badges de Status */
 .rpt-status {
   display: inline-flex;
   align-items: center;
@@ -320,16 +515,18 @@
   background: currentColor;
 }
 
-.rpt-status.in-use { background: #b5f2e5; color: var(--rpt-in-use); }
+.rpt-status.in-use { background: #dcfce7; color: var(--rpt-in-use); }
 .rpt-status.in-stock { background: #eff4ff; color: var(--rpt-on-surface); }
 .rpt-status.maintenance { background: #ffdfd8; color: var(--rpt-maintenance); }
 .rpt-status.damaged { background: #ffdad6; color: var(--rpt-error); }
-.rpt-status.discarded { background: #e0e0e0; color: var(--rpt-discarded); }
+.rpt-status.discarded { background: #f1f5f9; color: var(--rpt-discarded); }
 
+/* Rodapé da Folha A4 */
 .rpt-footer {
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid var(--rpt-outline-variant);
+  width: 100%;
 }
 
 .rpt-footer-content {
@@ -340,91 +537,244 @@
   color: var(--rpt-on-surface-variant);
 }
 
+.rpt-footer-system {
+  font-weight: 500;
+  color: var(--rpt-on-surface);
+}
+
+.rpt-footer-date {
+  color: var(--rpt-on-surface-variant);
+}
+
+.rpt-page-number {
+  font-weight: 600;
+  color: var(--rpt-on-surface);
+}
+
 .rpt-page-number::after {
   content: "Página 1 de 1";
   font-size: 9px;
   color: var(--rpt-on-surface-variant);
 }
 
+/* ==========================================================================
+   5. ESTADOS (Carregando, Vazio, Erro)
+   ========================================================================== */
+
+.rpt-empty-box {
+  padding: 30px 12px;
+  text-align: center;
+  color: var(--rpt-on-surface-variant);
+  width: 100%;
+}
+
+.rpt-empty-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rpt-surface-container-low);
+  color: var(--rpt-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 24px;
+}
+
+.rpt-empty-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rpt-on-surface);
+  margin: 0 0 4px;
+}
+
+.rpt-empty-desc {
+  font-size: 11px;
+  color: var(--rpt-on-surface-variant);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 16px;
+}
+
+/* Loading state */
+.rpt-state-loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--rpt-surface-container-low);
+  border: 1px solid var(--rpt-outline);
+  border-radius: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.rpt-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--rpt-surface-container);
+  border-top-color: var(--rpt-tertiary);
+  border-radius: 50%;
+  animation: rpt-spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes rpt-spin {
+  to { transform: rotate(360deg); }
+}
+
+.rpt-state-loading-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rpt-on-surface);
+  margin: 0 0 4px;
+}
+
+.rpt-state-loading-sub {
+  font-size: 11px;
+  color: var(--rpt-on-surface-variant);
+}
+
+/* Error state */
+.rpt-state-error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+.rpt-state-error-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.rpt-state-error-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #991b1b;
+  margin: 0 0 4px;
+}
+
+.rpt-state-error-desc {
+  font-size: 11px;
+  color: #991b1b;
+  max-width: 420px;
+  margin: 0 0 12px;
+  line-height: 16px;
+}
+
+.rpt-btn-retry {
+  height: 28px;
+  padding: 0 14px;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   6. ISOLAMENTO TOTAL PARA IMPRESSÃO / GERAR PDF (@media print)
+   ========================================================================== */
+
 @media print {
-  @page {
-    size: A4;
-    margin: 20mm;
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
   }
 
-  .no-print {
-    display: none !important;
+  /* Esconder TUDO da aplicação principal */
+  body * {
+    visibility: hidden;
   }
-
+  .rpt-overlay, .rpt-overlay * {
+    visibility: visible;
+  }
   .rpt-overlay {
+    position: static !important;
     background: transparent !important;
     backdrop-filter: none !important;
-    padding: 0;
-    margin: 0;
-    overflow: visible;
-    display: block;
-    position: static;
-    width: auto;
-    height: auto;
+    -webkit-backdrop-filter: none !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .rpt-print-canvas {
+    position: static !important;
     background: transparent !important;
-    padding: 0;
-    overflow: visible;
-    display: block;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    align-items: stretch !important;
   }
 
+  /* Folhas A4 — quebra de página após cada uma */
   .a4-sheet {
     box-shadow: none !important;
+    border: none !important;
     margin: 0 !important;
+    padding: 0 !important;
     width: 100% !important;
     min-height: unset !important;
     height: auto !important;
-    page-break-after: auto !important;
-    break-after: auto !important;
-    padding: 0 !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
   }
 
-  .a4-content {
-    flex: unset !important;
-    padding: 0 !important;
-    height: auto !important;
+  .a4-sheet:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 
   .rpt-table {
-    font-size: 10px;
-    table-layout: auto;
+    width: 100% !important;
   }
 
   .rpt-table thead {
-    display: table-header-group;
+    display: table-header-group !important;
   }
 
-  .rpt-table thead tr {
-    page-break-inside: avoid;
+  .rpt-table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
-  .rpt-table tbody tr {
-    page-break-inside: avoid;
-  }
-
-  .rpt-table tbody tr.rpt-row-alt {
-    background: var(--rpt-surface-container-low) !important;
-  }
-
-  .rpt-table tbody tr:hover {
-    background: transparent !important;
+  .rpt-logo {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   .rpt-page-number::after {
     content: "Página " counter(page) " de " counter(pages);
     font-size: 9px;
     color: var(--rpt-on-surface-variant);
-  }
-
-  .rpt-logo {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
   }
 }
