@@ -4,6 +4,7 @@ import Monitores from './Monitores.jsx'
 import Impressoras from './Impressoras.jsx'
 import Setores from './Setores.jsx'
 import Configuracoes from './Configuracoes.jsx'
+import Funcionarios from './Funcionarios.jsx'
 import EstacoesReport from '../components/EstacoesReport.jsx'
 import MonitoresReport from '../components/MonitoresReport.jsx'
 import ImpressaoReport from '../components/ImpressaoReport.jsx'
@@ -45,6 +46,8 @@ export default function Dashboard({ user, onLogout, searchRef }) {
   const [monitoresNew, setMonitoresNew] = useState(0)
   const [impressorasRefresh, setImpressorasRefresh] = useState(0)
   const [impressorasNew, setImpressorasNew] = useState(0)
+  const [funcionariosRefresh, setFuncionariosRefresh] = useState(0)
+  const [funcionariosNew, setFuncionariosNew] = useState(0)
   const [reportEmpresa, setReportEmpresa] = useState(null)
   const [filter, setFilter] = useState('')
   const localSearch = useRef(null)
@@ -89,27 +92,28 @@ export default function Dashboard({ user, onLogout, searchRef }) {
   useEffect(() => {
     function onKey(e) {
       if (document.querySelector('.est-dialog') || document.querySelector('.mon-dialog') || document.querySelector('.cfg-dialog') || document.querySelector('.imp-overlay') || document.querySelector('.set-overlay')) return
-      if (e.key === 'F5') {
-        e.preventDefault()
-        if (module === 'estacoes') setEstacoesRefresh((v) => v + 1)
-        else if (module === 'monitores') setMonitoresRefresh((v) => v + 1)
-        else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
-        else load()
-      }
-      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores') return
-      if (isReportModule) return
+        if (e.key === 'F5') {
+          e.preventDefault()
+          if (module === 'estacoes') setEstacoesRefresh((v) => v + 1)
+          else if (module === 'monitores') setMonitoresRefresh((v) => v + 1)
+          else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
+          else load()
+        }
+        if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios') return
+        if (isReportModule) return
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
         const el = searchRef?.current || localSearch.current
         if (el) el.focus()
       }
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') {
-        e.preventDefault()
-        if (module === 'estacoes') setEstacoesNew((v) => v + 1)
-        else if (module === 'monitores') setMonitoresNew((v) => v + 1)
-        else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
-        else if (module !== 'configuracoes') setModule('setores')
-      }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') {
+          e.preventDefault()
+          if (module === 'estacoes') setEstacoesNew((v) => v + 1)
+          else if (module === 'monitores') setMonitoresNew((v) => v + 1)
+          else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
+          else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
+          else if (module !== 'configuracoes') setModule('setores')
+        }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -254,6 +258,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
           if (module === 'estacoes') setEstacoesNew((v) => v + 1)
           else if (module === 'monitores') setMonitoresNew((v) => v + 1)
           else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
+          else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
           else setModule('setores')
         }}
       />
@@ -267,6 +272,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
             {module === 'monitores' && <Monitores refreshKey={monitoresRefresh} newRequest={monitoresNew} onChanged={load} />}
             {module === 'impressoras' && <Impressoras refreshKey={impressorasRefresh} newRequest={impressorasNew} onChanged={load} />}
             {module === 'setores' && <Setores refreshKey={estacoesRefresh} newRequest={estacoesNew} onChanged={load} />}
+            {module === 'funcionarios' && <Funcionarios refreshKey={estacoesRefresh} newRequest={estacoesNew} onChanged={load} />}
             {module === 'configuracoes' && <Configuracoes />}
             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}

@@ -86,9 +86,16 @@ export default function SetoresDialog({ mode = 'new', id, onClose, onSaved }) {
     setSaving(true)
     setError('')
     try {
-      await api('setores', 'salvar', { method: 'POST', body: setorPayload(form) })
+      await api('setores', 'salvar', { method: 'POST', body: { ...setorPayload(form), ...(id ? { id } : {}) } })
       onSaved(`${mode === 'new' ? 'Setor criado' : 'Setor atualizado'} com sucesso.`)
-    } catch (e) { setError(e.message) }
+    } catch (e) {
+      // Improve error message for duplicate name (HTTP 409)
+      if (e.status === 409) {
+        setError('Já existe um setor com este nome. Por favor, escolha um nome diferente.')
+      } else {
+        setError(e.message)
+      }
+    }
     finally { saveLock.current = false; setSaving(false) }
   }
 
