@@ -120,6 +120,11 @@ return [
 
     'funcionarios' => [
         'table'   => 'funcionarios',
+        'select'  =>
+            'SELECT funcionarios.*, '
+            . 's.nome AS setor_nome '
+            . 'FROM funcionarios '
+            . 'LEFT JOIN setores s ON s.id = funcionarios.setor_id',
         'fields'  => [
             'nome'     => ['tipo' => 'string', 'req' => true, 'max' => 150],
             'cargo'    => ['tipo' => 'string', 'max' => 100],
@@ -129,7 +134,7 @@ return [
             'email'    => ['tipo' => 'email', 'max' => 150],
             'gmail'    => ['tipo' => 'email', 'max' => 150],
         ],
-        'search'  => ['nome', 'cargo'],
+        'search'  => ['funcionarios.nome', 'funcionarios.cargo', 's.nome'],
         'filters' => ['setor_id'],
     ],
 
