@@ -28,6 +28,8 @@
   --ok-bg: #f0fdf4; --ok-fg: #166534; --ok-bd: #bbf7d0;
   --warn-bg: #fffbeb; --warn-fg: #b45309; --warn-bd: #fde68a;
   --crit-bg: #fef2f2; --crit-fg: #991b1b; --crit-bd: #fecaca;
+  --in-use: #166534;
+  --discarded: #475569;
 
   --statusbar-bg: #0f172a;
   --statusbar-fg: #94a3b8;

@@ -30,6 +30,9 @@
 .func-table tbody tr:hover { background: var(--surface-container-low); }
 .func-name { font-weight: 500; }
 .func-muted { color: var(--text-muted); }
+.func-status { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.func-status.active { background: #dcfce7; color: var(--in-use); }
+.func-status.inactive { background: #f1f5f9; color: var(--discarded); }
 .func-pagination { flex-wrap: wrap; padding: 8px 10px; border-top: 1px solid var(--border-light); font-size: 11px; }
 .func-pagination .pgs { display: flex; align-items: center; gap: 2px; }
 .func-pagination .pgs button { padding: 2px 8px; border: none; background: transparent; border-radius: var(--radius); font: inherit; font-family: var(--font-mono); font-size: 10px; color: var(--on-surface); cursor: pointer; }

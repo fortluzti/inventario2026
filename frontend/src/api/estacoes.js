@@ -18,10 +18,12 @@ export const EMPTY_ESTACAO = {
 
 // A API limita a 200 registros por página. Não truncar os cadastros dos selects.
 export async function listarOpcoes(endpoint) {
-  const first = await api(endpoint, 'listar', { params: { limit: 200, page: 1 } })
+  const params = { limit: 200, page: 1 }
+  if (endpoint === 'funcionarios' || endpoint === 'fornecedores') params.ativo = 1
+  const first = await api(endpoint, 'listar', { params })
   const items = [...first.items]
   for (let page = 2; page <= first.total_pages; page++) {
-    const next = await api(endpoint, 'listar', { params: { limit: 200, page } })
+    const next = await api(endpoint, 'listar', { params: { ...params, limit: 200, page } })
     items.push(...next.items)
   }
   return items.sort((a, b) => String(a.nome || a.codigo_interno_monitor || '').localeCompare(String(b.nome || b.codigo_interno_monitor || ''), 'pt-BR', { numeric: true }))

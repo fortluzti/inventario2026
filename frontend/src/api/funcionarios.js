@@ -7,13 +7,14 @@ export const EMPTY_FUNCIONARIO = {
   rg: '',
   email: '',
   gmail: '',
+  ativo: 1,
 }
 
 export async function listarOpcoes() {
-  const first = await api('funcionarios', 'listar', { params: { limit: 200, page: 1 } })
+  const first = await api('funcionarios', 'listar', { params: { limit: 200, page: 1, ativo: 1 } })
   const items = [...first.items]
   for (let page = 2; page <= first.total_pages; page++) {
-    const next = await api('funcionarios', 'listar', { params: { limit: 200, page } })
+    const next = await api('funcionarios', 'listar', { params: { limit: 200, page, ativo: 1 } })
     items.push(...next.items)
   }
   return items.sort((a, b) => String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR', { numeric: true }))
@@ -45,5 +46,6 @@ export function funcionarioPayload(form) {
     rg: String(form.rg ?? '').trim().substring(0, 30) || null,
     email: String(form.email ?? '').trim() || null,
     gmail: String(form.gmail ?? '').trim() || null,
+    ativo: form.ativo ? 1 : 0,
   }
 }

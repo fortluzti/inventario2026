@@ -312,11 +312,17 @@ final class ConfiguracoesHandler
             $cols = [];
             $cols[] = 'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY';
             foreach (array_keys($mod['fields']) as $col) {
-                $cols[] = match ($mod['fields'][$col]['tipo']) {
-                    'int'   => "`{$col}` INT",
-                    'date'  => "`{$col}` DATE",
-                    default => "`{$col}` VARCHAR(" . ($mod['fields'][$col]['max'] ?? 255) . ')',
-                };
+                if ($col === 'ativo') {
+                    // Status Ativo/Inativo: padrão do projeto (setores).
+                    // TINYINT(1) NOT NULL DEFAULT 1 garante que novos e existentes sejam Ativos.
+                    $cols[] = "`{$col}` TINYINT(1) NOT NULL DEFAULT 1";
+                } else {
+                    $cols[] = match ($mod['fields'][$col]['tipo']) {
+                        'int'   => "`{$col}` INT",
+                        'date'  => "`{$col}` DATE",
+                        default => "`{$col}` VARCHAR(" . ($mod['fields'][$col]['max'] ?? 255) . ')',
+                    };
+                }
             }
             $cols[] = 'data_cadastro DATETIME';
             $cols[] = 'data_atualizacao DATETIME';
@@ -335,14 +341,22 @@ final class ConfiguracoesHandler
                 $hasCol = (bool)$pdo->query("SHOW COLUMNS FROM `{$table}` LIKE '{$col}'")->fetch();
                 if ($hasCol) continue;
 
-                $ddl = match ($mod['fields'][$col]['tipo']) {
-                    'int'   => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` INT",
-                    'date'  => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` DATE",
-                    default => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` VARCHAR(" . ($mod['fields'][$col]['max'] ?? 255) . ')',
-                };
-                $nullable = !empty($mod['fields'][$col]['req']);
-                $ddl .= $nullable ? ' NOT NULL' : ' NULL';
-                $pdo->exec($ddl);
+                if ($col === 'ativo') {
+                    // Status Ativo/Inativo: padrão do projeto (setores).
+                    // NOT NULL DEFAULT 1 garante registros existentes como Ativos.
+                    $ddl = "ALTER TABLE `{$table}` ADD COLUMN `{$col}` TINYINT(1) NOT NULL DEFAULT 1";
+                    $pdo->exec($ddl);
+                    $pdo->exec("UPDATE `{$table}` SET `{$col}` = 1 WHERE `{$col}` IS NULL");
+                } else {
+                    $ddl = match ($mod['fields'][$col]['tipo']) {
+                        'int'   => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` INT",
+                        'date'  => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` DATE",
+                        default => "ALTER TABLE `{$table}` ADD COLUMN `{$col}` VARCHAR(" . ($mod['fields'][$col]['max'] ?? 255) . ')',
+                    };
+                    $nullable = !empty($mod['fields'][$col]['req']);
+                    $ddl .= $nullable ? ' NOT NULL' : ' NULL';
+                    $pdo->exec($ddl);
+                }
                 $log[] = ['table' => $table, 'column' => $col, 'action' => 'added'];
             }
         }

@@ -113,9 +113,12 @@ return [
             'tipo'          => ['tipo' => 'string', 'max' => 50],
             'nome_vendedor' => ['tipo' => 'string', 'max' => 100],
             'email'         => ['tipo' => 'email', 'max' => 150],
+            // Status Ativo/Inativo: padrão do projeto (setores). 1=Ativo, 0=Inativo.
+            'ativo'         => ['tipo' => 'int'],
         ],
         'search'  => ['nome', 'cnpj', 'nome_vendedor'],
-        'dropdown' => ['table' => 'fornecedores', 'name_col' => 'nome'],
+        'filters' => ['ativo'],
+        'dropdown' => ['table' => 'fornecedores', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
 
     'funcionarios' => [
@@ -133,9 +136,12 @@ return [
             'rg'       => ['tipo' => 'string', 'max' => 30],
             'email'    => ['tipo' => 'email', 'max' => 150],
             'gmail'    => ['tipo' => 'email', 'max' => 150],
+            // Status Ativo/Inativo: padrão do projeto (setores). 1=Ativo, 0=Inativo.
+            'ativo'    => ['tipo' => 'int'],
         ],
         'search'  => ['funcionarios.nome', 'funcionarios.cargo', 's.nome'],
-        'filters' => ['setor_id'],
+        'filters' => ['setor_id', 'funcionarios.ativo' => 'ativo'],
+        'dropdown' => ['table' => 'funcionarios', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
 
     'impressoras' => [

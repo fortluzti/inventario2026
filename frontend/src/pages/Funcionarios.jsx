@@ -10,7 +10,7 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
   const [data, setData] = useState(EMPTY)
   const [search, setSearch] = useState('')
   const [query, setQuery] = useState('')
-  const [filters, setFilters] = useState({ setor_id: '' })
+  const [filters, setFilters] = useState({ setor_id: '', ativo: '1' })
   const [draft, setDraft] = useState(filters)
   const [showFilters, setShowFilters] = useState(true)
   const [page, setPage] = useState(1)
@@ -86,7 +86,7 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
   }
 
   function clear() {
-    setSearch(''); setQuery(''); setFilters({ setor_id: '' }); setDraft({ setor_id: '' }); setPage(1)
+    setSearch(''); setQuery(''); setFilters({ setor_id: '', ativo: '1' }); setDraft({ setor_id: '', ativo: '1' }); setPage(1)
   }
 
   return <section className="func-page" aria-labelledby="func-page-title">
@@ -103,12 +103,13 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
       <div className="func-toolbar-row">
         <label className="func-search"><span className="mat" aria-hidden="true">search</span><input ref={searchRef} aria-label="Buscar funcionários" placeholder="Buscar funcionários…" value={search} onChange={(e) => setSearch(e.target.value)} /></label>
         <div className="func-actions">
-          <button className="func-btn" onClick={() => setShowFilters((v) => !v)} aria-expanded={showFilters} aria-controls="func-filters"><span className="mat" aria-hidden="true">filter_list</span>Filtros{(filters.setor_id && ' •')}</button>
+          <button className="func-btn" onClick={() => setShowFilters((v) => !v)} aria-expanded={showFilters} aria-controls="func-filters"><span className="mat" aria-hidden="true">filter_list</span>Filtros{(filters.setor_id || filters.ativo !== '1') && ' •'}</button>
           <button className="func-btn" onClick={() => setRevision((v) => v + 1)} disabled={loading}>Atualizar</button>
         </div>
       </div>
       {showFilters && <form id="func-filters" className="func-filters" onSubmit={(e) => { e.preventDefault(); setFilters({ ...draft }); setPage(1) }}>
-        <label>Setor: <select aria-label="Filtrar por setor" value={draft.setor_id} onChange={(e) => setDraft({ setor_id: e.target.value })}><option value="">Todos os Setores</option>{setores.map((s) => <option key={s.id} value={s.id}>{s.nome}</option>)}</select></label>
+        <label>Setor: <select aria-label="Filtrar por setor" value={draft.setor_id} onChange={(e) => setDraft({ ...draft, setor_id: e.target.value })}><option value="">Todos os Setores</option>{setores.map((s) => <option key={s.id} value={s.id}>{s.nome}</option>)}</select></label>
+        <label>Status: <select aria-label="Filtrar por status" value={draft.ativo} onChange={(e) => setDraft({ ...draft, ativo: e.target.value })}><option value="1">Ativos</option><option value="0">Inativos</option><option value="">Todos</option></select></label>
         <div className="func-actions"><button className="func-btn func-btn-primary" type="submit">Aplicar</button><button className="func-btn" type="button" onClick={clear}>Limpar</button></div>
       </form>}
     </div>
@@ -119,13 +120,14 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
     <div className="func-grid" aria-busy={loading}>
       <div className="func-table-scroll"><table className="func-table">
         <caption className="func-sr-only">Funcionários cadastrados</caption>
-        <thead><tr>{['Nome', 'Cargo', 'Setor', 'RG', 'E-mail', 'Ações'].map((label) => <th key={label} scope="col">{label}</th>)}</tr></thead>
-        <tbody>{loading ? <tr><td colSpan={6} className="func-empty" role="status">Carregando funcionários…</td></tr> : data.items.length === 0 ? <tr><td colSpan={6} className="func-empty">{error ? 'Não foi possível carregar a listagem.' : 'Nenhum funcionário encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
+        <thead><tr>{['Nome', 'Cargo', 'Setor', 'RG', 'E-mail', 'Status', 'Ações'].map((label) => <th key={label} scope="col">{label}</th>)}</tr></thead>
+        <tbody>{loading ? <tr><td colSpan={7} className="func-empty" role="status">Carregando funcionários…</td></tr> : data.items.length === 0 ? <tr><td colSpan={7} className="func-empty">{error ? 'Não foi possível carregar a listagem.' : 'Nenhum funcionário encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
           <td><strong className="func-name">{row.nome || '—'}</strong></td>
           <td className="func-muted">{row.cargo || '—'}</td>
           <td className="func-muted">{row.setor_nome || row.setor || '—'}</td>
           <td className="func-muted">{row.rg || '—'}</td>
           <td className="func-muted">{row.email || '—'}</td>
+          <td><span className={`func-status ${row.ativo ? 'active' : 'inactive'}`}>{row.ativo ? 'Ativo' : 'Inativo'}</span></td>
           <td><div className="func-actions"><button className="func-btn func-btn-icon" title="Visualizar" aria-label="Visualizar funcionário" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="func-btn func-btn-icon" title="Editar" aria-label="Editar funcionário" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button><button className="func-btn func-btn-icon danger" title="Excluir" aria-label="Excluir funcionário" disabled={deleting !== null} onClick={() => remove(row)}><span className="mat">delete</span></button></div></td>
         </tr>)}</tbody>
       </table></div>

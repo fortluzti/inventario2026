@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
 import { funcionarioPayload, buscarPorId } from '../api/funcionarios.js'
 
-const EMPTY = { nome: '', cargo: '', setor_id: '', rg: '', email: '', gmail: '' }
+const EMPTY = { nome: '', cargo: '', setor_id: '', rg: '', email: '', gmail: '', ativo: 1 }
 
 export default function FuncionarioDialog({ mode = 'new', id, onClose, onSaved }) {
   const [form, setForm] = useState(EMPTY)
@@ -31,6 +31,7 @@ export default function FuncionarioDialog({ mode = 'new', id, onClose, onSaved }
             rg: row.rg || '',
             email: row.email || '',
             gmail: row.gmail || '',
+            ativo: row.ativo ? 1 : 0,
           })
         })
         .catch((e) => setError(e.message))
@@ -153,7 +154,21 @@ export default function FuncionarioDialog({ mode = 'new', id, onClose, onSaved }
               <div className="func-field">
                 <label htmlFor="func-gmail">Gmail</label>
                 <input id="func-gmail" name="gmail" type="email" className="func-input" value={form.gmail || ''} onChange={handleChange} disabled={mode === 'view'} placeholder="Ex: joao@gmail.com" maxLength={150} />
+            </div>
+            {mode === 'edit' && (
+              <div className="func-field full">
+                <label htmlFor="func-ativo">
+                  <input id="func-ativo" type="checkbox" name="ativo" checked={form.ativo === 1} onChange={handleChange} />
+                  <span>Ativo</span>
+                </label>
               </div>
+            )}
+            {mode === 'view' && (
+              <div className="func-field full">
+                <label>Status</label>
+                <span className={`func-status ${form.ativo ? 'active' : 'inactive'}`}>{form.ativo ? 'Ativo' : 'Inativo'}</span>
+              </div>
+            )}
             </div>
           </fieldset>
           {setorError && <div className="func-message error" role="alert">{setorError}<button type="button" className="func-btn" onClick={() => setSetorError('')}>Tentar novamente</button></div>}
