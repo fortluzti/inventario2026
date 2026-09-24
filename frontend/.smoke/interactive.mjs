@@ -118,6 +118,10 @@ check('Volta ao Dashboard Geral', container.textContent.includes('Central de Ale
 const { testEstacoes } = await import('./estacoes.mjs')
 await testEstacoes({ container, act, check, setVal, dom })
 
+/* Fluxos de funcionários: ordenação por cabeçalho, filtros e paginação (mock em memória). */
+const { testFuncionarios } = await import('./funcionarios.mjs')
+await testFuncionarios({ container, act, check, setVal, dom })
+
 /* Testes específicos de relatórios (multi-página, logo, CSS de impressão). */
 const { testReports } = await import('./report.mjs')
 await testReports({ container, act, check, dom })

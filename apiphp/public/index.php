@@ -5,12 +5,13 @@
  * Uso: /apiphp/public/index.php?endpoint=impressoras&action=listar&page=1
  * Autenticacao: header `X-API-KEY: <chave>`
  *
- * Endpoints generico-CRUD (via src/modules.php):
+  * Endpoints generico-CRUD (via src/modules.php):
  *   acessorios, ativos_diversos, empresas, fornecedores, funcionarios,
- *   impressoras, impressoras_modelos, monitores, nobreaks, setores,
+ *   celulares, impressoras, impressoras_modelos, monitores, nobreaks, setores,
  *   softwares, toners, ativos_tipos
  * Endpoints dedicados:
- *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode
+ *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode,
+ *   api_keys, configuracoes, celulares
  */
 declare(strict_types=1);
 
@@ -65,6 +66,10 @@ try {
             require __DIR__ . '/../src/handlers/configuracoes.php';
             ConfiguracoesHandler::handle($pdo, $action, $input);
 
+        case 'celulares':
+            require __DIR__ . '/../src/handlers/celulares_handler.php';
+            CelularesHandler::handle($pdo, $action, $input);
+
         default:
             // --- Modulos genericos via registry ---
             $modules = require __DIR__ . '/../src/modules.php';
@@ -73,6 +78,7 @@ try {
             }
             $crud = new Crud($pdo, $modules[$endpoint], $endpoint);
             $crud->handle($action, $input);
+
     }
 } catch (ValidationException $e) {
     throw $e;

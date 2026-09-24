@@ -42,9 +42,21 @@ final class Crud
             }
         }
 
+        // Ordenacao (whitelist por modulo): a chave amigavel ('nome', 'setor'...)
+        // so e aceita se existir em mod['sortable']; a coluna SQL vem do registry
+        // e NUNCA e concatenada a partir do input do cliente. A ordenacao ocorre
+        // aqui, antes do LIMIT/OFFSET, valendo para o conjunto inteiro de registros.
+        $orderBy = $this->mod['order'] ?? 'ORDER BY id DESC';
+        $sortKey = (string)($input['sort'] ?? '');
+        if ($sortKey !== '' && !empty($this->mod['sortable'][$sortKey])) {
+            $dir = (strtoupper((string)($input['dir'] ?? 'ASC')) === 'DESC') ? 'DESC' : 'ASC';
+            // Desempate pelo id (mesma ordem do padrao) para ordenacao estavel entre paginas.
+            $orderBy = 'ORDER BY ' . $this->mod['sortable'][$sortKey] . ' ' . $dir . ", {$table}.id DESC";
+        }
+
         $sql = $base;
         if ($where) { $sql .= ' WHERE ' . implode(' AND ', $where); }
-        $sql .= ' ' . ($this->mod['order'] ?? 'ORDER BY id DESC');
+        $sql .= ' ' . $orderBy;
 
         // Paginacao (inteiros garantidos)
         $page  = max(1, (int)($input['page'] ?? 1));

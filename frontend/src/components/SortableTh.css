@@ -1,0 +1,7 @@
+/* Cabeçalho ordenável (SortableTh) — complementa o <th> já estilizado pela página. */
+.th-sort { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-transform: inherit; letter-spacing: inherit; cursor: pointer; white-space: nowrap; }
+.th-sortable:hover { background: var(--surface-container-high); color: var(--on-surface); cursor: pointer; }
+.th-sortable.is-sorted { color: var(--primary); }
+.th-sort:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 2px; }
+.th-sort .mat { font-size: 13px; line-height: 1; opacity: .6; }
+.th-sortable.is-sorted .mat { opacity: 1; }

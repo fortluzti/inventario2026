@@ -3,7 +3,7 @@ import { api, getApiKey } from './client.js'
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8090/index.php'
 
 export const MODULE_SCOPES = [
-  'ativos_diversos', 'ativos_tipos', 'empresas', 'estacoes',
+  'ativos_diversos', 'ativos_tipos', 'celulares', 'empresas', 'estacoes',
   'fornecedores', 'funcionarios', 'impressoras', 'impressoras_modelos',
   'monitores', 'nobreaks', 'setores', 'softwares', 'toners',
   'api_keys', 'configuracoes', 'health',
@@ -13,6 +13,7 @@ export const MODULE_SCOPES = [
 export const SCOPE_LABELS = {
   'ativos_diversos': 'Ativos Diversos',
   'ativos_tipos': 'Tipos de Ativos',
+  'celulares': 'Celulares Corporativos',
   'empresas': 'Empresas',
   'estacoes': 'Estações',
   'fornecedores': 'Fornecedores',

@@ -14,6 +14,7 @@ export const MODULES = [
     { id: 'monitores', label: 'Monitores', icon: 'desktop_windows' },
     { id: 'impressoras', label: 'Impressoras', icon: 'print' },
     { id: 'celulares', label: 'Celulares Corporativos', icon: 'smartphone' },
+    { id: 'celulares-conferencia', label: 'Conferência de Celulares', icon: 'fact_check' },
     { id: 'nobreaks', label: 'Nobreaks', icon: 'battery_charging_full' },
     { id: 'diversos', label: 'Ativos Diversos', icon: 'devices_other' },
     { id: 'softwares', label: 'Softwares', icon: 'terminal' },

@@ -141,6 +141,17 @@ return [
         ],
         'search'  => ['funcionarios.nome', 'funcionarios.cargo', 's.nome'],
         'filters' => ['setor_id', 'funcionarios.ativo' => 'ativo'],
+        // Whitelist de ordenacao: chave amigavel enviada pelo frontend => coluna SQL
+        // ja qualificada. O backend so aceita chaves deste mapa (nunca concatena
+        // input do cliente no SQL). 'setor' ordena pelo nome via JOIN (s.nome).
+        'sortable' => [
+            'nome'   => 'funcionarios.nome',
+            'cargo'  => 'funcionarios.cargo',
+            'setor'  => 's.nome',
+            'rg'     => 'funcionarios.rg',
+            'email'  => 'funcionarios.email',
+            'status' => 'funcionarios.ativo',
+        ],
         'dropdown' => ['table' => 'funcionarios', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
 
@@ -269,5 +280,48 @@ return [
             'empresa_id'     => ['tipo' => 'int'],
         ],
         'search'  => ['codigo'],
+    ],
+
+    'celulares' => [
+        'table'   => 'celulares',
+        'select'  =>
+            'SELECT celulares.*, '
+            . 'f.nome AS nome_usuario, '
+            . 'f.email AS email_usuario, '
+            . 'cf.data_entrega AS data_ultima_entrega '
+            . 'FROM celulares '
+            . 'LEFT JOIN (SELECT cf1.* FROM celulares_funcionarios cf1 '
+            . 'INNER JOIN (SELECT celular_id, MAX(id) AS max_id FROM celulares_funcionarios '
+            . 'WHERE data_desassociacao IS NULL GROUP BY celular_id) cf2 '
+            . 'ON cf2.celular_id = cf1.celular_id AND cf2.max_id = cf1.id) cf '
+            . 'ON cf.celular_id = celulares.id '
+            . 'LEFT JOIN funcionarios f ON f.id = cf.usuario_id',
+        'fields'  => [
+            'marca'          => ['tipo' => 'string', 'req' => true, 'max' => 100],
+            'modelo'         => ['tipo' => 'string', 'req' => true, 'max' => 150],
+            'imei'           => ['tipo' => 'string', 'req' => true, 'max' => 50, 'unique' => true],
+            'serial'         => ['tipo' => 'string', 'max' => 100],
+            'numero'         => ['tipo' => 'string', 'max' => 30],
+            'status'         => ['tipo' => 'string', 'max' => 20,
+                'values' => ['Em Estoque' => 'Em Estoque', 'Em Uso' => 'Em Uso', 'Danificado' => 'Danificado']],
+            'data_compra'    => ['tipo' => 'date'],
+            'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
+            'fornecedor_id'  => ['tipo' => 'int'],
+            'empresa_id'     => ['tipo' => 'int'],
+        ],
+        'search'  => ['celulares.codigo_interno_celular', 'celulares.marca', 'celulares.modelo',
+            'celulares.imei', 'celulares.serial', 'celulares.numero', 'f.nome', 'f.email'],
+        'filters' => ['celulares.status' => 'status'],
+        'sortable' => [
+            'codigo'        => 'celulares.codigo_interno_celular',
+            'marca'         => 'celulares.marca',
+            'numero'        => 'celulares.numero',
+            'status'        => 'celulares.status',
+            'nome_usuario'  => 'nome_usuario',
+            'email_usuario' => 'email_usuario',
+        ],
+        'code_field' => 'codigo_interno_celular',
+        'code_format' => 'CEL-%03d',
+        'dropdown' => ['table' => 'celulares', 'name_col' => 'codigo_interno_celular'],
     ],
 ];

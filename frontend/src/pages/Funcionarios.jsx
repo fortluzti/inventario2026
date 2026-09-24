@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
 import { listarOpcoes } from '../api/funcionarios.js'
 import FuncionarioDialog from '../components/FuncionarioDialog.jsx'
+import SortableTh from '../components/SortableTh.jsx'
+import { useTableSort } from '../hooks/useTableSort.js'
 import './Funcionarios.css'
 
 const EMPTY = { items: [], total: 0, total_pages: 0 }
@@ -26,6 +28,7 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
   const deleteLock = useRef(false)
   const searchRef = useRef(null)
   const lastNewRequest = useRef(newRequest)
+  const { params: sortParams, sort, toggle: toggleSort, isActive } = useTableSort()
 
   useEffect(() => {
     const timer = setTimeout(() => { setQuery(search.trim()); setPage(1) }, 300)
@@ -45,7 +48,7 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
     let active = true
     setLoading(true)
     setError('')
-    api('funcionarios', 'listar', { params: { search: query, ...filters, page, limit } })
+    api('funcionarios', 'listar', { params: { search: query, ...filters, ...sortParams, page, limit } })
       .then((result) => {
         if (!active) return
         if (page > Math.max(1, result.total_pages)) { setPage(Math.max(1, result.total_pages)); return }
@@ -54,7 +57,7 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
       .catch((e) => { if (active) { setError(e.message); setData(EMPTY) } })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
-  }, [query, filters, page, limit, revision, refreshKey])
+  }, [query, filters, sort, page, limit, revision, refreshKey])
 
   useEffect(() => {
     if (newRequest > lastNewRequest.current) { lastNewRequest.current = newRequest; setDialog({ mode: 'new' }) }
@@ -120,7 +123,11 @@ export default function Funcionarios({ refreshKey = 0, newRequest = 0, onChanged
     <div className="func-grid" aria-busy={loading}>
       <div className="func-table-scroll"><table className="func-table">
         <caption className="func-sr-only">Funcionários cadastrados</caption>
-        <thead><tr>{['Nome', 'Cargo', 'Setor', 'RG', 'E-mail', 'Status', 'Ações'].map((label) => <th key={label} scope="col">{label}</th>)}</tr></thead>
+        <thead><tr>
+          {[['Nome', 'nome'], ['Cargo', 'cargo'], ['Setor', 'setor'], ['RG', 'rg'], ['E-mail', 'email'], ['Status', 'status']].map(([label, key]) =>
+            <SortableTh key={key} label={label} active={isActive(key)} dir={sort.dir} onSort={() => { toggleSort(key); setPage(1) }} />)}
+          <th scope="col">Ações</th>
+        </tr></thead>
         <tbody>{loading ? <tr><td colSpan={7} className="func-empty" role="status">Carregando funcionários…</td></tr> : data.items.length === 0 ? <tr><td colSpan={7} className="func-empty">{error ? 'Não foi possível carregar a listagem.' : 'Nenhum funcionário encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
           <td><strong className="func-name">{row.nome || '—'}</strong></td>
           <td className="func-muted">{row.cargo || '—'}</td>
