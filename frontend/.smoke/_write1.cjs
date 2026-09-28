@@ -1,0 +1,17 @@
+const fs = require('fs');
+let content = ``;
+content += `// Smoke: listagem de Funcionarios - ordenacao pelas colunas (cabecalho clicavel).\n`;
+content += `// Mock em memoria espelhando o Crud::listar do backend:\n`;
+content += `//  - sort global (whitelist sortable) ANTES do slice (paginacao no servidor);\n`;
+content += `//  - nulls/vazios primeiro em ASC; desempate id DESC; padrao ORDER BY id DESC.\n`;
+content += `export async function testFuncionarios({ container, act, check, setVal, dom }) {\n`;
+content += `  // ---- dados mock ----\n`;
+content += `  const DB = [\n`;
+content += `    { id: 5, nome: 'Carlos Souza', cargo: 'Eletricista', setor_id: 2, setor_nome: 'DOCA', rg: '222333444', email: 'carlos@fortluz.com.br', ativo: 1 },\n`;
+content += `    { id: 4, nome: 'Ana Pereira', cargo: 'Analista', setor_id: 1, setor_nome: 'TI', rg: '111222333', email: 'ana@fortluz.com.br', ativo: 1 },\n`;
+content += `    { id: 3, nome: 'Bruno Lima', cargo: null, setor_id: null, setor_nome: null, rg: '555666777', email: null, ativo: 0 },\n`;
+content += `    { id: 2, nome: 'Ana Paula', cargo: 'Supervisora', setor_id: 1, setor_nome: 'TI', rg: '999888777', email: 'anapaula@fortluz.com.br', ativo: 1 },\n`;
+content += `    { id: 1, nome: 'Ana Paula', cargo: 'Operadora', setor_id: 2, setor_nome: 'DOCA', rg: '444555666', email: 'ana.paula@fortluz.com.br', ativo: 1 },\n`;
+content += `  ];\n\n`;
+fs.writeFileSync('.smoke/funcionarios.mjs', content, 'utf8');
+console.log('Parte 1 OK');

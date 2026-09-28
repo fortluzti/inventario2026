@@ -116,7 +116,8 @@ Gerenciamento de chaves de API via interface web.
 Scopos válidos: `*` (todas) ou lista de nomes de módulos:
 `ativos_diversos, ativos_tipos, empresas, estacoes, fornecedores, funcionarios,
 impressoras, impressoras_modelos, monitores, nobreaks, setores, softwares, toners,
-api_keys, configuracoes, health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode`.
+api_keys, configuracoes, health, dashboard_kpis, dashboard_alertas, dashboard_atividade,
+qrcode, usuarios`.
 
 ### `configuracoes` (requer escopo `configuracoes` ou `*`)
 Configurações gerais do sistema.
@@ -134,12 +135,33 @@ Configurações gerais do sistema.
 
 Status de licença retornados por `licenca`: `nao_validada` (sem validação disponível).
 
+### `usuarios` (requer escopo `usuarios` ou `*`)
+
+Gerenciamento de contas de acesso do sistema. Tabela base: `users` (id_usuario, nome, login, email, senha).
+
+**IMPORTANTE**: A tabela `users` NÃO possui campo `ativo`. O status (ativo/inativo) é obtido da tabela `funcionarios` apenas quando há correspondência por email. Usuários sem registro em `funcionarios` são considerados ativos por padrão.
+
+| Ação | Método | Params | Body | Retorno |
+|---|---|---|---|---|
+| `buscar_por_id` (alias `buscar`) | GET | `id` (login, email ou id_usuario numérico) | — | `data`: `{id, nome, login, email, cargo?, setor?, rg?, ativo_func?, funcionario_id?}` — senha **nunca** retornada |
+| `listar` | GET | `page`, `limit` (≤200), `search` (nome/login/email/RG/cargo/setor) | — | `data`: `{items, total, page, limit, total_pages}` |
+| `salvar` | POST | — | `{id, nome?, login?, email?, cargo?, setor?, rg?}` ou `{id, trocar_senha: true, nova_senha}` | mensagem de sucesso |
+| `alterar_senha` | POST | — | `{id, senha_atual?, nova_senha}` | mensagem de sucesso |
+| `ativar` | POST | `id`, `ativo?` | — | `data`: `{ativo}` — toggla `ativo` em `funcionarios` (requer registro vinculado) |
+| `novo` | POST | — | `{nome, login, senha, email?, cargo?, setor?, rg?}` | `data`: `{id}` — cria em `users` e opcionalmente em `funcionarios` |
+
+**Notas de segurança:**
+- `senha` nunca é retornada em nenhuma resposta.
+- Em `salvar`, `login` é atualizável, mas mudar o login pode invalidar referências
+  em outras tabelas (ex.: `celulares.usuario_cadastro`). Use com cuidado.
+- `alterar_senha` verifica `senha_atual` apenas se informada; `nova_senha` requer mínimo 6 caracteres.
+- O `id` aceita tanto id_usuario numérico quanto login/email (string) como identificador.
+
 ## Ainda NÃO portados (lógica dedicada, ver README "Pendências")
 
 `celulares` (entregas/devoluções/danos/histórico), `estacoes` (com softwares associados),
-`manutencoes` (orçamentos/peças/serviços/aprovação), `chamados`, `usuarios`,
-`perfis`, `recebimentos_toner`, `historico_troca_toner`, `nobreaks_historico_trocas`,
-`configuracoes`, `db_migrator`, `*_relatorio.php`.
+`manutencoes` (orçamentos/peças/serviços/aprovação), `chamados`, `perfis`, `recebimentos_toner`,
+`historico_troca_toner`, `nobreaks_historico_trocas`, `configuracoes`, `db_migrator`, `*_relatorio.php`.
 
 ## Segurança operacional
 

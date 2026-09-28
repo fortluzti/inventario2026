@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed-dim": "#ffb77d", "surface-variant": "#d5e3fc", "surface": "#f8f9ff", "error-container": "#ffdad6", "tertiary-fixed": "#9cf2e8", "surface-dim": "#ccdbf3", "on-secondary-container": "#663500", "tertiary": "#003f3a", "error": "#ba1a1a", "on-primary-fixed": "#410002", "inverse-surface": "#233144", "secondary-container": "#fe932c", "surface-container-low": "#eff4ff", "on-primary-container": "#ffaaa1", "surface-container-lowest": "#ffffff", "on-surface-variant": "#59413e", "background": "#f8f9ff", "surface-container": "#e6eeff", "on-secondary": "#ffffff", "on-primary": "#ffffff", "surface-container-high": "#dce9ff", "tertiary-fixed-dim": "#80d5cb", "primary": "#760009", "on-error-container": "#93000a", "outline-variant": "#e1bfbb", "on-primary-fixed-variant": "#8e1214", "on-secondary-fixed-variant": "#6e3900", "surface-tint": "#b02d29", "primary-fixed-dim": "#ffb4ac", "on-secondary-fixed": "#2f1500", "on-tertiary-fixed-variant": "#00504a", "secondary-fixed": "#ffdcc3", "on-tertiary-container": "#79cec4", "surface-container-highest": "#d5e3fc", "inverse-on-surface": "#eaf1ff", "outline": "#8d706d", "secondary": "#904d00", "on-surface": "#0d1c2e", "inverse-primary": "#ffb4ac", "primary-container": "#991b1b", "on-tertiary-fixed": "#00201d", "on-background": "#0d1c2e", "on-tertiary": "#ffffff", "on-error": "#ffffff", "tertiary-container": "#005852", "primary-fixed": "#ffdad6", "surface-bright": "#f8f9ff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "0.75rem", "space-sm": "0.25rem", "gutter": "0.5rem", "space-xl": "1rem", "margin": "0.75rem", "space-md": "0.5rem", "space-xs": "0.125rem" }, "fontFamily": { "headline-md": [ "IBM Plex Sans" ], "code-dense": [ "JetBrains Mono" ], "label-sm": [ "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans" ], "label-md": [ "IBM Plex Sans" ], "body-lg": [ "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans" ], "body-md": [ "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans" ], "label-lg": [ "IBM Plex Sans" ] }, "fontSize": { "headline-md": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "code-dense": [ "11px", { "lineHeight": "14px", "fontWeight": "400" } ], "label-sm": [ "10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "body-sm": [ "11px", { "lineHeight": "14px", "fontWeight": "400" } ], "label-md": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "body-lg": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "headline-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "600" } ], "body-md": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "headline-lg": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-lg": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 bottom-6 w-60 bg-surface-container-lowest z-40 flex flex-col shadow-[0_1px_8px_rgba(0,0,0,0.04)] overflow-y-auto"><div class="h-12 flex items-center px-space-md bg-surface-container-low gap-space-sm"><span class="material-symbols-outlined text-primary text-[20px]">hub</span><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold truncate">FortLuz TI ERP</span></div><nav class="flex-1 px-space-xs py-space-sm space-y-space-md" data-active-classes="bg-primary text-on-primary font-semibold"><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">1. Painel Principal</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="painel-principal" href="#"><span class="material-symbols-outlined text-[16px]">dashboard</span>Visão Geral</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">2. Equipamentos &amp; TI</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="equipamentos-computadores" href="#"><span class="material-symbols-outlined text-[16px]">computer</span>Computadores &amp; Servidores</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="equipamentos-rede" href="#"><span class="material-symbols-outlined text-[16px]">router</span>Switches &amp; Redes</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="equipamentos-perifericos" href="#"><span class="material-symbols-outlined text-[16px]">print</span>Periféricos &amp; Impressoras</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">3. Estoque &amp; Insumos</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="estoque-insumos" href="#"><span class="material-symbols-outlined text-[16px]">inventory_2</span>Almoxarifado &amp; Toner</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="movimentacoes-estoque" href="#"><span class="material-symbols-outlined text-[16px]">swap_horiz</span>Entradas e Saídas</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">4. Manutenção &amp; Suporte</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ordens-servico" href="#"><span class="material-symbols-outlined text-[16px]">build</span>Ordens de Serviço</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="preventivas" href="#"><span class="material-symbols-outlined text-[16px]">calendar_clock</span>Preventivas &amp; Calibração</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">5. Cadastros Básicos</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cadastros-empresas" href="#"><span class="material-symbols-outlined text-[16px]">business</span>Empresas &amp; Unidades</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cadastros-setores" href="#"><span class="material-symbols-outlined text-[16px]">domain</span>Setores</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cadastros-funcionarios" href="#"><span class="material-symbols-outlined text-[16px]">badge</span>Funcionários</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cadastros-fornecedores" href="#"><span class="material-symbols-outlined text-[16px]">local_shipping</span>Fornecedores TI</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">6. Etiquetas &amp; Patrimônio</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="patrimonio-etiquetas" href="#"><span class="material-symbols-outlined text-[16px]">qr_code_2</span>Impressão de Tombamento</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="auditoria-patrimonio" href="#"><span class="material-symbols-outlined text-[16px]">fact_check</span>Inventário Cego</a></div></div><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block">7. Administração &amp; Sistema</span><div class="mt-space-xs space-y-space-xs"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="admin-usuarios-perfis" href="#"><span class="material-symbols-outlined text-[16px]">manage_accounts</span>Usuários &amp; Perfis</a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded transition-colors bg-primary text-on-primary font-semibold" data-path="admin-permissoes" href="#"><span class="material-symbols-outlined text-[16px]">vpn_key</span>Permissões</a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="admin-configuracoes" href="#"><span class="material-symbols-outlined text-[16px]">settings</span>Configurações do Sistema</a></div></div></nav></aside><div class="pl-60 min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-60 right-0 h-12 bg-surface-container-lowest z-30 shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-space-md flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #991b1b
+- Font: ibmPlexSans
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UZaIOZZmYXXtuv60ZptkVMmoH8FRMxD1uGZLAkcxuNJOnXwBY-l2Fx7xYZ9j1IoAmm7sYemH9HNbZvqmeZUH89-7tWNY0vhMhL_90H3Tq6bQuf3tYAybHjBHypcrtaAduHoN-YMaBk3Sbnw87Vsh6gA50znWfEOWIwcPOib4ctUBexeVDn5vQXrNzbD8DIg3jvaSyK2h5jg-87ycr6zfLJKQsikO4yOcCxjJYRThvlnsnkkakqqqKNrhg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary uppercase font-bold tracking-tight leading-none">FortLuz</span><span class="font-label-sm text-label-sm text-outline">Materiais Elétricos</span></div><div class="h-5 w-px bg-surface-variant mx-space-xs"></div><div class="flex items-center bg-surface-container-low px-space-sm py-space-xs rounded gap-space-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">search</span><input class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none w-64" placeholder="Busca rápida de itens, MAC, patrimônio... (Ctrl+K)" type="text"/><kbd class="font-code-dense text-code-dense bg-surface-container px-space-xs rounded text-outline">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-code-dense text-code-dense text-on-surface-variant"><span class="inline-block w-2 h-2 rounded-full bg-tertiary-container"></span><span>12ms</span><span class="material-symbols-outlined text-[14px] text-tertiary-container">wifi</span></div><div class="h-4 w-px bg-surface-variant"></div><div class="flex flex-col text-right font-label-sm text-label-sm"><span class="text-on-surface font-semibold">Term. 01 — Almoxarifado Central</span><span class="text-outline font-code-dense text-code-dense">API REST v2.4</span></div><div class="h-4 w-px bg-surface-variant"></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-primary"></span></button><div class="flex items-center gap-space-sm bg-surface-container-low pl-space-sm pr-space-xs py-space-xs rounded"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-semibold">Admin TI</span><span class="font-label-sm text-label-sm text-outline">Operador Master</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-12 pb-6 px-space-md bg-surface min-h-[calc(100vh-3rem)]"><div class="flex flex-col w-full">
+<!-- Toast Notificações Dinâmicas (Hidden por padrão, acionado via JS) -->
+<div class="hidden fixed top-14 right-6 z-50 bg-tertiary text-on-tertiary px-space-md py-space-sm rounded shadow-lg flex items-center gap-space-sm animate-bounce" id="toastSuccess">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">task_alt</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Alterações Registradas</span>
+<span class="font-body-sm text-body-sm text-surface-container-highest">Matriz RBAC persistida localmente com sucesso.</span>
+</div>
+</div>
+<div class="hidden fixed top-14 right-6 z-50 bg-error text-on-error px-space-md py-space-sm rounded shadow-lg flex items-center gap-space-sm animate-pulse" id="toastError">
+<span class="material-symbols-outlined text-[18px]">error</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Falha de Comunicação</span>
+<span class="font-body-sm text-body-sm text-error-container">Erro HTTP 503: Serviço RBAC indisponível. Tente novamente.</span>
+</div>
+</div>
+<!-- Breadcrumb & Header Institucional -->
+<div class="flex flex-col gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="hover:text-primary cursor-pointer transition-colors">Administração</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Usuários &amp; Perfis</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Permissões</span>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">Permissões</h1>
+<span class="bg-surface-container-high text-on-surface-variant font-code-dense text-code-dense px-space-sm py-space-xs rounded">RBAC v1.2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Definição e consulta de privilégios de acesso aos módulos e operações do sistema Inventário FortLuz.</p>
+</div>
+</div>
+<!-- Simulador de Estados UX (Proposta Arquitetural) -->
+<div class="flex items-center bg-surface-container-lowest p-space-xs rounded shadow-sm gap-space-xs">
+<span class="font-label-sm text-label-sm text-outline px-space-xs uppercase">Modos UX:</span>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all" id="btnStateMatrix" onclick="switchUxState('matrix')">Matriz Ativa</button>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all" id="btnStateEditing" onclick="switchUxState('editing')">Modo Edição</button>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all" id="btnStateEmpty" onclick="switchUxState('empty')">Sem Perfil</button>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all" id="btnStateLoading" onclick="switchUxState('loading')">Carregando</button>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-tertiary-container text-on-tertiary hover:opacity-90 transition-all flex items-center gap-space-xs" onclick="triggerToast('toastSuccess')"><span class="material-symbols-outlined text-[12px]">check</span>Sucesso</button>
+<button class="px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-error-container text-on-error-container hover:opacity-90 transition-all flex items-center gap-space-xs" onclick="triggerToast('toastError')"><span class="material-symbols-outlined text-[12px]">warning</span>Erro API</button>
+</div>
+</div>
+</div>
+<!-- Banner Institucional de Transição Arquitetural RBAC -->
+<div class="bg-surface-container-low p-space-sm rounded mb-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Módulo RBAC em Estruturação:</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Proposta de Arquitetura de Permissões para Implementação Futura com granularidade por módulo e herança associativa.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-code-dense text-code-dense bg-surface-container-lowest px-space-sm py-space-xs rounded text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>ESTADO: PROPOSTA UX / REACT</span>
+</div>
+</div>
+<!-- Barra de Configuração e Seleção de Perfil/Usuário (Desktop Toolbar 40px) -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm mb-space-sm flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-1">
+<!-- Seletor de Perfil -->
+<div class="flex items-center gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-outline whitespace-nowrap" for="selectPerfil">Perfil de Acesso:</label>
+<div class="relative">
+<select class="h-7 bg-surface-container-low text-on-surface font-label-md text-label-md pl-space-sm pr-7 rounded outline-none focus:bg-surface-container-lowest shadow-sm cursor-pointer" id="selectPerfil" onchange="handleProfileChange(this.value)">
+<option selected="" value="admin_ti">Administrador TI (Privilégios Elevados)</option>
+<option value="suporte_n1">Suporte Técnico N1</option>
+<option value="almoxarife">Almoxarife / Estoquista</option>
+<option value="auditor">Auditor Patrimonial</option>
+<option value="read_only">Somente Leitura / Consulta</option>
+</select>
+<span class="material-symbols-outlined text-[14px] text-outline absolute right-1.5 top-1.5 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="h-4 w-px bg-surface-variant"></div>
+<!-- Filtro Específico de Usuário -->
+<div class="flex items-center gap-space-xs flex-1 max-w-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-outline whitespace-nowrap" for="inputUsuario">Usuário:</label>
+<div class="flex items-center bg-surface-container-low px-space-sm h-7 rounded w-full shadow-inner focus-within:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-outline text-[14px] mr-space-xs">person_search</span>
+<input class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none w-full" id="inputUsuario" placeholder="Filtrar por Usuário (ex: marcos.silva)..." type="text"/>
+</div>
+</div>
+<!-- Ações da Toolbar -->
+<button class="h-7 px-space-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" onclick="reloadPermissions()" title="Recarregar Definições do Perfil">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+<span>Carregar</span>
+</button>
+<button class="h-7 px-space-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" onclick="clonePrivileges()" title="Copiar permissões para outro perfil">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Clonar Privilégios</span>
+</button>
+</div>
+<!-- Indicador de Permissões Ativas -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-space-xs rounded">
+<span class="material-symbols-outlined text-primary text-[16px]">pie_chart</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-label-sm text-label-sm text-outline uppercase">Permissões:</span>
+<span class="font-code-dense text-code-dense font-semibold text-primary" id="permCountText">28 / 32</span>
+<span class="font-label-sm text-label-sm text-outline">(87.5% ativas)</span>
+</div>
+</div>
+</div>
+<!-- PAINEL CENTRAL DE CONTEÚDO (ESTADOS CONDICIONAIS) -->
+<div class="flex flex-col w-full relative" id="workspaceContainer">
+<!-- ESTADO 1: MATRIZ DE DADOS RBAC (PADRÃO / EDIÇÃO) -->
+<div class="flex flex-col bg-surface-container-lowest rounded shadow-sm overflow-hidden mb-space-sm" id="stateMatrixView">
+<!-- Cabeçalho do Grid Modular -->
+<div class="grid grid-cols-12 bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider py-space-xs px-space-md select-none sticky top-0 z-10 shadow-sm">
+<div class="col-span-4 flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">account_tree</span>
+<span>Módulo / Recurso do Sistema</span>
+</div>
+<div class="col-span-1 text-center font-bold">Visualizar</div>
+<div class="col-span-1 text-center font-bold">Criar</div>
+<div class="col-span-1 text-center font-bold">Editar</div>
+<div class="col-span-1 text-center font-bold">Excluir</div>
+<div class="col-span-4 pl-space-sm">Regras &amp; Restrições Operacionais</div>
+</div>
+<!-- GRUPO 1: EQUIPAMENTOS & ATIVOS DE TI -->
+<div class="flex flex-col">
+<div class="bg-surface-container px-space-md py-space-xs flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">devices</span>
+<span class="font-headline-sm text-headline-sm uppercase font-bold text-primary tracking-tight">1. Equipamentos &amp; Ativos de TI</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-outline px-space-xs rounded">4 Recursos</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-xs" onclick="toggleGroupCheck(1)">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Selecionar Módulo Todo
+          </button>
+</div>
+<!-- Linha: Estações de Trabalho -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">computer</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Estações de Trabalho</span>
+<span class="font-code-dense text-code-dense text-outline">TI-PC</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Acesso irrestrito a Desktops/Notebooks</span>
+</div>
+</div>
+<!-- Linha: Monitores -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-bright hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">monitor</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Monitores &amp; Telas</span>
+<span class="font-code-dense text-code-dense text-outline">TI-MON</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Cadastro direto e vínculo com estações</span>
+</div>
+</div>
+<!-- Linha: Impressoras -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">print</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Impressoras &amp; Modelos</span>
+<span class="font-code-dense text-code-dense text-outline">TI-PRN</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" title="Exclusão restrita à Supervisão" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm px-space-xs rounded font-semibold">Apenas Supervisão (Sem Exclusão)</span>
+</div>
+</div>
+<!-- Linha: Nobreaks & Periféricos -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-bright hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">battery_charging_full</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Nobreaks &amp; Periféricos</span>
+<span class="font-code-dense text-code-dense text-outline">TI-PWR</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-outline font-label-sm text-label-sm px-space-xs rounded">Descarte requer homologação técnica</span>
+</div>
+</div>
+</div>
+<!-- GRUPO 2: ESTOQUE & INSUMOS -->
+<div class="flex flex-col">
+<div class="bg-surface-container px-space-md py-space-xs flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">inventory_2</span>
+<span class="font-headline-sm text-headline-sm uppercase font-bold text-primary tracking-tight">2. Estoque &amp; Insumos</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-outline px-space-xs rounded">2 Recursos</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-xs" onclick="toggleGroupCheck(2)">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Selecionar Módulo Todo
+          </button>
+</div>
+<!-- Linha: Toners e Cartuchos -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">format_paint</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Toners e Cartuchos</span>
+<span class="font-code-dense text-code-dense text-outline">EST-TNR</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Controle de saldo mínimo e alerta Almoxarifado</span>
+</div>
+</div>
+<!-- Linha: Movimentações e Baixas -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-bright hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">swap_horiz</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Movimentações &amp; Baixas</span>
+<span class="font-code-dense text-code-dense text-outline">EST-MOV</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-space-xs rounded font-semibold">Registro Imutável (Auditoria Fiscal)</span>
+</div>
+</div>
+</div>
+<!-- GRUPO 3: PATRIMÔNIO & ETIQUETAS -->
+<div class="flex flex-col">
+<div class="bg-surface-container px-space-md py-space-xs flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">qr_code_2</span>
+<span class="font-headline-sm text-headline-sm uppercase font-bold text-primary tracking-tight">3. Patrimônio &amp; Etiquetas</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-outline px-space-xs rounded">2 Recursos</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-xs" onclick="toggleGroupCheck(3)">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Selecionar Módulo Todo
+          </button>
+</div>
+<!-- Linha: Emissão de Etiquetas QR -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">barcode_scanner</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Emissão de Etiquetas QR / Cód. Barras</span>
+<span class="font-code-dense text-code-dense text-outline">PAT-LBL</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Impressão térmica direta Zebra/Argox</span>
+</div>
+</div>
+<!-- Linha: Termos de Cautela e Auditoria -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-bright hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">assignment_turned_in</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Termos de Cautela &amp; Auditoria</span>
+<span class="font-code-dense text-code-dense text-outline">PAT-TRM</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-space-xs rounded font-semibold">Exige Assinatura Digital do Colaborador</span>
+</div>
+</div>
+</div>
+<!-- GRUPO 4: RELATÓRIOS CORPORATIVOS -->
+<div class="flex flex-col">
+<div class="bg-surface-container px-space-md py-space-xs flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">summarize</span>
+<span class="font-headline-sm text-headline-sm uppercase font-bold text-primary tracking-tight">4. Relatórios Corporativos</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-outline px-space-xs rounded">1 Recurso</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-xs" onclick="toggleGroupCheck(4)">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Selecionar Módulo Todo
+          </button>
+</div>
+<!-- Linha: Relatórios A4 & Visualizador PDF -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">picture_as_pdf</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Relatórios A4 &amp; Visualizador PDF</span>
+<span class="font-code-dense text-code-dense text-outline">REP-CORP</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center" title="Exportar CSV/Excel"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center text-outline font-code-dense text-code-dense select-none">—</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Coluna 3 mapeada para 'Exportar Planilha / CSV'</span>
+</div>
+</div>
+</div>
+<!-- GRUPO 5: ADMINISTRAÇÃO DO SISTEMA -->
+<div class="flex flex-col">
+<div class="bg-surface-container px-space-md py-space-xs flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">tune</span>
+<span class="font-headline-sm text-headline-sm uppercase font-bold text-primary tracking-tight">5. Administração do Sistema</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-outline px-space-xs rounded">2 Recursos</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-space-xs" onclick="toggleGroupCheck(5)">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Selecionar Módulo Todo
+          </button>
+</div>
+<!-- Linha: Configurações Gerais -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">settings_suggest</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Configurações Gerais da Empresa</span>
+<span class="font-code-dense text-code-dense text-outline">ADM-CFG</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center">
+<input class="accent-[#991b1b] w-3.5 h-3.5 opacity-30 cursor-not-allowed" disabled="" type="checkbox"/>
+</div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-xs rounded">Parâmetros de SMTP, Filiais e Logs Globais</span>
+</div>
+</div>
+<!-- Linha: Usuários e Credenciais -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-bright hover:bg-surface-container-low transition-colors text-body-sm group">
+<div class="col-span-4 flex items-center gap-space-sm pl-space-md">
+<span class="material-symbols-outlined text-outline text-[14px]">manage_accounts</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Usuários e Credenciais</span>
+<span class="font-code-dense text-code-dense text-outline">ADM-USR</span>
+</div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-1 flex justify-center"><input checked="" class="form-rbac accent-[#991b1b] w-3.5 h-3.5 cursor-pointer" type="checkbox"/></div>
+<div class="col-span-4 pl-space-sm flex items-center gap-space-xs">
+<span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm px-space-xs rounded font-semibold">Exige 2FA / Permissão de Superusuário</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ESTADO 2: ESTADO VAZIO (Nenhum perfil selecionado ou filtro sem correspondência) -->
+<div class="hidden flex-col items-center justify-center p-space-xl bg-surface-container-lowest rounded shadow-sm py-16 text-center" id="stateEmptyView">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-outline mb-space-sm">
+<span class="material-symbols-outlined text-[28px]">shield_person</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">Nenhum Perfil ou Usuário Selecionado</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mb-space-md">Escolha um Perfil de Acesso base na barra superior ou digite uma credencial de usuário para carregar os privilégios associados.</p>
+<button class="px-space-md py-space-xs bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:opacity-90 transition-all flex items-center gap-space-xs" onclick="switchUxState('matrix')">
+<span class="material-symbols-outlined text-[16px]">account_circle</span>
+<span>Carregar Perfil Administrador TI</span>
+</button>
+</div>
+<!-- ESTADO 3: CARREGANDO ESQUELETO (Skeleton Loading) -->
+<div class="hidden flex-col bg-surface-container-lowest rounded shadow-sm p-space-md gap-space-md animate-pulse" id="stateLoadingView">
+<div class="h-6 bg-surface-container-high rounded w-1/3"></div>
+<div class="space-y-space-sm">
+<div class="h-8 bg-surface-container-low rounded w-full"></div>
+<div class="h-8 bg-surface-container rounded w-full"></div>
+<div class="h-8 bg-surface-container-low rounded w-full"></div>
+<div class="h-8 bg-surface-container rounded w-full"></div>
+<div class="h-8 bg-surface-container-low rounded w-full"></div>
+</div>
+<div class="h-6 bg-surface-container-high rounded w-1/4 mt-space-sm"></div>
+<div class="space-y-space-sm">
+<div class="h-8 bg-surface-container-low rounded w-full"></div>
+<div class="h-8 bg-surface-container rounded w-full"></div>
+</div>
+</div>
+<!-- Bento Box Informativo RBAC (Microarquitetura de Apoio ao Desenvolvedor) -->
+<div class="grid grid-cols-3 gap-space-sm mb-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">lock_clock</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Herança de Papéis (Roles)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Políticas associadas ao grupo de TI sobrepõem permissões individuais de operador.</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5">history_toggle_off</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Auditoria em Tempo Real</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Todas as mudanças de flags são gravadas no log <code class="font-code-dense text-code-dense bg-surface-container px-1 rounded">tbl_audit_rbac</code>.</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">code_blocks</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Contratos de API REST</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Payload compatível com hook <code class="font-code-dense text-code-dense bg-surface-container px-1 rounded">useRBAC(userId)</code> no frontend Next.js.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Barra de Ações Fixada no Rodapé da Tela Administrativa (40px) -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm flex items-center justify-between sticky bottom-7 z-20">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">schedule</span>
+<span>Última sincronização de permissões:</span>
+<span class="font-code-dense text-code-dense text-on-surface font-semibold">24/02/2025 às 11:30</span>
+<span class="text-outline">por</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">admin.master</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-7 px-space-md bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded font-label-md text-label-md transition-colors shadow-sm" onclick="resetPermissions()">
+        Cancelar Alterações
+      </button>
+<!-- Botão Primário FortLuz #991b1b -->
+<button class="h-7 px-space-md bg-primary-container text-on-primary hover:opacity-90 rounded font-label-md text-label-md font-semibold transition-all shadow-sm flex items-center gap-space-xs active:translate-y-px" onclick="savePermissions()">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Salvar Matriz de Permissões</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Controle de Visualização de Estados (UX State Handler)
+  function switchUxState(state) {
+    const matrixView = document.getElementById('stateMatrixView');
+    const emptyView = document.getElementById('stateEmptyView');
+    const loadingView = document.getElementById('stateLoadingView');
+
+    // Reset visual dos botões
+    ['btnStateMatrix', 'btnStateEditing', 'btnStateEmpty', 'btnStateLoading'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.className = "px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all";
+      }
+    });
+
+    if (state === 'matrix') {
+      matrixView.classList.remove('hidden');
+      emptyView.classList.add('hidden');
+      loadingView.classList.add('hidden');
+      document.getElementById('btnStateMatrix').className = "px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all";
+      setFormInputsDisabled(false);
+    } else if (state === 'editing') {
+      matrixView.classList.remove('hidden');
+      emptyView.classList.add('hidden');
+      loadingView.classList.add('hidden');
+      document.getElementById('btnStateEditing').className = "px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all";
+      setFormInputsDisabled(false);
+      triggerToast('toastSuccess');
+    } else if (state === 'empty') {
+      matrixView.classList.add('hidden');
+      emptyView.classList.remove('hidden');
+      loadingView.classList.add('hidden');
+      document.getElementById('btnStateEmpty').className = "px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all";
+    } else if (state === 'loading') {
+      matrixView.classList.add('hidden');
+      emptyView.classList.add('hidden');
+      loadingView.classList.remove('hidden');
+      document.getElementById('btnStateLoading').className = "px-space-sm py-space-xs rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all";
+      setTimeout(() => switchUxState('matrix'), 1200);
+    }
+  }
+
+  function setFormInputsDisabled(disabled) {
+    const checkboxes = document.querySelectorAll('.form-rbac');
+    checkboxes.forEach(cb => {
+      if (!cb.hasAttribute('data-fixed-disabled')) {
+        cb.disabled = disabled;
+      }
+    });
+  }
+
+  function handleProfileChange(profileValue) {
+    switchUxState('loading');
+    setTimeout(() => {
+      const countEl = document.getElementById('permCountText');
+      if (profileValue === 'admin_ti') {
+        countEl.innerText = "28 / 32";
+        setAllCheckboxes(true);
+      } else if (profileValue === 'suporte_n1') {
+        countEl.innerText = "18 / 32";
+        setSamplePreset([true, true, false, false]);
+      } else if (profileValue === 'almoxarife') {
+        countEl.innerText = "12 / 32";
+        setSamplePreset([true, false, false, false]);
+      } else if (profileValue === 'read_only') {
+        countEl.innerText = "8 / 32";
+        setSamplePreset([true, false, false, false]);
+      }
+    }, 400);
+  }
+
+  function setAllCheckboxes(checked) {
+    const checkboxes = document.querySelectorAll('.form-rbac');
+    checkboxes.forEach(cb => {
+      if (!cb.disabled) cb.checked = checked;
+    });
+  }
+
+  function setSamplePreset(flags) {
+    const rows = document.querySelectorAll('#stateMatrixView .grid-cols-12.items-center');
+    rows.forEach((row, i) => {
+      const cbs = row.querySelectorAll('.form-rbac');
+      cbs.forEach((cb, cbIndex) => {
+        if (!cb.disabled) {
+          cb.checked = flags[cbIndex % flags.length];
+        }
+      });
+    });
+  }
+
+  function toggleGroupCheck(groupId) {
+    // Microinteração: inverte seleção do grupo
+    const checkboxes = document.querySelectorAll('.form-rbac');
+    checkboxes.forEach(cb => {
+      if (!cb.disabled) cb.checked = !cb.checked;
+    });
+    triggerToast('toastSuccess');
+  }
+
+  function triggerToast(toastId) {
+    const toast = document.getElementById(toastId);
+    if (!toast) return;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3200);
+  }
+
+  function reloadPermissions() {
+    switchUxState('loading');
+  }
+
+  function clonePrivileges() {
+    alert("FortLuz TI ERP: Selecione o perfil de destino para clonar a matriz de 28 privilégios ativos.");
+  }
+
+  function resetPermissions() {
+    if (confirm("Deseja descartar as alterações da matriz de permissões atual?")) {
+      handleProfileChange(document.getElementById('selectPerfil').value);
+    }
+  }
+
+  function savePermissions() {
+    triggerToast('toastSuccess');
+  }
+</script></main><footer class="fixed bottom-0 left-60 right-0 h-6 bg-inverse-surface text-inverse-on-surface z-40 px-space-md flex items-center justify-between font-label-sm text-label-sm select-none"><div class="flex items-center gap-space-md font-code-dense text-code-dense"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed"></span><span>Servidor: ONLINE</span></div><span class="text-outline">|</span><span>Banco: fortluz_db_prod</span><span class="text-outline">|</span><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[12px] text-tertiary-fixed">lock</span><span>SSL 256-BIT</span></div></div><div class="flex items-center gap-space-md font-code-dense text-code-dense"><span class="text-surface-variant">Build: 2025.2.4-web</span><span class="text-outline">|</span><span class="text-inverse-on-surface">UTF-8 / pt-BR</span></div></footer></div></body></html>

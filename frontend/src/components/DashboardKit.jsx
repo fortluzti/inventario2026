@@ -58,7 +58,7 @@ export const MODULES = [
 export const NAV_ITEMS = [DASHBOARD_MODULE, ...MODULES.flatMap((g) => g.items)]
 
 /* ---------------- App bar (h-12) ---------------- */
-export function AppBar({ user, onLogout, notifCount = 0, searchRef, terminal, empresaLogo }) {
+export function AppBar({ user, onLogout, notifCount = 0, searchRef, terminal, empresaLogo, onPerfil }) {
   const [open, setOpen] = useState(false)
   const wrapRef = useRef(null)
 
@@ -141,7 +141,7 @@ export function AppBar({ user, onLogout, notifCount = 0, searchRef, terminal, em
                 </div>
               </div>
               <div className="sep" />
-              <button className="item" type="button">
+              <button className="item" type="button" onClick={onPerfil}>
                 <span className="mat" style={{ fontSize: 16 }}>account_circle</span>
                 Meu perfil
               </button>

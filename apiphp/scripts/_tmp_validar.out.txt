@@ -1,0 +1,70 @@
+﻿OK     handler responde com items/total/resumo
+OK     consulta ├® somente leitura (flag)
+OK     fontes de dados documentadas
+OK     limita├º├Áes do modelo documentadas
+OK     todos=1 devolve o conjunto completo  [total=54]
+OK     grid traz todas as colunas exigidas
+OK     funcion├írios ativos aparecem
+OK     funcion├írios inativos aparecem
+OK     n├║meros aparecem
+OK     Gmail aparece
+OK     e-mail corporativo aparece
+OK     hist├│rico (associa├º├úo encerrada) aparece
+OK     celular sem associa├º├úo aparece (hist├│rico n├úo ├® escondido)
+OK     filtro status_funcionario=inativos  [total=5]
+OK     filtro status_funcionario=ativos  [total=36]
+OK     op├º├Áes de status do celular v├¬m dos dados reais  [Em Uso | Em Estoque]
+OK     filtro status_celular=Em Uso  [total=38]
+OK     filtro situacao=inconsistencia  [total=16]
+OK     inconsist├¬ncias identificadas nos dados reais  [total=16]
+OK     filtro situacao=ok  [total=38]
+OK     resumo bate com as listagens
+OK     regra numero_duplicado (filtro x r├│tulo)  [total=8 resumo=8]
+OK     regra numero_associado_a_varios_funcionarios (filtro x r├│tulo)  [total=10 resumo=10]
+OK     regra gmail_duplicado (filtro x r├│tulo)  [total=5 resumo=5]
+OK     regra gmail_associado_a_varios_funcionarios (filtro x r├│tulo)  [total=7 resumo=7]
+OK     regra email_corporativo_duplicado (filtro x r├│tulo)  [total=6 resumo=6]
+OK     regra email_corporativo_associado_a_varios_funcionarios (filtro x r├│tulo)  [total=8 resumo=8]
+OK     regra funcionario_inativo_com_uso_atual (filtro x r├│tulo)  [total=2 resumo=2]
+OK     regra celular_associado_a_varios_funcionarios (filtro x r├│tulo)  [total=4 resumo=4]
+OK     regra associacao_ativa_repetida (filtro x r├│tulo)  [total=0 resumo=0]
+OK     regra celular_em_uso_sem_associacao (filtro x r├│tulo)  [total=2 resumo=2]
+OK     regra celular_fora_de_uso_com_associacao (filtro x r├│tulo)  [total=0 resumo=0]
+OK     regra data_fim_antes_do_inicio (filtro x r├│tulo)  [total=1 resumo=1]
+OK     regra sem_associacao (filtro x r├│tulo)  [total=13 resumo=13]
+OK     regra funcionario_inativo_historico (filtro x r├│tulo)  [total=3 resumo=3]
+OK     regra associacao_sem_data_inicio (filtro x r├│tulo)  [total=0 resumo=0]
+OK     regra sem_numero (filtro x r├│tulo)  [total=7 resumo=7]
+OK     regra sem_gmail (filtro x r├│tulo)  [total=7 resumo=7]
+OK     regra sem_email_corporativo (filtro x r├│tulo)  [total=22 resumo=22]
+OK     regra email_corporativo_difere_do_funcionario (filtro x r├│tulo)  [total=1 resumo=1]
+OK     filtro associacao=atual  [total=32]
+OK     filtro associacao=historica  [total=9]
+OK     filtro associacao=sem_associacao  [total=13]
+OK     pesquisa por n├║mero  [total=3]
+OK     pesquisa por Gmail  [total=45]
+OK     pesquisa por e-mail corporativo  [total=37]
+OK     pesquisa por funcion├írio  [total=2]
+OK     pesquisa por c├│digo do celular  [total=54]
+OK     pagina├º├úo limit=5 devolve 5 itens  [itens=5]
+OK     pagina├º├úo calcula total_pages  [total_pages=11]
+OK     p├íginas n├úo repetem registros
+OK     total n├úo muda com a p├ígina
+OK     ordena├º├úo aceita sort=numero&dir=asc
+OK     ordena├º├úo aceita sort=numero&dir=desc
+OK     ordena├º├úo aceita sort=codigo&dir=asc
+OK     ordena├º├úo aceita sort=situacao&dir=desc
+OK     ordena├º├úo aceita sort=inicio&dir=desc
+OK     ordena├º├úo ASC por c├│digo
+OK     ordena├º├úo DESC por c├│digo
+OK     ordena├º├úo por situa├º├úo (inconsist├¬ncias primeiro)  [primeiras=7,6,6,5,5,4,4,3]
+OK     ordena├º├úo + filtro + pagina├º├úo juntos  [total=5]
+OK     termos de historico_uso t├¬m associa├º├úo correspondente em celulares_funcionarios  [orfaos=0]
+
+--- AUDITORIA (somente leitura) ---
+INFO  escopo: {"celulares":47,"associacoes":41,"funcionarios":45,"termos_historico_uso":6}
+INFO  registros na confer├¬ncia: 54 | OK: 38 | com inconsist├¬ncia: 16
+INFO  inconsist├¬ncias por tipo: {"numero_duplicado":8,"numero_associado_a_varios_funcionarios":10,"gmail_duplicado":5,"gmail_associado_a_varios_funcionarios":7,"email_corporativo_duplicado":6,"email_corporativo_associado_a_varios_funcionarios":8,"funcionario_inativo_com_uso_atual":2,"celular_associado_a_varios_funcionarios":4,"associacao_ativa_repetida":0,"celular_em_uso_sem_associacao":2,"celular_fora_de_uso_com_associacao":0,"data_fim_antes_do_inicio":1}
+INFO  observa├º├Áes por tipo: {"sem_associacao":13,"funcionario_inativo_historico":3,"associacao_sem_data_inicio":0,"sem_numero":7,"sem_gmail":7,"sem_email_corporativo":22,"email_corporativo_difere_do_funcionario":1}
+
+Todas as checagens da confer├¬ncia de celulares passaram.

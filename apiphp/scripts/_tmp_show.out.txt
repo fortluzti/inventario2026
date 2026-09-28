@@ -1,0 +1,85 @@
+﻿=== RESUMO ===
+{
+    "total": 54,
+    "ok": 38,
+    "com_inconsistencia": 16,
+    "por_inconsistencia": {
+        "numero_duplicado": 8,
+        "numero_associado_a_varios_funcionarios": 10,
+        "gmail_duplicado": 5,
+        "gmail_associado_a_varios_funcionarios": 7,
+        "email_corporativo_duplicado": 6,
+        "email_corporativo_associado_a_varios_funcionarios": 8,
+        "funcionario_inativo_com_uso_atual": 2,
+        "celular_associado_a_varios_funcionarios": 4,
+        "associacao_ativa_repetida": 0,
+        "celular_em_uso_sem_associacao": 2,
+        "celular_fora_de_uso_com_associacao": 0,
+        "data_fim_antes_do_inicio": 1
+    },
+    "por_observacao": {
+        "sem_associacao": 13,
+        "funcionario_inativo_historico": 3,
+        "associacao_sem_data_inicio": 0,
+        "sem_numero": 7,
+        "sem_gmail": 7,
+        "sem_email_corporativo": 22,
+        "email_corporativo_difere_do_funcionario": 1
+    },
+    "escopo": {
+        "celulares": 47,
+        "associacoes": 41,
+        "funcionarios": 45,
+        "termos_historico_uso": 6
+    }
+}
+
+=== REGISTROS COM INCONSISTENCIA ===
+1) CEL-014 | num=(17) 99646-8369 | gmail=fortluz.8369@gmail.com | email=vendas2@fortluz.com.br | func=LUIS PEREIRA ANDRADE (Inativo) | assoc=Atual | status=Em Uso | ini=2022-11-21 00:00:00 | fim=-
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios ; gmail_duplicado ; gmail_associado_a_varios_funcionarios ; email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios ; funcionario_inativo_com_uso_atual
+2) CEL-048 | num=(17) 99646-8369 | gmail=fortluz.8369@gmail.com | email=vendas2@fortluz.com.br | func=RAFAEL AMARO ARANTES (Ativo) | assoc=Atual | status=Em Uso | ini=2026-08-05 00:00:00 | fim=-
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios ; gmail_duplicado ; gmail_associado_a_varios_funcionarios ; email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios
+3) CEL-048 | num=(17) 99646-8369 | gmail=fortluz.8369@gmail.com | email=vendas2@fortluz.com.br | func=EDSON FERREIRA DE OLIVEIRA JUNIOR (Inativo) | assoc=Hist├│rica | status=Em Uso | ini=2025-04-10 00:00:00 | fim=2026-08-03 00:00:00
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios ; gmail_duplicado ; gmail_associado_a_varios_funcionarios ; email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios
+4) CEL-011 | num=(17) 99608-8373 | gmail=fortluz.8373@gmail.com | email=telefonista@fortluz.com.br | func=ELAINE BARBOSA DE OLIVEIRA CARVALHO (Ativo) | assoc=Atual | status=Em Uso | ini=2018-04-20 00:00:00 | fim=-
+    -> numero_associado_a_varios_funcionarios ; gmail_associado_a_varios_funcionarios ; email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios ; celular_associado_a_varios_funcionarios
+5) CEL-011 | num=(17) 99608-8373 | gmail=fortluz.8373@gmail.com | email=telefonista@fortluz.com.br | func=EDNA ELENA TEODORO (Ativo) | assoc=Atual | status=Em Uso | ini=2018-04-20 00:00:00 | fim=-
+    -> numero_associado_a_varios_funcionarios ; gmail_associado_a_varios_funcionarios ; email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios ; celular_associado_a_varios_funcionarios
+6) CEL-044 | num=(17) 99618-4932 | gmail=fortluz.4932@gmail.com | email=ti@fortluz.com.br | func=IVAN AUGUSTO ENCINAS (Ativo) | assoc=Atual | status=Em Uso | ini=2025-04-09 00:00:00 | fim=-
+    -> numero_associado_a_varios_funcionarios ; gmail_associado_a_varios_funcionarios ; email_corporativo_associado_a_varios_funcionarios ; celular_associado_a_varios_funcionarios
+7) CEL-044 | num=(17) 99618-4932 | gmail=fortluz.4932@gmail.com | email=ti@fortluz.com.br | func=ALEX FABIANO LONGO (Ativo) | assoc=Atual | status=Em Uso | ini=2025-01-24 00:00:00 | fim=-
+    -> numero_associado_a_varios_funcionarios ; gmail_associado_a_varios_funcionarios ; email_corporativo_associado_a_varios_funcionarios ; celular_associado_a_varios_funcionarios
+8) CEL-058 | num=(17) 99647-3718 | gmail=comprasfortluz@gmail.com | email=- | func=- (-) | assoc=- | status=Em Uso | ini=- | fim=-
+    -> numero_duplicado ; gmail_duplicado ; celular_em_uso_sem_associacao
+9) CEL-009 | num=(17) 99649-8473 | gmail=fortluz.8473@gmail.com | email=vendas8@fortluz.com.br | func=JOS├ë ROBERTO LEMOS GON├çALVES (Ativo) | assoc=Atual | status=Em Uso | ini=2026-04-13 00:00:00 | fim=-
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios
+10) CEL-009 | num=(17) 99649-8473 | gmail=fortluz.8473@gmail.com | email=vendas8@fortluz.com.br | func=RAFAEL AMARO ARANTES (Ativo) | assoc=Hist├│rica | status=Em Uso | ini=2024-06-19 00:00:00 | fim=2026-03-13 00:00:00
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios
+11) CEL-031 | num=(17) 99649-8473 | gmail=fortluz.0512@gmail.com | email=vendas10@fortluz.com.br | func=ANTONIO DONIZETI DO AMARAL (Ativo) | assoc=Atual | status=Em Uso | ini=2022-06-17 00:00:00 | fim=-
+    -> numero_duplicado ; numero_associado_a_varios_funcionarios
+12) CEL-016 | num=(17) 99774-5481 | gmail=forluz.5481@gmail.com | email=telefonista@fortluz.com.br | func=TELEFONISTA (Ativo) | assoc=Atual | status=Em Uso | ini=2021-08-26 00:00:00 | fim=-
+    -> email_corporativo_duplicado ; email_corporativo_associado_a_varios_funcionarios
+13) CEL-018 | num=(17) 99647-3718 | gmail=comprasfortluz@gmail.com | email=- | func=ADAIR RIBEIRO (Ativo) | assoc=Hist├│rica | status=Em Estoque | ini=2021-02-19 00:00:00 | fim=2026-02-04 00:00:00
+    -> numero_duplicado ; gmail_duplicado
+14) CEL-040 | num=(17) 99608-8959 | gmail=fortluz.8959@gmail.com.br | email=vendas16@fortluz.com.br | func=CID MICHEL FERREIRA BRUZADIM (Inativo) | assoc=Atual | status=Em Uso | ini=2024-04-25 00:00:00 | fim=-
+    -> funcionario_inativo_com_uso_atual
+15) CEL-008 | num=(17) 99618-4937 | gmail=tifortluz@gmail.com | email=- | func=TANIA CRISTA DE SOUZA PEDROSO (Ativo) | assoc=Hist├│rica | status=Em Estoque | ini=2022-05-19 00:00:00 | fim=2018-09-02 00:00:00
+    -> data_fim_antes_do_inicio
+16) CEL-060 | num=(17) 99791-9811 | gmail=fortluz.9811@gmail.com | email=- | func=- (-) | assoc=- | status=Em Uso | ini=- | fim=-
+    -> celular_em_uso_sem_associacao
+total com inconsistencia: 16
+
+=== CELULARES SEM NENHUMA ASSOCIACAO ===
+CEL-058 | num=(17) 99647-3718 | gmail=comprasfortluz@gmail.com | status=Em Uso | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo
+CEL-060 | num=(17) 99791-9811 | gmail=fortluz.9811@gmail.com | status=Em Uso | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo
+CEL-006 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-019 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-021 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-027 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-049 | num=(17) 99759-5892 | gmail=gerentefortluz@gmail.com | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo
+CEL-052 | num=(17) 99635-7527 | gmail=fortluz.7527@gmail.com | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo
+CEL-054 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-055 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-056 | num=- | gmail=- | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_numero,sem_gmail,sem_email_corporativo
+CEL-057 | num=(17) 99636-0836 | gmail=fortluz.0836@gmail.com | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo
+CEL-061 | num=(17) 99636-0970 | gmail=fortluz.0970@gmail.com | status=Em Estoque | obs=sem_associacao,funcionario_inativo_historico,sem_email_corporativo

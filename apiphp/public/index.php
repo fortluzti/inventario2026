@@ -11,7 +11,7 @@
  *   softwares, toners, ativos_tipos
  * Endpoints dedicados:
  *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode,
- *   api_keys, configuracoes, celulares
+ *   api_keys, configuracoes, celulares, usuarios
  */
 declare(strict_types=1);
 
@@ -45,30 +45,42 @@ try {
         case 'dashboard_kpis':
             require __DIR__ . '/../src/handlers/dashboard.php';
             Dashboard::kpis($pdo);
+            break;
 
         case 'dashboard_alertas':
             require __DIR__ . '/../src/handlers/dashboard.php';
             Dashboard::alertas($pdo);
+            break;
 
         case 'dashboard_atividade':
             require __DIR__ . '/../src/handlers/dashboard.php';
             Dashboard::atividade($pdo);
+            break;
 
         case 'qrcode':
             require __DIR__ . '/../src/handlers/qrcode.php';
             Qrcode::handle($pdo, $action, $input);
+            break;
 
         case 'api_keys':
             require __DIR__ . '/../src/handlers/api_keys_handler.php';
             ApiKeysHandler::handle($pdo, $action, $input);
+            break;
 
         case 'configuracoes':
             require __DIR__ . '/../src/handlers/configuracoes.php';
             ConfiguracoesHandler::handle($pdo, $action, $input);
+            break;
 
         case 'celulares':
             require __DIR__ . '/../src/handlers/celulares_handler.php';
             CelularesHandler::handle($pdo, $action, $input);
+            break;
+
+        case 'usuarios':
+            require __DIR__ . '/../src/handlers/usuarios_handler.php';
+            UsuariosHandler::handle($pdo, $action, $input);
+            break;
 
         default:
             // --- Modulos genericos via registry ---

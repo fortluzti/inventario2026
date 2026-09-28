@@ -11,6 +11,8 @@ import EstacoesReport from '../components/EstacoesReport.jsx'
 import MonitoresReport from '../components/MonitoresReport.jsx'
 import ImpressaoReport from '../components/ImpressaoReport.jsx'
 import { ReportShowcase } from '../components/report/ReportShowcase.jsx'
+import UsuariosRbac from './UsuariosRbac.jsx'
+import Perfil from './Perfil.jsx'
 import { api } from '../api/client.js'
 import { carregarEmpresa, hasLogo, logoUrl } from '../api/configuracoes.js'
 import {
@@ -48,10 +50,14 @@ export default function Dashboard({ user, onLogout, searchRef }) {
   const [monitoresNew, setMonitoresNew] = useState(0)
   const [impressorasRefresh, setImpressorasRefresh] = useState(0)
   const [impressorasNew, setImpressorasNew] = useState(0)
-    const [funcionariosRefresh, setFuncionariosRefresh] = useState(0)
+  const [setoresRefresh, setSetoresRefresh] = useState(0)
+  const [setoresNew, setSetoresNew] = useState(0)
+  const [funcionariosRefresh, setFuncionariosRefresh] = useState(0)
   const [funcionariosNew, setFuncionariosNew] = useState(0)
   const [celularesRefresh, setCelularesRefresh] = useState(0)
   const [celularesNew, setCelularesNew] = useState(0)
+  const [usuariosRefresh, setUsuariosRefresh] = useState(0)
+  const [usuariosNew, setUsuariosNew] = useState(0)
   const [reportEmpresa, setReportEmpresa] = useState(null)
   const [filter, setFilter] = useState('')
   const localSearch = useRef(null)
@@ -95,33 +101,37 @@ export default function Dashboard({ user, onLogout, searchRef }) {
   /* Atalhos de teclado do protótipo (F5, Ctrl+K, Ctrl+N) */
   useEffect(() => {
     function onKey(e) {
-      if (document.querySelector('.est-dialog') || document.querySelector('.mon-dialog') || document.querySelector('.cfg-dialog') || document.querySelector('.imp-overlay') || document.querySelector('.set-overlay') || document.querySelector('.celular-overlay')) return
-        if (e.key === 'F5') {
-          e.preventDefault()
-          if (module === 'estacoes') setEstacoesRefresh((v) => v + 1)
-          else if (module === 'monitores') setMonitoresRefresh((v) => v + 1)
-          else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
-          else if (module === 'funcionarios') setFuncionariosRefresh((v) => v + 1)
-          else if (module === 'celulares') setCelularesRefresh((v) => v + 1)
-          else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
-          else load()
-        }
-        if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'celulares' || module === 'celulares-conferencia') return
-        if (isReportModule) return
+      if (document.querySelector('.est-dialog') || document.querySelector('.mon-dialog') || document.querySelector('.cfg-dialog') || document.querySelector('.imp-overlay') || document.querySelector('.set-overlay') || document.querySelector('.celular-overlay') || document.querySelector('.usr-dialog')) return
+      if (e.key === 'F5') {
+        e.preventDefault()
+        if (module === 'estacoes') setEstacoesRefresh((v) => v + 1)
+        else if (module === 'monitores') setMonitoresRefresh((v) => v + 1)
+        else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
+        else if (module === 'setores') setSetoresRefresh((v) => v + 1)
+        else if (module === 'funcionarios') setFuncionariosRefresh((v) => v + 1)
+        else if (module === 'celulares') setCelularesRefresh((v) => v + 1)
+        else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
+        else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
+        else load()
+      }
+      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'celulares' || module === 'celulares-conferencia') return
+      if (isReportModule) return
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
         const el = searchRef?.current || localSearch.current
         if (el) el.focus()
       }
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') {
-          e.preventDefault()
-          if (module === 'estacoes') setEstacoesNew((v) => v + 1)
-          else if (module === 'monitores') setMonitoresNew((v) => v + 1)
-          else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
-          else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
-          else if (module === 'celulares') setCelularesNew((v) => v + 1)
-          else if (module !== 'configuracoes' && module !== 'celulares-conferencia') setModule('setores')
-        }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') {
+        e.preventDefault()
+        if (module === 'estacoes') setEstacoesNew((v) => v + 1)
+        else if (module === 'monitores') setMonitoresNew((v) => v + 1)
+        else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
+        else if (module === 'setores') setSetoresNew((v) => v + 1)
+        else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
+        else if (module === 'celulares') setCelularesNew((v) => v + 1)
+        else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
+        else if (module !== 'configuracoes' && module !== 'celulares-conferencia') setModule('setores')
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -254,23 +264,28 @@ export default function Dashboard({ user, onLogout, searchRef }) {
         notifCount={d.alertTotal}
         searchRef={searchRef || localSearch}
         empresaLogo={empresaLogo}
+        onPerfil={() => setModule('perfil')}
       />
       <SubBar total={d.total}
         onRefresh={() => {
           if (module === 'estacoes') setEstacoesRefresh((v) => v + 1)
           else if (module === 'monitores') setMonitoresRefresh((v) => v + 1)
           else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
+          else if (module === 'setores') setSetoresRefresh((v) => v + 1)
           else if (module === 'funcionarios') setFuncionariosRefresh((v) => v + 1)
           else if (module === 'celulares') setCelularesRefresh((v) => v + 1)
           else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
+          else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
           else load()
         }}
         onNovoAtivo={() => {
           if (module === 'estacoes') setEstacoesNew((v) => v + 1)
           else if (module === 'monitores') setMonitoresNew((v) => v + 1)
           else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
+          else if (module === 'setores') setSetoresNew((v) => v + 1)
           else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
           else if (module === 'celulares') setCelularesNew((v) => v + 1)
+          else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
           else if (module !== 'celulares-conferencia') setModule('setores')
         }}
       />
@@ -283,16 +298,18 @@ export default function Dashboard({ user, onLogout, searchRef }) {
             {module === 'estacoes' && <Estacoes refreshKey={estacoesRefresh} newRequest={estacoesNew} onChanged={load} />}
             {module === 'monitores' && <Monitores refreshKey={monitoresRefresh} newRequest={monitoresNew} onChanged={load} />}
             {module === 'impressoras' && <Impressoras refreshKey={impressorasRefresh} newRequest={impressorasNew} onChanged={load} />}
-            {module === 'setores' && <Setores refreshKey={estacoesRefresh} newRequest={estacoesNew} onChanged={load} />}
-            {module === 'funcionarios' && <Funcionarios refreshKey={estacoesRefresh} newRequest={estacoesNew} onChanged={load} />}
+            {module === 'setores' && <Setores refreshKey={setoresRefresh} newRequest={setoresNew} onChanged={load} />}
+            {module === 'funcionarios' && <Funcionarios refreshKey={funcionariosRefresh} newRequest={funcionariosNew} onChanged={load} />}
             {module === 'celulares' && <Celulares refreshKey={celularesRefresh} newRequest={celularesNew} onChanged={load} onOpenConferencia={() => setModule('celulares-conferencia')} />}
             {module === 'celulares-conferencia' && <CelularesConferencia refreshKey={celularesRefresh} />}
+            {module === 'usuarios' && <UsuariosRbac refreshKey={usuariosRefresh} newRequest={usuariosNew} onChanged={load} />}
+            {module === 'perfil' && <Perfil user={user} />}
             {module === 'configuracoes' && <Configuracoes />}
             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-monitores' && <MonitoresReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-impressoras' && <ImpressaoReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
-            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && !module.startsWith('relatorio-') && (
+            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && !module.startsWith('relatorio-') && (
               <PlaceholderModule
                 label={activeModule.label}
                 icon={activeModule.icon}

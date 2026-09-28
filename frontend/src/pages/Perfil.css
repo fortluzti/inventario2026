@@ -1,0 +1,362 @@
+/* Perfil do Usuário - Tela de Perfil e Configurações */
+/* Segue o padrão visual FortLuz Enterprise Inventory */
+/* Cores: primary #991b1b, secondary #904d00, tertiary #005852 */
+/* IBM Plex Sans, Tailwind classes, Material Symbolsicons */
+
+/* ---------- Página de Perfil ---------- */
+.perfil-page {
+  min-height: 100vh;
+  background-color: #f8f9ff;
+  color: #0d1c2e;
+}
+
+/* ---------- Header ---------- */
+.perfil-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.perfil-header-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.perfil-breadcrumb {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.perfil-header-top h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #0d1c2e;
+}
+
+.perfil-subtitle {
+  font-size: 0.875rem;
+  color: #904d00;
+  margin-top: 0.25rem;
+}
+
+.perfil-message {
+  padding: 0.5rem 1rem;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 4px;
+  color: #052e16;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.perfil-message.error {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+/* ---------- Main Content ---------- */
+.perfil-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.perfil-card {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.perfil-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.perfil-card-header .mat {
+  font-size: 1.25rem;
+}
+
+.perfil-card-body {
+  font-size: 0.875rem;
+}
+
+.perfil-grid-row {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .perfil-grid-row {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.perfil-grid-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.perfil-grid-col-full {
+  grid-column: 1 / -1;
+}
+
+.perfil-grid-col:first-child {
+  grid-column: 1 / 2;
+}
+
+.perfil-grid-col:last-child {
+  grid-column: 2 / 3;
+}
+
+.perfil-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.perfil-login {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.perfil-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: #f1f5f9;
+  border: 1px solid #94a3b8;
+  border-radius: 4px;
+  color: #0d1c2e;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.perfil-input:focus {
+  outline: none;
+  border-color: #991b1b;
+  background-color: #ffffff;
+}
+
+.perfil-input[readonly],
+.perfil-input[disabled] {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ---------- Status Badge ---------- */
+.perfil-status {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.perfil-status.ativo {
+  background-color: #059669;
+  /* verde-600 */
+}
+
+.perfil-status.inativo {
+  background-color: #ef4444;
+  /* vermelho-500 */
+}
+
+/* ---------- Ações ---------- */
+.perfil-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'IBM Plex Sans', sans-serif;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #0d1c2e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-perfil:hover {
+  border-color: #94a3b8;
+}
+
+.btn-perfil:focus-visible {
+  outline: 2px solid #991b1b;
+  outline-offset: 2px;
+}
+
+.btn-perfil-editar .mat {
+  color: #991b1b;
+}
+
+.btn-perfil-senha .mat {
+  color: #760009;
+}
+
+/* ---------- Diálogos (inline - reutilizam padrão do sistema) ---------- */
+.perfil-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.perfil-dialog {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: dialogIn 0.2s ease-out;
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.perfil-dialog-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 3px 3px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0d1c2e;
+}
+
+.perfil-dialog-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+}
+
+.perfil-dialog-body {
+  padding: 1rem;
+}
+
+.perfil-dialog-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.perfil-dialog-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.perfil-dialog-btn-cancelar {
+  background-color: #f1f5f9;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.perfil-dialog-btn-salvar {
+  background-color: #991b1b;
+  color: #ffffff;
+  border-color: #991b1b;
+}
+
+/* ---------- Responsividade 1024×768 ---------- */
+@media (max-width: 1024px) {
+  .perfil-page {
+    padding: 0.75rem;
+  }
+
+  .perfil-card {
+    padding: 1rem;
+  }
+
+  .perfil-grid-row {
+    gap: 0.5rem;
+  }
+
+  .perfil-card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn-perfil {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-main {
+    padding: 0 0.5rem;
+  }
+
+  .perfil-card {
+    padding: 0.75rem;
+  }
+
+  .perfil-header {
+    padding: 0.75rem;
+  }
+
+  .perfil-header-top {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .perfil-header-top h1 {
+    font-size: 1.25rem;
+  }
+
+  .perfil-breadcrumb {
+    font-size: 0.75rem;
+  }
+}

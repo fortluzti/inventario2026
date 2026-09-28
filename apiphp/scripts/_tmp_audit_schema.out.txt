@@ -1,0 +1,280 @@
+﻿
+===== SCHEMA funcionarios =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id | int | NO | PRI | NULL | auto_increment
+nome | varchar(50) | NO | UNI | NULL | 
+cargo | varchar(30) | YES |  | NULL | 
+setor | varchar(30) | YES |  | NULL | 
+setor_id | int | YES | MUL | NULL | 
+rg | varchar(20) | YES |  | NULL | 
+email | varchar(50) | YES |  | NULL | 
+gmail | varchar(50) | YES |  | NULL | 
+senha_gmail | varchar(20) | YES |  | NULL | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+ativo | tinyint(1) | NO | MUL | 1 | 
+total: 14
+
+===== SCHEMA celulares =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id | int | NO | PRI | NULL | auto_increment
+codigo_interno_celular | varchar(20) | NO | UNI | NULL | 
+marca | varchar(20) | NO |  | NULL | 
+modelo | varchar(30) | NO |  | NULL | 
+imei | varchar(20) | NO |  | NULL | 
+serial | varchar(20) | NO |  | NULL | 
+numero | varchar(15) | YES |  | NULL | 
+email_corporativo | varchar(100) | YES |  | NULL | 
+gmail | varchar(50) | YES |  | NULL | 
+senha_gmail | varchar(50) | YES |  | NULL | 
+data_compra | date | YES |  | NULL | 
+uuid | varchar(36) | YES |  | NULL | 
+nota_fiscal | varchar(50) | YES |  | NULL | 
+danos | text | YES |  | NULL | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+status | enum('Em Uso','Em Estoque','Em Manuten├º├úo','Danificado','Descartado') | NO |  | NULL | 
+fornecedor_id | int | YES | MUL | NULL | 
+empresa_id | int | YES | MUL | NULL | 
+total: 21
+
+===== SCHEMA celulares_funcionarios =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id | int | NO | PRI | NULL | auto_increment
+celular_id | int | NO | MUL | NULL | 
+usuario_id | int | NO | MUL | NULL | 
+data_entrega | datetime | YES |  | NULL | 
+data_associacao | datetime | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+data_desassociacao | datetime | YES |  | NULL | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+usuario_desassociacao | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+total: 11
+
+===== SCHEMA historico_uso =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id | int | NO | PRI | NULL | auto_increment
+celular_id | int | NO | MUL | NULL | 
+usuario_id | int | NO | MUL | NULL | 
+data_entrega | datetime | NO |  | NULL | 
+data_devolucao | datetime | YES |  | NULL | 
+termo_entrega | varchar(255) | YES |  | NULL | 
+termo_devolucao | varchar(255) | YES |  | NULL | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+total: 11
+
+===== SCHEMA danos =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id | int | NO | PRI | NULL | auto_increment
+celular_id | int | NO | MUL | NULL | 
+descricao | text | NO |  | NULL | 
+resolucao | text | YES |  | NULL | 
+data_dano | datetime | NO |  | NULL | 
+status | enum('Pendente','Resolvido') | YES |  | Pendente | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+total: 10
+
+===== SCHEMA users =====
+Field | Type | Null | Key | Default | Extra
+----------------------------------------------------------------------------------------------------
+id_usuario | int | NO | PRI | NULL | auto_increment
+nome | varchar(255) | NO |  | NULL | 
+login | varchar(50) | NO | UNI | NULL | 
+senha | varchar(255) | NO |  | NULL | 
+email | varchar(255) | YES |  | NULL | 
+data_cadastro | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+usuario_cadastro | varchar(50) | YES |  | NULL | 
+data_atualizacao | timestamp | NO |  | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+usuario_atualizacao | varchar(50) | YES |  | NULL | 
+total: 9
+
+===== funcionarios (todos) =====
+id | nome | cargo | setor | setor_id | rg | email | gmail | senha_gmail | data_cadastro | usuario_cadastro | data_atualizacao | usuario_atualizacao | ativo
+----------------------------------------------------------------------------------------------------
+1 | ANDERSON RODRIGO PASCHOAL | ENCARREGADO DE ESTOQUE | ESTOQUE | 22 | 29096611-5 | vendas1@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:19:12 | NULL | 1
+2 | EDEVAIR DONIZETI VEQUIATO | ENTREGADOR | ENTREGA | 21 | 20354210-1 |  | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:19:17 | NULL | 1
+3 | TANIA CRISTA DE SOUZA PEDROSO | COMPRAS | COMPRAS | 17 | 42886482x | compras1@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+4 | RAFAEL AMARO ARANTES | VENDEDOR | BALC├âO | 19 | 533178319 | vendas2@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-08-03 16:45:17 | alex | 1
+5 | ELAINE BARBOSA DE OLIVEIRA CARVALHO | TELEFONISTA | TELEFONISTA | 25 | 21861683-1 | telefonista@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:20:10 | NULL | 1
+6 | LUIS PEREIRA ANDRADE | VENDEDOR | NULL | 19 | 3834457-9 | vendas2@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:23:57 | NULL | 0
+7 | ALESSANDRO GODOI OLIVEIRA | FINANCEIRO | FINANCEIRO | 15 | 24501951-0 | financeiro@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+8 | TELEFONISTA | TELEFONISTA | TELEFONISTA | 25 |  | telefonista@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:20:20 | NULL | 1
+9 | LUIS CARLOS MENDES DA ROCHA | VENDEDOR | BALC├âO | 19 | 16.819.495-8 | vendas11@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+10 | ADAIR RIBEIRO | COMPRAS | COMPRAS | 17 | 73565350 | compras6@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-25 13:14:10 | alex | 1
+11 | VANESSA ELIAS JUNGERS | VENDEDOR | BALC├âO | 19 | 26689415-X | vendas20@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+12 | RODOLFO CARDOSO | VENDEDOR | NULL | 19 | 43.085.583-7 | vendas18@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:23:44 | NULL | 0
+13 | MAURICIO PERMEGIANE GOZO | COMPRAS | COMPRAS | 17 | 21993606-7 | compras@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+14 | LUAN HENRIQUE SOLHA | VENDEDOR | BALC├âO | 19 | 20963799 | vendas17@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:17:34 | NULL | 1
+15 | LORAYNE CABRAL DE LIMA | ESTOQUE | ESTOQUE | 22 | 56922257-6 |  | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:20:56 | NULL | 1
+16 | FERNANDA SCHAEFFER | VENDEDOR | BALC├âO | 19 | 6748483330 | vendas14@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+17 | JOS├ë RICARDO MARTIL SANZAGO | VENDEDOR | ATACADO | 16 | 32283852-6 | vendas7@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-08-04 16:37:08 | ivan | 1
+18 | DIEGO HENRIQUE MAZZONI | VENDEDOR | BALC├âO | 19 | 487968141 | vendas6@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+19 | ANTONIO DONIZETI DO AMARAL | VENDEDOR | BALC├âO | 19 | 064.850.668-10 | vendas10@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 15:17:59 | NULL | 1
+20 | MARCOS FERNANDO SILVA | GERENCIA | GERENCIA | 27 | 20963799 | fortluz@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:22:12 | NULL | 1
+21 | EDNA ELENA TEODORO | TELEFONISTA | TELEFONISTA | 25 | 23176519-8 | telefonista@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:20:29 | NULL | 1
+22 | ALEX CARRARO MEDEIROS | VENDEDOR | BALC├âO | 19 | 43.581.770-x | vendas12@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+23 | GUILHERME RODRIGUES GON├çALVES | VENDEDOR | BALC├âO | 19 | 52.923.725-8 | vendas4@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+24 | ANTONIO CARLOS ROTTA | VENDEDOR | ATACADO | 16 | 14181465 | vendas3@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+25 | CID MICHEL FERREIRA BRUZADIM | VENDEDOR | NULL | 19 | 44.920.354-2 | vendas16@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:22:54 | alex | 0
+26 | VITOR GABRIEL ARAUJO DE FREITAS | VENDEDOR | BALC├âO | 19 | 53605530-0 | vendas1@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+27 | LUIZ FERNANDO SOARES DE JESUS | MARKETING | NULL | 26 | 39142833-0 | marketing@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:22:44 | NULL | 0
+28 | ROBSON FERNANDES BATISTA | ENCARREGADO DE ESTOQUE | ESTOQUE | 22 | 24698570-7 | vendas1@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:21:30 | NULL | 1
+29 | IVAN AUGUSTO ENCINAS | TI | TI | 14 | 274429457 | ti@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-15 12:08:58 | ivan | 1
+30 | CHARLES SANTO CHALNI | GERENTE | ATACADO | 16 | 41492559-2 | vendas15@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+31 | POLYANE KAREN GOMES | RH | RH | 12 | 43085285-X | rh@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+32 | ALEX FABIANO LONGO | TI | TI | 14 | 33.095.826-4 | ti@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-10 10:23:20 | NULL | 1
+33 | EDSON FERREIRA DE OLIVEIRA JUNIOR | VENDEDOR | NULL | 19 | 199659254 | vendas2@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:22:30 | NULL | 0
+34 | MAGNO FAQUESI SOARES | VENDEDOR | BALC├âO | 19 | 41511595-4 | vendas9@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-12 08:17:24 | NULL | 1
+35 | DANILO CEZAR ZUPIROLI | VENDEDOR | ATACADO | 16 | 33750351-5 | vendas5@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2025-07-25 13:17:35 | alex | 1
+36 | SILVIO CESAR VENANCIO | VENDEDOR | NULL | 19 | 21689087 | vendas13@fortluz.com.br | NULL | NULL | 2025-07-10 10:23:20 | NULL | 2026-09-22 17:22:19 | NULL | 0
+37 | SERVIDOR FORT LUZ | USO INTERNO | NULL | 14 |  |  | NULL | NULL | 2025-07-15 17:52:07 | alex | 2025-07-15 17:52:07 | alex | 1
+38 | ANSELMO |  | NULL | 13 |  |  | NULL | NULL | 2025-07-16 17:48:57 | alex | 2025-07-16 17:48:57 | alex | 1
+39 | Leonardo Alves de Almeida | Marketing | NULL | 26 | 58.875.239-3 | market@fortluz.com.br | NULL | NULL | 2025-07-28 14:39:00 | alex | 2025-07-28 14:39:00 | alex | 1
+42 | PATRICIA MESSIAS FELIPE | CAIXA | NULL | 20 |  |  | NULL | NULL | 2025-08-13 16:10:53 | ivan | 2025-08-13 16:10:53 | ivan | 1
+44 | MOIS├ëS FRANCO DA SILVEIRA | ESTOQUE | NULL | 22 | 48.761.935-3 |  | NULL | NULL | 2026-04-06 16:06:38 | alex | 2026-04-06 16:06:38 | alex | 1
+45 | JOS├ë ROBERTO LEMOS GON├çALVES | VENDEDOR | NULL | 19 | 40.588.584-2 | vendas8@fortluz.com.br | NULL | NULL | 2026-04-09 14:25:28 | alex | 2026-04-09 14:26:43 | alex | 1
+46 | CARLOS ALBERTO GUBOLIN | GERENTE ESTOQUE | NULL | 22 | 20.964.101-3 |  | NULL | NULL | 2026-05-06 15:51:44 | alex | 2026-05-06 15:51:44 | alex | 1
+47 | JOS├ë VICTOR TAVARES DE SOUZA | VENDEDOR | NULL | 19 | 49.479.919-5 | vendas13@fortluz.com.br | NULL | NULL | 2026-06-19 14:54:34 | alex | 2026-06-19 14:54:34 | alex | 1
+48 | Matheus Di Biasi Nespolo | VENDEDOR | NULL | 19 | 57.410.021-0 | vendas18@fortluz.com.br | NULL | NULL | 2026-06-30 16:56:45 | alex | 2026-09-22 14:08:14 | alex | 1
+total: 45
+
+===== celulares (todos) =====
+id | codigo_interno_celular | marca | modelo | imei | serial | numero | email_corporativo | gmail | status
+----------------------------------------------------------------------------------------------------
+1 | CEL-001 | SAMSUNG | SM-J250M/DS | 355885/09/170714/6 | RQ8K30QQ71M | (17) 99634-7873 | NULL | fortluz.7873@gmail.com | Em Estoque
+2 | CEL-005 | SAMSUNG | SM-J250M/DS | 355885/09/170748/4 | RQ8K30QQ82V | (17) 99649-7120 | NULL | fortluz.7120@gmail.com | Em Uso
+3 | CEL-006 | SAMSUNG | SM-J250M/DS | 355885/09/170749/2 | RQ8K30QQ83W |  | NULL |  | Em Estoque
+4 | CEL-008 | SAMSUNG | SM-J250M/DS | 355885/09/1707753/4 | RQ8K30QQ87R | (17) 99618-4937 | NULL | tifortluz@gmail.com | Em Estoque
+5 | CEL-009 | SAMSUNG | SM-J250M/DS | 355885/09/170755/9 | RQ8K30QQ89E | (17) 99649-8473 | vendas8@fortluz.com.br | fortluz.8473@gmail.com | Em Uso
+6 | CEL-011 | SAMSUNG | SM-J250M/DS | 355885/09/170757/5 | RQ8K30QQ8BX | (17) 99608-8373 | telefonista@fortluz.com.br | fortluz.8373@gmail.com | Em Uso
+7 | CEL-014 | SAMSUNG | SM-J250M/DS | 355885/09/170768/2 | RQ8K30QQ8NW | (17) 99646-8369 | vendas2@fortluz.com.br | fortluz.8369@gmail.com | Em Uso
+8 | CEL-015 | SAMSUNG | SM-J250M/DSGSMH | 35885/09/304264/1 | RQ8K90388ZV | (17) 99659-8736 | financeiro@fortluz.com.br | financeiro@fortluz1@gmail.com | Em Uso
+9 | CEL-016 | SAMSUNG | SM-J250M/DSGSMH | 355886/09/304361/3 | RQ8K9038BXR | (17) 99774-5481 | telefonista@fortluz.com.br | forluz.5481@gmail.com | Em Uso
+10 | CEL-017 | SAMSUNG | SM-J250M/DSGSMH | 355886/09/304362/1 | RQ8K9038BYN | (17) 99639-6721 | vendas11@fortluz.com.br | fortluz.6221@gmail.com | Em Uso
+11 | CEL-018 | SAMSUNG | SM-A307GT | 354624112214506 | RQ8N60242MN | (17) 99647-3718 | NULL | comprasfortluz@gmail.com | Em Estoque
+12 | CEL-019 | MOTOROLA | XT2081-1 | 355561113859179 | TV0HNW2J4Q |  | NULL |  | Em Estoque
+13 | CEL-020 | MOTOROLA | XT2081-1 | 355561113853636 | TV0HNW2HQT | (17) 99635-9071 | vendas20@fortluz.com.br | fortluz.9071@gmail.com | Em Uso
+14 | CEL-021 | MOTOROLA | XT2081-1 | 355561113863312 | TV0HNW2JD5 |  | NULL |  | Em Estoque
+15 | CEL-022 | MOTOROLA | XT2081-1 | 355561113854519 | 0069924201 | (17) 99635-5779 | vendas18@fortluz.com.br | fortluz.5779@gmail.com | Em Uso
+16 | CEL-024 | MOTOROLA | XT2081-1 | 355561113859328 | TV0HNW2J42 | (17) 99618-4934 | compras@fortluz.com.br | fortluz.4934@gmail.com | Em Uso
+17 | CEL-025 | MOTOROLA | XT2081-1 | 355561113845095 | TV0HNW2H7L | (17) 99635-5670 | vendas17@fortluz.com.br | fortluz.5670@gmail.com | Em Uso
+18 | CEL-026 | XIAOMI | 2106119BI | 868480054472761 | MZB09QXIN | (17) 99615-4028 | NULL | fortluz.4028@gmail.com | Em Uso
+19 | CEL-027 | SAMSUNG | SM-G970F | 355015106907867 | RX8N509792N |  | NULL |  | Em Estoque
+20 | CEL-028 | SAMSUMG | SM-M127F/DS | 358281390277287 | RX8T404YFJZ | (17) 99743-8707 | vendas14@fortluz.com.br | fortluz.8707@fortluz.com.br | Em Uso
+21 | CEL-029 | SAMSUNG | SM-M127F/DS | 358281390277154 | RX8T404YF5J | (17) 99793-5417 | vendas7@fortluz.com.br | fortluz.5417@gmail.com | Em Uso
+22 | CEL-030 | SAMSUNG | SM-M127F/DS | 358281390277741 | RX8T404YGYM | (17) 99741-2613 | vendas6@fortluz.com.br | fortluz.2613@gmail.com | Em Uso
+23 | CEL-031 | SAMSUNG | SM-M127F/DS | 358281390277691 | RXT404YGSN | (17) 99649-8473 | vendas10@fortluz.com.br | fortluz.0512@gmail.com | Em Uso
+24 | CEL-035 | SAMSUNG | SM-A546E/DS | 356544/393178300/5 | RQCWA05495H | (17) 99728-4343 | fortluz@fortluz.com.br | fortluz.4343@gmail.com | Em Uso
+25 | CEL-037 | SAMSUNG | SM-A146M/DS | 356969674575697 | RQCW907HKHK | (17) 99719-9599 | vendas12@fortluz.com.br | fortluz.9599@gmail.com | Em Uso
+26 | CEL-038 | SAMSUNG | SM-A146M/DS | 356969674489352 | RQCW906WV3M | (17) 99609-1773 | vendas4@fortluz.com.br | fortluz.1773@gmail.com | Em Uso
+27 | CEL-039 | SAMSUNG | SM-A146M/DS | 356969745743312 | RQCW907HCAV | (17) 99745-8359 | vendas3@fortluz.com.br | fortluz.8359@gmail.com | Em Uso
+28 | CEL-040 | SAMSUNG | SM-A146M/DS | 356450524840854 | R5CWA04EKDL | (17) 99608-8959 | vendas16@fortluz.com.br | fortluz.8959@gmail.com.br | Em Uso
+29 | CEL-041 | SAMSUNG | SM-A146M/DS | 356450524853188 | R5CWA04FPRN | (17) 99645-0082 | vendas1@fortluz.com.br | fortluz.0082@gmail.com | Em Uso
+30 | CEL-042 | POCO X6 | 23122PCD1G | 867837063432667 | 7D92288C | (17) 99618-4935 | NULL | fortluz.4935@fortluz.com.br | Em Estoque
+31 | CEL-044 | XIAOMI | 23129RA5FL | 862281078821561 | 53392/04w505673 | (17) 99618-4932 | ti@fortluz.com.br | fortluz.4932@gmail.com | Em Uso
+32 | CEL-045 | XIAOMI | 23129RA5FL | 862281078762401 | 53392/04W506675 | (17) 99728-9591 | vendas15@fortluz.com.br | fortluz.9591@gmail.com | Em Uso
+33 | CEL-046 | XIAOMI | 23129RA5FL | 862281079746460 | 54861/04WD00856 | (17) 99738-9252 | rh@fortluz.com.br | rhfortluz@gmail.com | Em Uso
+34 | CEL-048 | XIAOMI | 23129RA5FL | 862281079650381 | 54861/04WD00964 | (17) 99646-8369 | vendas2@fortluz.com.br | fortluz.8369@gmail.com | Em Uso
+35 | CEL-049 | XIAOMI | 23129RA5FL | 865776076630267 | 54861/04V707002 | (17) 99759-5892 | NULL | gerentefortluz@gmail.com | Em Estoque
+36 | CEL-050 | XIAOMI | 23129RA5FL | 865776076269264 | 54861/04V800557 | (17) 99743-3840 | vendas9@fortluz.com.br | fortluz.3840@gmail.com | Em Uso
+37 | CEL-051 | XIAOMI | 23129RA5FL | 865776076682847 | 54861/04V706753 | (17) 99683-6939 | vendas5@fortluz.com.br | fortluz.6939@gmail.com | Em Uso
+38 | CEL-052 | XIAOMI | 23129RA5FL | 865776076430486 | 54861&#x2F;04V800450 | (17) 99635-7527 | NULL | fortluz.7527@gmail.com | Em Estoque
+39 | CEL-053 | XIAOMI | 23129RA5FL | 868796071415867 | 170C5335 | (17) 99723-5227 | vendas13@fortluz.com.br | fortluz.5227@gmail.com | Em Uso
+40 | CEL-054 | XIAOMI | 23129RA5FL | 862281079321504 | 54861/04WD00939 |  | NULL |  | Em Estoque
+41 | CEL-055 | teste | teste | 99884477 | 1234567777 |  | NULL |  | Em Estoque
+43 | CEL-056 | TESTE | TESTE | 102030 | 102030 |  | NULL |  | Em Estoque
+44 | CEL-057 | XIAOMI | 24094RAD4G | 861036075054462 | 60983&amp;#x2F;65WU0 | (17) 99636-0836 | NULL | fortluz.0836@gmail.com | Em Estoque
+45 | CEL-058 | XIAOMI | 24094RAD4G | 865501074443509 | 60990&#x2F;65WU00714 | (17) 99647-3718 | NULL | comprasfortluz@gmail.com | Em Uso
+46 | CEL-059 | XIAOMI | 24117RN76L | 86284407599612 | 61125W5PR04207 | (17) 99636-0740 | NULL | fortluz.0740@gmail.com | Em Uso
+47 | CEL-060 | SAMSUNG | GALAXY A30 CHACARA | 354881102709917 | RQ8M50P98MJ | (17) 99791-9811 | NULL | fortluz.9811@gmail.com | Em Uso
+48 | CEL-061 | XIAOMI | 24090RA29C | 867038079631703 | 59441&#x2F;Y6SH03517 | (17) 99636-0970 | NULL | fortluz.0970@gmail.com | Em Estoque
+total: 47
+
+===== celulares_funcionarios (todos) =====
+id | celular_id | usuario_id | data_entrega | data_associacao | data_desassociacao | data_cadastro | usuario_cadastro | usuario_desassociacao | data_atualizacao | usuario_atualizacao
+----------------------------------------------------------------------------------------------------
+1 | 1 | 1 | 2024-11-06 00:00:00 | 2024-11-06 00:00:00 | 2024-11-06 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+2 | 2 | 2 | 2024-11-21 00:00:00 | 2024-11-21 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+3 | 4 | 3 | 2022-05-19 00:00:00 | 2022-05-19 00:00:00 | 2018-09-02 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+4 | 5 | 4 | 2024-06-19 00:00:00 | 2024-06-19 00:00:00 | 2026-03-13 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2026-03-16 14:58:42 | alex
+5 | 6 | 5 | 2018-04-20 00:00:00 | 2018-04-20 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+6 | 7 | 6 | 2022-11-21 00:00:00 | 2022-11-21 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+7 | 8 | 7 | 2018-10-09 00:00:00 | 2018-10-09 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+8 | 9 | 8 | 2021-08-26 00:00:00 | 2021-08-26 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+9 | 10 | 9 | 2025-01-14 00:00:00 | 2025-01-14 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+10 | 11 | 10 | 2021-02-19 00:00:00 | 2021-02-19 00:00:00 | 2026-02-04 00:00:00 | 2025-07-10 10:23:20 | NULL | alex | 2026-02-04 15:17:37 | NULL
+11 | 13 | 11 | 2025-06-03 00:00:00 | 2025-06-03 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+12 | 15 | 12 | 2025-04-22 00:00:00 | 2025-04-22 00:00:00 | 2026-02-10 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2026-04-09 14:23:34 | alex
+13 | 16 | 13 | 2021-06-29 00:00:00 | 2021-06-29 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+14 | 17 | 14 | 2025-04-11 00:00:00 | 2025-04-11 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+15 | 18 | 15 | 2024-12-16 00:00:00 | 2024-12-16 00:00:00 | 2026-03-31 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2026-04-06 16:03:57 | alex
+16 | 20 | 16 | 2024-06-26 00:00:00 | 2024-06-26 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+17 | 21 | 17 | 2022-06-06 00:00:00 | 2022-06-06 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+18 | 22 | 18 | 2022-05-27 00:00:00 | 2022-05-27 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+19 | 23 | 19 | 2022-06-17 00:00:00 | 2022-06-17 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+20 | 24 | 20 | 2023-10-01 00:00:00 | 2023-10-01 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+21 | 6 | 21 | 2018-04-20 00:00:00 | 2018-04-20 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+22 | 25 | 22 | 2024-02-01 00:00:00 | 2024-02-01 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+23 | 26 | 23 | 2024-02-01 00:00:00 | 2024-02-01 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+24 | 27 | 24 | 2024-02-01 00:00:00 | 2024-02-01 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+25 | 28 | 25 | 2024-04-25 00:00:00 | 2024-04-25 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+26 | 29 | 26 | 2024-04-25 00:00:00 | 2024-04-25 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+27 | 30 | 27 | 2024-07-02 00:00:00 | 2024-07-02 00:00:00 | 2025-07-01 00:00:00 | 2025-07-10 10:23:20 | NULL | ivan | 2025-08-06 16:01:43 | NULL
+28 | 1 | 28 | 2024-11-06 00:00:00 | 2024-11-06 00:00:00 | 2024-11-06 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+29 | 31 | 29 | 2025-04-09 00:00:00 | 2025-04-09 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+30 | 32 | 30 | 2025-01-24 00:00:00 | 2025-01-24 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+31 | 33 | 31 | 2025-01-24 00:00:00 | 2025-01-24 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+32 | 31 | 32 | 2025-01-24 00:00:00 | 2025-01-24 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+33 | 34 | 33 | 2025-04-10 00:00:00 | 2025-04-10 00:00:00 | 2026-08-03 00:00:00 | 2025-07-10 10:23:20 | NULL | NULL | 2026-08-03 16:42:41 | alex
+34 | 36 | 34 | 2025-04-16 00:00:00 | 2025-04-16 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+35 | 37 | 35 | 2025-04-16 00:00:00 | 2025-04-16 00:00:00 | NULL | 2025-07-10 10:23:20 | NULL | NULL | 2025-07-10 10:23:20 | NULL
+40 | 18 | 44 | 2026-04-06 00:00:00 | 2026-04-06 16:07:11 | NULL | 2026-04-06 16:07:11 | alex | NULL | 2026-04-06 16:07:11 | NULL
+41 | 5 | 45 | 2026-04-13 00:00:00 | 2026-04-09 14:29:13 | NULL | 2026-04-09 14:29:13 | alex | NULL | 2026-04-09 14:29:13 | NULL
+42 | 46 | 46 | 2026-05-06 00:00:00 | 2026-05-06 16:03:25 | NULL | 2026-05-06 16:03:25 | alex | NULL | 2026-05-06 16:03:25 | NULL
+43 | 39 | 47 | 2026-06-22 00:00:00 | 2026-06-19 14:55:26 | NULL | 2026-06-19 14:55:26 | alex | NULL | 2026-06-19 14:55:26 | NULL
+44 | 15 | 48 | 2026-06-30 00:00:00 | 2026-06-30 16:57:20 | NULL | 2026-06-30 16:57:20 | alex | NULL | 2026-06-30 16:57:20 | NULL
+45 | 34 | 4 | 2026-08-05 00:00:00 | 2026-08-03 16:46:01 | NULL | 2026-08-03 16:46:01 | alex | NULL | 2026-08-03 16:46:01 | NULL
+total: 41
+
+===== historico_uso (todos) =====
+id | celular_id | usuario_id | data_entrega | data_devolucao | termo_entrega | termo_devolucao | data_cadastro | usuario_cadastro | data_atualizacao | usuario_atualizacao
+----------------------------------------------------------------------------------------------------
+7 | 18 | 44 | 2026-04-06 00:00:00 | NULL | Termo_20260406190711_44_18.docx | NULL | 2026-04-06 16:07:11 | NULL | 2026-04-06 16:07:11 | NULL
+8 | 5 | 45 | 2026-04-13 00:00:00 | NULL | Termo_20260409172913_45_5.docx | NULL | 2026-04-09 14:29:13 | NULL | 2026-04-09 14:29:13 | NULL
+9 | 46 | 46 | 2026-05-06 00:00:00 | NULL | Termo_20260506190325_46_46.docx | NULL | 2026-05-06 16:03:25 | NULL | 2026-05-06 16:03:25 | NULL
+10 | 39 | 47 | 2026-06-22 00:00:00 | NULL | Termo_20260619175526_47_39.docx | NULL | 2026-06-19 14:55:26 | NULL | 2026-06-19 14:55:26 | NULL
+11 | 15 | 48 | 2026-06-30 00:00:00 | NULL | Termo_20260630195720_48_15.docx | NULL | 2026-06-30 16:57:20 | NULL | 2026-06-30 16:57:20 | NULL
+12 | 34 | 4 | 2026-08-05 00:00:00 | NULL | Termo_20260803194601_4_34.docx | NULL | 2026-08-03 16:46:01 | NULL | 2026-08-03 16:46:01 | NULL
+total: 6
+php : [apiphp][exception] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list' @ 
+D:\GeminiCLI\Ativos\ativos.fortluz.com.br\ativos2026\apiphp\scripts\_tmp_audit_schema.php:42
+No linha:1 caractere:60
++ ... br\ativos2026'; php apiphp/scripts/_tmp_audit_schema.php 2>&1 | Out-F ...
++                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([apiphp][except...t_schema.php:42:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[apiphp][2] Cannot modify header information - headers already sent by (output started at 
+D:\GeminiCLI\Ativos\ativos.fortluz.com.br\ativos2026\apiphp\scripts\_tmp_audit_schema.php:13) @ 
+D:\GeminiCLI\Ativos\ativos.fortluz.com.br\ativos2026\apiphp\src\Response.php:14
+PHP Warning:  Cannot modify header information - headers already sent by (output started at 
+D:\GeminiCLI\Ativos\ativos.fortluz.com.br\ativos2026\apiphp\scripts\_tmp_audit_schema.php:13) in 
+D:\GeminiCLI\Ativos\ativos.fortluz.com.br\ativos2026\apiphp\src\Response.php on line 14
+{"success":false,"message":"Erro interno do servidor."}
