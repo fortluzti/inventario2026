@@ -1,0 +1,76 @@
+﻿.forn-page { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.forn-page-header, .forn-toolbar-row, .forn-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.forn-page-header { padding: 6px 0 8px; }
+.forn-page-header h1 { display: flex; align-items: center; gap: 8px; font-size: 20px; }
+.forn-page-header h1 .mat { color: var(--primary); }
+.forn-page-header p { margin: 4px 0 0; color: var(--text-muted); }
+.forn-breadcrumb { color: var(--text-muted); font-size: 10px; margin-bottom: 4px; }
+.forn-btn { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 3px 10px; border: 1px solid transparent; border-radius: var(--radius); background: var(--surface-container-low); color: var(--on-surface); font: 600 11px var(--font); cursor: pointer; white-space: nowrap; }
+.forn-btn .mat { font-size: 16px; }
+.forn-btn:hover { background: var(--surface-container-high); }
+.forn-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.forn-btn-primary { background: var(--primary); color: var(--on-primary); }
+.forn-btn-primary:hover { opacity: 0.9; }
+.forn-btn-icon { width: 26px; min-height: 26px; padding: 2px; background: transparent; border: none; }
+.forn-btn-icon.danger:hover { color: var(--crit-fg); background: var(--crit-bg); }
+.forn-actions { display: flex; align-items: center; gap: 8px; }
+.forn-toolbar { background: var(--surface-container-lowest); border-bottom: 1px solid var(--border); padding: 8px; }
+.forn-search { display: flex; align-items: center; gap: 5px; padding-left: 7px; background: var(--surface-container-low); border-radius: var(--radius); flex: 1; max-width: 420px; min-width: 200px; }
+.forn-search .mat { font-size: 17px; color: var(--text-muted); }
+.forn-search input { width: 100%; min-width: 0; height: 28px; border: 0; background: transparent; padding: 4px; font: inherit; color: inherit; }
+.forn-filters { margin-top: 8px; padding: 6px; background: var(--surface-container-low); display: flex; align-items: center; flex-wrap: wrap; gap: 12px; border-radius: var(--radius); }
+.forn-filters label { font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.forn-filters .forn-actions { margin-left: auto; }
+.forn-grid { flex: 1; overflow: auto; padding: 8px; display: flex; flex-direction: column; gap: 8px; background: var(--surface); }
+.forn-table-scroll { overflow: auto; }
+.forn-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; }
+.forn-table th { height: 32px; background: var(--surface-container-low); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); padding: 0 8px; border-bottom: 1px solid var(--border); }
+.forn-table td { height: 36px; padding: 4px 10px; }
+.forn-table tbody tr:nth-child(even) { background: var(--row-alt); }
+.forn-table tbody tr:hover { background: var(--surface-container-low); }
+.forn-name { font-weight: 500; }
+.forn-muted { color: var(--text-muted); }
+.forn-status { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.forn-status.active { background: #dcfce7; color: var(--in-use); }
+.forn-status.inactive { background: #f1f5f9; color: var(--discarded); }
+.forn-pagination { flex-wrap: wrap; padding: 8px 10px; border-top: 1px solid var(--border-light); font-size: 11px; }
+.forn-pagination .pgs { display: flex; align-items: center; gap: 2px; }
+.forn-pagination .pgs button { padding: 2px 8px; border: none; background: transparent; border-radius: var(--radius); font: inherit; font-family: var(--font-mono); font-size: 10px; color: var(--on-surface); cursor: pointer; }
+.forn-pagination .pgs button:hover:not(:disabled) { background: var(--surface-container); }
+.forn-pagination .pgs button:disabled { opacity: 0.45; cursor: not-allowed; }
+.forn-pagination .pgs button.cur { background: var(--primary); color: var(--on-primary); font-weight: 700; }
+.forn-message { background: var(--ok-bg); color: var(--ok-fg); padding: 8px; border-radius: var(--radius); display: flex; align-items: center; gap: 8px; }
+.forn-message.error { background: var(--crit-bg); color: var(--crit-fg); }
+.forn-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Dialog */
+.forn-overlay { position: fixed; inset: 0; z-index: 200; background: #0d1c2e80; backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.forn-dialog { width: 680px; max-width: 96vw; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; border-radius: 5px; background: var(--surface-container-lowest); box-shadow: 0 20px 60px #0005; overflow: hidden; outline: none; }
+.forn-dialog-header { min-height: 42px; padding: 6px 12px; background: var(--surface-container-low); gap: 8px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.forn-dialog-header h2 { font-size: 14px; flex: 1; font-weight: 600; }
+.forn-dialog-icon { font-size: 17px; padding: 4px; background: var(--primary); color: white; border-radius: 4px; }
+.forn-mode { background: #005852; color: white; font: 9px var(--font-mono); padding: 4px 6px; border-radius: 3px; }
+.forn-mode.view { background: var(--text-muted); }
+.forn-mode.edit { background: var(--warn-fg); }
+.forn-dialog-header .forn-btn-icon { width: 28px; height: 28px; padding: 4px; }
+.forn-form { padding: 16px; flex: 1; min-height: 0; overflow-y: auto; }
+.forn-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.forn-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.forn-field.full { grid-column: 1 / -1; }
+.forn-field label { font-size: 11px; font-weight: 600; color: var(--on-surface); }
+.forn-required { color: var(--primary); }
+.forn-input { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); }
+.forn-input:focus { outline: 2px solid var(--primary); border-color: var(--primary); }
+.forn-input:hover { border-color: var(--border-light); }
+.forn-textarea { width: 100%; min-height: 60px; resize: vertical; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); }
+.forn-select { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); cursor: pointer; }
+.forn-dialog-footer { padding: 12px; background: var(--surface-container-low); flex-shrink: 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.forn-dialog-footer small { color: var(--text-muted); font: 10px var(--font-mono); }
+.forn-btn-primary[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 640px) {
+  .forn-dialog { width: 96vw; max-height: calc(100dvh - 60px); }
+  .forn-form-grid { grid-template-columns: 1fr; }
+  .forn-dialog-footer small, .forn-mode { display: none; }
+  .forn-dialog-footer { justify-content: flex-end; }
+}

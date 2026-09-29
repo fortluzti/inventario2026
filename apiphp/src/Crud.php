@@ -163,10 +163,19 @@ final class Crud
             $params = $clean + [':id' => $id];
             $auditAction = 'update';
         } else {
-            $cols = array_keys($clean);
-            $phs = array_map(fn($c) => ":{$c}", $cols);
-            $sql = "INSERT INTO {$table} (" . implode(', ', $cols) . ", data_cadastro, data_atualizacao) VALUES (" . implode(', ', $phs) . ", NOW(), NOW())";
-            $params = $clean;
+            // INSERT: valores null ficam FORA do SQL e usam os DEFAULTs do banco
+            // (ex.: fornecedores.ativo DEFAULT 1). Sem isso, campos opcionais
+            // ausentes dariam 1048 (Column cannot be null) em colunas NOT NULL
+            // DEFAULT. Campos req nunca chegam null (validados pelo Validator).
+            $cols = array_keys(array_filter($clean, static fn($v) => $v !== null));
+            if ($cols === []) {
+                $sql = "INSERT INTO {$table} (data_cadastro, data_atualizacao) VALUES (NOW(), NOW())";
+                $params = [];
+            } else {
+                $phs = array_map(fn($c) => ":{$c}", $cols);
+                $sql = "INSERT INTO {$table} (" . implode(', ', $cols) . ", data_cadastro, data_atualizacao) VALUES (" . implode(', ', $phs) . ", NOW(), NOW())";
+                $params = array_intersect_key($clean, array_flip($cols));
+            }
             $auditAction = 'insert';
         }
 
@@ -196,6 +205,28 @@ final class Crud
             Response::error('ID invalido para exclusao.', 400);
         }
         $table = $this->mod['table'];
+
+        // Bloqueio de exclusao com dependencias (config opcional 'delete_check' no
+        // registry): se outras tabelas referenciam o registro (ex.: fornecedores
+        // usado em equipamentos/manutencoes), a exclusao fisica apagaria o
+        // historico. Nesses casos a acao correta e inativar (ativo = 0).
+        $deps = [];
+        foreach ($this->mod['delete_check'] ?? [] as $dep) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM {$dep['table']} WHERE {$dep['column']} = :id");
+            $stmt->execute([':id' => $id]);
+            $count = (int)$stmt->fetchColumn();
+            if ($count > 0) {
+                $deps[] = "{$count} registro(s) em {$dep['label']}";
+            }
+        }
+        if ($deps !== []) {
+            Response::error(
+                'Nao e possivel excluir: vinculos encontrados - ' . implode('; ', $deps)
+                . '. Inative o registro (ativo = 0) para preservar o historico.',
+                409
+            );
+        }
+
         $this->pdo->beginTransaction();
         try {
             $chk = $this->pdo->prepare("SELECT COUNT(*) FROM {$table} WHERE id = :id");

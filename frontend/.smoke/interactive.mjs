@@ -118,6 +118,10 @@ check('Volta ao Dashboard Geral', container.textContent.includes('Central de Ale
 const { testEstacoes } = await import('./estacoes.mjs')
 await testEstacoes({ container, act, check, setVal, dom })
 
+/* Fluxos de fornecedores: grid ordenável, busca/filtros, paginação e CRUD em modal. */
+const { testFornecedores } = await import('./fornecedores.mjs')
+await testFornecedores({ container, act, check, setVal, dom })
+
 /* Fluxos de funcionários: ordenação por cabeçalho, filtros e paginação (mock em memória). */
 const { testFuncionarios } = await import('./funcionarios.mjs')
 await testFuncionarios({ container, act, check, setVal, dom })

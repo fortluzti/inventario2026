@@ -53,7 +53,13 @@ Resposta de `listar`:
   Status: `Em Uso`, `Em Estoque`, `Em Manutenção`, `Danificado`, `Descartado`.
   Vínculos de software por estação não estão disponíveis neste endpoint.
   Validação SQL somente leitura: `php scripts/validar_estacoes.php` (na pasta da API).
-- **fornecedores**: `nome`*, `cnpj`, `telefone`, `endereco`, `tipo`, `nome_vendedor`, `email` — dropdown ✔
+- **fornecedores**: `nome`*, `tipo`* (`Fornecedor de Produtos` | `Prestador de Serviços`),
+  `cnpj` (único), `telefone`, `endereco`, `nome_vendedor`, `email`,
+  `ativo` (0/1 — migration `003_funcionarios_fornecedores_ativo.sql`) —
+  dropdown ✔ (ativo=1) · ordenação (`sort`): nome, cnpj, telefone, tipo,
+  nome_vendedor, email, status · `excluir` responde 409 quando há vínculos
+  (estações, monitores, impressoras, celulares, nobreaks, toners, ativos_diversos,
+  manutenções, orçamentos) — nesse caso a ação correta é inativar (`ativo=0`)
 - **funcionarios**: `nome`*, `cargo`, `setor`, `setor_id`, `rg`, `email`, `gmail`
   (⚠ `senha_gmail` existe na tabela mas está FORA da whitelist por segurança)
 - **impressoras**: `modelo_id`, `numero_serie`, `setor_id`, `ano_compra`, `status`,

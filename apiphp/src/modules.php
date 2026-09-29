@@ -106,18 +106,47 @@ return [
     'fornecedores' => [
         'table'   => 'fornecedores',
         'fields'  => [
-            'nome'          => ['tipo' => 'string', 'req' => true, 'max' => 150],
+            // Limits espelham o schema real (inventario2): nome varchar(100),
+            // telefone varchar(20), email varchar(100), cnpj varchar(20).
+            'nome'          => ['tipo' => 'string', 'req' => true, 'max' => 100],
             'cnpj'          => ['tipo' => 'string', 'max' => 20],
-            'telefone'      => ['tipo' => 'string', 'max' => 30],
+            'telefone'      => ['tipo' => 'string', 'max' => 20],
             'endereco'      => ['tipo' => 'string', 'max' => 200],
-            'tipo'          => ['tipo' => 'string', 'max' => 50],
+            // Coluna SET NOT NULL: 'Fornecedor de Produtos' | 'Prestador de Servicos'.
+            'tipo'          => ['tipo' => 'string', 'req' => true, 'max' => 50],
             'nome_vendedor' => ['tipo' => 'string', 'max' => 100],
-            'email'         => ['tipo' => 'email', 'max' => 150],
-            // Status Ativo/Inativo: padrão do projeto (setores). 1=Ativo, 0=Inativo.
+            'email'         => ['tipo' => 'email', 'max' => 100],
+            // Status Ativo/Inativo: padrao do projeto (setores/funcionarios). 1=Ativo, 0=Inativo.
             'ativo'         => ['tipo' => 'int'],
         ],
         'search'  => ['nome', 'cnpj', 'nome_vendedor'],
         'filters' => ['ativo'],
+        // Whitelist de ordenacao: chave amigavel enviada pelo frontend => coluna SQL.
+        // O backend so aceita chaves deste mapa (nunca concatena input no SQL).
+        'sortable' => [
+            'nome'          => 'fornecedores.nome',
+            'cnpj'          => 'fornecedores.cnpj',
+            'telefone'      => 'fornecedores.telefone',
+            'tipo'          => 'fornecedores.tipo',
+            'nome_vendedor' => 'fornecedores.nome_vendedor',
+            'email'         => 'fornecedores.email',
+            'status'        => 'fornecedores.ativo',
+        ],
+        // Exclusao fisica apenas sem historico: as tabelas abaixo possuem FK para
+        // fornecedores (todas ON DELETE SET NULL no inventario2) — apagar o
+        // fornecedor zeraria o vinculo e quebraria o historico. Com vinculos, a
+        // acao correta e inativar (ativo = 0). Ver Crud::excluir().
+        'delete_check' => [
+            ['table' => 'estacoes',              'column' => 'fornecedor_id', 'label' => 'estacoes de trabalho'],
+            ['table' => 'monitores',             'column' => 'fornecedor_id', 'label' => 'monitores'],
+            ['table' => 'impressoras',           'column' => 'fornecedor_id', 'label' => 'impressoras'],
+            ['table' => 'celulares',             'column' => 'fornecedor_id', 'label' => 'celulares'],
+            ['table' => 'nobreaks',              'column' => 'fornecedor_id', 'label' => 'nobreaks'],
+            ['table' => 'toner',                 'column' => 'fornecedor_id', 'label' => 'toners'],
+            ['table' => 'ativos_diversos',       'column' => 'fornecedor_id', 'label' => 'ativos diversos'],
+            ['table' => 'manutencoes',           'column' => 'fornecedor_id', 'label' => 'manutencoes'],
+            ['table' => 'manutencao_orcamentos', 'column' => 'fornecedor_id', 'label' => 'orcamentos'],
+        ],
         'dropdown' => ['table' => 'fornecedores', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
 

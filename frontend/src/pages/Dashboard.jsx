@@ -5,6 +5,7 @@ import Impressoras from './Impressoras.jsx'
 import Setores from './Setores.jsx'
 import Configuracoes from './Configuracoes.jsx'
 import Funcionarios from './Funcionarios.jsx'
+import Fornecedores from './Fornecedores.jsx'
 import Celulares from './Celulares.jsx'
 import CelularesConferencia from './CelularesConferencia.jsx'
 import EstacoesReport from '../components/EstacoesReport.jsx'
@@ -54,6 +55,8 @@ export default function Dashboard({ user, onLogout, searchRef }) {
   const [setoresNew, setSetoresNew] = useState(0)
   const [funcionariosRefresh, setFuncionariosRefresh] = useState(0)
   const [funcionariosNew, setFuncionariosNew] = useState(0)
+  const [fornecedoresRefresh, setFornecedoresRefresh] = useState(0)
+  const [fornecedoresNew, setFornecedoresNew] = useState(0)
   const [celularesRefresh, setCelularesRefresh] = useState(0)
   const [celularesNew, setCelularesNew] = useState(0)
   const [usuariosRefresh, setUsuariosRefresh] = useState(0)
@@ -109,12 +112,13 @@ export default function Dashboard({ user, onLogout, searchRef }) {
         else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
         else if (module === 'setores') setSetoresRefresh((v) => v + 1)
         else if (module === 'funcionarios') setFuncionariosRefresh((v) => v + 1)
+        else if (module === 'fornecedores') setFornecedoresRefresh((v) => v + 1)
         else if (module === 'celulares') setCelularesRefresh((v) => v + 1)
         else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
         else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
         else load()
       }
-      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'celulares' || module === 'celulares-conferencia') return
+      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'fornecedores' || module === 'celulares' || module === 'celulares-conferencia') return
       if (isReportModule) return
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
@@ -128,6 +132,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
         else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
         else if (module === 'setores') setSetoresNew((v) => v + 1)
         else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
+        else if (module === 'fornecedores') setFornecedoresNew((v) => v + 1)
         else if (module === 'celulares') setCelularesNew((v) => v + 1)
         else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
         else if (module !== 'configuracoes' && module !== 'celulares-conferencia') setModule('setores')
@@ -273,6 +278,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
           else if (module === 'impressoras') setImpressorasRefresh((v) => v + 1)
           else if (module === 'setores') setSetoresRefresh((v) => v + 1)
           else if (module === 'funcionarios') setFuncionariosRefresh((v) => v + 1)
+          else if (module === 'fornecedores') setFornecedoresRefresh((v) => v + 1)
           else if (module === 'celulares') setCelularesRefresh((v) => v + 1)
           else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
           else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
@@ -284,6 +290,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
           else if (module === 'impressoras') setImpressorasNew((v) => v + 1)
           else if (module === 'setores') setSetoresNew((v) => v + 1)
           else if (module === 'funcionarios') setFuncionariosNew((v) => v + 1)
+          else if (module === 'fornecedores') setFornecedoresNew((v) => v + 1)
           else if (module === 'celulares') setCelularesNew((v) => v + 1)
           else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
           else if (module !== 'celulares-conferencia') setModule('setores')
@@ -300,6 +307,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
             {module === 'impressoras' && <Impressoras refreshKey={impressorasRefresh} newRequest={impressorasNew} onChanged={load} />}
             {module === 'setores' && <Setores refreshKey={setoresRefresh} newRequest={setoresNew} onChanged={load} />}
             {module === 'funcionarios' && <Funcionarios refreshKey={funcionariosRefresh} newRequest={funcionariosNew} onChanged={load} />}
+            {module === 'fornecedores' && <Fornecedores refreshKey={fornecedoresRefresh} newRequest={fornecedoresNew} onChanged={load} />}
             {module === 'celulares' && <Celulares refreshKey={celularesRefresh} newRequest={celularesNew} onChanged={load} onOpenConferencia={() => setModule('celulares-conferencia')} />}
             {module === 'celulares-conferencia' && <CelularesConferencia refreshKey={celularesRefresh} />}
             {module === 'usuarios' && <UsuariosRbac refreshKey={usuariosRefresh} newRequest={usuariosNew} onChanged={load} />}
@@ -309,7 +317,7 @@ export default function Dashboard({ user, onLogout, searchRef }) {
             {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-monitores' && <MonitoresReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-impressoras' && <ImpressaoReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
-            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && !module.startsWith('relatorio-') && (
+            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'fornecedores' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && !module.startsWith('relatorio-') && (
               <PlaceholderModule
                 label={activeModule.label}
                 icon={activeModule.icon}
