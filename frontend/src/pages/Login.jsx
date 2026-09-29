@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { api } from '../api/client.js'
+import SystemBuild from '../components/SystemBuild.jsx'
 
 export default function Login({ onLogin }) {
   const [view, setView] = useState('login') // login | recovery
@@ -125,7 +126,8 @@ export default function Login({ onLogin }) {
             </div>
             <div className="grp">
               <span>FortLuz Iluminação Industrial S.A.</span>
-              <span>Build 2026.1.0-web</span>
+              {/* Build sempre vindo da API (`sistema/versao`) — sem versão hardcoded */}
+              <SystemBuild />
             </div>
           </div>
         </div>

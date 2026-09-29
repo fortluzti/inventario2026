@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import SystemBuild from './SystemBuild.jsx'
+import { useSistemaVersao } from '../hooks/useSistemaVersao.js'
 
 /* Rodapé de auditoria do dashboard */
 export const TERMINAL = 'FORTLUZ-TI-01'
@@ -642,7 +644,9 @@ export function ShortcutsBar({ onNavigate, checksum }) {
 }
 
 /* ---------------- Barra de status docked ---------------- */
-export function DashStatusBar({ latency, db, total, build, user }) {
+/* DB e build vem da API (`sistema/versao`) — nada hardcoded na UI. */
+export function DashStatusBar({ latency, total, user }) {
+  const { versao } = useSistemaVersao()
   return (
     <footer className="dash-statusbar">
       <div className="grp">
@@ -651,7 +655,7 @@ export function DashStatusBar({ latency, db, total, build, user }) {
           Conectado ao Servidor FortLuz ERP (API REST v2.4)
         </span>
         <span className="sep">|</span>
-        <span className="mut">DB: {db}</span>
+        <span className="mut">DB: {versao?.db_nome || '—'}</span>
         <span className="sep">|</span>
         <span className="mut">Latência: {latency}</span>
       </div>
@@ -660,7 +664,7 @@ export function DashStatusBar({ latency, db, total, build, user }) {
         <span className="sep">|</span>
         <span className="mut">Licença: Corporativa TI - {total} Ativos Registrados</span>
         <span className="sep">|</span>
-        <span className="mut">Versão: Build {build}</span>
+        <span className="mut">Versão: <SystemBuild versao={versao} /></span>
         <span className="sep">|</span>
         <span className="key">CAPS</span>
         <span className="key">NUM</span>

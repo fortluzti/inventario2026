@@ -22,8 +22,11 @@ apiphp/
 │   ├── Validator.php     Whitelist de campos + tipos (anti mass-assignment)
 │   ├── Crud.php          Motor generico: listar/dropdown/buscar/salvar/excluir/proximo_codigo
 │   ├── modules.php       Registry de modulos (tabela, campos, filtros)
-│   └── handlers/         dashboard.php, qrcode.php (endpoints dedicados)
-├── migrations/001_api_keys.sql   Tabelas api_keys + audit_log
+│   └── handlers/         dashboard.php, qrcode.php, sistema.php (dedicados)
+├── migrations/           SQL versionado, numerado (nunca reescrito):
+│                         001_api_keys · 002_configuracoes ·
+│                         003_funcionarios_fornecedores_ativo · 004_sistema_info
+├── scripts/migrate.php   Runner: aplica/registra migrations em `schema_migrations`
 ├── scripts/gerar_api_key.php     CLI: criar/revogar chaves
 ├── storage/              Rate limit + logs (fora do git)
 └── docs/ENDPOINTS.md     Documentacao completa de endpoints
@@ -36,10 +39,16 @@ apiphp/
    Copy-Item .env.example .env   # e edite DB_HOST/DB_USER/DB_PASS/API_SIGNING_SECRET
    ```
 
-2. **Aplicar migration** (cria `api_keys` e `audit_log` no banco):
-   ```sql
-   SOURCE migrations/001_api_keys.sql;   -- ou: mysql -u root -p inventario2 < migrations/001_api_keys.sql
+2. **Aplicar migrations** (cria as tabelas e registra a versão do schema):
+   ```powershell
+   php scripts/migrate.php          # aplica as pendentes (idempotente)
+   php scripts/migrate.php status   # lista aplicadas/pendentes/alteradas (somente leitura)
    ```
+   Cada versão aplicada é registrada em `schema_migrations` (versão, arquivo, SHA-256 e
+   data) e refletida em `sistema_info.db_versao` — tabela criada pela migration
+   `004_sistema_info.sql`, que também guarda `app_versao`/`app_build` exibidos no frontend
+   via `?endpoint=sistema&action=versao`. Aplicar manualmente (`mysql < arquivo`) continua
+   suportado: registre em seguida com `php scripts/migrate.php baseline`.
 
 3. **Criar a primeira chave de API** (CLI):
    ```powershell

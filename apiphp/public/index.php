@@ -11,7 +11,7 @@
  *   softwares, toners, ativos_tipos
  * Endpoints dedicados:
  *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode,
- *   api_keys, configuracoes, celulares, usuarios
+ *   api_keys, configuracoes, celulares, usuarios, sistema
  */
 declare(strict_types=1);
 
@@ -80,6 +80,11 @@ try {
         case 'usuarios':
             require __DIR__ . '/../src/handlers/usuarios_handler.php';
             UsuariosHandler::handle($pdo, $action, $input);
+            break;
+
+        case 'sistema':
+            require __DIR__ . '/../src/handlers/sistema.php';
+            SistemaHandler::handle($pdo, $action, $input);
             break;
 
         default:

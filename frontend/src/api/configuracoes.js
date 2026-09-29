@@ -6,7 +6,7 @@ export const MODULE_SCOPES = [
   'ativos_diversos', 'ativos_tipos', 'celulares', 'empresas', 'estacoes',
   'fornecedores', 'funcionarios', 'impressoras', 'impressoras_modelos',
   'monitores', 'nobreaks', 'setores', 'softwares', 'toners',
-  'api_keys', 'configuracoes', 'health',
+  'api_keys', 'configuracoes', 'health', 'sistema',
   'dashboard_kpis', 'dashboard_alertas', 'dashboard_atividade', 'qrcode',
 ]
 
@@ -28,6 +28,7 @@ export const SCOPE_LABELS = {
   'api_keys': 'API Keys',
   'configuracoes': 'Configurações',
   'health': 'Health Check',
+  'sistema': 'Sistema / Versão',
   'dashboard_kpis': 'Dashboard KPIs',
   'dashboard_alertas': 'Dashboard Alertas',
   'dashboard_atividade': 'Dashboard Atividade',

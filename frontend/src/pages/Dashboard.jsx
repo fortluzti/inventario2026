@@ -22,9 +22,6 @@ import {
   DashStatusBar, PlaceholderModule, NAV_ITEMS, DASHBOARD_MODULE,
 } from '../components/DashboardKit.jsx'
 
-const BUILD = '2026.1.0-web'
-const DB_LABEL = 'inventario2'
-
 /* Cores do tema (espelham o tailwind-config do protótipo) */
 const C = {
   primary: '#991b1b',
@@ -379,13 +376,8 @@ export default function Dashboard({ user, onLogout, searchRef }) {
             )}
           </div>
 
-          <DashStatusBar
-            latency={latency}
-            db={DB_LABEL}
-            total={d.total}
-            build={BUILD}
-            user={user}
-          />
+          {/* DB e versão/build são carregados da API dentro do componente */}
+          <DashStatusBar latency={latency} total={d.total} user={user} />
         </main>
       </div>
     </div>

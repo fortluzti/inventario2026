@@ -105,6 +105,31 @@ Lista de alertas: toners com estoque ≤ mínimo, equipamentos em manutenção.
   Gera PNG via `endroid/qr-code` se instalado; sem a lib, devolve os códigos
   (`data.gerado=false`) para o cliente gerar localmente.
 
+### `sistema` (requer escopo `sistema` ou `*`)
+Fonte única da versão instalada — tabela `sistema_info` (migration `004_sistema_info.sql`)
++ histórico em `schema_migrations`. Nenhuma versão/build fica hardcoded no frontend.
+
+| Ação | Método | Retorno |
+|---|---|---|
+| `versao` (alias `info`) | GET | payload abaixo |
+
+```json
+{ "success": true, "data": {
+    "app_versao": "2026.1.0",
+    "app_build": "web",
+    "build": "2026.1.0-web",
+    "db_versao": "004",
+    "db_nome": "inventario2",
+    "migrations_aplicadas": 4,
+    "atualizado_em": "2026-09-29 17:23:34"
+} }
+```
+
+`app_versao` (release da aplicação) e `db_versao` (migration efetivamente aplicada) são
+conceitos distintos; `build` é o texto pronto para exibição (`app_versao-app_build`).
+Sem `sistema_info` no banco a resposta é **503** orientando a rodar
+`php apiphp/scripts/migrate.php`.
+
 ---
 
 ## Endpoints dedicados — Administração
@@ -123,7 +148,7 @@ Scopos válidos: `*` (todas) ou lista de nomes de módulos:
 `ativos_diversos, ativos_tipos, empresas, estacoes, fornecedores, funcionarios,
 impressoras, impressoras_modelos, monitores, nobreaks, setores, softwares, toners,
 api_keys, configuracoes, health, dashboard_kpis, dashboard_alertas, dashboard_atividade,
-qrcode, usuarios`.
+qrcode, sistema, usuarios`.
 
 ### `configuracoes` (requer escopo `configuracoes` ou `*`)
 Configurações gerais do sistema.

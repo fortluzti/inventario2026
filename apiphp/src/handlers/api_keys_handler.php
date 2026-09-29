@@ -162,7 +162,7 @@ final class ApiKeysHandler
             'fornecedores', 'funcionarios', 'impressoras', 'impressoras_modelos',
             'monitores', 'nobreaks', 'setores', 'softwares', 'toners',
             'api_keys', 'configuracoes', 'health', 'dashboard_kpis',
-            'dashboard_alertas', 'dashboard_atividade', 'qrcode',
+            'dashboard_alertas', 'dashboard_atividade', 'qrcode', 'sistema',
         ];
     }
 }

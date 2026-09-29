@@ -27,9 +27,14 @@ const ATIV = [
   { id: 2, status: 'Pendente', aprovacao_status: 'Pendente', problema_relatado: 'FOLHA ENROSCANDO', data_inicio: '2025-09-26', data_cadastro: '2025-09-26 16:36:29' },
 ]
 
+const SISTEMA = { app_versao: '2026.1.0', app_build: 'web', build: '2026.1.0-web', db_versao: '004', db_nome: 'inventario2' }
+
 dom.window.fetch = async (url) => {
   const ep = new URL(String(url)).searchParams.get('endpoint')
-  const data = ep === 'dashboard_kpis' ? KPIS : ep === 'dashboard_alertas' ? ALERTAS : ATIV
+  const data = ep === 'dashboard_kpis' ? KPIS
+    : ep === 'dashboard_alertas' ? ALERTAS
+    : ep === 'sistema' ? SISTEMA
+    : ATIV
   return { status: 200, json: async () => ({ success: true, data }) }
 }
 globalThis.fetch = dom.window.fetch
@@ -49,6 +54,11 @@ await flush()
 let txt = container.textContent
 check('Tela de Login é a principal (sem sessão)', txt.includes('Entrar no Sistema'))
 check('Dashboard NÃO aparece antes do login', !txt.includes('Módulos do Sistema'))
+/* 1b. Build do rodapé do login vem da API (tabela sistema_info) */
+await flush()
+await flush()
+check('Build no rodapé do login vem da API (não hardcoded)', container.textContent.includes('Build 2026.1.0-web'))
+
 
 /* ---------- 2. Login entra no Dashboard ---------- */
 const inputs = container.querySelectorAll('input')
@@ -102,6 +112,9 @@ check('Atalhos do Módulo (5 links)', q('.shortcuts a') === 5)
 check('Barra de status docked', container.textContent.includes('API REST v2.4'))
 check('Checksum calculado', /Checksum: [0-9a-f]{4}-[0-9a-f]{4}/.test(container.textContent))
 check('Rodapé CAPS/NUM', container.textContent.includes('CAPS') && container.textContent.includes('NUM'))
+check('Versão/Build da barra de status vêm da API', container.textContent.includes('Versão: Build 2026.1.0-web'))
+check('DB da barra de status vem da API', container.textContent.includes('DB: inventario2'))
+
 
 /* navegação pela sidebar */
 const itemToners = [...container.querySelectorAll('.module-item')].find((b) => b.textContent.includes('Toners em Estoque'))
