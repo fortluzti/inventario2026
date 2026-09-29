@@ -65,90 +65,113 @@ export async function testFuncionarios({ container, act, check, setVal, dom }) {
     };
   };
 
-  const flush = () => act(async () => { await new Promise((r) => setTimeout(r, 0)); });
+  const flush = (ms = 0) => act(async () => { await new Promise((r) => setTimeout(r, ms)); });
   const lastList = () => [...calls].reverse().find((c) => c.endpoint === 'funcionarios' && c.action === 'listar');
   const headers = () => [...container.querySelectorAll('.func-table thead th')];
-  const findByLabel = (label) => headers().find((th) => th.textContent.replace(/[↕↑↓\s]/g, '') === label);
+  // o th ordenável (SortableTh) tem <span class="th-sort-label"> + ícone Material no textContent
+  const findByLabel = (label) => headers().find((th) => (th.querySelector('.th-sort-label')?.textContent || th.textContent).replace(/[↕↑↓\s]/g, '').trim() === label);
+  const iconOf = (label) => findByLabel(label)?.querySelector('.mat')?.textContent || '';
+  // setVal do harness usa o setter de HTMLInputElement: selects precisam do caminho nativo
+  const setSelect = (el, v) => { el.value = v; el.dispatchEvent(new dom.window.Event('change', { bubbles: true })); };
   const rowsNome = () => [...container.querySelectorAll('.func-table tbody tr')].map((tr) => tr.querySelector('.func-name')?.textContent || '');
 
 
   try {
     // navega para Funcionários via menu
-    const menuItem = [...container.querySelectorAll('button, a')].find((el) => el.textContent.trim() === 'Funcionários');
+    const menuItem = [...container.querySelectorAll('.module-item, button, a')].find((el) => el.textContent.includes('Funcionários'));
     if (menuItem) { await act(async () => { menuItem.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); }); await flush(); }
 
     await flush();
-    check(!!container.querySelector('.func-table'), 'abre listagem de Funcionários');
+    check('abre listagem de Funcionários', !!container.querySelector('.func-table'));
 
     // cabeçalhos ordenáveis presentes e clicáveis
     const esperados = ['Nome', 'Cargo', 'Setor', 'RG', 'E-mail', 'Status'];
     const faltando = esperados.filter((l) => !findByLabel(l));
-    check(faltando.length === 0, `cabeçalhos ordenáveis renderizados${faltando.length ? ' (faltando: ' + faltando.join(', ') + ')' : ''}`);
+    check(`cabeçalhos ordenáveis renderizados${faltando.length ? ' (faltando: ' + faltando.join(', ') + ')' : ''}`, faltando.length === 0);
     const nomeTh = findByLabel('Nome');
-    check(!!nomeTh && nomeTh.classList.contains('th-sort'), 'coluna Nome usa o componente ordenável');
+    check('coluna Nome usa o componente ordenável', !!nomeTh?.querySelector('.th-sort'));
 
     const clickTh = async (label) => {
-      const th = findByLabel(label);
-      await act(async () => { th.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+      // o handler de clique fica no <button class="th-sort"> dentro do <th>
+      const btn = findByLabel(label)?.querySelector('.th-sort');
+      if (!btn) throw new Error(`cabeçalho ordenável não encontrado: ${label}`);
+      await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
       await flush();
       return findByLabel(label);
     };
 
     // 1º clique: ASC
-    let th = await clickTh('Nome');
+    await clickTh('Nome');
     let p = lastList()?.params;
-    check(!!p && p.get('sort') === 'nome' && p.get('dir') === 'asc', '1º clique em Nome → sort=nome dir=asc');
-    check(th.textContent.includes('↑'), 'indicador ↑ no cabeçalho ativo');
+    check('1º clique em Nome → sort=nome dir=asc', !!p && p.get('sort') === 'nome' && p.get('dir') === 'asc');
+    check('indicador arrow_upward no cabeçalho ativo', iconOf('Nome') === 'arrow_upward');
     const asc = rowsNome();
     const ascOrdenado = [...asc].sort((a, b) => a.localeCompare(b, 'pt-BR', { sensitivity: 'base' }));
-    check(JSON.stringify(asc) === JSON.stringify(ascOrdenado), `linhas em ordem crescente (${asc.join(' | ')})`);
+    check(`linhas em ordem crescente (${asc.join(' | ')})`, JSON.stringify(asc) === JSON.stringify(ascOrdenado));
 
     // 2º clique: DESC
-    th = await clickTh('Nome');
+    await clickTh('Nome');
     p = lastList()?.params;
-    check(!!p && p.get('sort') === 'nome' && p.get('dir') === 'desc', '2º clique em Nome → sort=nome dir=desc');
-    check(th.textContent.includes('↓'), 'indicador ↓ no cabeçalho ativo');
+    check('2º clique em Nome → sort=nome dir=desc', !!p && p.get('sort') === 'nome' && p.get('dir') === 'desc');
+    check('indicador arrow_downward no cabeçalho ativo', iconOf('Nome') === 'arrow_downward');
     const desc = rowsNome();
-    check(JSON.stringify(desc) === JSON.stringify([...desc].sort((a, b) => b.localeCompare(a, 'pt-BR', { sensitivity: 'base' }))), 'linhas em ordem decrescente');
+    check('linhas em ordem decrescente', JSON.stringify(desc) === JSON.stringify([...desc].sort((a, b) => b.localeCompare(a, 'pt-BR', { sensitivity: 'base' }))));
 
     // 3º clique: volta ao padrão (sem sort)
     await clickTh('Nome');
     p = lastList()?.params;
-    check(!!p && !p.get('sort') && !p.get('dir'), '3º clique → estado padrão (sem sort/dir)');
+    check('3º clique → estado padrão (sem sort/dir)', !!p && !p.get('sort') && !p.get('dir'));
 
     // Setor (coluna do JOIN → sort=setor)
     await clickTh('Setor');
     p = lastList()?.params;
-    check(!!p && p.get('sort') === 'setor' && p.get('dir') === 'asc', 'clique em Setor → sort=setor dir=asc');
+    check('clique em Setor → sort=setor dir=asc', !!p && p.get('sort') === 'setor' && p.get('dir') === 'asc');
 
     // Cargo
     await clickTh('Cargo');
     p = lastList()?.params;
-    check(!!p && p.get('sort') === 'cargo', 'clique em Cargo → sort=cargo');
+    check('clique em Cargo → sort=cargo', !!p && p.get('sort') === 'cargo');
 
-    // Status (ativo)
+    // Status (coluna 'ativo' na tabela, chave 'status' na whitelist sortable)
     await clickTh('Status');
     p = lastList()?.params;
-    check(!!p && p.get('sort') === 'ativo', 'clique em Status → sort=ativo');
+    check('clique em Status → sort=status (ativo)', !!p && p.get('sort') === 'status');
 
     // pesquisa + filtro de setor + ordenação combinados
+    // (o painel de filtros inicia ABERTO: o módulo usa showFilters = true)
     const search = container.querySelector('input[aria-label^="Buscar"]');
-    if (search) { setVal(search, 'ana'); await flush(); }
+    setVal(search, 'ana');
+    await flush(350);
+    const btnFiltros = [...container.querySelectorAll('.func-actions button')].find((b) => b.textContent.includes('Filtros'));
+    check('botão Filtros disponível na toolbar', !!btnFiltros);
+    check('painel de filtros inicia montado', !!container.querySelector('#func-filters'));
+    // toggle: 1º clique recolhe, 2º clique reabre
+    await act(async () => { btnFiltros.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true, cancelable: true })); });
+    await flush();
+    check('botão Filtros recolhe o painel', btnFiltros.getAttribute('aria-expanded') === 'false' && !container.querySelector('#func-filters'));
+    await act(async () => { btnFiltros.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true, cancelable: true })); });
+    await flush();
+    const form = container.querySelector('#func-filters');
+    check('botão Filtros reabre o painel', btnFiltros.getAttribute('aria-expanded') === 'true' && !!form);
     const setorSel = container.querySelector('select[aria-label="Filtrar por setor"]');
-    if (setorSel) {
-      setVal(setorSel, '2');
-      const form = container.querySelector('#func-filters');
-      await act(async () => { form.dispatchEvent(new dom.window.Event('submit', { bubbles: true, cancelable: true })); });
-      await flush();
-    }
+    check('select de setor disponível no painel', !!setorSel);
+    if (setorSel) setSelect(setorSel, '2');
+    if (form) await act(async () => { form.dispatchEvent(new dom.window.Event('submit', { bubbles: true, cancelable: true })); });
+    await flush();
     await clickTh('Nome');
     p = lastList()?.params;
-    check(!!p && p.get('search') === 'ana' && p.get('setor_id') === '2' && p.get('sort') === 'nome', 'combinação pesquisa + filtro setor + sort nome');
+    check('combinação pesquisa + filtro setor + sort nome', !!p && p.get('search') === 'ana' && p.get('setor_id') === '2' && p.get('sort') === 'nome');
+    check('filtro combinado restringe as linhas (Ana + DOCA)', JSON.stringify(rowsNome()) === JSON.stringify(['Ana Paula']));
 
-    // Limpar → estado inicial padrão (sem ordenação)
+    // Limpar → busca/filtros voltam ao padrão (a ordenação escolhida é preservada,
+    // mesma convenção de Fornecedores: clear() não reseta o useTableSort)
     const btnLimpar = [...container.querySelectorAll('#func-filters button')].find((b) => b.textContent.trim() === 'Limpar');
-    if (btnLimpar) { await act(async () => { btnLimpar.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); }); await flush(); }
-    check(!findByLabel('Nome')?.textContent.includes('↑'), 'estado inicial sem ordenação ativa');
+    check('botão Limpar disponível no painel', !!btnLimpar);
+    if (btnLimpar) await act(async () => { btnLimpar.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+    await flush(350);
+    p = lastList()?.params;
+    check('Limpar restaura busca e filtros padrão', !!p && !p.get('search') && !p.get('setor_id') && p.get('ativo') === '1');
+    check('Limpar preserva a ordenação ativa (sort=nome asc)', !!p && p.get('sort') === 'nome' && p.get('dir') === 'asc' && iconOf('Nome') === 'arrow_upward');
   } finally {
     globalThis.fetch = realFetch;
   }
