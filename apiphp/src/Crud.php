@@ -155,10 +155,16 @@ final class Crud
         $table = $this->mod['table'];
         $id = (int)($input['id'] ?? 0);
 
+        // Tabelas de juncao (ex.: impressora_modelos_toner, migration 006) nao possuem
+        // as colunas de auditoria data_cadastro/data_atualizacao. O registry marca essas
+        // tabelas com 'audit_columns' => false; o padrao (true) mantem o comportamento
+        // historico de todas as demais tabelas.
+        $auditCols = (bool)($this->mod['audit_columns'] ?? true);
+
         if ($id > 0) {
             $sets = [];
             foreach (array_keys($clean) as $col) { $sets[] = "{$col} = :{$col}"; }
-            $sets[] = 'data_atualizacao = NOW()';
+            if ($auditCols) { $sets[] = 'data_atualizacao = NOW()'; }
             $sql = "UPDATE {$table} SET " . implode(', ', $sets) . ' WHERE id = :id';
             $params = $clean + [':id' => $id];
             $auditAction = 'update';
@@ -168,12 +174,17 @@ final class Crud
             // ausentes dariam 1048 (Column cannot be null) em colunas NOT NULL
             // DEFAULT. Campos req nunca chegam null (validados pelo Validator).
             $cols = array_keys(array_filter($clean, static fn($v) => $v !== null));
+            $phs = array_map(fn($c) => ":{$c}", $cols);
             if ($cols === []) {
-                $sql = "INSERT INTO {$table} (data_cadastro, data_atualizacao) VALUES (NOW(), NOW())";
+                $sql = $auditCols
+                    ? "INSERT INTO {$table} (data_cadastro, data_atualizacao) VALUES (NOW(), NOW())"
+                    : "INSERT INTO {$table} () VALUES ()";
                 $params = [];
             } else {
-                $phs = array_map(fn($c) => ":{$c}", $cols);
-                $sql = "INSERT INTO {$table} (" . implode(', ', $cols) . ", data_cadastro, data_atualizacao) VALUES (" . implode(', ', $phs) . ", NOW(), NOW())";
+                $sql = "INSERT INTO {$table} (" . implode(', ', $cols)
+                    . ($auditCols ? ', data_cadastro, data_atualizacao' : '') . ') VALUES ('
+                    . implode(', ', $phs)
+                    . ($auditCols ? ', NOW(), NOW()' : '') . ')';
                 $params = array_intersect_key($clean, array_flip($cols));
             }
             $auditAction = 'insert';

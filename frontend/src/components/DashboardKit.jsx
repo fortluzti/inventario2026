@@ -15,6 +15,7 @@ export const MODULES = [
     { id: 'estacoes', label: 'Estações de Trabalho', icon: 'computer' },
     { id: 'monitores', label: 'Monitores', icon: 'desktop_windows' },
     { id: 'impressoras', label: 'Impressoras', icon: 'print' },
+    { id: 'impressora_modelos', label: 'Modelos de Impressoras', icon: 'print' },
     { id: 'celulares', label: 'Celulares Corporativos', icon: 'smartphone' },
     { id: 'celulares-conferencia', label: 'Conferência de Celulares', icon: 'fact_check' },
     { id: 'nobreaks', label: 'Nobreaks', icon: 'battery_charging_full' },

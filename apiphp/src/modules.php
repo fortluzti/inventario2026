@@ -217,15 +217,42 @@ return [
         'dropdown' => ['table' => 'impressoras', 'name_col' => 'codigo_interno_impressora'],
     ],
 
-    'impressoras_modelos' => [
-        'table'   => 'impressora_modelos',
-        'fields'  => [
-            'nome_modelo' => ['tipo' => 'string', 'req' => true, 'max' => 150],
-            'marca'       => ['tipo' => 'string', 'max' => 100],
-            'descricao'   => ['tipo' => 'string', 'max' => 255],
-        ],
-        'search'  => ['nome_modelo', 'marca'],
-    ],
+'impressoras_modelos' => [
+          'table'   => 'impressora_modelos',
+          'fields'  => [
+              'nome_modelo'          => ['tipo' => 'string', 'req' => true, 'max' => 150],
+              'marca'                => ['tipo' => 'string', 'max' => 100],
+              'descricao'            => ['tipo' => 'string', 'max' => 255],
+              'estoque_minimo_toner' => ['tipo' => 'int', 'req' => true],
+              'estoque_minimo_cilindro'=> ['tipo' => 'int', 'req' => true],
+          ],
+          'search'  => ['nome_modelo', 'marca'],
+      ],
+
+    // Tabela de juncao modelo x consumivel (migration 006_impressora_modelos_toner.sql).
+    // O TIPO (TONER/CILINDRO) NUNCA e informado aqui: sempre vem de `toner.tipo`
+    // (cadastro do consumivel) — exposto apenas para leitura via JOIN (toner_tipo).
+    // 'audit_columns' => false: a tabela da 006 nao tem data_cadastro/data_atualizacao.
+    'impressora_modelos_toner' => [
+          'table'   => 'impressora_modelos_toner',
+          'select'  =>
+              'SELECT impressora_modelos_toner.*, '
+              . 't.codigo AS toner_codigo, t.tipo AS toner_tipo, t.estoque AS toner_estoque '
+              . 'FROM impressora_modelos_toner '
+              . 'INNER JOIN toner t ON t.id = impressora_modelos_toner.toner_id',
+          'fields'  => [
+              'modelo_id' => ['tipo' => 'int', 'req' => true],
+              'toner_id'  => ['tipo' => 'int', 'req' => true],
+          ],
+          'search'  => [],
+          'filters' => [
+              'impressora_modelos_toner.modelo_id' => 'modelo_id',
+              'impressora_modelos_toner.toner_id'  => 'toner_id',
+          ],
+          'order'         => 'ORDER BY impressora_modelos_toner.id ASC',
+          'audit_columns' => false,
+      ],
+
 
     'monitores' => [
         'table'   => 'monitores',
@@ -296,20 +323,21 @@ return [
         'search'  => ['nome', 'numero_serie'],
     ],
 
-    'toners' => [
-        'table'   => 'toner',
-        'fields'  => [
-            'codigo'         => ['tipo' => 'string', 'req' => true, 'max' => 100],
-            'estoque'        => ['tipo' => 'int'],
-            'estoque_minimo' => ['tipo' => 'int'],
-            'autonomia'      => ['tipo' => 'int'],
-            'data_compra'    => ['tipo' => 'date'],
-            'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
-            'fornecedor_id'  => ['tipo' => 'int'],
-            'empresa_id'     => ['tipo' => 'int'],
-        ],
-        'search'  => ['codigo'],
-    ],
+'toners' => [
+          'table'   => 'toner',
+          'fields'  => [
+              'codigo'         => ['tipo' => 'string', 'req' => true, 'max' => 100],
+              'tipo'           => ['tipo' => 'string', 'req' => true, 'enum' => ['TONER','CILINDRO']],
+              'estoque'        => ['tipo' => 'int'],
+              'estoque_minimo' => ['tipo' => 'int'],
+              'autonomia'      => ['tipo' => 'int'],
+              'data_compra'    => ['tipo' => 'date'],
+              'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
+              'fornecedor_id'  => ['tipo' => 'int'],
+              'empresa_id'     => ['tipo' => 'int'],
+          ],
+          'search'  => ['codigo'],
+      ],
 
     'celulares' => [
         'table'   => 'celulares',

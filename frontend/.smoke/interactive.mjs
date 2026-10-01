@@ -85,7 +85,7 @@ txt = container.textContent
 check('Login → Dashboard', txt.includes('Módulos do Sistema'))
 check('Usuário na AppBar', txt.includes('admin.ti'))
 check('KPIs da API renderizados', txt.includes('119'))
-check('Alerta de toner renderizado', txt.includes('Toner 1060'))
+check("Alerta de toner renderizado", txt.includes("Toner '1060'"))
 check('Atividade da API renderizada', txt.includes('FOLHA ENROSCANDO'))
 check('Latência medida', /Latência: \d+ms/.test(txt))
 
@@ -95,7 +95,7 @@ check('AppBar com título do ERP', !!container.querySelector('.appbar-title'))
 check('Sub-toolbar (Atualizar/Novo Ativo/Busca Global/Exportar)', q('.subbar .mini') === 4)
 check('Sidebar de Módulos do Sistema', !!container.querySelector('.modules'))
 check('7 grupos de módulos (colapsáveis)', q('.modules-group') === 7)
-check('30 itens de módulo (Dashboard + reports incluídos)', q('.module-item') === 30)
+check('32 itens de módulo (Dashboard + 31 do manifesto, incl. Modelos de Impressoras)', q('.module-item') === 32)
 check('Item ativo = Dashboard Geral', container.querySelector('.module-item.active')?.textContent.includes('Dashboard Geral'))
 check('QuickBar "Ações Rápidas"', !!container.querySelector('.quickbar .lbl'))
 check('5 StatCards', q('.stat-card') === 5)
@@ -142,6 +142,10 @@ await testFuncionarios({ container, act, check, setVal, dom })
 /* Testes específicos de relatórios (multi-página, logo, CSS de impressão). */
 const { testReports } = await import('./report.mjs')
 await testReports({ container, act, check, dom })
+
+/* Modelos de Impressoras: menu, CRUD em modal e associação de consumíveis (006). */
+const { testImpressoraModelos } = await import('./impressora_modelos.mjs')
+await testImpressoraModelos({ container, act, check, setVal, dom })
 
 /* ---------- 3. Menu de usuário > Sair do sistema ---------- */
 const menuBtn = container.querySelector('button[title="Menu do Usuário"]')

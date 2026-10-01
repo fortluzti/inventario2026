@@ -65,7 +65,15 @@ Resposta de `listar`:
 - **impressoras**: `modelo_id`, `numero_serie`, `setor_id`, `ano_compra`, `status`,
   `data_compra`, `nota_fiscal`, `fornecedor_id`, `empresa_id` —
   `proximo_codigo` ✔ (`IMP-014`) · dropdown ✔ · busca: codigo_interno/numero_serie
-- **impressoras_modelos** (tabela `impressora_modelos`): `nome_modelo`*, `marca`, `descricao`
+- **impressoras_modelos** (tabela `impressora_modelos`): `nome_modelo`*, `marca`, `descricao`,
+  `estoque_minimo_toner`*, `estoque_minimo_cilindro`* (colunas da migration `005_consumiveis_regra.sql`)
+- **impressora_modelos_toner** (tabela `impressora_modelos_toner`, migration `006_impressora_modelos_toner.sql`):
+  `modelo_id`*, `toner_id`* — consumíveis compatíveis de um modelo (vários por modelo).
+  Filtros: `modelo_id`, `toner_id`. `listar` devolve também `toner_codigo`, `toner_tipo` e
+  `toner_estoque` (JOIN com `toner`). **O tipo (TONER/CILINDRO) vem sempre de `toner.tipo`**
+  (cadastro do consumível) — não existe campo de tipo nesta tabela e o cliente não o envia.
+  Duplicidade (modelo_id, toner_id) responde 409. A tabela não tem `data_cadastro`/
+  `data_atualizacao` (`'audit_columns' => false` no registry).
 - **monitores**: `marca`, `modelo`, `numero_serie`, `status`, `data_compra`, `nota_fiscal`,
   `fornecedor_id`, `empresa_id`, `portas` — `proximo_codigo` ✔ (`MON-027`)
 - **nobreaks**: `marca`, `potencia`, `quantidade_bateria`, `numero_serie`, `setor_id`,
@@ -146,7 +154,7 @@ Gerenciamento de chaves de API via interface web.
 
 Scopos válidos: `*` (todas) ou lista de nomes de módulos:
 `ativos_diversos, ativos_tipos, empresas, estacoes, fornecedores, funcionarios,
-impressoras, impressoras_modelos, monitores, nobreaks, setores, softwares, toners,
+impressoras, impressoras_modelos, impressora_modelos_toner, monitores, nobreaks, setores, softwares, toners,
 api_keys, configuracoes, health, dashboard_kpis, dashboard_alertas, dashboard_atividade,
 qrcode, sistema, usuarios`.
 

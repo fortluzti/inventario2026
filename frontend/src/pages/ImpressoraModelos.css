@@ -1,0 +1,95 @@
+.imo-page { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.imo-page-header, .imo-toolbar-row, .imo-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.imo-page-header { padding: 6px 0 8px; }
+.imo-page-header h1 { display: flex; align-items: center; gap: 8px; font-size: 20px; }
+.imo-page-header h1 .mat { color: var(--primary); }
+.imo-page-header p { margin: 4px 0 0; color: var(--text-muted); }
+.imo-breadcrumb { color: var(--text-muted); font-size: 10px; margin-bottom: 4px; }
+.imo-btn { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 3px 10px; border: 1px solid transparent; border-radius: var(--radius); background: var(--surface-container-low); color: var(--on-surface); font: 600 11px var(--font); cursor: pointer; white-space: nowrap; }
+.imo-btn .mat { font-size: 16px; }
+.imo-btn:hover { background: var(--surface-container-high); }
+.imo-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.imo-btn-primary { background: var(--primary); color: var(--on-primary); }
+.imo-btn-primary:hover { opacity: 0.9; }
+.imo-btn-icon { width: 26px; min-height: 26px; padding: 2px; background: transparent; border: none; }
+.imo-btn-icon.danger:hover { color: var(--crit-fg); background: var(--crit-bg); }
+.imo-toolbar { background: var(--surface-container-lowest); border-bottom: 1px solid var(--border); padding: 8px; }
+.imo-search { display: flex; align-items: center; gap: 5px; padding-left: 7px; background: var(--surface-container-low); border-radius: var(--radius); flex: 1; max-width: 420px; min-width: 200px; }
+.imo-search .mat { font-size: 17px; color: var(--text-muted); }
+.imo-search input { width: 100%; min-width: 0; height: 28px; border: 0; background: transparent; padding: 4px; font: inherit; color: inherit; }
+.imo-filters { margin-top: 8px; padding: 6px; background: var(--surface-container-low); display: flex; align-items: center; flex-wrap: wrap; gap: 12px; border-radius: var(--radius); }
+.imo-filters label { font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.imo-filters .imo-actions { margin-left: auto; }
+.imo-grid { flex: 1; overflow: auto; padding: 8px; display: flex; flex-direction: column; gap: 8px; background: var(--surface); }
+.imo-table-scroll { overflow: auto; }
+.imo-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; }
+.imo-table th { height: 32px; background: var(--surface-container-low); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); padding: 0 8px; border-bottom: 1px solid var(--border); }
+.imo-table td { height: 36px; padding: 4px 10px; }
+.imo-table tbody tr:nth-child(even) { background: var(--row-alt); }
+.imo-table tbody tr:hover { background: var(--surface-container-low); }
+.imo-name { font-family: var(--font-mono); font-size: 11px; }
+.imo-muted { color: var(--text-muted); }
+.imo-status { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.imo-status.active { background: #dcfce7; color: var(--in-use); }
+.imo-status.inactive { background: #f1f5f9; color: var(--discarded); }
+.imo-pagination { flex-wrap: wrap; padding: 8px 10px; border-top: 1px solid var(--border-light); font-size: 11px; }
+.imo-pagination .pgs { display: flex; align-items: center; gap: 2px; }
+.imo-pagination .pgs button { padding: 2px 8px; border: none; background: transparent; border-radius: var(--radius); font: inherit; font-family: var(--font-mono); font-size: 10px; color: var(--on-surface); cursor: pointer; }
+.imo-pagination .pgs button:hover:not(:disabled) { background: var(--surface-container); }
+.imo-pagination .pgs button:disabled { opacity: 0.45; cursor: not-allowed; }
+.imo-pagination .pgs button.cur { background: var(--primary); color: var(--on-primary); font-weight: 700; }
+.imo-message { background: var(--ok-bg); color: var(--ok-fg); padding: 8px; border-radius: var(--radius); display: flex; align-items: center; gap: 8px; }
+.imo-message.error { background: var(--crit-bg); color: var(--crit-fg); }
+.imo-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Dialog */
+.imo-overlay { position: fixed; inset: 0; z-index: 200; background: #0d1c2e80; backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.imo-dialog { width: 680px; max-width: 96vw; max-height: calc(100dvh - 48px); display: flex; flex-direction: column; border-radius: 5px; background: var(--surface-container-lowest); box-shadow: 0 20px 60px #0005; overflow: hidden; outline: none; }
+.imo-dialog-header { min-height: 42px; padding: 6px 12px; background: var(--surface-container-low); gap: 8px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.imo-dialog-header h2 { font-size: 14px; flex: 1; font-weight: 600; }
+.imo-dialog-icon { font-size: 17px; padding: 4px; background: var(--primary); color: white; border-radius: 4px; }
+.imo-mode { background: #005852; color: white; font: 9px var(--font-mono); padding: 4px 6px; border-radius: 3px; }
+.imo-mode.view { background: var(--text-muted); }
+.imo-mode.edit { background: var(--warn-fg); }
+.imo-dialog-header .imo-btn-icon { width: 28px; height: 28px; padding: 4px; }
+.imo-form { padding: 16px; flex: 1; min-height: 0; overflow-y: auto; }
+.imo-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.imo-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.imo-field.full { grid-column: 1 / -1; }
+.imo-label { font-size: 11px; font-weight: 600; color: var(--on-surface); }
+.imo-input { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); }
+.imo-input:focus { outline: 2px solid var(--primary); border-color: var(--primary); }
+.imo-input:hover { border-color: var(--border-light); }
+.imo-textarea { width: 100%; min-height: 60px; resize: vertical; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 11px; background: var(--surface-container-lowest); color: var(--on-surface); }
+.imo-dialog-footer { padding: 12px; background: var(--surface-container-low); flex-shrink: 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; }
+.imo-dialog-footer small { color: var(--text-muted); font: 10px var(--font-mono); }
+.imo-actions { display: flex; align-items: center; gap: 8px; }
+
+/* Consumíveis compatíveis (modal de Modelo de Impressora) */
+.imo-assoc { margin-top: 16px; padding: 10px 12px 12px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-low); display: flex; flex-direction: column; gap: 8px; }
+.imo-assoc-head { display: flex; align-items: center; gap: 6px; }
+.imo-assoc-head .mat { color: var(--primary); font-size: 17px; }
+.imo-assoc-head h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; flex: 1; margin: 0; }
+.imo-assoc-count { min-width: 20px; padding: 1px 6px; border-radius: 10px; background: var(--primary); color: var(--on-primary); font: 700 10px var(--font-mono); text-align: center; }
+.imo-assoc-hint, .imo-assoc-empty { margin: 0; color: var(--text-muted); font-size: 10px; }
+.imo-assoc-grupo { display: flex; align-items: flex-start; gap: 8px; }
+.imo-assoc-tipo { flex-shrink: 0; min-width: 68px; padding: 2px 6px; border-radius: 3px; font: 700 9px var(--font-mono); letter-spacing: .05em; text-align: center; background: #e8eef7; color: #1e3a5f; }
+.imo-assoc-grupo.tipo-toner .imo-assoc-tipo { background: #fef3c7; color: #92400e; }
+.imo-assoc-grupo.tipo-cilindro .imo-assoc-tipo { background: #dcfce7; color: #166534; }
+.imo-assoc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.imo-chip { display: inline-flex; align-items: center; gap: 2px; padding: 2px 2px 2px 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-container-lowest); }
+.imo-chip-code { font: 600 11px var(--font-mono); }
+.imo-chip-x { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; }
+.imo-chip-x .mat { font-size: 13px; }
+.imo-chip-x:hover { background: var(--crit-bg); color: var(--crit-fg); }
+.imo-assoc-add { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.imo-assoc-add .imo-input { flex: 1; min-width: 220px; }
+
+@media (max-width: 640px) {
+  .imo-assoc-grupo { flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 640px) {
+  .imo-dialog { width: 96vw; max-height: calc(100dvh - 60px); }
+  .imo-form-grid { grid-template-columns: 1fr; }
+}

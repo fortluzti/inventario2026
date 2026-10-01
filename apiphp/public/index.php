@@ -7,7 +7,7 @@
  *
   * Endpoints generico-CRUD (via src/modules.php):
  *   acessorios, ativos_diversos, empresas, fornecedores, funcionarios,
- *   celulares, impressoras, impressoras_modelos, monitores, nobreaks, setores,
+ *   celulares, impressoras, impressoras_modelos, impressora_modelos_toner, monitores, nobreaks, setores,
  *   softwares, toners, ativos_tipos
  * Endpoints dedicados:
  *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode,
