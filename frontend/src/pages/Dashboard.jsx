@@ -9,6 +9,7 @@ import Fornecedores from './Fornecedores.jsx'
 import Celulares from './Celulares.jsx'
 import CelularesConferencia from './CelularesConferencia.jsx'
 import ImpressoraModelos from './ImpressoraModelos.jsx'
+import Toners from './Toners.jsx'
 import EstacoesReport from '../components/EstacoesReport.jsx'
 import MonitoresReport from '../components/MonitoresReport.jsx'
 import ImpressaoReport from '../components/ImpressaoReport.jsx'
@@ -61,6 +62,8 @@ export default function Dashboard({ user, onLogout, searchRef }) {
 const [usuariosNew, setUsuariosNew] = useState(0)
    const [impressoraModelosRefresh, setImpressoraModelosRefresh] = useState(0)
    const [impressoraModelosNew, setImpressoraModelosNew] = useState(0)
+   const [tonersRefresh, setTonersRefresh] = useState(0)
+   const [tonersNew, setTonersNew] = useState(0)
    const [reportEmpresa, setReportEmpresa] = useState(null)
   const [filter, setFilter] = useState('')
   const localSearch = useRef(null)
@@ -117,9 +120,10 @@ if (e.key === 'F5') {
          else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
          else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
          else if (module === 'impressora_modelos') setImpressoraModelosRefresh((v) => v + 1)
+         else if (module === 'toners') setTonersRefresh((v) => v + 1)
          else load()
        }
-      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'fornecedores' || module === 'celulares' || module === 'celulares-conferencia' || module === 'impressora_modelos') return
+      if (module === 'estacoes' || module === 'monitores' || module === 'impressoras' || module === 'setores' || module === 'funcionarios' || module === 'fornecedores' || module === 'celulares' || module === 'celulares-conferencia' || module === 'impressora_modelos' || module === 'toners') return
       if (isReportModule) return
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
@@ -136,6 +140,7 @@ if (e.key === 'F5') {
         else if (module === 'fornecedores') setFornecedoresNew((v) => v + 1)
         else if (module === 'celulares') setCelularesNew((v) => v + 1)
         else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
+        else if (module === 'toners') setTonersNew((v) => v + 1)
         else if (module !== 'configuracoes' && module !== 'celulares-conferencia') setModule('setores')
       }
     }
@@ -284,6 +289,7 @@ onRefresh={() => {
            else if (module === 'celulares-conferencia') setCelularesRefresh((v) => v + 1)
            else if (module === 'usuarios') setUsuariosRefresh((v) => v + 1)
            else if (module === 'impressora_modelos') setImpressoraModelosRefresh((v) => v + 1)
+           else if (module === 'toners') setTonersRefresh((v) => v + 1)
            else load()
          }}
 onNovoAtivo={() => {
@@ -296,6 +302,7 @@ onNovoAtivo={() => {
            else if (module === 'celulares') setCelularesNew((v) => v + 1)
            else if (module === 'usuarios') setUsuariosNew((v) => v + 1)
            else if (module === 'impressora_modelos') setImpressoraModelosNew((v) => v + 1)
+           else if (module === 'toners') setTonersNew((v) => v + 1)
            else if (module !== 'celulares-conferencia') setModule('setores')
          }}
       />
@@ -315,13 +322,14 @@ onNovoAtivo={() => {
             {module === 'celulares-conferencia' && <CelularesConferencia refreshKey={celularesRefresh} />}
             {module === 'usuarios' && <UsuariosRbac refreshKey={usuariosRefresh} newRequest={usuariosNew} onChanged={load} />}
             {module === 'impressora_modelos' && <ImpressoraModelos refreshKey={impressoraModelosRefresh} newRequest={impressoraModelosNew} onChanged={load} />}
+            {module === 'toners' && <Toners refreshKey={tonersRefresh} newRequest={tonersNew} onChanged={load} />}
              {module === 'perfil' && <Perfil user={user} />}
             {module === 'configuracoes' && <Configuracoes />}
             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-monitores' && <MonitoresReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-impressoras' && <ImpressaoReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
-            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'fornecedores' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && module !== 'impressora_modelos' && !module.startsWith('relatorio-') && (
+            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'fornecedores' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && module !== 'impressora_modelos' && module !== 'toners' && !module.startsWith('relatorio-') && (
               <PlaceholderModule
                 label={activeModule.label}
                 icon={activeModule.icon}

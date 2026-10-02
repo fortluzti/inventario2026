@@ -116,9 +116,9 @@ check('Versão/Build da barra de status vêm da API', container.textContent.incl
 check('DB da barra de status vem da API', container.textContent.includes('DB: inventario2'))
 
 
-/* navegação pela sidebar */
-const itemToners = [...container.querySelectorAll('.module-item')].find((b) => b.textContent.includes('Toners em Estoque'))
-await act(async () => { itemToners.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })) })
+/* navegação pela sidebar (módulo ainda sem frontend dedicado) */
+const itemPlaceholder = [...container.querySelectorAll('.module-item')].find((b) => b.textContent.includes('Gerar QR / Etiquetas'))
+await act(async () => { itemPlaceholder.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })) })
 await flush()
 check('Sidebar troca de módulo (placeholder)', container.textContent.includes('ainda não implementado'))
 const btnVoltar = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Voltar ao Dashboard Geral'))
@@ -146,6 +146,10 @@ await testReports({ container, act, check, dom })
 /* Modelos de Impressoras: menu, CRUD em modal e associação de consumíveis (006). */
 const { testImpressoraModelos } = await import('./impressora_modelos.mjs')
 await testImpressoraModelos({ container, act, check, setVal, dom })
+
+/* Toners: CRUD do estoque de consumíveis com `valor` (migration 007) — mock em memória. */
+const { testToners } = await import('./toners.mjs')
+await testToners({ container, act, check, setVal, dom })
 
 /* ---------- 3. Menu de usuário > Sair do sistema ---------- */
 const menuBtn = container.querySelector('button[title="Menu do Usuário"]')

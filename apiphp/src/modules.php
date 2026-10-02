@@ -331,6 +331,10 @@ return [
               'estoque'        => ['tipo' => 'int'],
               'estoque_minimo' => ['tipo' => 'int'],
               'autonomia'      => ['tipo' => 'int'],
+              // Valor unitário do consumível (migration 007_toner_valor.sql).
+              // Cadastro p/ futuro histórico financeiro — fora de qualquer
+              // solicitação/pedido de compra e de cálculos de estoque.
+              'valor'          => ['tipo' => 'decimal'],
               'data_compra'    => ['tipo' => 'date'],
               'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
               'fornecedor_id'  => ['tipo' => 'int'],
