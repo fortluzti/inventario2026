@@ -34,6 +34,14 @@ export async function ativarUsuario(id, ativo) {
   return api('usuarios', 'ativar', { params: { id, ativo } })
 }
 
+export async function mudarSenha(id, senhaAtual, novaSenha) {
+  return api('usuarios', 'alterar_senha', { method: 'POST', body: { id, senha_atual: senhaAtual, nova_senha: novaSenha } })
+}
+
+export async function toggleAtivo(id) {
+  return api('usuarios', 'toggleAtivo', { method: 'POST', body: { id } })
+}
+
 export async function criarUsuario(dados) {
   return api('usuarios', 'novo', { method: 'POST', body: dados })
 }

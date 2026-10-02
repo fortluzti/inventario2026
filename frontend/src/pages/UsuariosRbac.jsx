@@ -82,21 +82,22 @@ export default function UsuariosRbac({ refreshKey = 0, newRequest = 0, onChanged
     {message && <div className="usr-message" role="status">{message}</div>}
     {(error) && <div className="usr-message error" role="alert">{error}<button className="usr-btn" onClick={() => { setError(''); setRevision((v) => v + 1) }}>Tentar novamente</button></div>}
 
-    <div className="usr-grid" aria-busy={loading}>
-      <div className="usr-table-scroll"><table className="usr-table">
-        <caption className="usr-sr-only">Contas de acesso cadastradas</caption>
-        <thead><tr>
-          {[['Login', 'login'], ['Nome', 'nome'], ['Email', 'email']].map(([label, key]) =>
-            <SortableTh key={key} label={label} active={isActive(key)} dir={sort.dir} onSort={() => { toggleSort(key); setPage(1) }} />)}
-          <th scope="col">Ações</th>
-        </tr></thead>
-        <tbody>{loading ? <tr><td colSpan={4} className="usr-empty" role="status">Carregando usuarios…</td></tr> : data.items.length === 0 ? <tr><td colSpan={4} className="usr-empty">{error ? 'Nao foi possivel carregar a listagem.' : 'Nenhum usuario encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
-          <td><strong className="usr-login">{row.login || '—'}</strong></td>
-          <td className="usr-muted">{row.nome || '—'}</td>
-          <td className="usr-muted">{row.email || '—'}</td>
-          <td><div className="usr-actions"><button className="usr-btn usr-btn-icon" title="Visualizar" aria-label="Visualizar usuario" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="usr-btn usr-btn-icon" title="Editar" aria-label="Editar usuario" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button></div></td>
-        </tr>)}</tbody>
-      </table></div>
+<div className="usr-grid" aria-busy={loading}>
+       <div className="usr-table-scroll"><table className="usr-table">
+         <caption className="usr-sr-only">Contas de acesso cadastradas</caption>
+         <thead><tr>
+            {[['Login', 'login'], ['Nome', 'nome'], ['Email', 'email'], ['Status', 'ativo']].map(([label, key]) =>
+              <SortableTh key={key} label={label} active={isActive(key)} dir={sort.dir} onSort={() => { toggleSort(key); setPage(1) }} />)}
+            <th scope="col">Ações</th>
+          </tr></thead>
+         <tbody>{loading ? <tr><td colSpan={5} className="usr-empty" role="status">Carregando usuarios…</td></tr> : data.items.length === 0 ? <tr><td colSpan={5} className="usr-empty">{error ? 'Nao foi possivel carregar a listagem.' : 'Nenhum usuario encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
+           <td><strong className="usr-login">{row.login || '—'}</strong></td>
+           <td className="usr-muted">{row.nome || '—'}</td>
+           <td className="usr-muted">{row.email || '—'}</td>
+           <td className="usr-status">{row.ativo ? 'Ativo' : 'Inativo'}</td>
+           <td><div className="usr-actions"><button className="usr-btn usr-btn-icon" title="Visualizar" aria-label="Visualizar usuario" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="usr-btn usr-btn-icon" title="Editar" aria-label="Editar usuario" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button><button className="usr-btn usr-btn-icon" title="Alterar senha" aria-label="Alterar senha do usuario" onClick={() => setDialog({ mode: 'changePassword', id: row.id })}><span className="mat">lock_reset</span></button><button className="usr-btn usr-btn-icon" title={row.ativo ? 'Desativar' : 'Ativar'} aria-label={row.ativo ? 'Desativar usuario' : 'Ativar usuario'} onClick={() => { setMessage(''); api('usuarios', 'toggleAtivo', { params: { id: row.id } }).then(() => { setMessage(row.ativo ? 'Usuario desativado com sucesso.' : 'Usuario ativado com sucesso.'); setRevision(v => v + 1); onChanged?.(); }).catch(e => { setError(e.message); }); }}><span className="mat">{row.ativo ? 'lock_open' : 'lock'}</span></button><button className="usr-btn usr-btn-icon" title="Excluir" aria-label="Excluir usuario" onClick={() => { setMessage(''); api('usuarios', 'excluir', { method: 'POST', body: { id: row.id } }).then(() => { setMessage('Usuario excluido com sucesso.'); setRevision(v => v + 1); onChanged?.(); }).catch(e => { setError(e.message); }); }}><span className="mat">delete</span></button></div></td>
+         </tr>)}</tbody>
+       </table></div>
       <footer className="usr-pagination">
         <span>{data.total ? `${(page - 1) * limit + 1}–${Math.min(page * limit, data.total)}` : '0'} de {data.total} registros</span>
         <label>Por página: <select aria-label="Registros por página" value={limit} onChange={(e) => { setLimit(Number(e.target.value)); setPage(1) }}>{[10, 20, 50, 100].map((n) => <option key={n}>{n}</option>)}</select></label>
