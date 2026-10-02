@@ -19,7 +19,17 @@ export async function testToners({ container, act, check, setVal, dom }) {
   ];
   let nextAssoc = 3;
   const calls = [];    // endpoint toners
-  const relCalls = []; // impressoras_modelos + impressora_modelos_toner
+  const relCalls = []; // impressoras_modelos + impressora_modelos_toner + apoio dos modais
+  /* --- Dados das operações da tela (troca / recebimento / histórico) --- */
+  const IMPRESSORAS = [
+    { id: 16, codigo_interno_impressora: 'IMP-004', modelo_id: 29, modelo_nome: '408DN', modelo_marca: 'HP', setor_id: 11, setor_nome: 'TI' },
+    { id: 17, codigo_interno_impressora: 'IMP-005', modelo_id: 31, modelo_nome: 'M404dn', modelo_marca: 'HP', setor_id: 14, setor_nome: 'FINANCEIRO' },
+  ];
+  const FUNCIONARIOS = [{ id: 32, nome: 'ALEX FABIANO LONGO' }];
+  const SETORES = [{ id: 11, nome: 'TI' }, { id: 14, nome: 'FINANCEIRO' }];
+  const HISTORICO = [];    // linhas gravadas em historico_troca_toner
+  const RECEBIMENTOS = []; // lotes gravados em recebimentos_toner
+  const pagina = (arr) => ({ items: arr, total: arr.length, page: 1, limit: 200, total_pages: 1 });
   const lastCall = (a) => [...calls].reverse().find((c) => c.action === a);
   const realFetch = globalThis.fetch;
   let confirmResult = true;
@@ -91,8 +101,79 @@ export async function testToners({ container, act, check, setVal, dom }) {
       return Response.json({ success: false, message: 'Ação não prevista.' }, { status: 400 });
     }
 
+    /* Apoio dos modais: impressoras (troca/histórico), funcionários (recebimento)
+       e setores (filtro do histórico) — mesmos endpoints genéricos da API. */
+    if (endpoint === 'impressoras' || endpoint === 'funcionarios' || endpoint === 'setores') {
+      relCalls.push({ endpoint, action });
+      const base = endpoint === 'impressoras' ? IMPRESSORAS : endpoint === 'funcionarios' ? FUNCIONARIOS : SETORES;
+      return Response.json({ success: true, data: pagina(base) });
+    }
+
     if (endpoint !== 'toners') return realFetch(url, opts);
     calls.push({ action, params: Object.fromEntries(u.searchParams.entries()), body });
+
+    /* ---------- Ações das operações da tela (troca / recebimento / histórico) ---------- */
+    if (action === 'dropdown') {
+      return Response.json({ success: true, data: DB.map((r) => ({ id: r.id, nome: r.codigo })) });
+    }
+    if (action === 'listar_compativeis') {
+      const impId = Number(u.searchParams.get('impressora_id') || 0);
+      const imp = IMPRESSORAS.find((i) => i.id === impId);
+      if (!imp) return Response.json({ success: false, message: 'Impressora nao encontrada.' }, { status: 404 });
+      const items = DB.filter((r) => ASSOC.some((a) => a.toner_id === r.id && a.modelo_id === imp.modelo_id));
+      return Response.json({ success: true, data: { impressora_id: impId, modelo_id: imp.modelo_id, items } });
+    }
+    if (action === 'registrar_troca') {
+      const imp = IMPRESSORAS.find((i) => i.id === Number(body?.id_impressora));
+      const t = DB.find((r) => r.id === Number(body?.id_toner));
+      if (!imp || !t) return Response.json({ success: false, message: 'Registro nao encontrado.' }, { status: 404 });
+      if (!ASSOC.some((a) => a.toner_id === t.id && a.modelo_id === imp.modelo_id)) {
+        return Response.json({ success: false, message: 'Consumivel incompativel com o modelo da impressora selecionada.' }, { status: 422 });
+      }
+      if ((t.estoque ?? 0) <= 0) {
+        return Response.json({ success: false, message: 'Consumivel sem estoque disponivel para troca.' }, { status: 422 });
+      }
+      t.estoque -= 1;
+      HISTORICO.push({
+        id: HISTORICO.length + 1,
+        data_cadastro: '2026-10-01 10:00:00',
+        id_toner: t.id,
+        id_impressora: imp.id,
+        toner_codigo: t.codigo,
+        toner_tipo: t.tipo,
+        impressora_codigo: imp.codigo_interno_impressora,
+        modelo_nome: imp.modelo_nome,
+        modelo_marca: imp.modelo_marca,
+        setor_id: imp.setor_id,
+        setor_nome: imp.setor_nome,
+        usuario_cadastro: body?.usuario || '',
+        responsavel: body?.usuario || '',
+        observacoes: body?.observacoes || '',
+      });
+      return Response.json({ success: true, data: { id: HISTORICO.length, codigo: t.codigo, estoque: t.estoque }, message: 'Troca registrada com sucesso. Estoque atualizado.' });
+    }
+    if (action === 'receber_multiplos') {
+      const itens = Array.isArray(body?.toners) ? body.toners : [];
+      if (!Number(body?.funcionario_recebedor_id)) return Response.json({ success: false, message: 'Funcionario recebedor e obrigatorio.' }, { status: 422 });
+      if (!itens.length) return Response.json({ success: false, message: 'Selecione ao menos um consumivel com quantidade.' }, { status: 422 });
+      for (const it of itens) {
+        const t = DB.find((r) => r.id === Number(it.toner_id));
+        if (!t) return Response.json({ success: false, message: 'Consumivel inexistente no lote.' }, { status: 422 });
+        t.estoque = (t.estoque ?? 0) + Number(it.quantidade);
+      }
+      RECEBIMENTOS.push({ ...body, toners: itens });
+      return Response.json({ success: true, data: { funcionario_recebedor: FUNCIONARIOS[0].nome, itens }, message: 'Recebimento registrado com sucesso.' });
+    }
+    if (action === 'listar_historico') {
+      let rows = HISTORICO.slice();
+      const impId = u.searchParams.get('impressora_id');
+      const setorId = u.searchParams.get('setor_id');
+      const tonerId = u.searchParams.get('toner_id');
+      if (impId) rows = rows.filter((r) => String(r.id_impressora) === String(impId));
+      if (setorId) rows = rows.filter((r) => String(r.setor_id) === String(setorId));
+      if (tonerId) rows = rows.filter((r) => String(r.id_toner) === String(tonerId));
+      return Response.json({ success: true, data: { items: rows, total: rows.length, page: 1, limit: 50, total_pages: 1 } });
+    }
     if (action === 'listar') return Response.json({ success: true, data: applyList(u.searchParams) });
     if (action === 'buscar_por_id') {
       const row = DB.find((r) => r.id === Number(u.searchParams.get('id')));
@@ -131,6 +212,13 @@ export async function testToners({ container, act, check, setVal, dom }) {
   /* setVal só vale p/ <input>; `<select>` precisa do setter de HTMLSelectElement. */
   async function setSelect(el, value) {
     await act(async () => { el.value = value; el.dispatchEvent(new dom.window.Event('change', { bubbles: true })); });
+  }
+
+  /* `<textarea>` precisa do setter de HTMLTextAreaElement (setVal só vale p/ input). */
+  function setTextarea(el, value) {
+    const setter = Object.getOwnPropertyDescriptor(dom.window.HTMLTextAreaElement.prototype, 'value').set;
+    setter.call(el, value);
+    el.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
   }
 
   try {
@@ -278,6 +366,121 @@ export async function testToners({ container, act, check, setVal, dom }) {
     await act(async () => { btnExcluir().dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
     await flush();
     ok(!!lastCall('excluir'), 'exclusão confirmada chama a API');
+
+    /* ================= Operações da tela: TUDO em MODAL ================= */
+    const headerBtns = () => [...container.querySelectorAll('.tnd-page-header button')].map((b) => b.textContent.trim());
+    ok(headerBtns().some((t) => t.includes('Novo Consumível')), 'topo mantém "Novo Consumível"');
+    ok(headerBtns().some((t) => t.includes('Registrar Troca')), 'topo tem "Registrar Troca"');
+    ok(headerBtns().some((t) => t.includes('Recebimento de Toners')), 'topo tem "Recebimento de Toners"');
+    ok(headerBtns().some((t) => t.includes('Ver Histórico de Trocas')), 'topo tem "Ver Histórico de Trocas"');
+
+    const itensMenu = [...container.querySelectorAll('.module-item')].map((b) => b.textContent);
+    ok(!itensMenu.some((t) => t.includes('Recebimento de Toners')), 'menu lateral SEM item "Recebimento de Toners"');
+    ok(!itensMenu.some((t) => t.includes('Histórico de Trocas')), 'menu lateral SEM item "Histórico de Trocas"');
+
+    const abrirOperacao = async (rotulo) => {
+      const btn = [...container.querySelectorAll('.tnd-page-header button')].find((b) => b.textContent.includes(rotulo));
+      await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+      await flush(); await flush();
+    };
+    const fecharOverlay = async () => {
+      const btn = [...container.querySelectorAll('.tnd-overlay button')].find((b) => b.getAttribute('aria-label') === 'Fechar');
+      await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+      await flush(); await flush();
+    };
+    const linhasDoOverlay = () => container.querySelectorAll('.tnd-overlay .tnd-table tbody tr');
+
+    /* ---------- 1. Registrar Troca ---------- */
+    await abrirOperacao('Registrar Troca');
+    ok(!!container.querySelector('.tnd-overlay'), '"Registrar Troca" abre MODAL');
+    ok(!!container.querySelector('#tnd-troca-impressora'), 'modal da troca tem select de impressora');
+    ok(!container.querySelector('#tnd-receb-func'), 'modal da troca NÃO permite escolher funcionário');
+    ok(container.textContent.includes('USUÁRIO LOGADO'), 'responsável exibido = usuário logado');
+    await flush(); await flush(); await flush();
+    const selImp = container.querySelector('#tnd-troca-impressora');
+    ok(selImp.options.length === 3, 'modal lista as impressoras cadastradas');
+    await setSelect(selImp, '16');
+    await flush(); await flush();
+    ok(lastCall('listar_compativeis')?.params?.impressora_id === '16', 'troca consulta os consumíveis compatíveis com a impressora');
+    const selTon = container.querySelector('#tnd-troca-toner');
+    ok(selTon.options.length === 2, 'só o consumível compatível com o modelo é oferecido');
+    ok(selTon.textContent.includes('W1330A'), 'compatível = W1330A (TONER/CILINDRO pela mesma relação)');
+    await setSelect(selTon, '1');
+    setTextarea(container.querySelector('#tnd-troca-obs'), 'Troca de teste');
+    await flush();
+    const estoqueAntes = DB.find((r) => r.id === 1).estoque;
+    await submitForm('#tnd-troca-form');
+    const trocaBody = lastCall('registrar_troca')?.body;
+    ok(trocaBody?.id_impressora === 16 && trocaBody?.id_toner === 1, 'envia impressora + consumível');
+    ok(trocaBody?.usuario === 'admin.ti', 'responsável = usuário logado (login enviado, sem funcionário manual)');
+    ok(DB.find((r) => r.id === 1).estoque === estoqueAntes - 1, 'troca baixa 1 unidade no estoque');
+    ok(HISTORICO.length === 1, 'troca gravada no histórico');
+    ok(!container.querySelector('.tnd-overlay'), 'modal da troca fecha após confirmar');
+    ok(container.textContent.includes('Estoque atualizado'), 'confirmação da troca exibida na tela');
+
+    /* ---------- 2. Recebimento de Toners (múltiplo) ---------- */
+    await abrirOperacao('Recebimento de Toners');
+    ok(!!container.querySelector('#tnd-receb-func'), '"Recebimento de Toners" abre MODAL');
+    ok(!!container.querySelector('#tnd-receb-data'), 'modal tem data do recebimento');
+    ok(!!container.querySelector('#tnd-receb-obs'), 'modal tem observação');
+    await flush(); await flush(); await flush();
+    const selFunc = container.querySelector('#tnd-receb-func');
+    ok(selFunc.options.length === 2, 'modal lista o funcionário recebedor');
+    await setSelect(selFunc, '32');
+    const est1Antes = DB.find((r) => r.id === 1).estoque;
+    const est2Antes = DB.find((r) => r.id === 2).estoque;
+    const addLote = async () => {
+      const btn = [...container.querySelectorAll('.tnd-receb-add button')][0];
+      await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+      await flush();
+    };
+    await setSelect(container.querySelector('#tnd-receb-toner'), '1');
+    await addLote();
+    ok(container.querySelectorAll('.tnd-receb-item').length === 1, 'primeiro consumível entra no lote');
+    setVal(container.querySelector('.tnd-receb-item input'), '3');
+    await flush();
+    await setSelect(container.querySelector('#tnd-receb-toner'), '2');
+    await addLote();
+    ok(container.querySelectorAll('.tnd-receb-item').length === 2, 'lote aceita VÁRIOS consumíveis');
+    await submitForm('#tnd-receb-form');
+    const recebBody = lastCall('receber_multiplos')?.body;
+    ok(recebBody?.funcionario_recebedor_id === 32, 'envia o funcionário recebedor');
+    ok(recebBody?.toners?.length === 2, 'envia os 2 consumíveis com quantidade');
+    ok(DB.find((r) => r.id === 1).estoque === est1Antes + 3, 'estoque somou 3 no 1º consumível');
+    ok(DB.find((r) => r.id === 2).estoque === est2Antes + 1, 'estoque somou 1 no 2º consumível');
+    ok(RECEBIMENTOS.length === 1, 'recebimento registrado na tabela de recebimentos');
+    ok(!container.querySelector('.tnd-overlay'), 'modal do recebimento fecha após confirmar');
+    ok(container.textContent.includes('Estoque atualizado'), 'confirmação do recebimento exibida');
+
+    /* ---------- 3. Histórico de Trocas ---------- */
+    await abrirOperacao('Ver Histórico de Trocas');
+    await flush(); await flush(); await flush();
+    ok(!!container.querySelector('.tnd-overlay'), '"Histórico de Trocas" abre MODAL');
+    ok(!!container.querySelector('.tnd-page'), 'listagem de Toners segue montada (sem navegação)');
+    ok(!container.textContent.includes('ainda não implementado'), 'nenhuma operação cai em página em construção');
+    const filtrosHist = container.querySelectorAll('.tnd-overlay .tnd-hist-filtros select');
+    ok(filtrosHist.length === 3, 'preserva os filtros impressora, setor e consumível');
+    ok(linhasDoOverlay().length === 1, 'histórico lista a troca registrada');
+    const cel = [...linhasDoOverlay()[0].querySelectorAll('td')].map((td) => td.textContent);
+    ok(cel[0].includes('/'), 'coluna Data');
+    ok(cel[1].includes('408DN') && cel[1].includes('IMP-004'), 'coluna Modelo / Impressora');
+    ok(cel[2].includes('TI'), 'coluna Setor');
+    ok(cel[3].includes('W1330A'), 'coluna Consumível');
+    ok(cel[4].includes('admin.ti'), 'coluna Responsável');
+    ok(cel[5].includes('Troca de teste'), 'coluna Observações');
+
+    await setSelect(filtrosHist[0], '17');
+    await flush(); await flush();
+    ok(lastCall('listar_historico')?.params?.impressora_id === '17', 'filtro por impressora é enviado à API');
+    ok(linhasDoOverlay().length === 1 && linhasDoOverlay()[0].textContent.includes('Nenhum registro'),
+      'filtro por outra impressora devolve vazio');
+    await setSelect(filtrosHist[0], '');
+    await flush(); await flush();
+    ok(linhasDoOverlay()[0].textContent.includes('W1330A'), 'limpar o filtro restaura os registros');
+
+    await fecharOverlay();
+    ok(!container.querySelector('.tnd-overlay'), 'modal do histórico fecha');
+    ok(!!container.querySelector('.tnd-page'), 'volta para a tela de Toners sem navegação');
   } finally {
     globalThis.fetch = realFetch;
   }

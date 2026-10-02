@@ -91,6 +91,23 @@ Resposta de `listar`:
   `modelos_compat` (lista agregada dos modelos compatíveis). Regras: `estoque_minimo`
   continua sendo o mínimo do consumível e `tipo` continua determinando TONER/CILINDRO.
 
+  **Ações dedicadas** (mesmo endpoint `toners`, handler `src/handlers/toners_handler.php`) —
+  as operações que o sistema antigo separava em `historico_troca_toner_handler.php` e
+  `recebimentos_toner_handler.php` ficam concentradas na tela de Toners (nenhuma página nova):
+
+  | Ação | Método | Params/Body | Retorno / regras |
+  |---|---|---|---|
+  | `listar_compativeis` | GET | `impressora_id` | `data`: `{impressora_id, modelo_id, items[]}` — consumíveis do **MODELO** da impressora (relação `impressora_modelos_toner`, TONER e CILINDRO juntos). 404 se a impressora não existe. |
+  | `registrar_troca` | POST | `{id_impressora, id_toner, observacoes?, usuario?}` | `data`: `{id, id_impressora, id_toner, codigo, estoque, responsavel}`. Em **transação**: grava `historico_troca_toner`, dá baixa de 1 unidade no estoque e atualiza `impressoras.data_ultima_troca_toner`. **422** se o consumível não for compatível com o modelo da impressora ou se o estoque estiver zerado. |
+  | `listar_historico` | GET | `impressora_id?`, `setor_id?`, `toner_id?`, `page`, `limit` | `data`: `{items, total, page, limit, total_pages}` com `data_cadastro`, `modelo_nome`, `impressora_codigo`, `setor_nome`, `toner_codigo`/`toner_tipo`, `responsavel` e `observacoes`. |
+  | `receber_multiplos` | POST | `{funcionario_recebedor_id, data_recebimento?, observacoes?, usuario?, toners:[{toner_id, quantidade}]}` | `data`: `{funcionario_recebedor, data_recebimento, itens[], responsavel}`. Em **transação**: soma o estoque e grava **uma linha por consumível** em `recebimentos_toner`. Itens repetidos do mesmo consumível são somados. **422** sem funcionário ou sem itens. |
+
+  `usuario` é o **usuário logado** (o modal de troca não oferece seleção de funcionário
+  responsável); o valor é sanitizado (máx. 50 chars) e usado apenas para responsabilização —
+  o histórico resolve o funcionário de **mesmo nome** (`users.nome` × `funcionarios.nome`)
+  e, na ausência, exibe o próprio login. `GET action=dropdown` devolve `[{id, nome}]`
+  (códigos dos consumíveis) e alimenta o filtro "Consumível" do histórico.
+
 **REMOVIDO**: `acessorios` — a tabela não existe no backup `inventario2` restaurado
 (o handler legado `acessorios_handler.php` permanece na v1; recriar tabela se o módulo for necessário).
 
@@ -206,8 +223,8 @@ Gerenciamento de contas de acesso do sistema. Tabela base: `users` (id_usuario, 
 ## Ainda NÃO portados (lógica dedicada, ver README "Pendências")
 
 `celulares` (entregas/devoluções/danos/histórico), `estacoes` (com softwares associados),
-`manutencoes` (orçamentos/peças/serviços/aprovação), `chamados`, `perfis`, `recebimentos_toner`,
-`historico_troca_toner`, `nobreaks_historico_trocas`, `configuracoes`, `db_migrator`, `*_relatorio.php`.
+`manutencoes` (orçamentos/peças/serviços/aprovação), `chamados`, `perfis`,
+`nobreaks_historico_trocas`, `configuracoes`, `db_migrator`, `*_relatorio.php`.
 
 ## Segurança operacional
 

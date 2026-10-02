@@ -25,8 +25,9 @@ export const MODULES = [
   ]},
   { group: '3. Estoque & Insumos', items: [
     { id: 'toners', label: 'Toners em Estoque', icon: 'inventory_2' },
-    { id: 'recebimento', label: 'Recebimento de Toners', icon: 'move_to_inbox' },
-    { id: 'historico', label: 'Histórico de Trocas', icon: 'history' },
+    /* Registrar Troca, Recebimento de Toners e Histórico de Trocas são
+       operações MODAIS da tela "Toners em Estoque" — não têm página própria
+       nem item de menu (espelha o sistema antigo, onde tudo vivia naquela tela). */
   ]},
   { group: '4. Manutenção & Suporte', items: [
     { id: 'manutencoes', label: 'Ordens & Manutenções', icon: 'build' },

@@ -7,11 +7,11 @@
  *
   * Endpoints generico-CRUD (via src/modules.php):
  *   acessorios, ativos_diversos, empresas, fornecedores, funcionarios,
- *   celulares, impressoras, impressoras_modelos, impressora_modelos_toner, monitores, nobreaks, setores,
- *   softwares, toners, ativos_tipos
+ *   impressoras, impressoras_modelos, impressora_modelos_toner, monitores, nobreaks, setores,
+ *   softwares, ativos_tipos
  * Endpoints dedicados:
  *   health, dashboard_kpis, dashboard_alertas, dashboard_atividade, qrcode,
- *   api_keys, configuracoes, celulares, usuarios, sistema
+ *   api_keys, configuracoes, celulares, toners, usuarios, sistema
  */
 declare(strict_types=1);
 
@@ -75,6 +75,13 @@ try {
         case 'celulares':
             require __DIR__ . '/../src/handlers/celulares_handler.php';
             CelularesHandler::handle($pdo, $action, $input);
+            break;
+
+        // Consumiveis: CRUD generico + acoes da tela de Toners (troca, historico
+        // e recebimento multiplo) concentradas no mesmo endpoint.
+        case 'toners':
+            require __DIR__ . '/../src/handlers/toners_handler.php';
+            TonersHandler::handle($pdo, $action, $input);
             break;
 
         case 'usuarios':

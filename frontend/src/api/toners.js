@@ -134,3 +134,68 @@ export function tonerPayload(form) {
     empresa_id: toIntOrNull(form.empresa_id),
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Operações concentradas na tela "Toners em Estoque" — registrar troca,
+ * recebimento múltiplo e histórico de trocas. Usam EXATAMENTE as tabelas do
+ * legado (`historico_troca_toner`, `recebimentos_toner`, `impressora_modelos_toner`,
+ * `toner`) via o endpoint `toners`. Nenhuma página/tabela nova é criada: as três
+ * operações abrem em MODAL sobre a listagem.
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Consumíveis compatíveis com o MODELO da impressora (TONER e CILINDRO juntos:
+ * a classificação vem de `toner.tipo`). A impressora determina os compatíveis.
+ */
+export async function listarCompativeis(impressoraId) {
+  const data = await api('toners', 'listar_compativeis', { params: { impressora_id: impressoraId } })
+  return data.items || []
+}
+
+/**
+ * Registra a troca. O responsável é SEMPRE o usuário logado — o modal não exibe
+ * seleção de funcionário; o login é enviado apenas para responsabilização
+ * (o backend resolve o funcionário de mesmo nome para exibição no histórico).
+ */
+export function registrarTroca({ id_impressora, id_toner, observacoes, usuario }) {
+  return api('toners', 'registrar_troca', {
+    method: 'POST',
+    body: {
+      id_impressora: Number(id_impressora),
+      id_toner: Number(id_toner),
+      observacoes: String(observacoes ?? '').trim().substring(0, 1000) || null,
+      usuario: String(usuario ?? '').trim().substring(0, 50) || null,
+    },
+  })
+}
+
+/** Histórico de trocas — filtros do legado: impressora, setor e consumível. */
+export function listarHistorico({ impressora_id, setor_id, toner_id, page = 1, limit = 50 } = {}) {
+  return api('toners', 'listar_historico', {
+    params: { impressora_id, setor_id, toner_id, page, limit },
+  })
+}
+
+/**
+ * Recebimento múltiplo: funcionário recebedor + data/observação + vários
+ * consumíveis com quantidade. Soma no estoque e grava `recebimentos_toner`.
+ */
+export function receberMultiplos({ funcionario_recebedor_id, data_recebimento, observacoes, toners, usuario }) {
+  return api('toners', 'receber_multiplos', {
+    method: 'POST',
+    body: {
+      funcionario_recebedor_id: Number(funcionario_recebedor_id),
+      data_recebimento: String(data_recebimento ?? '').trim() || null,
+      observacoes: String(observacoes ?? '').trim().substring(0, 1000) || null,
+      usuario: String(usuario ?? '').trim().substring(0, 50) || null,
+      toners: (toners || []).map((t) => ({ toner_id: Number(t.toner_id), quantidade: Number(t.quantidade) })),
+    },
+  })
+}
+
+/** Lista simples (id + código) de consumíveis — usada nos filtros dos modais. */
+export async function listarConsumiveis() {
+  const data = await api('toners', 'dropdown')
+  return data || []
+}
+

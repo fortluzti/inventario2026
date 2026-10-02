@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
 import { excluir, buscarModelos } from '../api/toners.js'
 import TonerDialog from '../components/TonerDialog.jsx'
+import TonerTrocaDialog from '../components/TonerTrocaDialog.jsx'
+import TonerRecebimentoDialog from '../components/TonerRecebimentoDialog.jsx'
+import TonerHistoricoDialog from '../components/TonerHistoricoDialog.jsx'
 import './Toners.css'
 
 const EMPTY = { items: [], total: 0, total_pages: 0 }
@@ -14,7 +17,7 @@ const brl = (v) => Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigit
  * O campo `valor` (migration 007) é apenas cadastral — não entra no cálculo de
  * estoque mínimo e não vai para solicitação/pedido de compra.
  */
-export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
+export default function Toners({ user, refreshKey = 0, newRequest = 0, onChanged }) {
   const [data, setData] = useState(EMPTY)
   const [search, setSearch] = useState('')
   const [query, setQuery] = useState('')
@@ -28,6 +31,9 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
   const [dialog, setDialog] = useState(null)
+  /* Operações da tela — TODAS em modal (nenhuma navega para página separada):
+   * 'troca' · 'recebimento' · 'historico'. */
+  const [opDialog, setOpDialog] = useState(null)
   const [deleting, setDeleting] = useState(null)
   // Filtro "Modelo da impressora": autocomplete por modelos reais cadastrados
   // (evita texto livre) — usa o endpoint existente `impressoras_modelos`.
@@ -78,13 +84,13 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
 
   useEffect(() => {
     function onKey(e) {
-      if (dialog) return
+      if (dialog || opDialog) return
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); searchRef.current?.focus() }
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n') { e.preventDefault(); setDialog({ mode: 'new' }) }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [dialog])
+  }, [dialog, opDialog])
 
   async function remove(row) {
     if (deleteLock.current || !window.confirm(`Excluir o consumível "${row.codigo}"? Esta ação não pode ser desfeita.`)) return
@@ -137,7 +143,12 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
         <h1 id="tnd-page-title"><span className="mat" aria-hidden="true">inventory_2</span>Toners em Estoque</h1>
         <p>Cadastro de consumíveis (toners e cilindros) e seus valores unitários.</p>
       </div>
-      <button className="tnd-btn tnd-btn-primary" onClick={() => { setMessage(''); setDialog({ mode: 'new' }) }}><span className="mat" aria-hidden="true">add</span>Novo Consumível</button>
+      <div className="tnd-actions tnd-header-actions">
+        <button className="tnd-btn tnd-btn-primary" onClick={() => { setMessage(''); setDialog({ mode: 'new' }) }}><span className="mat" aria-hidden="true">add</span>Novo Consumível</button>
+        <button className="tnd-btn" onClick={() => { setError(''); setMessage(''); setOpDialog({ mode: 'troca' }) }}><span className="mat" aria-hidden="true">swap_horiz</span>Registrar Troca</button>
+        <button className="tnd-btn" onClick={() => { setError(''); setMessage(''); setOpDialog({ mode: 'recebimento' }) }}><span className="mat" aria-hidden="true">move_to_inbox</span>Recebimento de Toners</button>
+        <button className="tnd-btn" onClick={() => { setError(''); setMessage(''); setOpDialog({ mode: 'historico' }) }}><span className="mat" aria-hidden="true">history</span>Ver Histórico de Trocas</button>
+      </div>
     </header>
 
     <div className="tnd-toolbar">
@@ -194,5 +205,24 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
     </div>
 
     {dialog && <TonerDialog {...dialog} onClose={() => setDialog(null)} onSaved={(text) => { setDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }} />}
+
+    {/* Operações concentradas nesta tela em modal (mesma ideia do legado
+        modules/toners/toners_list.php) — sem página separada de recebimento
+        nem de histórico de trocas. */}
+    {opDialog?.mode === 'troca' && (
+      <TonerTrocaDialog
+        user={user}
+        onClose={() => setOpDialog(null)}
+        onSaved={(text) => { setOpDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }}
+      />
+    )}
+    {opDialog?.mode === 'recebimento' && (
+      <TonerRecebimentoDialog
+        user={user}
+        onClose={() => setOpDialog(null)}
+        onSaved={(text) => { setOpDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }}
+      />
+    )}
+    {opDialog?.mode === 'historico' && <TonerHistoricoDialog onClose={() => setOpDialog(null)} />}
   </section>
 }

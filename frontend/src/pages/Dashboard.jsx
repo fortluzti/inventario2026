@@ -322,7 +322,7 @@ onNovoAtivo={() => {
             {module === 'celulares-conferencia' && <CelularesConferencia refreshKey={celularesRefresh} />}
             {module === 'usuarios' && <UsuariosRbac refreshKey={usuariosRefresh} newRequest={usuariosNew} onChanged={load} />}
             {module === 'impressora_modelos' && <ImpressoraModelos refreshKey={impressoraModelosRefresh} newRequest={impressoraModelosNew} onChanged={load} />}
-            {module === 'toners' && <Toners refreshKey={tonersRefresh} newRequest={tonersNew} onChanged={load} />}
+            {module === 'toners' && <Toners user={user} refreshKey={tonersRefresh} newRequest={tonersNew} onChanged={load} />}
              {module === 'perfil' && <Perfil user={user} />}
             {module === 'configuracoes' && <Configuracoes />}
             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}

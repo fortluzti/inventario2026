@@ -105,9 +105,12 @@ Detalhes de parâmetros e permissões: `docs/ENDPOINTS.md`.
 - [x] Banco configurado: `inventario2` / root (`.env` local). Migration `001_api_keys.sql` aplicada.
 - [x] Testes ao vivo contra o banco real: health ✔, listar ✔, dropdown ✔, proximo_codigo ✔
       (IMP-014, DIV-005), dashboard ✔, validação 422 ✔, chave inválida 401 ✔.
+- [x] `toners` portado com lógica dedicada (`src/handlers/toners_handler.php`): registrar troca
+      (histórico + baixa de estoque), histórico de trocas (filtros impressora/setor/consumível) e
+      recebimento múltiplo — tudo em modal sobre a tela de Toners, sem páginas separadas.
 - [ ] Portar módulos complexos com lógica dedicada: `celulares` (entregas/devoluções),
       `estacoes` (associação de softwares), `manutencoes` (orçamentos/peças), `chamados`,
-      `usuarios`, `recebimentos_toner`, `historico_troca_toner`, `configuracoes`, `db_migrator`.
+      `usuarios`, `configuracoes`, `db_migrator`.
 - [ ] `composer require endroid/qr-code` para gerar imagens de QR Code no servidor.
 - [ ] HTTPS obrigatório + subdomínio dedicado (ex.: `api.fortluz.com.br`) na publicação.
 - [ ] Criar usuário MySQL dedicado (`apiphp_ro`) com privilégios mínimos e trocar o `root` no `.env`.

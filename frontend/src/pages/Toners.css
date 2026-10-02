@@ -104,3 +104,36 @@
 
 /* Coluna "Modelos compatíveis" da grade */
 .tnd-modelos { max-width: 260px; color: var(--text-muted); }
+
+/* ---------------- Operações da tela: modais de troca / recebimento / histórico ---------------- */
+.tnd-header-actions { flex-wrap: wrap; justify-content: flex-end; }
+.tnd-dialog-wide { width: 920px; }
+.tnd-textarea { height: auto; min-height: 56px; padding: 6px 8px; resize: vertical; line-height: 15px; }
+
+/* Responsável pela troca = usuário logado (sem seleção de funcionário) */
+.tnd-responsavel { display: flex; align-items: center; gap: 6px; margin: 0; padding: 5px 8px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-container-low); font: 600 11px var(--font-mono); color: var(--on-surface); }
+.tnd-responsavel .mat { color: var(--primary); font-size: 16px; }
+.tnd-responsavel-tag { margin-left: auto; font: 700 9px var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
+
+/* Bloco de itens do recebimento múltiplo */
+.tnd-receb { margin-top: 16px; padding: 10px 12px 12px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-low); display: flex; flex-direction: column; gap: 8px; }
+.tnd-receb-head { display: flex; align-items: center; gap: 6px; }
+.tnd-receb-head .mat { color: var(--primary); font-size: 17px; }
+.tnd-receb-head h3 { flex: 1; margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.tnd-receb-add { display: flex; align-items: center; gap: 8px; }
+.tnd-receb-add .tnd-select { flex: 1; }
+.tnd-receb-empty { margin: 0; color: var(--text-muted); font-size: 10px; }
+.tnd-receb-itens { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.tnd-receb-item { display: flex; align-items: center; gap: 8px; padding: 5px 6px 5px 8px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-container-lowest); }
+.tnd-receb-codigo { flex: 1; font: 600 11px var(--font-mono); }
+.tnd-receb-qtd { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; color: var(--text-muted); }
+.tnd-receb-qtd .tnd-input { width: 76px; text-align: right; }
+
+/* Histórico de trocas (modal) */
+.tnd-hist-filtros { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding: 8px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-low); }
+.tnd-hist-filtros .tnd-field { min-width: 190px; flex: 1; }
+.tnd-hist-filtros .tnd-actions { margin-left: auto; }
+.tnd-hist-scroll { max-height: 52vh; margin-top: 4px; }
+.tnd-nowrap { white-space: nowrap; }
+.tnd-table td .tnd-tipo { margin-left: 6px; }
+

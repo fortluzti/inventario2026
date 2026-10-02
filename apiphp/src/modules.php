@@ -362,6 +362,9 @@ return [
           'filter_exists' => [
               'modelo_id' => ['table' => 'impressora_modelos_toner', 'column' => 'toner_id', 'ref' => 'modelo_id'],
           ],
+          // Lista simples (id + codigo) para selects/filtros — ex.: filtro
+          // "Consumivel" do Historico de Trocas e do Recebimento de Toners.
+          'dropdown' => ['table' => 'toner', 'name_col' => 'codigo'],
       ],
 
     'celulares' => [
