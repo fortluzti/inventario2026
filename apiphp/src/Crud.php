@@ -42,6 +42,20 @@ final class Crud
             }
         }
 
+        // Filtro por RELACAO (whitelist no registry): restringe o modulo a registros
+        // que possuem vinculo em uma tabela de juncao (ex.: toners compativeis com um
+        // 'modelo_id' via impressora_modelos_toner, migration 006). Implementado com
+        // EXISTS para NAO duplicar linhas — um consumivel com N modelos continua
+        // aparecendo uma unica vez. Tabela/colunas sempre do registry; valor como
+        // parametro inteiro (nunca concatenado).
+        foreach ($this->mod['filter_exists'] ?? [] as $param => $fx) {
+            if (isset($input[$param]) && $input[$param] !== '') {
+                $where[] = "EXISTS (SELECT 1 FROM {$fx['table']} fx "
+                    . "WHERE fx.{$fx['column']} = {$table}.id AND fx.{$fx['ref']} = :fx_{$param})";
+                $params[":fx_{$param}"] = (int)$input[$param];
+            }
+        }
+
         // Ordenacao (whitelist por modulo): a chave amigavel ('nome', 'setor'...)
         // so e aceita se existir em mod['sortable']; a coluna SQL vem do registry
         // e NUNCA e concatenada a partir do input do cliente. A ordenacao ocorre

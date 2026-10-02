@@ -69,20 +69,27 @@ Resposta de `listar`:
   `estoque_minimo_toner`*, `estoque_minimo_cilindro`* (colunas da migration `005_consumiveis_regra.sql`)
 - **impressora_modelos_toner** (tabela `impressora_modelos_toner`, migration `006_impressora_modelos_toner.sql`):
   `modelo_id`*, `toner_id`* — consumíveis compatíveis de um modelo (vários por modelo).
-  Filtros: `modelo_id`, `toner_id`. `listar` devolve também `toner_codigo`, `toner_tipo` e
-  `toner_estoque` (JOIN com `toner`). **O tipo (TONER/CILINDRO) vem sempre de `toner.tipo`**
-  (cadastro do consumível) — não existe campo de tipo nesta tabela e o cliente não o envia.
-  Duplicidade (modelo_id, toner_id) responde 409. A tabela não tem `data_cadastro`/
-  `data_atualizacao` (`'audit_columns' => false` no registry).
+  Filtros: `modelo_id`, `toner_id`. `listar` devolve também `toner_codigo`, `toner_tipo`,
+  `toner_estoque` (JOIN com `toner`) e `modelo_nome`/`modelo_marca` (LEFT JOIN com
+  `impressora_modelos`) — usado no modal do Consumível. **O tipo (TONER/CILINDRO) vem sempre
+  de `toner.tipo`** (cadastro do consumível) — não existe campo de tipo nesta tabela e o
+  cliente não o envia. Duplicidade (modelo_id, toner_id) responde 409. A tabela não tem
+  `data_cadastro`/`data_atualizacao` (`'audit_columns' => false` no registry).
 - **monitores**: `marca`, `modelo`, `numero_serie`, `status`, `data_compra`, `nota_fiscal`,
   `fornecedor_id`, `empresa_id`, `portas` — `proximo_codigo` ✔ (`MON-027`)
 - **nobreaks**: `marca`, `potencia`, `quantidade_bateria`, `numero_serie`, `setor_id`,
   `status`, `data_compra`, `nf`, `fornecedor_id`, `empresa_id` — `proximo_codigo` ✔ (`NB-002`)
 - **setores**: `nome`*, `descricao`, `ativo` (0/1 — a tabela não tem `status`) — dropdown ✔ (ativo=1)
 - **softwares**: `nome`*, `numero_serie`, `observacao`
-- **toners** (tabela `toner`, singular): `codigo`*, `estoque`, `estoque_minimo`,
-  `autonomia`, `data_compra`, `nota_fiscal`, `fornecedor_id`, `empresa_id`
-  (sem `proximo_codigo` — códigos são modelos de toner, ex.: `TN-3442`)
+- **toners** (tabela `toner`, singular): `codigo`*, `tipo`* (`TONER`|`CILINDRO`),
+  `estoque`, `estoque_minimo`, `autonomia`, `valor` (migration `007_toner_valor.sql`,
+  `DECIMAL(10,2)`, só cadastro), `data_compra`, `nota_fiscal`, `fornecedor_id`,
+  `empresa_id` (sem `proximo_codigo` — códigos são modelos de toner, ex.: `TN-3442`).
+  Busca: `codigo`. Filtros: `tipo` e `modelo_id` (este último restringe aos consumíveis
+  ligados ao modelo via `impressora_modelos_toner`, usando `EXISTS` — um consumível
+  aparece **uma única vez** mesmo compatível com vários modelos). `listar` devolve também
+  `modelos_compat` (lista agregada dos modelos compatíveis). Regras: `estoque_minimo`
+  continua sendo o mínimo do consumível e `tipo` continua determinando TONER/CILINDRO.
 
 **REMOVIDO**: `acessorios` — a tabela não existe no backup `inventario2` restaurado
 (o handler legado `acessorios_handler.php` permanece na v1; recriar tabela se o módulo for necessário).

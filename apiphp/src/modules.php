@@ -237,9 +237,11 @@ return [
           'table'   => 'impressora_modelos_toner',
           'select'  =>
               'SELECT impressora_modelos_toner.*, '
-              . 't.codigo AS toner_codigo, t.tipo AS toner_tipo, t.estoque AS toner_estoque '
+              . 't.codigo AS toner_codigo, t.tipo AS toner_tipo, t.estoque AS toner_estoque, '
+              . 'im.nome_modelo AS modelo_nome, im.marca AS modelo_marca '
               . 'FROM impressora_modelos_toner '
-              . 'INNER JOIN toner t ON t.id = impressora_modelos_toner.toner_id',
+              . 'INNER JOIN toner t ON t.id = impressora_modelos_toner.toner_id '
+              . 'LEFT JOIN impressora_modelos im ON im.id = impressora_modelos_toner.modelo_id',
           'fields'  => [
               'modelo_id' => ['tipo' => 'int', 'req' => true],
               'toner_id'  => ['tipo' => 'int', 'req' => true],
@@ -325,6 +327,17 @@ return [
 
 'toners' => [
           'table'   => 'toner',
+          // `modelos_compat` agrega, em UMA linha por consumivel, os modelos de
+          // impressora compativeis (relacao impressora_modelos_toner, migration 006).
+          // Evita N+1 e NAO duplica o consumivel quando ele combina com varios modelos.
+          'select'  =>
+              "SELECT toner.*, "
+              . "(SELECT GROUP_CONCAT(CONCAT_WS(' ', NULLIF(im.marca, ''), NULLIF(im.nome_modelo, '')) "
+              . "ORDER BY im.nome_modelo SEPARATOR ', ') "
+              . "FROM impressora_modelos_toner r "
+              . "INNER JOIN impressora_modelos im ON im.id = r.modelo_id "
+              . "WHERE r.toner_id = toner.id) AS modelos_compat "
+              . "FROM toner",
           'fields'  => [
               'codigo'         => ['tipo' => 'string', 'req' => true, 'max' => 100],
               'tipo'           => ['tipo' => 'string', 'req' => true, 'enum' => ['TONER','CILINDRO']],
@@ -341,6 +354,14 @@ return [
               'empresa_id'     => ['tipo' => 'int'],
           ],
           'search'  => ['codigo'],
+          // Filtro TONER/CILINDRO (toner.tipo continua determinando a classificacao).
+          'filters' => ['tipo' => 'tipo'],
+          // Filtro "Modelo da impressora": retorna SOMENTE os consumiveis (TONER ou
+          // CILINDRO, mesma regra) vinculados ao modelo via impressora_modelos_toner.
+          // EXISTS garante uma unica linha por consumivel mesmo com N modelos.
+          'filter_exists' => [
+              'modelo_id' => ['table' => 'impressora_modelos_toner', 'column' => 'toner_id', 'ref' => 'modelo_id'],
+          ],
       ],
 
     'celulares' => [

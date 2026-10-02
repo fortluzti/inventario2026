@@ -25,6 +25,78 @@ export async function excluir(id) {
   return api('toners', 'excluir', { method: 'POST', body: { id } })
 }
 
+/* ---------------------------------------------------------------------------
+ * Modelos de impressora compatíveis — reusa a relação EXISTENTE
+ * `impressora_modelos_toner` (migration 006) e o cadastro `impressoras_modelos`.
+ * Mesma regra p/ TONER e CILINDRO: a classificação continua vindo de `toner.tipo`.
+ * Nenhuma tabela/endpoint paralelo é criado.
+ * ------------------------------------------------------------------------- */
+
+/** Autocomplete de modelos reais cadastrados (busca por nome/marca). */
+export async function buscarModelos(search = '') {
+  const data = await api('impressoras_modelos', 'listar', {
+    params: { search: String(search || '').trim(), limit: 20 },
+  })
+  return data.items || []
+}
+
+/** Associações já gravadas de um consumível (com nome/marca do modelo). */
+export async function listarModelosDoToner(tonerId) {
+  const data = await api('impressora_modelos_toner', 'listar', {
+    params: { toner_id: tonerId, limit: 200 },
+  })
+  return data.items || []
+}
+
+/** Grava uma associação consumível x modelo (duplicidade responde 409). */
+export function associarModelo(tonerId, modeloId) {
+  return api('impressora_modelos_toner', 'salvar', {
+    method: 'POST',
+    body: { toner_id: Number(tonerId), modelo_id: Number(modeloId) },
+  })
+}
+
+/** Remove uma associação pelo id da linha em `impressora_modelos_toner`. */
+export function removerAssociacaoModelo(associacaoId) {
+  return api('impressora_modelos_toner', 'excluir', {
+    method: 'POST',
+    body: { id: Number(associacaoId) },
+  })
+}
+
+/**
+ * Sincroniza o banco com a seleção do modal (diferença entre o gravado e o
+ * marcado): remove os que saíram e grava os novos. Idempotente — pode repetir
+ * em caso de falha de rede no meio do fluxo.
+ *
+ * @param {number} tonerId     consumível dono das associações
+ * @param {Array}  selecionados [{ modelo_id }] escolhidos no modal
+ * @param {Array}  atuais      associações devolvidas pela API para o consumível
+ * @returns {Promise<{adicionadas:number, removidas:number}>}
+ */
+export async function sincronizarModelos(tonerId, selecionados, atuais) {
+  const desejados = new Set(selecionados.map((m) => Number(m.modelo_id)))
+  const gravados = new Map(atuais.map((m) => [Number(m.modelo_id), Number(m.id)]))
+
+  let removidas = 0
+  for (const a of atuais) {
+    if (!desejados.has(Number(a.modelo_id))) {
+      await removerAssociacaoModelo(a.id)
+      removidas += 1
+    }
+  }
+
+  let adicionadas = 0
+  for (const s of selecionados) {
+    if (!gravados.has(Number(s.modelo_id))) {
+      await associarModelo(tonerId, s.modelo_id)
+      adicionadas += 1
+    }
+  }
+
+  return { adicionadas, removidas }
+}
+
 function toIntOrNull(v) {
   if (v === '' || v === null || v === undefined) return null
   const n = Number(v)

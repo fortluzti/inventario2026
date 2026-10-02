@@ -70,3 +70,37 @@
 .tnd-message { background: var(--ok-bg); color: var(--ok-fg); padding: 8px; border-radius: var(--radius); display: flex; align-items: center; gap: 8px; }
 .tnd-message.error { background: var(--crit-bg); color: var(--crit-fg); }
 .tnd-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Modelos de impressora compatíveis (modal do Consumível) */
+.tnd-compat { margin-top: 16px; padding: 10px 12px 12px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-low); display: flex; flex-direction: column; gap: 8px; }
+.tnd-compat-head { display: flex; align-items: center; gap: 6px; }
+.tnd-compat-head .mat { color: var(--primary); font-size: 17px; }
+.tnd-compat-head h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; flex: 1; margin: 0; }
+.tnd-compat-count { min-width: 20px; padding: 1px 6px; border-radius: 10px; background: var(--primary); color: var(--on-primary); font: 700 10px var(--font-mono); text-align: center; }
+.tnd-compat-hint, .tnd-compat-empty { margin: 0; color: var(--text-muted); font-size: 10px; }
+.tnd-compat-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.tnd-compat-chip { display: inline-flex; align-items: center; gap: 2px; padding: 2px 2px 2px 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-container-lowest); }
+.tnd-compat-chip-txt { font: 600 11px var(--font-mono); }
+.tnd-compat-x { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; }
+.tnd-compat-x .mat { font-size: 13px; }
+.tnd-compat-x:hover { background: var(--crit-bg); color: var(--crit-fg); }
+.tnd-compat-add { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.tnd-compat-sug { position: absolute; top: 100%; left: 0; right: 0; z-index: 5; max-height: 180px; overflow-y: auto; margin-top: 2px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-container-lowest); box-shadow: 0 8px 20px #0003; display: flex; flex-direction: column; }
+.tnd-compat-opcao { display: flex; align-items: center; gap: 6px; padding: 5px 8px; border: 0; border-radius: var(--radius); background: transparent; color: var(--on-surface); font: 11px var(--font); text-align: left; cursor: pointer; }
+.tnd-compat-opcao .mat { font-size: 15px; color: var(--primary); }
+.tnd-compat-opcao:hover { background: var(--surface-container-low); }
+
+/* Filtro "Modelo da impressora" (grade de Consumíveis) */
+.tnd-field-modelo { position: relative; }
+.tnd-modelo-autocomplete { position: relative; display: inline-flex; min-width: 220px; }
+.tnd-modelo-sug { position: absolute; top: 100%; left: 0; right: 0; z-index: 20; max-height: 200px; overflow-y: auto; margin-top: 2px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-container-lowest); box-shadow: 0 8px 20px #0003; display: flex; flex-direction: column; }
+.tnd-modelo-opcao { padding: 5px 8px; border: 0; border-radius: var(--radius); background: transparent; color: var(--on-surface); font: 11px var(--font); text-align: left; cursor: pointer; }
+.tnd-modelo-opcao:hover { background: var(--surface-container-low); }
+.tnd-modelo-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 2px 2px 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-container-lowest); font: 600 11px var(--font); }
+.tnd-modelo-chip .mat { font-size: 14px; color: var(--primary); }
+.tnd-modelo-chip-x { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; }
+.tnd-modelo-chip-x .mat { font-size: 13px; color: inherit; }
+.tnd-modelo-chip-x:hover { background: var(--crit-bg); color: var(--crit-fg); }
+
+/* Coluna "Modelos compatíveis" da grade */
+.tnd-modelos { max-width: 260px; color: var(--text-muted); }

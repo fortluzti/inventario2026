@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
-import { excluir } from '../api/toners.js'
+import { excluir, buscarModelos } from '../api/toners.js'
 import TonerDialog from '../components/TonerDialog.jsx'
 import './Toners.css'
 
@@ -29,6 +29,12 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
   const [message, setMessage] = useState('')
   const [dialog, setDialog] = useState(null)
   const [deleting, setDeleting] = useState(null)
+  // Filtro "Modelo da impressora": autocomplete por modelos reais cadastrados
+  // (evita texto livre) — usa o endpoint existente `impressoras_modelos`.
+  const [modeloQuery, setModeloQuery] = useState('')
+  const [modeloResults, setModeloResults] = useState([])
+  const [modeloOpen, setModeloOpen] = useState(false)
+  const [modeloLabel, setModeloLabel] = useState('')
   const deleteLock = useRef(false)
   const searchRef = useRef(null)
   const lastNewRequest = useRef(newRequest)
@@ -37,6 +43,19 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
     const timer = setTimeout(() => { setQuery(search.trim()); setPage(1) }, 300)
     return () => clearTimeout(timer)
   }, [search])
+
+  // Autocomplete do filtro "Modelo da impressora" (busca modelos reais cadastrados).
+  useEffect(() => {
+    if (!modeloOpen) return undefined
+    let active = true
+    const q = modeloQuery.trim()
+    const timer = setTimeout(() => {
+      buscarModelos(q)
+        .then((items) => { if (active) setModeloResults(items) })
+        .catch(() => { if (active) setModeloResults([]) })
+    }, 250)
+    return () => { active = false; clearTimeout(timer) }
+  }, [modeloQuery, modeloOpen])
 
   useEffect(() => {
     let active = true
@@ -84,8 +103,31 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
     finally { deleteLock.current = false; setDeleting(null) }
   }
 
+  function selectModelo(m) {
+    const label = [m.marca, m.nome_modelo].filter(Boolean).join(' ')
+    // Aplica imediatamente o filtro por modelo (combina com busca, tipo e paginação).
+    setModeloLabel(label)
+    setModeloQuery(label)
+    setModeloOpen(false)
+    setModeloResults([])
+    setDraft((d) => ({ ...d, modelo_id: m.id }))
+    setFilters((f) => ({ ...f, modelo_id: m.id }))
+    setPage(1)
+  }
+
+  function clearModelo() {
+    setModeloLabel('')
+    setModeloQuery('')
+    setModeloOpen(false)
+    setModeloResults([])
+    setDraft((d) => { const { modelo_id, ...rest } = d; return rest })
+    setFilters((f) => { const { modelo_id, ...rest } = f; return rest })
+    setPage(1)
+  }
+
   function clear() {
     setSearch(''); setQuery(''); setFilters({}); setDraft({}); setPage(1)
+    setModeloLabel(''); setModeloQuery(''); setModeloOpen(false); setModeloResults([])
   }
 
   return <section className="tnd-page" aria-labelledby="tnd-page-title">
@@ -102,12 +144,26 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
       <div className="tnd-toolbar-row">
         <label className="tnd-search"><span className="mat" aria-hidden="true">search</span><input ref={searchRef} aria-label="Buscar consumíveis" placeholder="Buscar por código…" value={search} onChange={(e) => setSearch(e.target.value)} /></label>
         <div className="tnd-actions">
-          <button className="tnd-btn" onClick={() => setShowFilters((v) => !v)} aria-expanded={showFilters} aria-controls="tnd-filters"><span className="mat" aria-hidden="true">filter_list</span>Filtros{filters.tipo ? ' •' : ''}</button>
+          <button className="tnd-btn" onClick={() => setShowFilters((v) => !v)} aria-expanded={showFilters} aria-controls="tnd-filters"><span className="mat" aria-hidden="true">filter_list</span>Filtros{(filters.tipo || filters.modelo_id) ? ' •' : ''}</button>
           <button className="tnd-btn" onClick={() => setRevision((v) => v + 1)} disabled={loading}>Atualizar</button>
         </div>
       </div>
       {showFilters && <form id="tnd-filters" className="tnd-filters" onSubmit={(e) => { e.preventDefault(); setFilters({ ...draft }); setPage(1) }}>
         <label>Tipo: <select aria-label="Filtrar por tipo" value={draft.tipo || ''} onChange={(e) => setDraft({ ...draft, tipo: e.target.value })}><option value="">Todos</option><option value="TONER">TONER</option><option value="CILINDRO">CILINDRO</option></select></label>
+        <label className="tnd-field-modelo">Modelo da impressora:
+          <span className="tnd-modelo-autocomplete">
+            <input id="tnd-modelo-busca" className="tnd-input" aria-label="Buscar modelo da impressora" placeholder="Pesquisar modelo (ex: HP 408)…" value={modeloQuery} onChange={(e) => { setModeloQuery(e.target.value); setModeloOpen(true) }} onFocus={() => setModeloOpen(true)} autoComplete="off" />
+            {modeloOpen && modeloQuery.trim() !== '' && (
+              <div className="tnd-modelo-sug" role="listbox" aria-label="Modelos encontrados">
+                {modeloResults.length === 0 && <p className="tnd-hint">Nenhum modelo encontrado.</p>}
+                {modeloResults.map((m) => (
+                  <button key={m.id} type="button" className="tnd-modelo-opcao" role="option" onClick={() => selectModelo(m)}>{[m.marca, m.nome_modelo].filter(Boolean).join(' ')}</button>
+                ))}
+              </div>
+            )}
+          </span>
+        </label>
+        {filters.modelo_id && <span className="tnd-modelo-chip" title="Filtro por modelo aplicado"><span className="mat" aria-hidden="true">print</span>{modeloLabel || `Modelo #${filters.modelo_id}`}<button type="button" className="tnd-modelo-chip-x" aria-label="Remover filtro de modelo" onClick={clearModelo}><span className="mat">close</span></button></span>}
         <div className="tnd-actions"><button className="tnd-btn tnd-btn-primary" type="submit">Aplicar</button><button className="tnd-btn" type="button" onClick={clear}>Limpar</button></div>
       </form>}
     </div>
@@ -118,14 +174,15 @@ export default function Toners({ refreshKey = 0, newRequest = 0, onChanged }) {
     <div className="tnd-grid" aria-busy={loading}>
       <div className="tnd-table-scroll"><table className="tnd-table">
         <caption className="tnd-sr-only">Consumíveis cadastrados</caption>
-        <thead><tr>{['Código', 'Tipo', 'Estoque', 'Mín.', 'Autonomia', 'Valor (R$)', 'Ações'].map((label) => <th key={label} scope="col">{label}</th>)}</tr></thead>
-        <tbody>{loading ? <tr><td colSpan={7} className="tnd-muted" role="status">Carregando consumíveis…</td></tr> : data.items.length === 0 ? <tr><td colSpan={7} className="tnd-muted">{error ? 'Não foi possível carregar a listagem.' : 'Nenhum consumível encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
+        <thead><tr>{['Código', 'Tipo', 'Estoque', 'Mín.', 'Autonomia', 'Valor (R$)', 'Modelos compatíveis', 'Ações'].map((label) => <th key={label} scope="col">{label}</th>)}</tr></thead>
+        <tbody>{loading ? <tr><td colSpan={8} className="tnd-muted" role="status">Carregando consumíveis…</td></tr> : data.items.length === 0 ? <tr><td colSpan={8} className="tnd-muted">{error ? 'Não foi possível carregar a listagem.' : 'Nenhum consumível encontrado.'}</td></tr> : data.items.map((row) => <tr key={row.id}>
           <td><strong className="tnd-name">{row.codigo || '—'}</strong></td>
           <td><span className={`tnd-tipo ${row.tipo === 'CILINDRO' ? 'cilindro' : 'toner'}`}>{row.tipo || '—'}</span></td>
           <td className="tnd-number">{row.estoque ?? 0}</td>
           <td className="tnd-number">{row.estoque_minimo ?? 0}</td>
           <td className="tnd-muted">{row.autonomia || '—'}</td>
           <td className="tnd-number tnd-valor">{`R$ ${brl(row.valor)}`}</td>
+          <td className="tnd-modelos" title={row.modelos_compat || ''}>{row.modelos_compat || '—'}</td>
           <td><div className="tnd-actions"><button className="tnd-btn tnd-btn-icon" title="Visualizar" aria-label="Visualizar consumível" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="tnd-btn tnd-btn-icon" title="Editar" aria-label="Editar consumível" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button><button className="tnd-btn tnd-btn-icon danger" title="Excluir" aria-label="Excluir consumível" disabled={deleting !== null} onClick={() => remove(row)}><span className="mat">delete</span></button></div></td>
         </tr>)}</tbody>
       </table></div>

@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
-import { EMPTY_TONER, TONER_TIPOS, tonerPayload, buscarPorId } from '../api/toners.js'
+import {
+  EMPTY_TONER, TONER_TIPOS, tonerPayload, buscarPorId,
+  buscarModelos, listarModelosDoToner, sincronizarModelos,
+} from '../api/toners.js'
 
 export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
   const [form, setForm] = useState(EMPTY_TONER)
@@ -8,6 +11,15 @@ export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [dirty, setDirty] = useState(false)
+  // Modelos de impressora compatíveis — relação existente `impressora_modelos_toner`
+  // (migration 006). TONER e CILINDRO usam exatamente o mesmo mecanismo.
+  const [modelos, setModelos] = useState([]) // [{ id, modelo_id, modelo_nome, modelo_marca }]
+  const [modeloQuery, setModeloQuery] = useState('')
+  const [modeloResults, setModeloResults] = useState([])
+  const [modeloLoading, setModeloLoading] = useState(false)
+  // id do consumível já gravado nesta sessão do modal (permite novo Ctrl+S após
+  // falha na gravação das associações sem duplicar o cadastro)
+  const [savedId, setSavedId] = useState(null)
   const saveLock = useRef(false)
   const dialogRef = useRef(null)
   const formRef = useRef(null)
@@ -38,6 +50,41 @@ export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
     }
   }, [mode, id])
 
+  // Associações já gravadas do consumível (edição/visualização).
+  useEffect(() => {
+    let active = true
+    if ((mode === 'edit' || mode === 'view') && id) {
+      listarModelosDoToner(id)
+        .then((items) => {
+          if (!active) return
+          setModelos(items.map((a) => ({
+            id: a.id ?? null,
+            modelo_id: Number(a.modelo_id),
+            modelo_nome: a.modelo_nome || '',
+            modelo_marca: a.modelo_marca || '',
+          })))
+        })
+        .catch((e) => { if (active) setError(e.message) })
+    }
+    return () => { active = false }
+  }, [mode, id])
+
+  // Autocomplete de modelos reais cadastrados (evita texto livre).
+  useEffect(() => {
+    if (view) return undefined
+    const q = modeloQuery.trim()
+    if (!q) { setModeloResults([]); return undefined }
+    let active = true
+    setModeloLoading(true)
+    const timer = setTimeout(() => {
+      buscarModelos(q)
+        .then((items) => { if (active) setModeloResults(items) })
+        .catch(() => { if (active) setModeloResults([]) })
+        .finally(() => { if (active) setModeloLoading(false) })
+    }, 250)
+    return () => { active = false; clearTimeout(timer) }
+  }, [modeloQuery, view])
+
   useEffect(() => {
     const previous = document.activeElement
     dialogRef.current?.focus()
@@ -64,6 +111,28 @@ export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
     setDirty(true)
   }
 
+  // ---- Modelos de impressora compatíveis (adiciona/remove) ----
+  const modeloLabel = (m) => [m.modelo_marca, m.modelo_nome].filter(Boolean).join(' ') || `Modelo #${m.modelo_id}`
+  const modeloDisponiveis = modeloResults.filter((m) => !modelos.some((x) => Number(x.modelo_id) === Number(m.id)))
+
+  function addModelo(m) {
+    if (!m || modelos.some((x) => Number(x.modelo_id) === Number(m.id))) return
+    setModelos((prev) => [...prev, {
+      id: null,
+      modelo_id: Number(m.id),
+      modelo_nome: m.nome_modelo || '',
+      modelo_marca: m.marca || '',
+    }])
+    setModeloQuery('')
+    setModeloResults([])
+    setDirty(true)
+  }
+
+  function removeModelo(modeloId) {
+    setModelos((prev) => prev.filter((m) => Number(m.modelo_id) !== Number(modeloId)))
+    setDirty(true)
+  }
+
   async function save(e) {
     e.preventDefault()
     if (view || loading || saveLock.current) return
@@ -72,13 +141,30 @@ export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
     saveLock.current = true
     setSaving(true)
     setError('')
+    // Em "novo", o consumível é criado primeiro para que as associações de modelos
+    // (modelo_id é obrigatório na relação 006) sejam gravadas no mesmo fluxo.
+    const payloadId = id || savedId
+    let tonerId = payloadId
     try {
       const payload = tonerPayload(form)
-      if (mode === 'edit') payload.id = id
+      if (mode === 'edit' || savedId) payload.id = payloadId
       const res = await api('toners', 'salvar', { method: 'POST', body: payload })
-      onSaved?.(mode === 'new' ? 'Consumível criado com sucesso.' : 'Consumível atualizado com sucesso.', res.id)
+      tonerId = payloadId || res?.id || null
+      if (mode === 'new' && tonerId && !savedId) setSavedId(tonerId)
     } catch (err) {
       setError(err.message)
+      saveLock.current = false
+      setSaving(false)
+      return
+    }
+    try {
+      if (tonerId) {
+        const atuais = await listarModelosDoToner(tonerId)
+        await sincronizarModelos(tonerId, modelos, atuais)
+      }
+      onSaved?.(mode === 'new' && !savedId ? 'Consumível criado com sucesso.' : 'Consumível atualizado com sucesso.', tonerId)
+    } catch (err) {
+      setError(`Consumível salvo, mas não foi possível gravar os modelos compatíveis: ${err.message}`)
     } finally {
       saveLock.current = false
       setSaving(false)
@@ -138,6 +224,55 @@ export default function TonerDialog({ mode = 'new', id, onClose, onSaved }) {
               </div>
               {!view && <p className="tnd-hint full">O valor é apenas cadastro p/ futuro histórico financeiro — não entra em solicitação/pedido nem em cálculo de estoque.</p>}
             </div>
+
+            <section className="tnd-compat" aria-labelledby="tnd-compat-title">
+              <header className="tnd-compat-head">
+                <span className="mat" aria-hidden="true">print</span>
+                <h3 id="tnd-compat-title">Modelos de impressora compatíveis</h3>
+                <span className="tnd-compat-count" aria-label={`${modelos.length} modelo(s) compatível(is)`}>{modelos.length}</span>
+              </header>
+              <p className="tnd-compat-hint">O tipo (TONER/CILINDRO) vem do cadastro acima — não é definido no modelo.</p>
+              {modelos.length === 0 ? (
+                <p className="tnd-compat-empty">Nenhum modelo de impressora associado a este consumível.</p>
+              ) : (
+                <ul className="tnd-compat-chips">
+                  {modelos.map((m) => (
+                    <li key={m.modelo_id} className="tnd-compat-chip">
+                      <span className="tnd-compat-chip-txt">{modeloLabel(m)}</span>
+                      {!view && (
+                        <button type="button" className="tnd-compat-x" aria-label={`Remover ${modeloLabel(m)}`} onClick={() => removeModelo(m.modelo_id)}>
+                          <span className="mat">close</span>
+                        </button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {!view && (
+                <div className="tnd-compat-add">
+                  <label className="tnd-sr-only" htmlFor="tnd-dialog-modelo-busca">Adicionar modelo de impressora compatível</label>
+                  <input
+                    id="tnd-dialog-modelo-busca"
+                    className="tnd-input"
+                    value={modeloQuery}
+                    onChange={(e) => setModeloQuery(e.target.value)}
+                    placeholder="Pesquisar modelo (ex: HP 408)…"
+                    autoComplete="off"
+                  />
+                  {modeloQuery.trim() !== '' && (
+                    <div className="tnd-compat-sug" role="listbox" aria-label="Modelos encontrados">
+                      {modeloLoading && <p className="tnd-compat-hint" role="status">Buscando…</p>}
+                      {!modeloLoading && modeloDisponiveis.length === 0 && <p className="tnd-compat-hint">Nenhum modelo novo encontrado.</p>}
+                      {modeloDisponiveis.map((m) => (
+                        <button key={m.id} type="button" className="tnd-compat-opcao" role="option" onClick={() => addModelo(m)}>
+                          <span className="mat" aria-hidden="true">add</span>{[m.marca, m.nome_modelo].filter(Boolean).join(' ')}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </section>
           </fieldset>
           {error && <div className="tnd-message error" role="alert">{error}<button type="button" className="tnd-btn" onClick={() => setError('')}>Fechar</button></div>}
         </form>
