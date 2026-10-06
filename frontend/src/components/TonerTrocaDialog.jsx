@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { listarTodas } from '../api/impressoras.js'
 import { listarCompativeis, registrarTroca } from '../api/toners.js'
+import SearchableSelect, { toSearchOptions } from './SearchableSelect.jsx'
 
 /**
  * TonerTrocaDialog — "Registrar Troca" em MODAL sobre a lista de Toners.
@@ -58,6 +59,14 @@ export default function TonerTrocaDialog({ user, onClose, onSaved }) {
 
   const impressoraLabel = (i) => [i.codigo_interno_impressora, i.modelo_nome, i.setor_nome].filter(Boolean).join(' · ')
   const tonerLabel = (t) => `${t.codigo} · ${t.tipo} · estoque ${t.estoque ?? 0}`
+  const impOptions = useMemo(
+    () => toSearchOptions(impressoras, { labelOf: impressoraLabel, extraOf: (i) => [i.modelo_nome, i.setor_nome].filter(Boolean).join(' ') }),
+    [impressoras],
+  )
+  const tonerOptions = useMemo(
+    () => toSearchOptions(compativeis, { labelOf: tonerLabel, extraOf: (t) => t.tipo }),
+    [compativeis],
+  )
 
   async function submit(e) {
     e.preventDefault()
@@ -97,35 +106,31 @@ export default function TonerTrocaDialog({ user, onClose, onSaved }) {
           <div className="tnd-form-grid">
             <div className="tnd-field full">
               <label htmlFor="tnd-troca-impressora">Impressora *</label>
-              <select
+              <SearchableSelect
                 id="tnd-troca-impressora"
-                className="tnd-select"
+                ariaLabel="Impressora"
+                options={impOptions}
                 value={form.id_impressora}
-                onChange={(e) => trocarImpressora(e.target.value)}
+                onChange={(v) => trocarImpressora(v)}
+                placeholder={carregandoImp ? 'Carregando impressoras…' : 'Selecione a impressora…'}
+                loading={carregandoImp}
                 disabled={saving || carregandoImp}
-                required
-              >
-                <option value="">{carregandoImp ? 'Carregando impressoras…' : 'Selecione a impressora…'}</option>
-                {impressoras.map((i) => <option key={i.id} value={i.id}>{impressoraLabel(i)}</option>)}
-              </select>
+              />
               <p className="tnd-hint">A impressora determina os consumíveis compatíveis (TONER e CILINDRO na mesma operação).</p>
             </div>
 
             <div className="tnd-field full">
               <label htmlFor="tnd-troca-toner">Consumível utilizado *</label>
-              <select
+              <SearchableSelect
                 id="tnd-troca-toner"
-                className="tnd-select"
+                ariaLabel="Consumível utilizado"
+                options={tonerOptions}
                 value={form.id_toner}
-                onChange={(e) => setForm((f) => ({ ...f, id_toner: e.target.value }))}
+                onChange={(v) => setForm((f) => ({ ...f, id_toner: v }))}
+                placeholder={!form.id_impressora ? 'Selecione a impressora primeiro' : carregandoComp ? 'Carregando…' : 'Selecione o consumível…'}
+                loading={carregandoComp}
                 disabled={saving || carregandoComp || !form.id_impressora}
-                required
-              >
-                <option value="">
-                  {!form.id_impressora ? 'Selecione a impressora primeiro' : carregandoComp ? 'Carregando…' : 'Selecione o consumível…'}
-                </option>
-                {compativeis.map((t) => <option key={t.id} value={t.id}>{tonerLabel(t)}</option>)}
-              </select>
+              />
               {semCompativel && (
                 <p className="tnd-hint">
                   Nenhum consumível vinculado ao modelo desta impressora. Cadastre a compatibilidade no cadastro do consumível.

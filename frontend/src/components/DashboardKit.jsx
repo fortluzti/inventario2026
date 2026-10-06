@@ -51,7 +51,10 @@ export const MODULES = [
     { id: 'relatorio-monitores', label: 'Relatório de Monitores', icon: 'desktop_windows' },
     { id: 'relatorio-impressoras', label: 'Relatório de Impressoras', icon: 'print' },
   ]},
-  { group: '8. Administração', items: [
+  { group: '8. Suporte & Atualizações ERP', items: [
+    { id: 'pendencias-erp', label: 'Pendências do ERP', icon: 'assignment_late' },
+  ]},
+  { group: '9. Administração', items: [
     { id: 'usuarios', label: 'Usuários & Perfis (RBAC)', icon: 'admin_panel_settings' },
     { id: 'permissoes', label: 'Permissões', icon: 'lock_person' },
     { id: 'configuracoes', label: 'Configurações do Sistema', icon: 'settings' },

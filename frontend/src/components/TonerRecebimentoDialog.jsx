@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { listarOpcoes as listarFuncionarios } from '../api/funcionarios.js'
+import { listarOpcoes as listarFornecedores } from '../api/fornecedores.js'
 import { listarConsumiveis, receberMultiplos } from '../api/toners.js'
+import SearchableSelect, { toSearchOptions } from './SearchableSelect.jsx'
 
 const hoje = () => new Date().toISOString().slice(0, 10)
 
@@ -15,8 +17,9 @@ const hoje = () => new Date().toISOString().slice(0, 10)
 export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
   const [funcionarios, setFuncionarios] = useState([])
   const [consumiveis, setConsumiveis] = useState([])
+  const [fornecedores, setFornecedores] = useState([])
   const [carregando, setCarregando] = useState(true)
-  const [form, setForm] = useState({ funcionario_recebedor_id: '', data_recebimento: hoje(), observacoes: '' })
+  const [form, setForm] = useState({ funcionario_recebedor_id: '', fornecedor_id: '', data_recebimento: hoje(), observacoes: '' })
   const [itens, setItens] = useState([]) // [{ toner_id, codigo, quantidade }]
   const [novoTonerId, setNovoTonerId] = useState('')
   const [saving, setSaving] = useState(false)
@@ -26,11 +29,12 @@ export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
 
   useEffect(() => {
     let ativo = true
-    Promise.all([listarFuncionarios(), listarConsumiveis()])
-      .then(([funcs, cons]) => {
+    Promise.all([listarFuncionarios(), listarConsumiveis(), listarFornecedores()])
+      .then(([funcs, cons, forns]) => {
         if (!ativo) return
         setFuncionarios(funcs)
         setConsumiveis(cons)
+        setFornecedores(forns)
       })
       .catch((e) => { if (ativo) setError(e.message) })
       .finally(() => { if (ativo) setCarregando(false) })
@@ -74,6 +78,20 @@ export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
 
   const validos = itens.filter((i) => Number(i.quantidade) > 0)
 
+  const funcOptions = useMemo(() => toSearchOptions(funcionarios, { labelOf: (f) => f.nome, extraOf: (f) => f.cargo }), [funcionarios])
+  const fornOptions = useMemo(
+    () => toSearchOptions(fornecedores, { labelOf: (f) => f.nome, extraOf: (f) => [f.cnpj, f.nome_vendedor].filter(Boolean).join(' ') }),
+    [fornecedores],
+  )
+  const tonerAddOptions = useMemo(
+    () => toSearchOptions(disponiveis, { labelOf: (c) => c.nome, extraOf: (c) => [c.codigo, c.tipo].filter(Boolean).join(' ') }),
+    [disponiveis],
+  )
+
+  function pick(name) {
+    return (v) => { setForm((prev) => ({ ...prev, [name]: v })); setError('') }
+  }
+
   async function submit(e) {
     e.preventDefault()
     if (lock.current || saving) return
@@ -85,6 +103,7 @@ export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
     try {
       const res = await receberMultiplos({
         funcionario_recebedor_id: form.funcionario_recebedor_id,
+        fornecedor_id: form.fornecedor_id,
         data_recebimento: form.data_recebimento,
         observacoes: form.observacoes,
         toners: validos.map((i) => ({ toner_id: i.toner_id, quantidade: i.quantidade })),
@@ -114,18 +133,31 @@ export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
           <div className="tnd-form-grid">
             <div className="tnd-field">
               <label htmlFor="tnd-receb-func">Funcionário recebedor *</label>
-              <select
+              <SearchableSelect
                 id="tnd-receb-func"
-                name="funcionario_recebedor_id"
-                className="tnd-select"
+                ariaLabel="Funcionário recebedor"
+                options={funcOptions}
                 value={form.funcionario_recebedor_id}
-                onChange={change}
-                disabled={saving || carregando}
-                required
-              >
-                <option value="">{carregando ? 'Carregando…' : 'Selecione o funcionário…'}</option>
-                {funcionarios.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
-              </select>
+                onChange={pick('funcionario_recebedor_id')}
+                placeholder={carregando ? 'Carregando…' : 'Selecione o funcionário…'}
+                loading={carregando}
+                disabled={saving}
+              />
+            </div>
+
+            <div className="tnd-field">
+              <label htmlFor="tnd-receb-fornecedor">Fornecedor (opcional)</label>
+              <SearchableSelect
+                id="tnd-receb-fornecedor"
+                ariaLabel="Fornecedor do recebimento"
+                options={fornOptions}
+                value={form.fornecedor_id}
+                onChange={pick('fornecedor_id')}
+                placeholder="Sem fornecedor…"
+                loading={carregando}
+                disabled={saving}
+                emptyText="Nenhum fornecedor ativo encontrado."
+              />
             </div>
 
             <div className="tnd-field">
@@ -165,16 +197,16 @@ export default function TonerRecebimentoDialog({ user, onClose, onSaved }) {
 
             <div className="tnd-receb-add">
               <label className="tnd-sr-only" htmlFor="tnd-receb-toner">Adicionar consumível</label>
-              <select
+              <SearchableSelect
                 id="tnd-receb-toner"
-                className="tnd-select"
+                ariaLabel="Adicionar consumível"
+                options={tonerAddOptions}
                 value={novoTonerId}
-                onChange={(e) => setNovoTonerId(e.target.value)}
+                onChange={setNovoTonerId}
+                placeholder={carregando ? 'Carregando…' : 'Selecione o consumível…'}
+                loading={carregando}
                 disabled={saving || carregando}
-              >
-                <option value="">{carregando ? 'Carregando…' : 'Selecione o consumível…'}</option>
-                {disponiveis.map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}
-              </select>
+              />
               <button className="tnd-btn" type="button" onClick={adicionar} disabled={saving || !novoTonerId}>
                 <span className="mat" aria-hidden="true">add</span>Adicionar
               </button>

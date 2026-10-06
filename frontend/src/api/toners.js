@@ -179,12 +179,15 @@ export function listarHistorico({ impressora_id, setor_id, toner_id, page = 1, l
 /**
  * Recebimento múltiplo: funcionário recebedor + data/observação + vários
  * consumíveis com quantidade. Soma no estoque e grava `recebimentos_toner`.
+ * `fornecedor_id` é OPCIONAL e geral do lote (um valor para todos os itens,
+ * mesma regra de data/observação) — ausente = NULL, sem quebrar o fluxo.
  */
-export function receberMultiplos({ funcionario_recebedor_id, data_recebimento, observacoes, toners, usuario }) {
+export function receberMultiplos({ funcionario_recebedor_id, fornecedor_id, data_recebimento, observacoes, toners, usuario }) {
   return api('toners', 'receber_multiplos', {
     method: 'POST',
     body: {
       funcionario_recebedor_id: Number(funcionario_recebedor_id),
+      fornecedor_id: fornecedor_id ? Number(fornecedor_id) : null,
       data_recebimento: String(data_recebimento ?? '').trim() || null,
       observacoes: String(observacoes ?? '').trim().substring(0, 1000) || null,
       usuario: String(usuario ?? '').trim().substring(0, 50) || null,

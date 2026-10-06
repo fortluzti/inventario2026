@@ -27,6 +27,7 @@ export async function testToners({ container, act, check, setVal, dom }) {
   ];
   const FUNCIONARIOS = [{ id: 32, nome: 'ALEX FABIANO LONGO' }];
   const SETORES = [{ id: 11, nome: 'TI' }, { id: 14, nome: 'FINANCEIRO' }];
+  const FORNECEDORES = [{ id: 55, nome: 'DISTRIBUIDORA ALPHA', cnpj: '11.222.333/0001-44', nome_vendedor: 'JOAO', ativo: 1 }];
   const HISTORICO = [];    // linhas gravadas em historico_troca_toner
   const RECEBIMENTOS = []; // lotes gravados em recebimentos_toner
   const pagina = (arr) => ({ items: arr, total: arr.length, page: 1, limit: 200, total_pages: 1 });
@@ -103,9 +104,9 @@ export async function testToners({ container, act, check, setVal, dom }) {
 
     /* Apoio dos modais: impressoras (troca/histórico), funcionários (recebimento)
        e setores (filtro do histórico) — mesmos endpoints genéricos da API. */
-    if (endpoint === 'impressoras' || endpoint === 'funcionarios' || endpoint === 'setores') {
+    if (endpoint === 'impressoras' || endpoint === 'funcionarios' || endpoint === 'setores' || endpoint === 'fornecedores') {
       relCalls.push({ endpoint, action });
-      const base = endpoint === 'impressoras' ? IMPRESSORAS : endpoint === 'funcionarios' ? FUNCIONARIOS : SETORES;
+      const base = endpoint === 'impressoras' ? IMPRESSORAS : endpoint === 'funcionarios' ? FUNCIONARIOS : endpoint === 'fornecedores' ? FORNECEDORES : SETORES;
       return Response.json({ success: true, data: pagina(base) });
     }
 
@@ -172,7 +173,8 @@ export async function testToners({ container, act, check, setVal, dom }) {
       if (impId) rows = rows.filter((r) => String(r.id_impressora) === String(impId));
       if (setorId) rows = rows.filter((r) => String(r.setor_id) === String(setorId));
       if (tonerId) rows = rows.filter((r) => String(r.id_toner) === String(tonerId));
-      return Response.json({ success: true, data: { items: rows, total: rows.length, page: 1, limit: 50, total_pages: 1 } });
+      // total_geral = total existente ANTES dos filtros (mesmo com paginação).
+      return Response.json({ success: true, data: { items: rows, total: rows.length, total_geral: HISTORICO.length, page: 1, limit: 50, total_pages: 1 } });
     }
     if (action === 'listar') return Response.json({ success: true, data: applyList(u.searchParams) });
     if (action === 'buscar_por_id') {
@@ -219,6 +221,28 @@ export async function testToners({ container, act, check, setVal, dom }) {
     const setter = Object.getOwnPropertyDescriptor(dom.window.HTMLTextAreaElement.prototype, 'value').set;
     setter.call(el, value);
     el.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  }
+
+  /* ---------- Padrão global: SearchableSelect (dropdown pesquisável) ---------- */
+  const ssItems = () => [...container.querySelectorAll('.ss-drop .ss-item')];
+  async function ssOpen(btnSel) {
+    // Fecha qualquer dropdown aberto (clique fora) antes de abrir outro.
+    await act(async () => { dom.window.document.dispatchEvent(new dom.window.MouseEvent('mousedown', { bubbles: true })); });
+    await flush();
+    const btn = container.querySelector(btnSel);
+    await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+    await flush(); await flush(); // autofocus usa setTimeout(0)
+    return container.querySelector('.ss-drop');
+  }
+  async function ssClickItem(match) {
+    const el = ssItems().find((i) => i.textContent.includes(match));
+    await act(async () => { el.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+    await flush(); await flush();
+    return el;
+  }
+  async function ssSearch(texto) {
+    setVal(container.querySelector('.ss-drop .ss-search-input'), texto);
+    await flush();
   }
 
   try {
@@ -393,19 +417,33 @@ export async function testToners({ container, act, check, setVal, dom }) {
     /* ---------- 1. Registrar Troca ---------- */
     await abrirOperacao('Registrar Troca');
     ok(!!container.querySelector('.tnd-overlay'), '"Registrar Troca" abre MODAL');
-    ok(!!container.querySelector('#tnd-troca-impressora'), 'modal da troca tem select de impressora');
+    ok(!!container.querySelector('#tnd-troca-impressora'), 'modal da troca tem botão de impressora (padrão pesquisável)');
     ok(!container.querySelector('#tnd-receb-func'), 'modal da troca NÃO permite escolher funcionário');
     ok(container.textContent.includes('USUÁRIO LOGADO'), 'responsável exibido = usuário logado');
     await flush(); await flush(); await flush();
-    const selImp = container.querySelector('#tnd-troca-impressora');
-    ok(selImp.options.length === 3, 'modal lista as impressoras cadastradas');
-    await setSelect(selImp, '16');
+
+    /* Padrão global: busca no topo, foco automático, filtro, limpar e seleção */
+    const dropImp = await ssOpen('#tnd-troca-impressora');
+    ok(!!dropImp && !!dropImp.querySelector('.ss-search-input'), 'dropdown de impressora abre com "🔍 Buscar..." no topo');
+    ok(dom.window.document.activeElement === dropImp.querySelector('.ss-search-input'), 'foco automático no campo de busca');
+    ok(ssItems().length === 2, 'modal lista as impressoras cadastradas');
+    await ssSearch('IMP-005');
+    ok(ssItems().length === 1 && ssItems()[0].textContent.includes('IMP-005'), 'busca filtra conforme a digitação');
+    await ssSearch('nao-existe');
+    ok(ssItems().length === 0 && dropImp.textContent.includes('Nenhum registro'), 'busca sem resultado exibe vazio');
+    await act(async () => { dropImp.querySelector('.ss-clear').dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
+    await flush();
+    ok(ssItems().length === 2, 'limpar a busca restaura os resultados');
+    await ssSearch('IMP-004');
+    await ssClickItem('IMP-004');
+    ok(!container.querySelector('.ss-drop'), 'selecionar item fecha o dropdown');
+    ok(container.querySelector('#tnd-troca-impressora').textContent.includes('IMP-004'), 'valor selecionado é mantido no campo');
     await flush(); await flush();
     ok(lastCall('listar_compativeis')?.params?.impressora_id === '16', 'troca consulta os consumíveis compatíveis com a impressora');
-    const selTon = container.querySelector('#tnd-troca-toner');
-    ok(selTon.options.length === 2, 'só o consumível compatível com o modelo é oferecido');
-    ok(selTon.textContent.includes('W1330A'), 'compatível = W1330A (TONER/CILINDRO pela mesma relação)');
-    await setSelect(selTon, '1');
+    const dropTon = await ssOpen('#tnd-troca-toner');
+    ok(ssItems().length === 1, 'só o consumível compatível com o modelo é oferecido');
+    ok(ssItems()[0].textContent.includes('W1330A'), 'compatível = W1330A (TONER/CILINDRO pela mesma relação)');
+    await ssClickItem('W1330A');
     setTextarea(container.querySelector('#tnd-troca-obs'), 'Troca de teste');
     await flush();
     const estoqueAntes = DB.find((r) => r.id === 1).estoque;
@@ -423,28 +461,51 @@ export async function testToners({ container, act, check, setVal, dom }) {
     ok(!!container.querySelector('#tnd-receb-func'), '"Recebimento de Toners" abre MODAL');
     ok(!!container.querySelector('#tnd-receb-data'), 'modal tem data do recebimento');
     ok(!!container.querySelector('#tnd-receb-obs'), 'modal tem observação');
+    ok(!!container.querySelector('#tnd-receb-fornecedor'), 'modal tem campo Fornecedor (opcional)');
     await flush(); await flush(); await flush();
-    const selFunc = container.querySelector('#tnd-receb-func');
-    ok(selFunc.options.length === 2, 'modal lista o funcionário recebedor');
-    await setSelect(selFunc, '32');
+
+    /* Funcionário recebedor: padrão pesquisável */
+    const dropFunc = await ssOpen('#tnd-receb-func');
+    ok(!!dropFunc?.querySelector('.ss-search-input'), 'recebedor usa dropdown com busca no topo');
+    ok(ssItems().length === 1, 'modal lista o funcionário recebedor');
+    await ssSearch('alex');
+    ok(ssItems().length === 1 && ssItems()[0].textContent.includes('ALEX'), 'busca localiza o recebedor');
+    await ssClickItem('ALEX FABIANO');
+    ok(container.querySelector('#tnd-receb-func').textContent.includes('ALEX'), 'recebedor selecionado mantém o valor');
+
+    /* Fornecedor: cadastro real com busca (1º recebimento fica SEM fornecedor) */
+    const dropForn1 = await ssOpen('#tnd-receb-fornecedor');
+    ok(!!dropForn1?.querySelector('.ss-search-input'), 'fornecedor usa dropdown com busca no topo');
+    ok(ssItems().length === 1, 'dropdown lista o cadastro real de fornecedores');
+    await ssSearch('alpha');
+    ok(ssItems()[0]?.textContent.includes('ALPHA'), 'busca localiza o fornecedor pelo nome');
+    await act(async () => { dom.window.document.dispatchEvent(new dom.window.MouseEvent('mousedown', { bubbles: true })); });
+    await flush();
+
     const est1Antes = DB.find((r) => r.id === 1).estoque;
     const est2Antes = DB.find((r) => r.id === 2).estoque;
     const addLote = async () => {
-      const btn = [...container.querySelectorAll('.tnd-receb-add button')][0];
+      const btn = [...container.querySelectorAll('.tnd-receb-add button')].find((b) => b.textContent.includes('Adicionar'));
       await act(async () => { btn.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
       await flush();
     };
-    await setSelect(container.querySelector('#tnd-receb-toner'), '1');
+    const escolherConsumivel = async (texto) => {
+      await ssOpen('#tnd-receb-toner');
+      await ssSearch(texto);
+      await ssClickItem(texto);
+    };
+    await escolherConsumivel('W1330A');
     await addLote();
     ok(container.querySelectorAll('.tnd-receb-item').length === 1, 'primeiro consumível entra no lote');
     setVal(container.querySelector('.tnd-receb-item input'), '3');
     await flush();
-    await setSelect(container.querySelector('#tnd-receb-toner'), '2');
+    await escolherConsumivel('W1332');
     await addLote();
     ok(container.querySelectorAll('.tnd-receb-item').length === 2, 'lote aceita VÁRIOS consumíveis');
     await submitForm('#tnd-receb-form');
     const recebBody = lastCall('receber_multiplos')?.body;
     ok(recebBody?.funcionario_recebedor_id === 32, 'envia o funcionário recebedor');
+    ok(recebBody?.fornecedor_id == null, 'fornecedor omitido continua funcionando (opcional)');
     ok(recebBody?.toners?.length === 2, 'envia os 2 consumíveis com quantidade');
     ok(DB.find((r) => r.id === 1).estoque === est1Antes + 3, 'estoque somou 3 no 1º consumível');
     ok(DB.find((r) => r.id === 2).estoque === est2Antes + 1, 'estoque somou 1 no 2º consumível');
@@ -452,14 +513,42 @@ export async function testToners({ container, act, check, setVal, dom }) {
     ok(!container.querySelector('.tnd-overlay'), 'modal do recebimento fecha após confirmar');
     ok(container.textContent.includes('Estoque atualizado'), 'confirmação do recebimento exibida');
 
+    /* 2b. Segundo recebimento COM fornecedor (persistência no cadastro real) */
+    await abrirOperacao('Recebimento de Toners');
+    await flush(); await flush(); await flush();
+    await ssOpen('#tnd-receb-func');
+    await ssClickItem('ALEX FABIANO');
+    const dropForn2 = await ssOpen('#tnd-receb-fornecedor');
+    await ssSearch('alpha');
+    await ssClickItem('DISTRIBUIDORA ALPHA');
+    ok(container.querySelector('#tnd-receb-fornecedor').textContent.includes('ALPHA'), 'fornecedor selecionado mantém o valor');
+    await escolherConsumivel('W1330A');
+    await addLote();
+    const est1Antes2 = DB.find((r) => r.id === 1).estoque;
+    await submitForm('#tnd-receb-form');
+    const recebBody2 = lastCall('receber_multiplos')?.body;
+    ok(recebBody2?.fornecedor_id === 55, 'recebimento com fornecedor envia o id do cadastro real');
+    ok(RECEBIMENTOS[1]?.fornecedor_id === 55, 'fornecedor persistido no recebimento');
+    ok(DB.find((r) => r.id === 1).estoque === est1Antes2 + 1, 'estoque atualizado no 2º recebimento');
+    ok(RECEBIMENTOS.length === 2, '2º recebimento registrado');
+    ok(!container.querySelector('.tnd-overlay'), 'modal fecha após o 2º recebimento');
+
     /* ---------- 3. Histórico de Trocas ---------- */
     await abrirOperacao('Ver Histórico de Trocas');
     await flush(); await flush(); await flush();
     ok(!!container.querySelector('.tnd-overlay'), '"Histórico de Trocas" abre MODAL');
     ok(!!container.querySelector('.tnd-page'), 'listagem de Toners segue montada (sem navegação)');
     ok(!container.textContent.includes('ainda não implementado'), 'nenhuma operação cai em página em construção');
-    const filtrosHist = container.querySelectorAll('.tnd-overlay .tnd-hist-filtros select');
-    ok(filtrosHist.length === 3, 'preserva os filtros impressora, setor e consumível');
+    const filtrosHist = container.querySelectorAll('.tnd-overlay .tnd-hist-filtros .ss-root');
+    ok(filtrosHist.length === 3, 'preserva os filtros impressora, setor e consumível (todos pesquisáveis)');
+
+    /* Contagens: total sem filtros x registros encontrados com os filtros atuais */
+    const contagemTotal = () => Number((container.querySelector('.tnd-hist-total strong')?.textContent || '0').replace(/\D/g, ''));
+    const contagemEncontrados = () => Number((container.querySelector('.tnd-hist-encontrados strong')?.textContent || '0').replace(/\D/g, ''));
+    ok(container.textContent.includes('Total de registros:'), 'exibe "Total de registros" (antes dos filtros)');
+    ok(container.textContent.includes('Registros encontrados:'), 'exibe "Registros encontrados" (resultado dos filtros)');
+    ok(contagemTotal() === 1, `total de registros = 1 (recebimentos não contam: ${contagemTotal()})`);
+    ok(contagemEncontrados() === 1, `registros encontrados = 1 sem filtros (${contagemEncontrados()})`);
     ok(linhasDoOverlay().length === 1, 'histórico lista a troca registrada');
     const cel = [...linhasDoOverlay()[0].querySelectorAll('td')].map((td) => td.textContent);
     ok(cel[0].includes('/'), 'coluna Data');
@@ -469,14 +558,26 @@ export async function testToners({ container, act, check, setVal, dom }) {
     ok(cel[4].includes('admin.ti'), 'coluna Responsável');
     ok(cel[5].includes('Troca de teste'), 'coluna Observações');
 
-    await setSelect(filtrosHist[0], '17');
+    /* Filtro por impressora: pesquisável e enviado à API; contagens atualizam */
+    const dropHistImp = await ssOpen('#tnd-hist-impressora');
+    ok(!!dropHistImp?.querySelector('.ss-search-input'), 'filtro de impressora tem busca no topo');
+    await ssSearch('IMP-005');
+    ok(ssItems().length === 1 && ssItems()[0].textContent.includes('IMP-005'), 'busca filtra o filtro de impressora');
+    await ssClickItem('IMP-005');
     await flush(); await flush();
     ok(lastCall('listar_historico')?.params?.impressora_id === '17', 'filtro por impressora é enviado à API');
     ok(linhasDoOverlay().length === 1 && linhasDoOverlay()[0].textContent.includes('Nenhum registro'),
       'filtro por outra impressora devolve vazio');
-    await setSelect(filtrosHist[0], '');
+    ok(contagemTotal() === 1, 'total de registros NÃO muda ao aplicar filtro');
+    ok(contagemEncontrados() === 0, 'registros encontrados = 0 com o filtro aplicado');
+
+    /* Limpar filtros restaura contagens e registros */
+    const btnLimpar = [...container.querySelectorAll('.tnd-hist-filtros button')].find((b) => b.textContent.includes('Limpar'));
+    await act(async () => { btnLimpar.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })); });
     await flush(); await flush();
-    ok(linhasDoOverlay()[0].textContent.includes('W1330A'), 'limpar o filtro restaura os registros');
+    ok(!lastCall('listar_historico')?.params?.impressora_id, 'limpar filtros reenvia sem filtro');
+    ok(linhasDoOverlay().length === 1, 'limpar filtros restaura os registros');
+    ok(contagemTotal() === 1 && contagemEncontrados() === 1, 'limpar filtros restaura as contagens');
 
     await fecharOverlay();
     ok(!container.querySelector('.tnd-overlay'), 'modal do histórico fecha');

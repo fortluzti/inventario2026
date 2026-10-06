@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary": "#ffffff",
+          "on-secondary-fixed-variant": "#6e3900",
+          "outline": "#8d706d",
+          "on-surface-variant": "#59413e",
+          "primary-container": "#991b1b",
+          "surface-container-low": "#eff4ff",
+          "on-tertiary-fixed": "#00201d",
+          "on-tertiary": "#ffffff",
+          "error-container": "#ffdad6",
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#ccdbf3",
+          "on-primary-fixed-variant": "#8e1214",
+          "primary-fixed-dim": "#ffb4ac",
+          "on-error": "#ffffff",
+          "error": "#ba1a1a",
+          "surface-container-high": "#dce9ff",
+          "tertiary-container": "#005852",
+          "on-tertiary-fixed-variant": "#00504a",
+          "on-surface": "#0d1c2e",
+          "primary-fixed": "#ffdad6",
+          "on-tertiary-container": "#79cec4",
+          "inverse-surface": "#233144",
+          "surface-container-highest": "#d5e3fc",
+          "background": "#f8f9ff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#d5e3fc",
+          "tertiary": "#003f3a",
+          "on-primary-fixed": "#410002",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed": "#9cf2e8",
+          "secondary-fixed-dim": "#ffb77d",
+          "surface-container": "#e6eeff",
+          "inverse-on-surface": "#eaf1ff",
+          "secondary-container": "#fe932c",
+          "surface-bright": "#f8f9ff",
+          "secondary": "#904d00",
+          "surface": "#f8f9ff",
+          "on-secondary-fixed": "#2f1500",
+          "on-background": "#0d1c2e",
+          "outline-variant": "#e1bfbb",
+          "on-secondary-container": "#663500",
+          "on-primary-container": "#ffaaa1",
+          "tertiary-fixed-dim": "#80d5cb",
+          "primary": "#760009",
+          "surface-tint": "#b02d29",
+          "secondary-fixed": "#ffdcc3",
+          "inverse-primary": "#ffb4ac"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "0.25rem",
+          "space-xl": "1rem",
+          "space-xs": "0.125rem",
+          "gutter": "0.5rem",
+          "space-lg": "0.75rem",
+          "margin": "0.75rem",
+          "space-md": "0.5rem"
+        },
+        "fontFamily": {
+          "headline-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-md": [
+            "IBM Plex Sans"
+          ],
+          "label-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-sm": [
+            "IBM Plex Sans"
+          ],
+          "label-lg": [
+            "IBM Plex Sans"
+          ],
+          "body-lg": [
+            "IBM Plex Sans"
+          ],
+          "code-dense": [
+            "JetBrains Mono"
+          ],
+          "label-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-lg": [
+            "IBM Plex Sans"
+          ]
+        },
+        "fontSize": {
+          "headline-sm": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "10px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "code-dense": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-on-surface antialiased select-none"><header class="fixed top-0 left-0 right-0 h-14 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.06)] z-50 flex items-center justify-between px-space-xl border-b border-surface-container-high"><div class="flex items-center gap-space-lg"><img alt="Brand logo. - Primary color: #991b1b
+- Font: ibmPlexSans
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V4DG4DXntzwKmFrq35PBJ-7hyH_4XBP_wYIixpFcfM9jtjaACNPRvIlnSgXJHwXurgu0wm10gK425WKLqwLLif_3CTIOk_rQfCsvPKBR96DrI23g0mXc4lK1DqXgsGhaRDfm8JK2YkgTjozDO-iqpBY3xwLDHYSCvmhb1nlZaJMFgfAxoo9N0N6L_C-_9aAhHf45i2QiKCm10l-S6DNwbubD5HM76duIhyK_HjtlHT9b_64AoFGGmSRS0"><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">FORTLUZ</span><span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-code-dense font-semibold">TI ERP v2.4</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Materiais Elétricos · Infraestrutura Corporativa</span></div></div><div class="flex-1 max-w-xl mx-space-xl"><div class="relative flex items-center bg-surface-container-low rounded px-space-md py-space-xs border border-surface-container-highest focus-within:border-primary"><span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-space-sm">search</span><input class="w-full bg-transparent border-0 outline-none font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/70" placeholder="Busca rápida de itens, MAC, patrimônio... (Ctrl+K)" type="text"><kbd class="font-code-dense text-label-sm bg-surface-container-lowest px-space-xs rounded text-on-surface-variant shadow-sm border border-surface-container-highest">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-md bg-surface-container-low px-space-md py-space-xs rounded border border-surface-container-highest"><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-code-dense text-code-dense text-tertiary font-semibold">12ms</span></div><span class="h-3 w-px bg-surface-container-highest"></span><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Term. 01 — Almoxarifado Central</span><span class="font-code-dense text-[9px] text-on-surface-variant">API REST v2.4 • Sync OK</span></div></div><div class="relative flex items-center justify-center w-8 h-8 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full ring-2 ring-surface-container-lowest"></span></div><div class="flex items-center gap-space-md pl-space-sm border-l border-surface-container-highest"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-semibold">Admin TI</span><span class="font-label-sm text-label-sm text-primary font-medium">Operador Master</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-1 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-6 w-64 bg-surface-container-lowest z-40 flex flex-col border-r border-surface-container-high overflow-y-auto"><div class="p-space-md bg-surface-container-low border-b border-surface-container-high flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Módulos do Sistema</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer hover:text-on-surface">dock_to_left</span></div><nav class="flex-1 p-space-sm space-y-space-md" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm"><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">1. Painel Principal</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="painel-principal" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dashboard</span>Visão Geral</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">2. Equipamentos &amp; TI</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="computadores-e-servidores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dns</span>Computadores &amp; Servidores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="switches-e-redes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">hub</span>Switches &amp; Redes</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="perifericos-e-impressoras" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">print</span>Periféricos &amp; Impressoras</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="monitores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">desktop_windows</span>Monitores</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">3. Estoque &amp; Insumos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="almoxarifado-e-toner" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">inventory_2</span>Almoxarifado &amp; Toner</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="entradas-e-saidas" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">swap_horiz</span>Entradas e Saídas</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">4. Manutenção &amp; Suporte</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="ordens-de-servico" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">build</span>Ordens de Serviço</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="preventivas-e-calibracao" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">published_with_changes</span>Preventivas &amp; Calibração</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">5. Cadastros Básicos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="empresas-e-unidades" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">domain</span>Empresas &amp; Unidades</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="setores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">apartment</span>Setores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="funcionarios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">badge</span>Funcionários</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="fornecedores-ti" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">local_shipping</span>Fornecedores TI</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">6. Etiquetas &amp; Patrimônio</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="impressao-de-tombamento" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">qr_code_2</span>Impressão de Tombamento</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="inventario-cego" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">fact_check</span>Inventário Cego</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">7. Administração &amp; Sistema</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="usuarios-e-perfis" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">manage_accounts</span>Usuários &amp; Perfis</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="permissoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">security</span>Permissões</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="configuracoes-do-sistema" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">settings</span>Configurações do Sistema</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider flex items-center justify-between"><span class="">8. Suporte &amp; ERP</span><span class="w-1.5 h-1.5 rounded-full bg-primary"></span></div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md bg-primary-container text-on-primary font-semibold shadow-sm gap-space-sm" data-path="pendencias-do-erp" href="#"><span class="material-symbols-outlined text-[16px] text-on-primary">pending_actions</span>Pendências do ERP</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="historico-de-atualizacoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">update</span>Histórico de Atualizações</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="relatorios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">assessment</span>Relatórios</a></div></nav></aside><div class="pl-64 flex flex-col min-h-screen"><main class="relative pt-14 pb-6 w-full px-space-xl bg-background flex-1"><div class="flex flex-col w-full relative">
+<!-- SCRIPT PARA ATIVAÇÃO NO MENU LATERAL -->
+<script>
+    (function highlightMenu() {
+      const activeLink = document.querySelector('aside nav a[data-path="pendencias-do-erp"]');
+      if (activeLink) {
+        activeLink.className = "flex items-center px-space-md py-1.5 rounded font-label-md text-label-md bg-primary-container text-on-primary font-semibold shadow-sm gap-space-sm";
+        const icon = activeLink.querySelector('.material-symbols-outlined');
+        if (icon) icon.className = "material-symbols-outlined text-[16px] text-on-primary";
+      }
+    })();
+  </script>
+<!-- ========================================== -->
+<!-- 1. TELA DE FUNDO: LISTAGEM DE PENDÊNCIAS ERP -->
+<!-- ========================================== -->
+<div class="flex flex-col gap-space-md opacity-45 pointer-events-none select-none filter blur-[0.5px]">
+<!-- Barra Superior de Controle da Página -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-md rounded shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="p-space-xs bg-primary-fixed text-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">pending_actions</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md text-on-surface">Pendências do ERP FortLuz</span>
+<span class="font-code-dense text-label-sm bg-surface-container-high text-on-surface-variant px-space-xs py-0.5 rounded font-semibold">14 Abertas</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Rastreamento de tickets, inconsistências e chamados de suporte técnico de software</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-md py-1 bg-surface-container text-on-surface rounded font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>Filtrar
+        </button>
+<button class="flex items-center gap-space-xs px-space-md py-1 bg-primary text-on-primary rounded font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add</span>Nova Pendência
+        </button>
+</div>
+</div>
+<!-- Tabela Sintética de Fundo -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<tr>
+<th class="py-space-xs px-space-md">Código</th>
+<th class="py-space-xs px-space-md">Módulo</th>
+<th class="py-space-xs px-space-md">Descrição do Problema</th>
+<th class="py-space-xs px-space-md">Prioridade</th>
+<th class="py-space-xs px-space-md">Status</th>
+<th class="py-space-xs px-space-md text-right">Data/Abertura</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-md text-body-md">
+<tr class="bg-surface-container-low/70">
+<td class="py-space-sm px-space-md font-code-dense font-bold text-primary">ERP-0042</td>
+<td class="py-space-sm px-space-md">Vendas / Faturamento</td>
+<td class="py-space-sm px-space-md font-medium text-on-surface">Erro no relatório consolidado por filial HTTP 504</td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">ALTA</span></td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-tertiary font-label-sm text-label-sm">Aguardando Testes</span></td>
+<td class="py-space-sm px-space-md text-right font-code-dense text-label-sm">24/02/2025 14:35</td>
+</tr>
+<tr>
+<td class="py-space-sm px-space-md font-code-dense font-bold text-on-surface">ERP-0041</td>
+<td class="py-space-sm px-space-md">Estoque Central</td>
+<td class="py-space-sm px-space-md">Divergência na contagem de cabo 2.5mm bobina</td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm">MÉDIA</span></td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Em Análise</span></td>
+<td class="py-space-sm px-space-md text-right font-code-dense text-label-sm">23/02/2025 09:12</td>
+</tr>
+<tr>
+<td class="py-space-sm px-space-md font-code-dense font-bold text-on-surface">ERP-0040</td>
+<td class="py-space-sm px-space-md">Fiscal / SPED</td>
+<td class="py-space-sm px-space-md">Bloco K não totaliza saldo intermediário da Filial 02</td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">CRÍTICA</span></td>
+<td class="py-space-sm px-space-md"><span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">Resolvido</span></td>
+<td class="py-space-sm px-space-md text-right font-code-dense text-label-sm">22/02/2025 17:40</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- 2. BACKDROP & MODAL OVERLAY               -->
+<!-- ========================================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-space-md bg-inverse-surface/65 backdrop-blur-[2px]" id="erp-details-modal">
+<!-- CONTAINER PRINCIPAL DO MODAL (940px ideal para 1024x768) -->
+<div class="relative w-full max-w-[940px] max-h-[92vh] flex flex-col bg-surface-container-lowest rounded-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+<!-- 2.1 CABEÇALHO DO MODAL -->
+<div class="flex flex-col bg-surface-container-low px-space-xl pt-space-lg pb-space-md gap-space-sm shadow-sm">
+<!-- Linha Superior do Cabeçalho -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">assignment_late</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Detalhes da Pendência ERP</h2>
+<span class="font-code-dense text-label-lg font-bold px-space-sm py-0.5 rounded bg-primary text-on-primary shadow-sm tracking-wide">
+                ERP-0042
+              </span>
+</div>
+</div>
+<!-- Botão Fechar [X] -->
+<button class="w-7 h-7 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors" onclick="document.getElementById('erp-details-modal').classList.add('hidden')" title="Fechar janela (Esc)">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Sub-barra de Resumo Imediato -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-xs text-on-surface font-body-sm text-body-sm">
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Status Badge com Dot Ativo -->
+<div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-lowest shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Aguardando Testes</span>
+</div>
+<!-- Prioridade Alta -->
+<div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-error-container text-on-error-container shadow-sm font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">priority_high</span>
+<span class="">Prioridade Alta</span>
+</div>
+<!-- Módulo do ERP -->
+<div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]">point_of_sale</span>
+<span class="font-medium text-on-surface">Vendas / Faturamento</span>
+</div>
+</div>
+<!-- Metadados de Autoria e Data -->
+<div class="flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span class="font-code-dense">24/02/2025 às 14:35</span>
+</div>
+<span class="text-surface-dim">•</span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="">Identificado por: <strong class="text-on-surface font-semibold">Marcos Antônio da Silva</strong> (TI - Almoxarifado)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2.2 BARRA DE AÇÕES OPERACIONAIS (Toolbar de Alta Densidade) -->
+<div class="flex items-center justify-between px-space-xl py-space-xs bg-surface-container text-on-surface shadow-inner"><div class="flex flex-wrap items-center gap-space-xs py-0.5"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-md font-label-md shadow-xs transition-all"><span class="material-symbols-outlined text-[15px] text-on-surface-variant">edit_note</span><span class="">Editar Pendência</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-md font-label-md shadow-xs transition-all"><span class="material-symbols-outlined text-[15px] text-secondary">outgoing_mail</span><span class="">Enviar ao Suporte</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-md font-label-md shadow-xs transition-all"><span class="material-symbols-outlined text-[15px] text-tertiary">move_to_inbox</span><span class="">Registrar Retorno</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-md font-label-md shadow-xs transition-all"><span class="material-symbols-outlined text-[15px] text-secondary">play_arrow</span><span class="">Liberar para Testes</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-primary-container text-on-primary hover:bg-primary text-label-md font-label-md shadow-xs transition-all font-semibold"><span class="material-symbols-outlined text-[15px]">science</span><span class="">Registrar Teste</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-tertiary-container text-on-tertiary hover:opacity-90 text-label-md font-label-md shadow-xs transition-all font-semibold"><span class="material-symbols-outlined text-[15px]">check_circle</span><span class="">Resolver</span></button></div><div class="flex items-center gap-space-xs"><button class="flex items-center gap-space-xs px-space-md py-1 rounded bg-surface-container-lowest text-primary hover:bg-primary-fixed border border-primary/30 text-label-md font-label-md shadow-sm font-bold transition-all" title="Gerar Ficha Cadastral e Técnica (PDF)"><span class="material-symbols-outlined text-[16px] text-primary">print</span><span class="">Imprimir Ficha</span></button></div></div>
+<!-- 2.3 CORPO DO MODAL (DUAS COLUNAS COMPACTAS COM SCROLL) -->
+<div class="flex-1 overflow-y-auto px-space-xl py-space-lg bg-surface-container-low/40"><div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-start"><div class="md:col-span-7 flex flex-col gap-space-md"><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-primary">report_problem</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">1. Dados da Pendência</span></div><div class="flex items-center gap-space-xs"><span class="font-code-dense text-[11px] font-bold px-space-xs py-0.5 rounded bg-primary text-on-primary shadow-xs">ERP-0042</span><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>Prioridade Alta</span></div></div><div class="bg-surface-container-low p-space-sm rounded"><span class="font-label-sm text-label-sm font-bold text-on-surface-variant uppercase tracking-wider block">Título do Problema</span><p class="font-headline-sm text-headline-sm font-semibold text-primary mt-0.5">Erro ao emitir relatório de faturamento consolidado por filial</p></div><div class="flex flex-col gap-space-xs"><span class="font-label-sm text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Descrição Detalhada</span><p class="bg-surface-container-low/70 p-space-sm rounded text-on-surface font-body-sm text-body-sm leading-relaxed border border-surface-container-high">Ao tentar emitir o relatório de faturamento consolidado por filial com período superior a 30 dias, a aplicação trava no carregamento e retorna mensagem de timeout (HTTP 504). O problema começou após a sincronização do lote da manhã no servidor central.</p></div><div class="grid grid-cols-2 gap-space-sm pt-space-xs font-body-sm text-body-sm"><div class="bg-surface-container-low p-space-xs rounded flex flex-col border border-surface-container-high"><span class="font-label-sm text-label-sm text-on-surface-variant font-semibold flex items-center gap-space-xs"><span class="material-symbols-outlined text-[13px] text-secondary">grid_view</span>Sistema / Módulo</span><span class="font-medium text-on-surface mt-0.5">Vendas / Faturamento (Módulo 02)</span></div><div class="bg-surface-container-low p-space-xs rounded flex flex-col border border-surface-container-high"><span class="font-label-sm text-label-sm text-on-surface-variant font-semibold flex items-center gap-space-xs"><span class="material-symbols-outlined text-[13px] text-tertiary">apartment</span>Setor / Abrangência</span><span class="font-medium text-on-surface mt-0.5">Setor Específico: Comercial / Faturamento</span></div></div><div class="grid grid-cols-3 gap-space-xs pt-space-xs text-[11px] font-body-sm text-on-surface-variant border-t border-surface-container-high"><div class="flex flex-col"><span class="font-label-sm text-[10px] text-on-surface-variant font-semibold uppercase">Identificado por:</span><span class="text-on-surface font-semibold">Marcos Antônio da Silva</span><span class="text-[10px]">Encarregado TI</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] text-on-surface-variant font-semibold uppercase">Data da Identificação:</span><span class="font-code-dense text-on-surface font-medium">24/02/2025 às 14:35</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] text-on-surface-variant font-semibold uppercase">Status Atual:</span><span class="font-semibold text-secondary flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>Em Validação Final</span></div></div></div><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">support_agent</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">3. Atendimento do Suporte</span></div><span class="font-code-dense text-label-sm px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant font-bold rounded shadow-xs">Protocolo: TKT-2025-88392</span></div><div class="grid grid-cols-3 gap-space-sm font-body-sm text-body-sm bg-surface-container-low p-space-sm rounded"><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Data do Envio</span><span class="font-code-dense text-on-surface font-semibold">24/02/2025 às 15:10</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Quem Enviou</span><span class="text-on-surface font-medium">Marcos Antônio <span class="text-on-surface-variant">(Admin TI)</span></span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Método</span><span class="text-on-surface font-medium">Portal do Fornecedor / API REST</span></div></div><div class="bg-surface-container-lowest p-space-sm rounded border border-surface-container-high flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm font-bold text-tertiary flex items-center gap-space-xs"><span class="material-symbols-outlined text-[14px]">verified</span>Respostas do Suporte / Técnico</span><span class="text-[11px] font-medium text-on-surface-variant">Técnico Responsável: <strong class="text-on-surface">Carlos Eduardo</strong> (Analista N3 - TOTVS/ERP)</span></div><div class="bg-surface-container-low/60 p-space-xs rounded text-body-sm text-on-surface"><strong class="text-secondary">Observações do Suporte:</strong> "Bug identificado no timeout da query de agregação da filial 02. Patch liberado para homologação."</div></div></div><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">system_update_alt</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">4. Correção / Atualização</span></div><span class="font-code-dense text-label-sm px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed font-bold rounded shadow-xs">Hotfix v2025.2.4-patch3</span></div><div class="grid grid-cols-3 gap-space-sm font-body-sm text-body-sm bg-surface-container-low p-space-sm rounded"><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Tipo de Correção</span><span class="text-on-surface font-medium">Hotfix BD / Otimização SQL</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Liberação / Aplicação</span><span class="font-code-dense text-on-surface font-semibold">25/02/2025 às 10:20</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Responsável</span><span class="text-on-surface font-medium">Alexandre Ferreira <span class="text-on-surface-variant">(SysAdmin)</span></span></div></div><div class="p-space-xs bg-surface-container-low/60 rounded border border-surface-container-high text-body-sm text-on-surface"><span class="font-label-sm text-[11px] font-bold text-on-surface-variant uppercase block">Descrição do que foi realizado:</span>Criado índice composto na tabela <code class="font-code-dense text-[11px] bg-surface-container px-1 py-0.5 rounded text-primary font-semibold">tb_fat_consolidado</code> e ampliado timeout da pool para 60s em ambiente de homologação.</div></div><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-tertiary-container">fact_check</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">5. Testes da Solução</span></div><span class="font-label-sm text-label-sm px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant font-bold rounded shadow-xs">Aprovado Parcialmente</span></div><div class="grid grid-cols-3 gap-space-sm font-body-sm text-body-sm bg-surface-container-low p-space-sm rounded"><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Quem Testou</span><span class="text-on-surface font-medium">Maria Clara dos Santos</span><span class="text-[10px] text-on-surface-variant">Coord. Financeiro</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Data do Teste</span><span class="font-code-dense text-on-surface font-semibold">25/02/2025 às 14:15</span></div><div class="flex flex-col"><span class="font-label-sm text-[10px] uppercase text-on-surface-variant font-bold">Ambiente / Setor</span><span class="text-on-surface font-medium">Homologação Staging</span><span class="text-[10px] text-on-surface-variant">Financeiro / Faturamento</span></div></div><div class="flex flex-col gap-space-xs bg-surface-container-low/60 p-space-sm rounded border border-surface-container-high text-body-sm text-body-sm"><div class="flex items-start gap-space-xs"><span class="font-semibold text-on-surface">Procedimento:</span><span class="text-on-surface-variant">Emissão de relatório de 30 e 45 dias com 3 filiais simultâneas.</span></div><div class="flex items-start gap-space-xs"><span class="font-semibold text-secondary">Resultado:</span><span class="text-on-surface font-medium">Aprovado Parcialmente — Relatórios mensais emitiram em 12s sem erro 504.</span></div><div class="flex items-start gap-space-xs text-[11px] text-on-surface-variant"><span class="font-semibold text-on-surface">Observações:</span><span class="">Alerta de lentidão residual em filtros anuais. Necessário teste de carga estendido com o fechamento completo.</span></div><div class="mt-1 pt-1 border-t border-surface-container flex items-center justify-between"><span class="font-label-sm text-[11px] text-tertiary flex items-center gap-space-xs"><span class="material-symbols-outlined text-[13px]">attach_file</span>Evidência do Teste: <strong class="font-code-dense">evidencia_teste_homolog_ok.png</strong></span><button class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface hover:text-primary font-code-dense text-[10px] flex items-center gap-space-xs shadow-xs"><span class="material-symbols-outlined text-[12px]">visibility</span>Ver anexo</button></div></div></div></div><div class="md:col-span-5 flex flex-col gap-space-md"><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">attachment</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">2. Evidências &amp; Arquivos</span></div><span class="font-code-dense text-[10px] text-on-surface-variant">3 anexos • SHA256 OK</span></div><div class="flex flex-col gap-space-xs"><div class="p-space-xs rounded bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-1 border border-surface-container-high"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs min-w-0"><span class="material-symbols-outlined text-[18px] text-primary shrink-0">image</span><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate" title="print_erro_timeout_faturamento.png">print_erro_timeout_faturamento.png</span></div><div class="flex items-center gap-space-xs shrink-0"><button class="p-1 rounded bg-surface-container-lowest hover:text-primary shadow-xs" title="Visualizar anexo"><span class="material-symbols-outlined text-[14px]">visibility</span></button><button class="p-1 rounded bg-surface-container-lowest hover:text-primary shadow-xs" title="Baixar anexo"><span class="material-symbols-outlined text-[14px]">download</span></button></div></div><div class="flex items-center justify-between text-[10px] text-on-surface-variant font-code-dense"><span class="">420 KB • PNG • 24/02 14:38</span><span class="text-[9px] text-tertiary">SHA: c9a4f21...</span></div><div class="text-[10px] text-on-surface-variant italic">Anexado por: Marcos Antônio na abertura da pendência</div></div><div class="p-space-xs rounded bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-1 border border-surface-container-high"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs min-w-0"><span class="material-symbols-outlined text-[18px] text-tertiary shrink-0">description</span><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate" title="log_requisicao_vendas.txt">log_requisicao_vendas.txt</span></div><div class="flex items-center gap-space-xs shrink-0"><button class="p-1 rounded bg-surface-container-lowest hover:text-tertiary shadow-xs" title="Visualizar anexo"><span class="material-symbols-outlined text-[14px]">visibility</span></button><button class="p-1 rounded bg-surface-container-lowest hover:text-tertiary shadow-xs" title="Baixar anexo"><span class="material-symbols-outlined text-[14px]">download</span></button></div></div><div class="flex items-center justify-between text-[10px] text-on-surface-variant font-code-dense"><span class="">18 KB • UTF-8 Log • 24/02 14:40</span><span class="text-[9px] text-tertiary">SHA: b71d80e...</span></div><div class="text-[10px] text-on-surface-variant italic">Anexado por: Marcos Antônio (Log do Servidor)</div></div><div class="p-space-xs rounded bg-surface-container-low hover:bg-surface-container transition-all flex flex-col gap-1 border border-surface-container-high"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs min-w-0"><span class="material-symbols-outlined text-[18px] text-tertiary-container shrink-0">image</span><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate" title="evidencia_teste_homolog_ok.png">evidencia_teste_homolog_ok.png</span></div><div class="flex items-center gap-space-xs shrink-0"><button class="p-1 rounded bg-surface-container-lowest hover:text-tertiary shadow-xs" title="Visualizar anexo"><span class="material-symbols-outlined text-[14px]">visibility</span></button><button class="p-1 rounded bg-surface-container-lowest hover:text-tertiary shadow-xs" title="Baixar anexo"><span class="material-symbols-outlined text-[14px]">download</span></button></div></div><div class="flex items-center justify-between text-[10px] text-on-surface-variant font-code-dense"><span class="">310 KB • PNG • 25/02 14:18</span><span class="text-[9px] text-tertiary">SHA: 7a42ec9...</span></div><div class="text-[10px] text-on-surface-variant italic">Anexado por: Maria Clara no teste em homologação</div></div></div><button class="w-full py-1 px-space-sm rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center justify-center gap-space-xs transition-colors border border-surface-container-high"><span class="material-symbols-outlined text-[15px] text-primary">add_circle</span><span class="">+ Adicionar Novo Arquivo / Log</span></button></div><div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm border border-surface-container-high"><div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-primary">timeline</span><span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-on-surface">6. Histórico da Pendência</span></div><div class="flex items-center gap-space-xs text-on-surface-variant font-code-dense text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="">Log Imutável</span></div></div><div class="relative pl-space-md flex flex-col gap-space-xs text-body-sm"><div class="absolute left-[9px] top-1.5 bottom-2 w-[2px] bg-surface-container-highest"></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-surface-container text-primary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">flag</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Problema Identificado</span><span class="font-code-dense text-[9px] text-on-surface-variant">24/02 14:35</span></div><div class="text-[10px] text-on-surface-variant">Abertura interna por Marcos Antônio com 2 evidências.</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-surface-container text-secondary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">outgoing_mail</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Enviado ao Suporte</span><span class="font-code-dense text-[9px] text-on-surface-variant">24/02 15:10</span></div><div class="text-[10px] text-on-surface-variant">Protocolo <strong class="font-code-dense text-secondary">TKT-2025-88392</strong> via API REST do Fornecedor.</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-surface-container text-tertiary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">published_with_changes</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Análise do Suporte / Retorno</span><span class="font-code-dense text-[9px] text-on-surface-variant">25/02 10:20</span></div><div class="text-[10px] text-on-surface-variant">Carlos Eduardo (N3) liberou pacote <strong class="font-code-dense text-tertiary">Hotfix v2025.2.4-patch3</strong>.</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-surface-container text-tertiary-container flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">system_update_alt</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Correção / Atualização Aplicada</span><span class="font-code-dense text-[9px] text-on-surface-variant">25/02 11:00</span></div><div class="text-[10px] text-on-surface-variant">Alexandre Ferreira compilou patch no BD de homologação.</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">hourglass_top</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Pronto para Testes / Liberado</span><span class="font-code-dense text-[9px] text-on-surface-variant">25/02 11:15</span></div><div class="text-[10px] text-on-surface-variant">Notificação enviada para a coordenação de Faturamento.</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-surface-container text-tertiary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px]"><span class="material-symbols-outlined text-[11px]">fact_check</span></div><div class="flex-1 bg-surface-container-low p-space-xs rounded"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-on-surface">Teste Realizado</span><span class="font-code-dense text-[9px] text-on-surface-variant">25/02 14:15</span></div><div class="text-[10px] text-on-surface-variant">Maria Clara: <strong class="text-secondary">Aprovado Parcialmente</strong> (falta carga longa).</div></div></div><div class="relative flex items-start gap-space-sm"><div class="relative z-10 w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 ring-2 ring-surface-container-lowest text-[11px] animate-pulse"><span class="material-symbols-outlined text-[11px]">autorenew</span></div><div class="flex-1 bg-primary-fixed/40 p-space-xs rounded border border-primary-fixed"><div class="flex items-center justify-between gap-1"><span class="font-label-sm text-[11px] font-bold text-primary uppercase">Status Atual: Em Validação Final</span><span class="font-code-dense text-[9px] px-1 bg-surface-container-lowest text-primary font-bold rounded">Etapa 5/6</span></div><div class="text-[9px] text-on-surface-variant mt-0.5 leading-tight">Nota de Governança: Caso seja necessário retornar para 'Pendente', todas as etapas anteriores permanecem íntegras e imutáveis na trilha de auditoria.</div></div></div></div></div></div></div></div>
+<!-- 2.4 RODAPÉ DO MODAL (Barra de Ações e Auditoria) -->
+<div class="flex flex-wrap items-center justify-between px-space-xl py-space-md bg-surface-container-low">
+<!-- Resumo do Ciclo e Auditoria -->
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+<span class="">Tempo total decorrido: <strong class="text-on-surface font-semibold">23h 40min</strong></span>
+</div>
+<span class="text-surface-dim">•</span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span class="">5 atualizações registradas no log imutável de auditoria</span>
+</div>
+</div>
+<!-- Botões de Ação Final -->
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-1.5 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors shadow-xs" onclick="document.getElementById('erp-details-modal').classList.add('hidden')">
+            Fechar Detalhes
+          </button>
+<button class="flex items-center gap-space-xs px-space-lg py-1.5 rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md font-bold shadow-md transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+<span class="">Registrar Próxima Ação</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="fixed bottom-0 left-0 right-0 h-6 bg-inverse-surface text-inverse-on-surface z-50 flex items-center justify-between px-space-xl text-[10px] font-code-dense border-t border-inverse-surface"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-[#80d5cb]"><span class="w-1.5 h-1.5 rounded-full bg-[#80d5cb]"></span><span class="">Servidor: ONLINE</span></div><span class="text-inverse-on-surface/40">|</span><span class="">Banco: fortluz_db_prod</span><span class="text-inverse-on-surface/40">|</span><span class="text-[#9cf2e8]">SSL 256-BIT</span></div><div class="flex items-center gap-space-md"><span class="text-inverse-on-surface/70">Build: 2025.2.4-web</span><span class="text-inverse-on-surface/40">|</span><span class="text-inverse-on-surface/80">UTF-8 / pt-BR</span><span class="text-inverse-on-surface/40">|</span><span class="bg-surface-container/20 px-1 rounded text-[9px] uppercase tracking-wider text-inverse-on-surface/60">CAPS / NUM</span></div></footer></div>
+
+</body></html>

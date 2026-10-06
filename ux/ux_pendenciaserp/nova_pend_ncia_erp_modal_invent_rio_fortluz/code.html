@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary": "#ffffff",
+          "on-secondary-fixed-variant": "#6e3900",
+          "outline": "#8d706d",
+          "on-surface-variant": "#59413e",
+          "primary-container": "#991b1b",
+          "surface-container-low": "#eff4ff",
+          "on-tertiary-fixed": "#00201d",
+          "on-tertiary": "#ffffff",
+          "error-container": "#ffdad6",
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#ccdbf3",
+          "on-primary-fixed-variant": "#8e1214",
+          "primary-fixed-dim": "#ffb4ac",
+          "on-error": "#ffffff",
+          "error": "#ba1a1a",
+          "surface-container-high": "#dce9ff",
+          "tertiary-container": "#005852",
+          "on-tertiary-fixed-variant": "#00504a",
+          "on-surface": "#0d1c2e",
+          "primary-fixed": "#ffdad6",
+          "on-tertiary-container": "#79cec4",
+          "inverse-surface": "#233144",
+          "surface-container-highest": "#d5e3fc",
+          "background": "#f8f9ff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#d5e3fc",
+          "tertiary": "#003f3a",
+          "on-primary-fixed": "#410002",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed": "#9cf2e8",
+          "secondary-fixed-dim": "#ffb77d",
+          "surface-container": "#e6eeff",
+          "inverse-on-surface": "#eaf1ff",
+          "secondary-container": "#fe932c",
+          "surface-bright": "#f8f9ff",
+          "secondary": "#904d00",
+          "surface": "#f8f9ff",
+          "on-secondary-fixed": "#2f1500",
+          "on-background": "#0d1c2e",
+          "outline-variant": "#e1bfbb",
+          "on-secondary-container": "#663500",
+          "on-primary-container": "#ffaaa1",
+          "tertiary-fixed-dim": "#80d5cb",
+          "primary": "#760009",
+          "surface-tint": "#b02d29",
+          "secondary-fixed": "#ffdcc3",
+          "inverse-primary": "#ffb4ac"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "0.25rem",
+          "space-xl": "1rem",
+          "space-xs": "0.125rem",
+          "gutter": "0.5rem",
+          "space-lg": "0.75rem",
+          "margin": "0.75rem",
+          "space-md": "0.5rem"
+        },
+        "fontFamily": {
+          "headline-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-md": [
+            "IBM Plex Sans"
+          ],
+          "label-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-sm": [
+            "IBM Plex Sans"
+          ],
+          "label-lg": [
+            "IBM Plex Sans"
+          ],
+          "body-lg": [
+            "IBM Plex Sans"
+          ],
+          "code-dense": [
+            "JetBrains Mono"
+          ],
+          "label-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-lg": [
+            "IBM Plex Sans"
+          ]
+        },
+        "fontSize": {
+          "headline-sm": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "10px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "code-dense": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-on-surface antialiased select-none"><header class="fixed top-0 left-0 right-0 h-14 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.06)] z-50 flex items-center justify-between px-space-xl border-b border-surface-container-high"><div class="flex items-center gap-space-lg"><img alt="Brand logo. - Primary color: #991b1b
+- Font: ibmPlexSans
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V4DG4DXntzwKmFrq35PBJ-7hyH_4XBP_wYIixpFcfM9jtjaACNPRvIlnSgXJHwXurgu0wm10gK425WKLqwLLif_3CTIOk_rQfCsvPKBR96DrI23g0mXc4lK1DqXgsGhaRDfm8JK2YkgTjozDO-iqpBY3xwLDHYSCvmhb1nlZaJMFgfAxoo9N0N6L_C-_9aAhHf45i2QiKCm10l-S6DNwbubD5HM76duIhyK_HjtlHT9b_64AoFGGmSRS0"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">FORTLUZ</span><span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-code-dense font-semibold">TI ERP v2.4</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Materiais Elétricos · Infraestrutura Corporativa</span></div></div><div class="flex-1 max-w-xl mx-space-xl"><div class="relative flex items-center bg-surface-container-low rounded px-space-md py-space-xs border border-surface-container-highest focus-within:border-primary"><span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-space-sm">search</span><input class="w-full bg-transparent border-0 outline-none font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/70" placeholder="Busca rápida de itens, MAC, patrimônio... (Ctrl+K)" type="text"/><kbd class="font-code-dense text-label-sm bg-surface-container-lowest px-space-xs rounded text-on-surface-variant shadow-sm border border-surface-container-highest">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-md bg-surface-container-low px-space-md py-space-xs rounded border border-surface-container-highest"><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-code-dense text-code-dense text-tertiary font-semibold">12ms</span></div><span class="h-3 w-px bg-surface-container-highest"></span><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Term. 01 — Almoxarifado Central</span><span class="font-code-dense text-[9px] text-on-surface-variant">API REST v2.4 • Sync OK</span></div></div><div class="relative flex items-center justify-center w-8 h-8 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full ring-2 ring-surface-container-lowest"></span></div><div class="flex items-center gap-space-md pl-space-sm border-l border-surface-container-highest"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-semibold">Admin TI</span><span class="font-label-sm text-label-sm text-primary font-medium">Operador Master</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-1 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-6 w-64 bg-surface-container-lowest z-40 flex flex-col border-r border-surface-container-high overflow-y-auto"><div class="p-space-md bg-surface-container-low border-b border-surface-container-high flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Módulos do Sistema</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer hover:text-on-surface">dock_to_left</span></div><nav class="flex-1 p-space-sm space-y-space-md" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm"><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">1. Painel Principal</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="painel-principal" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dashboard</span>Visão Geral</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">2. Equipamentos &amp; TI</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="computadores-e-servidores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dns</span>Computadores &amp; Servidores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="switches-e-redes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">hub</span>Switches &amp; Redes</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="perifericos-e-impressoras" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">print</span>Periféricos &amp; Impressoras</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="monitores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">desktop_windows</span>Monitores</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">3. Estoque &amp; Insumos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="almoxarifado-e-toner" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">inventory_2</span>Almoxarifado &amp; Toner</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="entradas-e-saidas" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">swap_horiz</span>Entradas e Saídas</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">4. Manutenção &amp; Suporte</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="ordens-de-servico" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">build</span>Ordens de Serviço</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="preventivas-e-calibracao" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">published_with_changes</span>Preventivas &amp; Calibração</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">5. Cadastros Básicos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="empresas-e-unidades" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">domain</span>Empresas &amp; Unidades</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="setores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">apartment</span>Setores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="funcionarios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">badge</span>Funcionários</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="fornecedores-ti" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">local_shipping</span>Fornecedores TI</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">6. Etiquetas &amp; Patrimônio</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="impressao-de-tombamento" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">qr_code_2</span>Impressão de Tombamento</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="inventario-cego" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">fact_check</span>Inventário Cego</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">7. Administração &amp; Sistema</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="usuarios-e-perfis" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">manage_accounts</span>Usuários &amp; Perfis</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="permissoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">security</span>Permissões</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="configuracoes-do-sistema" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">settings</span>Configurações do Sistema</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider flex items-center justify-between"><span>8. Suporte &amp; ERP</span><span class="w-1.5 h-1.5 rounded-full bg-primary"></span></div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="pendencias-do-erp" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">pending_actions</span>Pendências do ERP</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="historico-de-atualizacoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">update</span>Histórico de Atualizações</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="relatorios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">assessment</span>Relatórios</a></div></nav></aside><div class="pl-64 flex flex-col min-h-screen"><main class="relative pt-14 pb-6 w-full px-space-xl bg-background flex-1"><div class="flex flex-col w-full relative">
+<!-- BACKGROUND BEHIND MODAL (Pendências do ERP - ERP Support Workspace) -->
+<div class="flex flex-col w-full select-none pointer-events-none opacity-45 filter blur-[1.5px] transition-all duration-300">
+<!-- Top Action Breadcrumb & System Bar -->
+<div class="flex items-center justify-between py-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px]">home</span>
+<span>/</span>
+<span>Suporte &amp; ERP</span>
+<span>/</span>
+<span class="text-primary font-semibold">Pendências do ERP</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-code-dense text-[10px] text-on-surface-variant font-semibold">
+          SYNC ATIVO
+        </span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center bg-surface-container-lowest px-space-md py-1 rounded shadow-sm gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="font-label-sm text-label-sm text-error font-semibold">3 Críticas</span>
+</div>
+<span class="w-px h-3 bg-surface-container-high"></span>
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">7 Em Tratamento</span>
+</div>
+<span class="w-px h-3 bg-surface-container-high"></span>
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">44 Concluídas</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toolbar Ribbon -->
+<div class="bg-surface-container-lowest p-space-sm rounded shadow-sm flex items-center justify-between gap-space-md mb-space-md">
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-md py-1 rounded bg-primary-container text-on-primary font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>Nova Pendência ERP</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1 rounded bg-surface-container text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">filter_alt</span>
+<span>Filtrar Módulo</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1 rounded bg-surface-container text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Exportar (XLSX)</span>
+</button>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center bg-surface-container-low px-space-md py-1 rounded">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-1">search</span>
+<input class="bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/60 outline-none w-48" placeholder="Filtrar por ID, título..." type="text" value="Faturamento"/>
+</div>
+</div>
+</div>
+<!-- Mock Datagrid behind veil -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden flex flex-col">
+<div class="bg-surface-container-low px-space-md py-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<div class="w-20">Cód. ID</div>
+<div class="w-48">Módulo</div>
+<div class="flex-1">Problema / Descrição</div>
+<div class="w-24 text-center">Prioridade</div>
+<div class="w-32">Identificado Por</div>
+<div class="w-28 text-center">Data Registro</div>
+<div class="w-24 text-center">Status</div>
+</div>
+<div class="divide-y divide-surface-container-low font-body-sm text-body-sm">
+<div class="px-space-md py-2 flex items-center justify-between bg-surface-container-lowest">
+<div class="w-20 font-code-dense text-primary font-semibold">ERP-1094</div>
+<div class="w-48 font-label-sm text-on-surface font-medium">Vendas / Faturamento</div>
+<div class="flex-1 truncate pr-4 text-on-surface">Erro ao gerar espelho de NF-e em lote com filiais integradas</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm">ALTA</span></div>
+<div class="w-32 truncate text-on-surface-variant">Marcos Silva</div>
+<div class="w-28 text-center font-code-dense text-[10px] text-on-surface-variant">24/02 11:20</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm">Aberto</span></div>
+</div>
+<div class="px-space-md py-2 flex items-center justify-between bg-surface-container-low/50">
+<div class="w-20 font-code-dense text-primary font-semibold">ERP-1093</div>
+<div class="w-48 font-label-sm text-on-surface font-medium">Estoque &amp; Almoxarifado</div>
+<div class="flex-1 truncate pr-4 text-on-surface">Divergência de baixa automática de bobina de cabos 2.5mm</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm">MÉDIA</span></div>
+<div class="w-32 truncate text-on-surface-variant">Carlos Eduardo</div>
+<div class="w-28 text-center font-code-dense text-[10px] text-on-surface-variant">23/02 16:45</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-tertiary-container text-on-tertiary font-label-sm">Em Análise</span></div>
+</div>
+<div class="px-space-md py-2 flex items-center justify-between bg-surface-container-lowest">
+<div class="w-20 font-code-dense text-primary font-semibold">ERP-1092</div>
+<div class="w-48 font-label-sm text-on-surface font-medium">Financeiro &amp; Fiscal</div>
+<div class="flex-1 truncate pr-4 text-on-surface">Inconsistência na alíquota de ICMS interestadual SP-MG</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm font-bold">CRÍTICA</span></div>
+<div class="w-32 truncate text-on-surface-variant">Renata Vasconcelos</div>
+<div class="w-28 text-center font-code-dense text-[10px] text-on-surface-variant">23/02 10:12</div>
+<div class="w-24 text-center"><span class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary font-label-sm">Urgente</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL BACKDROP (Semi-transparent overlay with dark veil & delicate blur) -->
+<div class="fixed inset-0 z-50 bg-[#0d1c2e]/70 backdrop-blur-[2px] flex items-center justify-center p-space-md">
+<!-- MODAL WINDOW (Target width 750px, optimized for 1024x768 canvas) -->
+<div class="relative w-full max-w-[760px] max-h-[92vh] flex flex-col bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden animate-[fadeIn_0.15s_ease-out]">
+<!-- Top Accent Bar -->
+<div class="h-1 w-full bg-gradient-to-r from-primary via-primary-container to-secondary-container"></div>
+<!-- MODAL HEADER -->
+<div class="px-space-xl py-space-md bg-surface-container-lowest flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] z-10">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded bg-error-container/60 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">report_problem</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Nova Pendência ERP</h2>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-code-dense text-[10px] text-primary font-semibold tracking-wider">
+                CÓDIGO: ERP-NOVO (AUTOMÁTICO)
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Registro de ocorrência, falha ou melhoria para acompanhamento de suporte e testes.
+            </p>
+</div>
+</div>
+<!-- Close Action -->
+<button class="w-7 h-7 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/40 transition-colors" id="btn-close-modal" title="Fechar janela (Esc)" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- MODAL BODY (Structured, High-density corporate inputs with scroll protection) -->
+<div class="flex-1 overflow-y-auto px-space-xl py-space-md space-y-space-md bg-surface-bright">
+<!-- SECTION 1: Problema / Título -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5" for="titulo-pendencia">
+<span>Problema / Título</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<span class="font-code-dense text-[10px] text-on-surface-variant">Obrigatório</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-8 px-space-md bg-surface-container-lowest rounded shadow-xs font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary outline-none transition-all" id="titulo-pendencia" placeholder="Ex: Erro ao gerar relatório de vendas em formato PDF" type="text" value="Erro ao gerar relatório de vendas em formato PDF"/>
+</div>
+</div>
+<!-- SECTION 2: Sistema / Módulo & Prioridade (Grid 2 Cols) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Dropdown Sistema / Módulo -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5" for="select-modulo">
+<span>Sistema / Módulo</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-8 px-space-md pr-8 bg-surface-container-lowest rounded shadow-xs font-body-sm text-body-sm text-on-surface appearance-none focus:ring-1 focus:ring-primary outline-none cursor-pointer" id="select-modulo">
+<option selected="" value="vendas">Vendas / Faturamento</option>
+<option value="financeiro">Financeiro &amp; Fiscal</option>
+<option value="estoque">Estoque &amp; Almoxarifado</option>
+<option value="ti">TI &amp; Infraestrutura</option>
+<option value="relatorios">Relatórios Corporativos</option>
+<option value="compras">Compras &amp; Suprimentos</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1.5 text-[18px] text-on-surface-variant pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Selector Visual Prioridade -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5">
+<span>Prioridade</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<div class="grid grid-cols-4 gap-1 h-8 p-0.5 bg-surface-container-low rounded">
+<button class="flex items-center justify-center rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" type="button">
+                Baixa
+              </button>
+<button class="flex items-center justify-center rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" type="button">
+                Média
+              </button>
+<button class="flex items-center justify-center rounded font-label-sm text-label-sm bg-primary text-on-primary font-bold shadow-xs transition-all" type="button">
+                Alta
+              </button>
+<button class="flex items-center justify-center rounded font-label-sm text-label-sm text-error hover:bg-error-container/50 transition-all font-semibold" type="button">
+                Crítica
+              </button>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Abrangência & Setor Afetado (Grid 2 Cols with dynamic feedback) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md p-space-sm bg-surface-container-low rounded-lg">
+<!-- Abrangência -->
+<div class="flex flex-col justify-center space-y-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Abrangência do Impacto</span>
+<div class="flex items-center gap-space-md pt-0.5">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-3.5 h-3.5 accent-primary cursor-pointer" id="radio-setor-especifico" name="abrangencia" type="radio" value="especifico"/>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Setor específico</span>
+</label>
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input class="w-3.5 h-3.5 accent-primary cursor-pointer" id="radio-setor-todos" name="abrangencia" type="radio" value="todos"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Todos os setores</span>
+</label>
+</div>
+</div>
+<!-- Setor Afetado -->
+<div class="space-y-space-xs" id="container-setor-afetado">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5" for="input-setor">
+<span>Setor Afetado</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<span class="font-code-dense text-[9px] text-tertiary font-semibold uppercase bg-tertiary-fixed/30 px-1 rounded" id="setor-badge-status">Habilitado</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2 text-[16px] text-on-surface-variant">apartment</span>
+<select class="w-full h-8 pl-7 pr-8 bg-surface-container-lowest rounded shadow-xs font-body-sm text-body-sm text-on-surface appearance-none focus:ring-1 focus:ring-primary outline-none cursor-pointer" id="input-setor">
+<option selected="" value="faturamento">Comercial / Faturamento</option>
+<option value="ti">Tecnologia da Informação &amp; Redes</option>
+<option value="almoxarifado">Almoxarifado &amp; Expedição Central</option>
+<option value="controladoria">Controladoria &amp; Auditoria</option>
+<option value="financeiro">Financeiro / Contas a Pagar</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 text-[18px] text-on-surface-variant pointer-events-none">
+                expand_more
+              </span>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Identificado por & Data/Hora (Grid 2 Cols) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Identificado por -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5">
+<span>Identificado por</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<div class="relative flex items-center bg-surface-container-lowest rounded px-space-sm h-8 shadow-xs">
+<div class="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-space-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[13px]">person</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate flex-1">
+                Marcos Antônio da Silva (Encarregado TI - Almoxarifado)
+              </span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant flex-shrink-0">
+                badge
+              </span>
+</div>
+</div>
+<!-- Data e Hora da Identificação (Locked / Auto) -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Data / Hora de Registro</label>
+<span class="px-space-xs py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed font-code-dense text-[9px] font-bold uppercase">
+                Automático
+              </span>
+</div>
+<div class="flex items-center justify-between px-space-md h-8 bg-surface-container-low rounded shadow-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[15px] text-on-surface-variant">schedule</span>
+<span class="font-code-dense text-code-dense text-on-surface font-semibold">24/02/2025 às 14:35</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/70">lock</span>
+</div>
+</div>
+</div>
+<!-- SECTION 5: Descrição do Problema -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-0.5" for="desc-problema">
+<span>Descrição do Problema &amp; Passo a Passo</span>
+<span class="text-error font-bold text-sm leading-none">*</span>
+</label>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Descreva o passo a passo para reproduzir o problema.</span>
+</div>
+<div class="relative">
+<textarea class="w-full p-space-sm bg-surface-container-lowest rounded shadow-xs font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-1 focus:ring-primary outline-none resize-none leading-relaxed" id="desc-problema" rows="3">Ao tentar emitir o relatório de faturamento consolidado por filial com período superior a 30 dias, a aplicação trava no carregamento e retorna mensagem de timeout (HTTP 504). O problema começou após a sincronização do lote da manhã.</textarea>
+</div>
+</div>
+<!-- SECTION 6: Observações adicionais -->
+<div class="space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="obs-adicionais">
+<span>Observações adicionais</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">(Opcional)</span>
+</label>
+<input class="w-full h-8 px-space-md bg-surface-container-lowest rounded shadow-xs font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-1 focus:ring-primary outline-none" id="obs-adicionais" placeholder="Informações complementares sobre impacto ou tentativas prévias..." type="text" value="Ocorreu simultaneamente em 3 terminais da unidade Matriz."/>
+</div>
+<!-- SECTION 7: Evidências / Fotos (Compact dropzone + active pills) -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1">
+<span>Evidências / Fotos / Logs</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">(2 anexados)</span>
+</label>
+<span class="font-code-dense text-[10px] text-on-surface-variant">PNG, JPG, PDF (Máx. 10MB)</span>
+</div>
+<!-- Dropzone area -->
+<div class="p-space-xs bg-surface-container-lowest rounded shadow-xs flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm pl-space-sm py-1">
+<span class="material-symbols-outlined text-[20px] text-primary">cloud_upload</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Clique para selecionar ou arraste capturas de tela e arquivos de log
+              </span>
+</div>
+<button class="px-space-md py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-semibold hover:bg-surface-container-high transition-colors" type="button">
+              Procurar Arquivos
+            </button>
+</div>
+<!-- List of Attached Files -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-1">
+<!-- Anexo 1: Screenshot -->
+<div class="flex items-center justify-between p-1.5 bg-surface-container-lowest rounded shadow-xs group">
+<div class="flex items-center gap-space-sm min-w-0 pr-2">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">image</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-code-dense text-[11px] text-on-surface font-medium truncate">print_erro_timeout_faturamento.png</span>
+<span class="font-code-dense text-[9px] text-on-surface-variant">420 KB • Imagem PNG</span>
+</div>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/40 transition-colors" title="Remover anexo" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+<!-- Anexo 2: Log File -->
+<div class="flex items-center justify-between p-1.5 bg-surface-container-lowest rounded shadow-xs group">
+<div class="flex items-center gap-space-sm min-w-0 pr-2">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">description</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-code-dense text-[11px] text-on-surface font-medium truncate">log_requisicao_vendas.txt</span>
+<span class="font-code-dense text-[9px] text-on-surface-variant">18 KB • Arquivo de Log</span>
+</div>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/40 transition-colors" title="Remover anexo" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL FOOTER (Pinned bottom bar) -->
+<div class="px-space-xl py-space-sm bg-surface-container-low flex items-center justify-between shadow-[0_-1px_3px_rgba(0,0,0,0.04)]">
+<!-- Left Side: Helper info -->
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="text-error font-bold leading-none">*</span>
+<span class="font-body-sm text-body-sm">Campos de preenchimento obrigatório</span>
+</div>
+<!-- Right Side: Actions -->
+<div class="flex items-center gap-space-sm">
+<button class="h-8 px-space-lg rounded bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container hover:text-on-surface shadow-xs transition-all active:translate-y-px" id="btn-cancel-modal" type="button">
+            Cancelar
+          </button>
+<button class="h-8 px-space-xl rounded bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:bg-primary shadow-sm flex items-center gap-space-xs transition-all active:translate-y-px" id="btn-save-pendencia" type="button">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Salvar Pendência</span>
+<kbd class="ml-1 font-code-dense text-[9px] bg-primary/40 px-1 py-0.2 rounded text-on-primary/90">Alt+S</kbd>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic UI feedback for Scope (Abrangência) toggle
+  const radioEspecifico = document.getElementById('radio-setor-especifico');
+  const radioTodos = document.getElementById('radio-setor-todos');
+  const containerSetor = document.getElementById('container-setor-afetado');
+  const inputSetor = document.getElementById('input-setor');
+  const badgeStatus = document.getElementById('setor-badge-status');
+
+  function updateSetorState() {
+    if (radioTodos && radioTodos.checked) {
+      if (containerSetor) containerSetor.classList.add('opacity-40', 'pointer-events-none');
+      if (inputSetor) inputSetor.disabled = true;
+      if (badgeStatus) {
+        badgeStatus.textContent = 'Global / Desabilitado';
+        badgeStatus.className = 'font-code-dense text-[9px] text-on-surface-variant font-semibold uppercase bg-surface-container-highest px-1 rounded';
+      }
+    } else {
+      if (containerSetor) containerSetor.classList.remove('opacity-40', 'pointer-events-none');
+      if (inputSetor) inputSetor.disabled = false;
+      if (badgeStatus) {
+        badgeStatus.textContent = 'Habilitado';
+        badgeStatus.className = 'font-code-dense text-[9px] text-tertiary font-semibold uppercase bg-tertiary-fixed/30 px-1 rounded';
+      }
+    }
+  }
+
+  if (radioEspecifico && radioTodos) {
+    radioEspecifico.addEventListener('change', updateSetorState);
+    radioTodos.addEventListener('change', updateSetorState);
+  }
+
+  // Visual shortcut handling
+  document.addEventListener('keydown', function(e) {
+    if ((e.altKey && e.key.toLowerCase() === 's') || (e.key === 'Enter' && e.ctrlKey)) {
+      e.preventDefault();
+      const saveBtn = document.getElementById('btn-save-pendencia');
+      if (saveBtn) {
+        saveBtn.classList.add('brightness-90');
+        setTimeout(() => saveBtn.classList.remove('brightness-90'), 150);
+      }
+    }
+  });
+</script></main><footer class="fixed bottom-0 left-0 right-0 h-6 bg-inverse-surface text-inverse-on-surface z-50 flex items-center justify-between px-space-xl text-[10px] font-code-dense border-t border-inverse-surface"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-[#80d5cb]"><span class="w-1.5 h-1.5 rounded-full bg-[#80d5cb]"></span><span>Servidor: ONLINE</span></div><span class="text-inverse-on-surface/40">|</span><span>Banco: fortluz_db_prod</span><span class="text-inverse-on-surface/40">|</span><span class="text-[#9cf2e8]">SSL 256-BIT</span></div><div class="flex items-center gap-space-md"><span class="text-inverse-on-surface/70">Build: 2025.2.4-web</span><span class="text-inverse-on-surface/40">|</span><span class="text-inverse-on-surface/80">UTF-8 / pt-BR</span><span class="text-inverse-on-surface/40">|</span><span class="bg-surface-container/20 px-1 rounded text-[9px] uppercase tracking-wider text-inverse-on-surface/60">CAPS / NUM</span></div></footer></div></body></html>

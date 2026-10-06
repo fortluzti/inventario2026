@@ -22,13 +22,20 @@
  *                                funcionario de MESMO NOME apenas na exibicao).
  *   - listar_historico    (GET)  historico de trocas com os filtros do legado
  *                                (impressora, setor, consumivel) + paginacao.
+ *                                Retorna `total` (registros ENCONTRADOS com os
+ *                                filtros) e `total_geral` (total EXISTENTE sem
+ *                                filtros) para as contagens do modal.
  *   - receber_multiplos   (POST) recebimento MULTIPLO: funcionario recebedor +
  *                                data/observacao + varios consumiveis com
  *                                quantidade; soma no estoque e grava cada
- *                                linha em `recebimentos_toner`.
+ *                                linha em `recebimentos_toner`. Aceita
+ *                                `fornecedor_id` OPCIONAL (cadastro real
+ *                                `fornecedores`, migration 008) como informacao
+ *                                geral do lote — mesma regra de data/observacao.
  *
- * Nenhuma tabela/coluna nova: reusa `historico_troca_toner`,
- * `recebimentos_toner`, `impressora_modelos_toner` e `toner`.
+ * Tabelas/colunas: reusa `historico_troca_toner`, `recebimentos_toner`
+ * (+ `fornecedor_id` opcional da migration 008), `impressora_modelos_toner` e
+ * `toner`. Nenhuma tabela paralela.
  */
 declare(strict_types=1);
 
@@ -213,6 +220,10 @@ final class TonersHandler
      * registrou (`users.nome` x `funcionarios.nome`, sem diferenciar maiusculas),
      * caindo para o proprio login quando nao ha funcionario correspondente. A
      * resolucao e feita por subconsulta para nunca multiplicar linhas.
+     *
+     * Contagens do modal: `total` = registros ENCONTRADOS com os filtros
+     * aplicados; `total_geral` = total EXISTENTE sem filtros (mesmo durante a
+     * paginacao — ambos contam a tabela inteira, nao a pagina atual).
      */
     private static function listarHistorico(PDO $pdo, array $input): never
     {
@@ -243,6 +254,9 @@ final class TonersHandler
         $stmt->execute($params);
         $total = (int)$stmt->fetchColumn();
 
+        /* Total EXISTENTE antes dos filtros (contagem global, sem WHERE). */
+        $totalGeral = (int)$pdo->query('SELECT COUNT(*) FROM historico_troca_toner')->fetchColumn();
+
         $sql = 'SELECT h.id, h.data_cadastro, h.observacoes, h.usuario_cadastro,
                        t.id AS toner_id, t.codigo AS toner_codigo, t.tipo AS toner_tipo,
                        i.id AS impressora_id, i.codigo_interno_impressora AS impressora_codigo,
@@ -267,6 +281,7 @@ final class TonersHandler
         Response::success([
             'items'       => $stmt->fetchAll(),
             'total'       => $total,
+            'total_geral' => $totalGeral,
             'page'        => $page,
             'limit'       => $limit,
             'total_pages' => (int)ceil($total / $limit),
@@ -278,12 +293,22 @@ final class TonersHandler
      * consumiveis com quantidade. Soma no estoque e grava uma linha em
      * `recebimentos_toner` por consumivel, na mesma transacao. Itens repetidos
      * do mesmo consumivel sao somados (evita linhas duplicadas no mesmo lote).
+     *
+     * `fornecedor_id` e OPCIONAL e e informacao GERAL do lote (mesma regra de
+     * data/observacao: um valor para todos os itens, sem repetir por item no
+     * payload). E persistido em cada linha do lote referenciando o cadastro
+     * real `fornecedores` (migration 008); ausente = NULL e o recebimento
+     * funciona normalmente.
      */
     private static function receberMultiplos(PDO $pdo, array $input): never
     {
         $funcionarioId = (int)($input['funcionario_recebedor_id'] ?? 0);
         $observacoes   = self::observacoes($input);
         $usuario       = self::responsavel($input);
+
+        /* Fornecedor opcional do lote (cadastro real `fornecedores`). */
+        $fornecedorId = (int)($input['fornecedor_id'] ?? 0);
+        if ($fornecedorId < 0) { $fornecedorId = 0; }
 
         $dataRaw = trim((string)($input['data_recebimento'] ?? ''));
         $dataRecebimento = preg_match('/^\d{4}-\d{2}-\d{2}$/', $dataRaw) === 1 ? $dataRaw : null;
@@ -327,12 +352,26 @@ final class TonersHandler
                 ]);
             }
 
+            /* Fornecedor opcional: valida contra o cadastro real; inexistente = 422. */
+            $fornecedorNome = null;
+            if ($fornecedorId > 0) {
+                $chkForn = $pdo->prepare('SELECT nome FROM fornecedores WHERE id = :id LIMIT 1');
+                $chkForn->execute([':id' => $fornecedorId]);
+                $fornecedorNome = $chkForn->fetchColumn();
+                if ($fornecedorNome === false) {
+                    $pdo->rollBack();
+                    Response::error('Fornecedor nao encontrado.', 422, [
+                        'fornecedor_id' => 'Fornecedor inexistente.',
+                    ]);
+                }
+            }
+
             $updEstoque = $pdo->prepare('UPDATE toner SET estoque = estoque + :qtd, usuario_atualizacao = :usr, data_atualizacao = NOW()
                                          WHERE id = :id');
             $ins = $pdo->prepare('INSERT INTO recebimentos_toner
                     (toner_id, usuario_recebedor_id, data_recebimento, quantidade_recebida, nota_fiscal, fornecedor_entrada,
-                     observacoes, usuario_cadastro, data_cadastro, usuario_atualizacao, data_atualizacao)
-                    VALUES (:toner_id, :func, COALESCE(:data, NOW()), :qtd, NULL, NULL, :obs, :usr_cad, NOW(), :usr_upd, NOW())');
+                     fornecedor_id, observacoes, usuario_cadastro, data_cadastro, usuario_atualizacao, data_atualizacao)
+                    VALUES (:toner_id, :func, COALESCE(:data, NOW()), :qtd, NULL, NULL, :forn, :obs, :usr_cad, NOW(), :usr_upd, NOW())');
 
             $processados = [];
             foreach ($limpos as $tonerId => $qtd) {
@@ -352,6 +391,7 @@ final class TonersHandler
                     ':func'     => $funcionarioId,
                     ':data'     => $dataRecebimento,
                     ':qtd'      => $qtd,
+                    ':forn'     => $fornecedorId > 0 ? $fornecedorId : null,
                     ':obs'      => $observacoes,
                     ':usr_cad'  => $usuario,
                     ':usr_upd'  => $usuario,
@@ -370,6 +410,8 @@ final class TonersHandler
 
             Response::success([
                 'funcionario_recebedor' => $recebedor,
+                'fornecedor_id'         => $fornecedorId > 0 ? $fornecedorId : null,
+                'fornecedor'            => $fornecedorNome,
                 'data_recebimento'      => $dataRecebimento,
                 'itens'                 => $processados,
                 'responsavel'           => $usuario,

@@ -105,6 +105,26 @@
 /* Coluna "Modelos compatíveis" da grade */
 .tnd-modelos { max-width: 260px; color: var(--text-muted); }
 
+/* ---------------- SearchableSelect: padrão global de dropdown pesquisável ---------------- */
+.ss-root { position: relative; min-width: 0; }
+.ss-button { width: 100%; justify-content: space-between; text-align: left; }
+.ss-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-placeholder { color: var(--text-muted); font-weight: 400; }
+.ss-caret { color: var(--text-muted); }
+.ss-drop { position: absolute; z-index: 300; top: calc(100% + 4px); left: 0; right: 0; min-width: 220px; max-height: 260px; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-container-lowest); box-shadow: 0 8px 20px #0003; overflow: hidden; }
+.ss-search { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid var(--border-light); background: var(--surface-container-low); }
+.ss-search .mat { font-size: 16px; color: var(--text-muted); }
+.ss-search-input { flex: 1; min-width: 0; height: 26px; border: 0; background: transparent; font: inherit; color: inherit; }
+.ss-search-input:focus { outline: none; }
+.ss-clear { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; }
+.ss-clear:hover { background: var(--crit-bg); color: var(--crit-fg); }
+.ss-clear .mat { font-size: 14px; }
+.ss-list { margin: 0; padding: 4px; list-style: none; overflow: auto; }
+.ss-item { width: 100%; padding: 6px 8px; border: 0; border-radius: var(--radius); background: transparent; color: var(--on-surface); font: 11px var(--font); text-align: left; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-item.ss-highlight { background: var(--surface-container-low); }
+.ss-item.ss-selected { font-weight: 700; color: var(--primary); }
+.ss-empty { padding: 10px 8px; color: var(--text-muted); font-size: 11px; text-align: center; }
+
 /* ---------------- Operações da tela: modais de troca / recebimento / histórico ---------------- */
 .tnd-header-actions { flex-wrap: wrap; justify-content: flex-end; }
 .tnd-dialog-wide { width: 920px; }
@@ -116,6 +136,27 @@
 .tnd-responsavel-tag { margin-left: auto; font: 700 9px var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
 
 /* Bloco de itens do recebimento múltiplo */
+
+/* ---------------- SearchableSelect: PADRÃO GLOBAL de dropdown pesquisável ---------------- */
+/* Botão usa .tnd-select; posicionamento relativo ao campo (funciona em modais). */
+.ss-root { position: relative; min-width: 0; flex: 1; display: flex; }
+.ss-button { width: 100%; justify-content: space-between; text-align: left; }
+.ss-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-placeholder { color: var(--text-muted); font-weight: 400; }
+.ss-caret { color: var(--text-muted); }
+.ss-drop { position: absolute; z-index: 300; top: calc(100% + 4px); left: 0; right: 0; min-width: 220px; background: var(--surface-container-lowest); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 8px 20px #0003; overflow: hidden; }
+.ss-search { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid var(--border-light); background: var(--surface-container-low); }
+.ss-search .mat { font-size: 16px; color: var(--text-muted); }
+.ss-search-input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: inherit; outline: none; }
+.ss-clear { display: inline-flex; border: 0; background: transparent; color: var(--text-muted); cursor: pointer; padding: 2px; border-radius: 50%; }
+.ss-clear:hover { background: var(--crit-bg); color: var(--crit-fg); }
+.ss-clear .mat { font-size: 14px; }
+.ss-list { list-style: none; margin: 0; padding: 4px; max-height: 220px; overflow: auto; }
+.ss-item { display: block; width: 100%; padding: 6px 8px; border: 0; border-radius: var(--radius); background: transparent; color: var(--on-surface); font: 11px var(--font); text-align: left; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ss-item.ss-highlight { background: var(--surface-container-low); }
+.ss-item.ss-selected { font-weight: 700; color: var(--primary); }
+.ss-empty { padding: 10px; font-size: 11px; color: var(--text-muted); }
+
 .tnd-receb { margin-top: 16px; padding: 10px 12px 12px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-low); display: flex; flex-direction: column; gap: 8px; }
 .tnd-receb-head { display: flex; align-items: center; gap: 6px; }
 .tnd-receb-head .mat { color: var(--primary); font-size: 17px; }
@@ -134,6 +175,37 @@
 .tnd-hist-filtros .tnd-field { min-width: 190px; flex: 1; }
 .tnd-hist-filtros .tnd-actions { margin-left: auto; }
 .tnd-hist-scroll { max-height: 52vh; margin-top: 4px; }
+/* Contagens: total sem filtros x registros encontrados com os filtros atuais */
+.tnd-hist-titulo { flex: 1; min-width: 0; }
+.tnd-hist-contagens { display: flex; flex-wrap: wrap; gap: 14px; margin: 4px 0 0; font-size: 11px; color: var(--text-muted); }
+.tnd-hist-contagens strong { font-family: var(--font-mono); color: var(--on-surface); }
+.tnd-hist-encontrados strong { color: var(--primary); }
 .tnd-nowrap { white-space: nowrap; }
 .tnd-table td .tnd-tipo { margin-left: 6px; }
+
+/* ---------------- SearchableSelect: PADRÃO GLOBAL de dropdown pesquisável ----
+ * Todo dropdown com muitos registros usa este componente (botão + painel com
+ * 🔍 Buscar... no topo). Selects pequenos/fechados continuam <select> nativo. */
+.ss-root { position: relative; min-width: 0; }
+.tnd-field .ss-root { width: 100%; }
+.ss-button { width: 100%; justify-content: space-between; text-align: left; }
+.ss-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-value.ss-placeholder { color: var(--text-muted); font-weight: 400; }
+.ss-caret { color: var(--text-muted); }
+.ss-drop { position: absolute; z-index: 400; top: calc(100% + 4px); left: 0; right: 0; min-width: 220px; background: var(--surface-container-lowest); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 8px 20px #0003; display: flex; flex-direction: column; overflow: hidden; }
+.ss-search { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid var(--border); background: var(--surface-container-low); }
+.ss-search .mat { font-size: 17px; color: var(--text-muted); }
+.ss-search-input { flex: 1; min-width: 0; height: 28px; border: 0; background: transparent; padding: 4px; font: inherit; color: inherit; }
+.ss-clear { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; }
+.ss-clear:hover { background: var(--crit-bg); color: var(--crit-fg); }
+.ss-clear .mat { font-size: 15px; }
+.ss-list { margin: 0; padding: 4px; list-style: none; max-height: 240px; overflow: auto; }
+.ss-item { display: block; width: 100%; padding: 6px 8px; border: 0; border-radius: var(--radius); background: transparent; color: var(--on-surface); font: 11px var(--font); text-align: left; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-item.ss-highlight { background: var(--surface-container-low); }
+.ss-item.ss-selected { font-weight: 700; color: var(--primary); }
+.ss-empty { padding: 10px 8px; color: var(--text-muted); font-size: 11px; }
+
+/* Contagem do histórico de trocas: total existente x encontrados no filtro. */
+.tnd-hist-count { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0 0 8px; font-size: 11px; color: var(--text-muted); }
+.tnd-hist-count strong { color: var(--on-surface); font-family: var(--font-mono); }
 

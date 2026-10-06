@@ -31,7 +31,7 @@ return [
         'code_field' => 'codigo_patrimonio',
         'code_format' => 'DIV-%03d',
     ],
-
+    
     'ativos_tipos' => [
         'table'   => 'ativos_tipos',
         'fields'  => [
@@ -40,7 +40,7 @@ return [
         ],
         'search'  => ['nome'],
     ],
-
+    
     'empresas' => [
         'table'   => 'empresas',
         'fields'  => [
@@ -56,7 +56,7 @@ return [
         'search'  => ['nome', 'cnpj', 'unidade'],
         'dropdown' => ['table' => 'empresas', 'name_col' => 'nome'],
     ],
-
+    
     'estacoes' => [
         'table'   => 'estacoes',
         // select explicito: a grid de estacoes exibe empresa, setor, responsavel e monitor.
@@ -101,8 +101,7 @@ return [
         'code_field'  => 'codigo_interno_estacao',
         'code_format' => 'EST-%03d',
     ],
-
-
+    
     'fornecedores' => [
         'table'   => 'fornecedores',
         'fields'  => [
@@ -149,7 +148,7 @@ return [
         ],
         'dropdown' => ['table' => 'fornecedores', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
-
+    
     'funcionarios' => [
         'table'   => 'funcionarios',
         'select'  =>
@@ -183,7 +182,7 @@ return [
         ],
         'dropdown' => ['table' => 'funcionarios', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
-
+    
     'impressoras' => [
         'table'   => 'impressoras',
         'select'  =>
@@ -216,46 +215,45 @@ return [
         'code_format' => 'IMP-%03d',
         'dropdown' => ['table' => 'impressoras', 'name_col' => 'codigo_interno_impressora'],
     ],
-
-'impressoras_modelos' => [
-          'table'   => 'impressora_modelos',
-          'fields'  => [
-              'nome_modelo'          => ['tipo' => 'string', 'req' => true, 'max' => 150],
-              'marca'                => ['tipo' => 'string', 'max' => 100],
-              'descricao'            => ['tipo' => 'string', 'max' => 255],
-              'estoque_minimo_toner' => ['tipo' => 'int', 'req' => true],
-              'estoque_minimo_cilindro'=> ['tipo' => 'int', 'req' => true],
-          ],
-          'search'  => ['nome_modelo', 'marca'],
-      ],
-
+    
+    'impressoras_modelos' => [
+        'table'   => 'impressora_modelos',
+        'fields'  => [
+            'nome_modelo'          => ['tipo' => 'string', 'req' => true, 'max' => 150],
+            'marca'                => ['tipo' => 'string', 'max' => 100],
+            'descricao'            => ['tipo' => 'string', 'max' => 255],
+            'estoque_minimo_toner' => ['tipo' => 'int', 'req' => true],
+            'estoque_minimo_cilindro'=> ['tipo' => 'int', 'req' => true],
+        ],
+        'search'  => ['nome_modelo', 'marca'],
+    ],
+    
     // Tabela de juncao modelo x consumivel (migration 006_impressora_modelos_toner.sql).
     // O TIPO (TONER/CILINDRO) NUNCA e informado aqui: sempre vem de `toner.tipo`
     // (cadastro do consumivel) — exposto apenas para leitura via JOIN (toner_tipo).
     // 'audit_columns' => false: a tabela da 006 nao tem data_cadastro/data_atualizacao.
     'impressora_modelos_toner' => [
-          'table'   => 'impressora_modelos_toner',
-          'select'  =>
-              'SELECT impressora_modelos_toner.*, '
-              . 't.codigo AS toner_codigo, t.tipo AS toner_tipo, t.estoque AS toner_estoque, '
-              . 'im.nome_modelo AS modelo_nome, im.marca AS modelo_marca '
-              . 'FROM impressora_modelos_toner '
-              . 'INNER JOIN toner t ON t.id = impressora_modelos_toner.toner_id '
-              . 'LEFT JOIN impressora_modelos im ON im.id = impressora_modelos_toner.modelo_id',
-          'fields'  => [
-              'modelo_id' => ['tipo' => 'int', 'req' => true],
-              'toner_id'  => ['tipo' => 'int', 'req' => true],
-          ],
-          'search'  => [],
-          'filters' => [
-              'impressora_modelos_toner.modelo_id' => 'modelo_id',
-              'impressora_modelos_toner.toner_id'  => 'toner_id',
-          ],
-          'order'         => 'ORDER BY impressora_modelos_toner.id ASC',
-          'audit_columns' => false,
-      ],
-
-
+        'table'   => 'impressora_modelos_toner',
+        'select'  =>
+            'SELECT impressora_modelos_toner.*, '
+            . 't.codigo AS toner_codigo, t.tipo AS toner_tipo, t.estoque AS toner_estoque, '
+            . 'im.nome_modelo AS modelo_nome, im.marca AS modelo_marca '
+            . 'FROM impressora_modelos_toner '
+            . 'INNER JOIN toner t ON t.id = impressora_modelos_toner.toner_id '
+            . 'LEFT JOIN impressora_modelos im ON im.id = impressora_modelos_toner.modelo_id',
+        'fields'  => [
+            'modelo_id' => ['tipo' => 'int', 'req' => true],
+            'toner_id'  => ['tipo' => 'int', 'req' => true],
+        ],
+        'search'  => [],
+        'filters' => [
+            'impressora_modelos_toner.modelo_id' => 'modelo_id',
+            'impressora_modelos_toner.toner_id'  => 'toner_id',
+        ],
+        'order'         => 'ORDER BY impressora_modelos_toner.id ASC',
+        'audit_columns' => false,
+    ],
+    
     'monitores' => [
         'table'   => 'monitores',
         'select'  =>
@@ -282,7 +280,7 @@ return [
         'code_field' => 'codigo_interno_monitor',
         'code_format' => 'MON-%03d',
     ],
-
+    
     'nobreaks' => [
         'table'   => 'nobreaks',
         'fields'  => [
@@ -302,7 +300,7 @@ return [
         'code_field' => 'codigo_interno_nobreak',
         'code_format' => 'NB-%03d',
     ],
-
+    
     'setores' => [
         'table'   => 'setores',
         'fields'  => [
@@ -314,7 +312,7 @@ return [
         'filters' => ['ativo'],
         'dropdown' => ['table' => 'setores', 'name_col' => 'nome', 'where' => 'ativo = 1'],
     ],
-
+    
     'softwares' => [
         'table'   => 'softwares',
         'fields'  => [
@@ -324,49 +322,49 @@ return [
         ],
         'search'  => ['nome', 'numero_serie'],
     ],
-
-'toners' => [
-          'table'   => 'toner',
-          // `modelos_compat` agrega, em UMA linha por consumivel, os modelos de
-          // impressora compativeis (relacao impressora_modelos_toner, migration 006).
-          // Evita N+1 e NAO duplica o consumivel quando ele combina com varios modelos.
-          'select'  =>
-              "SELECT toner.*, "
-              . "(SELECT GROUP_CONCAT(CONCAT_WS(' ', NULLIF(im.marca, ''), NULLIF(im.nome_modelo, '')) "
-              . "ORDER BY im.nome_modelo SEPARATOR ', ') "
-              . "FROM impressora_modelos_toner r "
-              . "INNER JOIN impressora_modelos im ON im.id = r.modelo_id "
-              . "WHERE r.toner_id = toner.id) AS modelos_compat "
-              . "FROM toner",
-          'fields'  => [
-              'codigo'         => ['tipo' => 'string', 'req' => true, 'max' => 100],
-              'tipo'           => ['tipo' => 'string', 'req' => true, 'enum' => ['TONER','CILINDRO']],
-              'estoque'        => ['tipo' => 'int'],
-              'estoque_minimo' => ['tipo' => 'int'],
-              'autonomia'      => ['tipo' => 'int'],
-              // Valor unitário do consumível (migration 007_toner_valor.sql).
-              // Cadastro p/ futuro histórico financeiro — fora de qualquer
-              // solicitação/pedido de compra e de cálculos de estoque.
-              'valor'          => ['tipo' => 'decimal'],
-              'data_compra'    => ['tipo' => 'date'],
-              'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
-              'fornecedor_id'  => ['tipo' => 'int'],
-              'empresa_id'     => ['tipo' => 'int'],
-          ],
-          'search'  => ['codigo'],
-          // Filtro TONER/CILINDRO (toner.tipo continua determinando a classificacao).
-          'filters' => ['tipo' => 'tipo'],
-          // Filtro "Modelo da impressora": retorna SOMENTE os consumiveis (TONER ou
-          // CILINDRO, mesma regra) vinculados ao modelo via impressora_modelos_toner.
-          // EXISTS garante uma unica linha por consumivel mesmo com N modelos.
-          'filter_exists' => [
-              'modelo_id' => ['table' => 'impressora_modelos_toner', 'column' => 'toner_id', 'ref' => 'modelo_id'],
-          ],
-          // Lista simples (id + codigo) para selects/filtros — ex.: filtro
-          // "Consumivel" do Historico de Trocas e do Recebimento de Toners.
-          'dropdown' => ['table' => 'toner', 'name_col' => 'codigo'],
-      ],
-
+    
+    'toners' => [
+        'table'   => 'toner',
+        // `modelos_compat` agrega, em UMA linha por consumivel, os modelos de
+        // impressora compativeis (relacao impressora_modelos_toner, migration 006).
+        // Evita N+1 e NAO duplica o consumivel quando ele combina com varios modelos.
+        'select'  =>
+            "SELECT toner.*, "
+            . "(SELECT GROUP_CONCAT(CONCAT_WS(' ', NULLIF(im.marca, ''), NULLIF(im.nome_modelo, '')) "
+            . "ORDER BY im.nome_modelo SEPARATOR ', ') "
+            . "FROM impressora_modelos_toner r "
+            . "INNER JOIN impressora_modelos im ON im.id = r.modelo_id "
+            . "WHERE r.toner_id = toner.id) AS modelos_compat "
+            . "FROM toner",
+        'fields'  => [
+            'codigo'         => ['tipo' => 'string', 'req' => true, 'max' => 100],
+            'tipo'           => ['tipo' => 'string', 'req' => true, 'enum' => ['TONER','CILINDRO']],
+            'estoque'        => ['tipo' => 'int'],
+            'estoque_minimo' => ['tipo' => 'int'],
+            'autonomia'      => ['tipo' => 'int'],
+            // Valor unitário do consumível (migration 007_toner_valor.sql).
+            // Cadastro p/ futuro histórico financeiro — fora de qualquer
+            // solicitação/pedido de compra e de cálculos de estoque.
+            'valor'          => ['tipo' => 'decimal'],
+            'data_compra'    => ['tipo' => 'date'],
+            'nota_fiscal'    => ['tipo' => 'string', 'max' => 100],
+            'fornecedor_id'  => ['tipo' => 'int'],
+            'empresa_id'     => ['tipo' => 'int'],
+        ],
+        'search'  => ['codigo'],
+        // Filtro TONER/CILINDRO (toner.tipo continua determinando a classificacao).
+        'filters' => ['tipo' => 'tipo'],
+        // Filtro "Modelo da impressora": retorna SOMENTE os consumiveis (TONER ou
+        // CILINDRO, mesma regra) vinculados ao modelo via impressora_modelos_toner.
+        // EXISTS garante uma unica linha por consumivel mesmo com N modelos.
+        'filter_exists' => [
+            'modelo_id' => ['table' => 'impressora_modelos_toner', 'column' => 'toner_id', 'ref' => 'modelo_id'],
+        ],
+        // Lista simples (id + codigo) para selects/filtros — ex.: filtro
+        // "Consumivel" do Historico de Trocas e do Recebimento de Toners.
+        'dropdown' => ['table' => 'toner', 'name_col' => 'codigo'],
+    ],
+    
     'celulares' => [
         'table'   => 'celulares',
         'select'  =>
@@ -408,5 +406,64 @@ return [
         'code_field' => 'codigo_interno_celular',
         'code_format' => 'CEL-%03d',
         'dropdown' => ['table' => 'celulares', 'name_col' => 'codigo_interno_celular'],
+    ],
+
+    // Módulos de Pendências do ERP (migrações 009, 010, 011)
+    'pendencias_erp' => [
+        'table'   => 'pendencias_erp',
+        'fields'  => [
+            'codigo'           => ['tipo' => 'string', 'max' => 50],
+            'titulo'           => ['tipo' => 'string', 'req' => true, 'max' => 255],
+            'descricao'        => ['tipo' => 'string', 'max' => 5000],
+            'modulo'           => ['tipo' => 'string', 'req' => true, 'max' => 100],
+            'versao_programa'  => ['tipo' => 'string', 'max' => 50],
+            'prioridade'       => ['tipo' => 'string', 'req' => true, 'max' => 20],
+            'setor'            => ['tipo' => 'string', 'max' => 100],
+            'abrangencia'      => ['tipo' => 'string', 'max' => 50],
+            'identificado_por' => ['tipo' => 'string', 'max' => 200],
+            'data_identificacao' => ['tipo' => 'datetime'],
+            'status'           => ['tipo' => 'string', 'req' => true, 'max' => 50],
+            'usuario_id'       => ['tipo' => 'int'],
+            'observacoes'      => ['tipo' => 'string', 'max' => 5000],
+        ],
+        'search'  => ['codigo', 'titulo', 'descricao'],
+        'filters' => ['status', 'prioridade', 'modulo', 'setor'],
+        'order'   => 'ORDER BY data_cadastro DESC',
+        'code_field' => 'codigo',
+        'code_format' => 'ERP-%04d',
+    ],
+    
+    'atendimentos_erp' => [
+        'table'   => 'atendimentos_erp',
+        'fields'  => [
+            'pendencia_id'   => ['tipo' => 'int', 'req' => true],
+            'usuario_id'     => ['tipo' => 'int', 'req' => true],
+            'metodo_envio'   => ['tipo' => 'string', 'req' => true, 'max' => 50],
+            'destinatario'   => ['tipo' => 'string', 'max' => 200],
+            'contato'        => ['tipo' => 'string', 'max' => 100],
+            'protocolo'      => ['tipo' => 'string', 'max' => 100],
+            'observacoes'    => ['tipo' => 'string', 'max' => 2000],
+            'anexos_ids'     => ['tipo' => 'string', 'max' => 500],
+        ],
+        'search'  => ['destinatario', 'protocolo'],
+        'filters' => ['pendencia_id', 'usuario_id'],
+        'order'   => 'ORDER BY data_cadastro DESC',
+    ],
+    
+    'anexos_erp' => [
+        'table'   => 'anexos_erp',
+        'fields'  => [
+            'pendencia_id'   => ['tipo' => 'int', 'req' => true],
+            'nome_arquivo'   => ['tipo' => 'string', 'req' => true, 'max' => 255],
+            'tipo_arquivo'   => ['tipo' => 'string', 'req' => true, 'max' => 50],
+            'caminho'        => ['tipo' => 'string', 'req' => true, 'max' => 500],
+            'tamanho_bytes'  => ['tipo' => 'int'],
+            'hash_sha256'    => ['tipo' => 'string', 'max' => 64],
+            'usuario_id'     => ['tipo' => 'int'],
+            'enviado_ao_suporte' => ['tipo' => 'int', 'default' => 0],
+        ],
+        'search'  => ['nome_arquivo'],
+        'filters' => ['pendencia_id', 'enviado_ao_suporte'],
+        'order'   => 'ORDER BY data_cadastro DESC',
     ],
 ];

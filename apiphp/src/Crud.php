@@ -165,9 +165,23 @@ final class Crud
 
     public function salvar(array $input): never
     {
-        $clean = Validator::filter($input, $this->mod['fields']);
-        $table = $this->mod['table'];
         $id = (int)($input['id'] ?? 0);
+        $table = $this->mod['table'];
+
+        // Auto-gerar codigo sequencial se modulo possuir code_field e input estiver vazio em novo registro
+        if ($id === 0 && !empty($this->mod['code_field'])) {
+            $codeField = $this->mod['code_field'];
+            if (empty($input[$codeField])) {
+                $stmt = $this->pdo->prepare("SELECT {$codeField} FROM {$table} ORDER BY id DESC LIMIT 1");
+                $stmt->execute();
+                $last = $stmt->fetchColumn();
+                $num = ($last && preg_match('/(\d+)\s*$/', (string)$last, $m)) ? (int)$m[1] + 1 : 1;
+                $format = $this->mod['code_format'] ?? '%d';
+                $input[$codeField] = sprintf($format, $num);
+            }
+        }
+
+        $clean = Validator::filter($input, $this->mod['fields']);
 
         // Tabelas de juncao (ex.: impressora_modelos_toner, migration 006) nao possuem
         // as colunas de auditoria data_cadastro/data_atualizacao. O registry marca essas

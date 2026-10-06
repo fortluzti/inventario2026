@@ -10,6 +10,7 @@ import Celulares from './Celulares.jsx'
 import CelularesConferencia from './CelularesConferencia.jsx'
 import ImpressoraModelos from './ImpressoraModelos.jsx'
 import Toners from './Toners.jsx'
+import PendenciasErp from './PendenciasErp.jsx'
 import EstacoesReport from '../components/EstacoesReport.jsx'
 import MonitoresReport from '../components/MonitoresReport.jsx'
 import ImpressaoReport from '../components/ImpressaoReport.jsx'
@@ -325,11 +326,12 @@ onNovoAtivo={() => {
             {module === 'toners' && <Toners user={user} refreshKey={tonersRefresh} newRequest={tonersNew} onChanged={load} />}
              {module === 'perfil' && <Perfil user={user} />}
             {module === 'configuracoes' && <Configuracoes />}
+            {module === 'pendencias-erp' && <PendenciasErp user={user} onChanged={load} />}
             {module === 'relatorio-mestre' && <ReportShowcase empresa={reportEmpresa} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-estacoes' && <EstacoesReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-monitores' && <MonitoresReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
             {module === 'relatorio-impressoras' && <ImpressaoReport empresa={reportEmpresa} filters={{}} onClose={() => setModule('dashboard')} />}
-            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'fornecedores' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && module !== 'impressora_modelos' && module !== 'toners' && !module.startsWith('relatorio-') && (
+            {!showDashboard && module !== 'estacoes' && module !== 'monitores' && module !== 'impressoras' && module !== 'setores' && module !== 'funcionarios' && module !== 'fornecedores' && module !== 'celulares' && module !== 'celulares-conferencia' && module !== 'configuracoes' && module !== 'usuarios' && module !== 'impressora_modelos' && module !== 'toners' && module !== 'perfil' && module !== 'pendencias-erp' && !module.startsWith('relatorio-') && (
               <PlaceholderModule
                 label={activeModule.label}
                 icon={activeModule.icon}

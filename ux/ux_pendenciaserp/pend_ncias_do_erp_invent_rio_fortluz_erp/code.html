@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary": "#ffffff",
+          "on-secondary-fixed-variant": "#6e3900",
+          "outline": "#8d706d",
+          "on-surface-variant": "#59413e",
+          "primary-container": "#991b1b",
+          "surface-container-low": "#eff4ff",
+          "on-tertiary-fixed": "#00201d",
+          "on-tertiary": "#ffffff",
+          "error-container": "#ffdad6",
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#ccdbf3",
+          "on-primary-fixed-variant": "#8e1214",
+          "primary-fixed-dim": "#ffb4ac",
+          "on-error": "#ffffff",
+          "error": "#ba1a1a",
+          "surface-container-high": "#dce9ff",
+          "tertiary-container": "#005852",
+          "on-tertiary-fixed-variant": "#00504a",
+          "on-surface": "#0d1c2e",
+          "primary-fixed": "#ffdad6",
+          "on-tertiary-container": "#79cec4",
+          "inverse-surface": "#233144",
+          "surface-container-highest": "#d5e3fc",
+          "background": "#f8f9ff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#d5e3fc",
+          "tertiary": "#003f3a",
+          "on-primary-fixed": "#410002",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed": "#9cf2e8",
+          "secondary-fixed-dim": "#ffb77d",
+          "surface-container": "#e6eeff",
+          "inverse-on-surface": "#eaf1ff",
+          "secondary-container": "#fe932c",
+          "surface-bright": "#f8f9ff",
+          "secondary": "#904d00",
+          "surface": "#f8f9ff",
+          "on-secondary-fixed": "#2f1500",
+          "on-background": "#0d1c2e",
+          "outline-variant": "#e1bfbb",
+          "on-secondary-container": "#663500",
+          "on-primary-container": "#ffaaa1",
+          "tertiary-fixed-dim": "#80d5cb",
+          "primary": "#760009",
+          "surface-tint": "#b02d29",
+          "secondary-fixed": "#ffdcc3",
+          "inverse-primary": "#ffb4ac"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "0.25rem",
+          "space-xl": "1rem",
+          "space-xs": "0.125rem",
+          "gutter": "0.5rem",
+          "space-lg": "0.75rem",
+          "margin": "0.75rem",
+          "space-md": "0.5rem"
+        },
+        "fontFamily": {
+          "headline-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-md": [
+            "IBM Plex Sans"
+          ],
+          "label-sm": [
+            "IBM Plex Sans"
+          ],
+          "body-sm": [
+            "IBM Plex Sans"
+          ],
+          "label-lg": [
+            "IBM Plex Sans"
+          ],
+          "body-lg": [
+            "IBM Plex Sans"
+          ],
+          "code-dense": [
+            "JetBrains Mono"
+          ],
+          "label-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-md": [
+            "IBM Plex Sans"
+          ],
+          "headline-lg": [
+            "IBM Plex Sans"
+          ]
+        },
+        "fontSize": {
+          "headline-sm": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "10px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "code-dense": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-on-surface antialiased select-none"><header class="fixed top-0 left-0 right-0 h-14 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.06)] z-50 flex items-center justify-between px-space-xl border-b border-surface-container-high"><div class="flex items-center gap-space-lg"><img alt="Brand logo. - Primary color: #991b1b
+- Font: ibmPlexSans
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V4DG4DXntzwKmFrq35PBJ-7hyH_4XBP_wYIixpFcfM9jtjaACNPRvIlnSgXJHwXurgu0wm10gK425WKLqwLLif_3CTIOk_rQfCsvPKBR96DrI23g0mXc4lK1DqXgsGhaRDfm8JK2YkgTjozDO-iqpBY3xwLDHYSCvmhb1nlZaJMFgfAxoo9N0N6L_C-_9aAhHf45i2QiKCm10l-S6DNwbubD5HM76duIhyK_HjtlHT9b_64AoFGGmSRS0"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">FORTLUZ</span><span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-code-dense font-semibold">TI ERP v2.4</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Materiais Elétricos · Infraestrutura Corporativa</span></div></div><div class="flex-1 max-w-xl mx-space-xl"><div class="relative flex items-center bg-surface-container-low rounded px-space-md py-space-xs border border-surface-container-highest focus-within:border-primary"><span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-space-sm">search</span><input class="w-full bg-transparent border-0 outline-none font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/70" placeholder="Busca rápida de itens, MAC, patrimônio... (Ctrl+K)" type="text"/><kbd class="font-code-dense text-label-sm bg-surface-container-lowest px-space-xs rounded text-on-surface-variant shadow-sm border border-surface-container-highest">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-md bg-surface-container-low px-space-md py-space-xs rounded border border-surface-container-highest"><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-code-dense text-code-dense text-tertiary font-semibold">12ms</span></div><span class="h-3 w-px bg-surface-container-highest"></span><div class="flex flex-col text-right"><span class="font-label-sm text-label-sm text-on-surface font-semibold">Term. 01 — Almoxarifado Central</span><span class="font-code-dense text-[9px] text-on-surface-variant">API REST v2.4 • Sync OK</span></div></div><div class="relative flex items-center justify-center w-8 h-8 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full ring-2 ring-surface-container-lowest"></span></div><div class="flex items-center gap-space-md pl-space-sm border-l border-surface-container-highest"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-semibold">Admin TI</span><span class="font-label-sm text-label-sm text-primary font-medium">Operador Master</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-1 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-6 w-64 bg-surface-container-lowest z-40 flex flex-col border-r border-surface-container-high overflow-y-auto"><div class="p-space-md bg-surface-container-low border-b border-surface-container-high flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Módulos do Sistema</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer hover:text-on-surface">dock_to_left</span></div><nav class="flex-1 p-space-sm space-y-space-md" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm"><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">1. Painel Principal</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="painel-principal" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dashboard</span>Visão Geral</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">2. Equipamentos &amp; TI</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="computadores-e-servidores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">dns</span>Computadores &amp; Servidores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="switches-e-redes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">hub</span>Switches &amp; Redes</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="perifericos-e-impressoras" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">print</span>Periféricos &amp; Impressoras</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="monitores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">desktop_windows</span>Monitores</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">3. Estoque &amp; Insumos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="almoxarifado-e-toner" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">inventory_2</span>Almoxarifado &amp; Toner</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="entradas-e-saidas" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">swap_horiz</span>Entradas e Saídas</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">4. Manutenção &amp; Suporte</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="ordens-de-servico" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">build</span>Ordens de Serviço</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="preventivas-e-calibracao" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">published_with_changes</span>Preventivas &amp; Calibração</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">5. Cadastros Básicos</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="empresas-e-unidades" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">domain</span>Empresas &amp; Unidades</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="setores" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">apartment</span>Setores</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="funcionarios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">badge</span>Funcionários</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="fornecedores-ti" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">local_shipping</span>Fornecedores TI</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">6. Etiquetas &amp; Patrimônio</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="impressao-de-tombamento" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">qr_code_2</span>Impressão de Tombamento</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="inventario-cego" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">fact_check</span>Inventário Cego</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">7. Administração &amp; Sistema</div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="usuarios-e-perfis" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">manage_accounts</span>Usuários &amp; Perfis</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="permissoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">security</span>Permissões</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="configuracoes-do-sistema" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">settings</span>Configurações do Sistema</a></div><div class="space-y-space-xs"><div class="px-space-md py-space-xs font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider flex items-center justify-between"><span>8. Suporte &amp; ERP</span><span class="w-1.5 h-1.5 rounded-full bg-primary"></span></div><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="pendencias-do-erp" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">pending_actions</span>Pendências do ERP</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="historico-de-atualizacoes" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">update</span>Histórico de Atualizações</a><a class="flex items-center px-space-md py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all gap-space-sm" data-path="relatorios" href="#"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">assessment</span>Relatórios</a></div></nav></aside><div class="pl-64 flex flex-col min-h-screen"><main class="relative pt-14 pb-6 w-full px-space-xl bg-background flex-1"><div class="flex flex-col w-full">
+<!-- 1. CABEÇALHO DA TELA -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="hover:text-primary cursor-pointer transition-colors">Suporte &amp; ERP</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Pendências do ERP</span>
+</div>
+<!-- Title Bar & Action Buttons -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded bg-error-container/60 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">bug_report</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Pendências do ERP</h1>
+<span class="font-code-dense text-label-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-semibold">MÓDULO 08</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Controle de problemas, atendimentos, atualizações e testes do ERP.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<!-- Secondary Action: Enviar ao Suporte -->
+<button class="h-8 px-space-md rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs shadow-sm font-label-md text-label-md active:translate-y-px" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">forward_to_inbox</span>
+<span>Enviar ao Suporte</span>
+</button>
+<!-- Primary Action: Nova Pendência -->
+<button class="h-8 px-space-md rounded bg-primary-container text-on-primary hover:bg-primary transition-all flex items-center gap-space-xs shadow-sm font-label-md text-label-md active:translate-y-px" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Nova Pendência</span>
+<kbd class="ml-space-xs font-code-dense text-[9px] bg-black/20 text-on-primary px-1 py-0.5 rounded">Alt+N</kbd>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. CARDS / RESUMOS DE CONTADORES -->
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-space-md mb-space-lg">
+<!-- Card 1: Pendentes -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">error_outline</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Pendentes</span>
+<span class="font-code-dense text-headline-sm text-on-surface font-bold">14</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded font-code-dense text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed-variant">Atenção</span>
+</div>
+<!-- Card 2: Aguardando Suporte -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Aguardando Suporte</span>
+<span class="font-code-dense text-headline-sm text-on-surface font-bold">6</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded font-code-dense text-label-sm font-semibold bg-surface-container-highest text-on-surface">Fila N2</span>
+</div>
+<!-- Card 3: Aguardando Testes -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-tertiary-fixed-dim/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Aguardando Testes</span>
+<span class="font-code-dense text-headline-sm text-on-surface font-bold">8</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded font-code-dense text-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed">QA Ready</span>
+</div>
+<!-- Card 4: Testando -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Testando</span>
+<span class="font-code-dense text-headline-sm text-on-surface font-bold">4</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded font-code-dense text-label-sm font-semibold bg-surface-container-high text-on-surface">Em Validação</span>
+</div>
+<!-- Card 5: Resolvidas -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-all col-span-2 md:col-span-1 xl:col-span-1">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Resolvidas</span>
+<span class="font-code-dense text-headline-sm text-on-surface font-bold">128</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded font-code-dense text-label-sm font-semibold bg-tertiary-container text-on-tertiary">Concluídas</span>
+</div>
+</div>
+<!-- 3. ÁREA DE FILTROS COMPACTA -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md mb-space-md">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-md items-end">
+<!-- Search Input -->
+<div class="lg:col-span-4 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-busca">Buscar Pendência</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7 focus-within:bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-space-xs">search</span>
+<input class="w-full bg-transparent outline-none font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/70" id="filtro-busca" placeholder="Buscar por código, título ou descrição..." type="text"/>
+<kbd class="font-code-dense text-[9px] bg-surface-container-lowest px-1 rounded text-on-surface-variant shadow-sm">Ctrl+K</kbd>
+</div>
+</div>
+<!-- Dropdown: Status -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-status">Status</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<select class="w-full bg-transparent outline-none font-body-sm text-body-sm text-on-surface cursor-pointer" id="filtro-status">
+<option value="">Todos os status</option>
+<option value="pendente">Pendente</option>
+<option value="aguardando_suporte">Aguardando suporte</option>
+<option value="aguardando_atualizacao">Aguardando atualização</option>
+<option value="aguardando_testes">Aguardando testes</option>
+<option value="testando">Testando</option>
+<option value="nao_resolvido">Não resolvido</option>
+<option value="resolvido">Resolvido</option>
+<option value="cancelado">Cancelado</option>
+</select>
+</div>
+</div>
+<!-- Dropdown: Setor -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-setor">Setor / Módulo</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<select class="w-full bg-transparent outline-none font-body-sm text-body-sm text-on-surface cursor-pointer" id="filtro-setor">
+<option value="">Todos os setores</option>
+<option value="ti">TI</option>
+<option value="financeiro">Financeiro</option>
+<option value="fiscal">Fiscal</option>
+<option value="faturamento">Faturamento</option>
+<option value="almoxarifado">Almoxarifado</option>
+<option value="vendas">Vendas</option>
+<option value="rh">RH / DP</option>
+</select>
+</div>
+</div>
+<!-- Dropdown: Prioridade -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-prioridade">Prioridade</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<select class="w-full bg-transparent outline-none font-body-sm text-body-sm text-on-surface cursor-pointer" id="filtro-prioridade">
+<option value="">Todas</option>
+<option value="critica">Crítica</option>
+<option value="alta">Alta</option>
+<option value="media">Média</option>
+<option value="baixa">Baixa</option>
+</select>
+</div>
+</div>
+<!-- Dropdown: Identificado por -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-autor">Identificado por</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<select class="w-full bg-transparent outline-none font-body-sm text-body-sm text-on-surface cursor-pointer" id="filtro-autor">
+<option value="">Todos</option>
+<option value="alex">Alex</option>
+<option value="joao">João</option>
+<option value="maria">Maria</option>
+<option value="marcos">Marcos Silva</option>
+<option value="carlos">Carlos</option>
+</select>
+</div>
+</div>
+<!-- Período: De / Até -->
+<div class="lg:col-span-5 flex items-center gap-space-sm">
+<div class="flex-1 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-data-inicio">Período De</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<input class="w-full bg-transparent outline-none font-code-dense text-code-dense text-on-surface" id="filtro-data-inicio" placeholder="01/02/2025" type="text"/>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">calendar_today</span>
+</div>
+</div>
+<span class="font-body-sm text-on-surface-variant mt-4">até</span>
+<div class="flex-1 flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold" for="filtro-data-fim">Até</label>
+<div class="relative flex items-center bg-surface-container-low rounded px-space-sm h-7">
+<input class="w-full bg-transparent outline-none font-code-dense text-code-dense text-on-surface" id="filtro-data-fim" placeholder="24/02/2025" type="text"/>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Botão de Limpar Filtros & Atalho de ordenação rápida -->
+<div class="lg:col-span-7 flex items-center justify-end gap-space-md pt-1">
+<span class="font-code-dense text-label-sm text-on-surface-variant">Filtros ativos: <b class="text-on-surface font-semibold">Nenhum</b></span>
+<button class="h-7 px-space-md rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-space-xs font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">backspace</span>
+<span>Limpar filtros</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. GRID PRINCIPAL (TABELA CORPORATIVA DE ALTA DENSIDADE) -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[940px]">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant h-8 font-label-sm text-label-sm uppercase tracking-wider select-none">
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-28">
+<div class="flex items-center gap-space-xs">
+<span>Código</span>
+<span class="material-symbols-outlined text-[13px] text-primary">arrow_upward</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs">
+<span>Problema / Descrição Sintética</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-36">
+<div class="flex items-center gap-space-xs">
+<span>Setor / Abrangência</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-24">
+<div class="flex items-center gap-space-xs">
+<span>Prioridade</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-32">
+<div class="flex items-center gap-space-xs">
+<span>Identificado por</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-44">
+<div class="flex items-center gap-space-xs">
+<span>Status</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold cursor-pointer hover:bg-surface-container-high transition-colors w-36">
+<div class="flex items-center gap-space-xs">
+<span>Última Atualização</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant/50">swap_vert</span>
+</div>
+</th>
+<th class="px-space-md py-1 font-bold text-right w-28">Ações</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y-0">
+<!-- Linha 1 -->
+<tr class="h-8 bg-surface-container-lowest hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0042</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Erro no relatório de impressoras com falha de paginação no preview">
+              Erro no relatório de impressoras com falha de paginação no preview
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">Todos os setores</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Alta
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">A</div>
+<span>Alex</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Aguardando testes
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">Hoje às 14:10</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 2 -->
+<tr class="h-8 bg-surface-container-low/40 hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0041</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Falha no cadastro de usuários ao salvar privilégios RBAC">
+              Falha no cadastro de usuários ao salvar privilégios RBAC
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">TI</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Média
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">J</div>
+<span>João</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Aguardando suporte
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">Ontem às 18:45</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 3 -->
+<tr class="h-8 bg-surface-container-lowest hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0038</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Campo não grava alteração no formulário de estações">
+              Campo não grava alteração no formulário de estações
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">Financeiro</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Alta
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">M</div>
+<span>Maria</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-high text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span> Testando
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">23/02/2025 às 11:20</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 4 -->
+<tr class="h-8 bg-surface-container-low/40 hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0035</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Lentidão no carregamento do catálogo de toners e insumos">
+              Lentidão no carregamento do catálogo de toners e insumos
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">Almoxarifado</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Média
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">MS</div>
+<span>Marcos Silva</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-secondary-fixed text-on-secondary-fixed-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Pendente
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">22/02/2025 às 09:15</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 5 -->
+<tr class="h-8 bg-surface-container-lowest hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0034</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Incompatibilidade na exportação de planilha CSV em UTF-8">
+              Incompatibilidade na exportação de planilha CSV em UTF-8
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">Fiscal</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-surface-container-highest text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Baixa
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">C</div>
+<span>Carlos</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Aguardando atualização
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">21/02/2025 às 16:30</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 6 -->
+<tr class="h-8 bg-surface-container-low/40 hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0032</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Erro no fechamento mensal de movimentações de estoque">
+              Erro no fechamento mensal de movimentações de estoque
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">Fiscal</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Alta
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">A</div>
+<span>Alex</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-tertiary-container text-on-tertiary">
+<span class="material-symbols-outlined text-[13px]">check</span> Resolvido
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">20/02/2025 às 17:05</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 7 -->
+<tr class="h-8 bg-surface-container-lowest hover:bg-surface-container-low transition-colors group">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-primary">ERP-0029</td>
+<td class="px-space-md py-1 text-on-surface font-medium truncate max-w-xs" title="Falha ao sincronizar dados de colaboradores via API do RH">
+              Falha ao sincronizar dados de colaboradores via API do RH
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">RH / DP</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-error text-on-error">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Crítica
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest text-[10px] font-bold text-on-surface flex items-center justify-center">J</div>
+<span>João</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Não resolvido
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">19/02/2025 às 15:00</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Linha 8 -->
+<tr class="h-8 bg-surface-container-low/40 hover:bg-surface-container-low transition-colors group opacity-80">
+<td class="px-space-md py-1 font-code-dense text-code-dense font-semibold text-outline line-through">ERP-0027</td>
+<td class="px-space-md py-1 text-on-surface-variant font-medium truncate max-w-xs line-through" title="Duplicidade de registros ao reemitir etiqueta de tombamento">
+              Duplicidade de registros ao reemitir etiqueta de tombamento
+            </td>
+<td class="px-space-md py-1 text-on-surface-variant font-label-md text-label-md font-semibold">TI</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-code-dense text-label-sm font-semibold bg-surface-container text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Baixa
+              </span>
+</td>
+<td class="px-space-md py-1 text-on-surface flex items-center gap-1.5">
+<div class="w-5 h-5 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant flex items-center justify-center">M</div>
+<span>Maria</span>
+</td>
+<td class="px-space-md py-1">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Cancelado
+              </span>
+</td>
+<td class="px-space-md py-1 font-code-dense text-code-dense text-on-surface-variant">18/02/2025 às 10:40</td>
+<td class="px-space-md py-1 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Visualizar" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Histórico" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 7. RODAPÉ DA TABELA E PAGINAÇÃO -->
+<div class="p-space-md bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md select-none">
+<!-- Status de registros -->
+<div class="flex items-center gap-space-sm text-on-surface-variant font-code-dense text-code-dense">
+<span>Mostrando <b class="text-on-surface font-semibold">1 a 8</b> de <b class="text-on-surface font-semibold">160</b> pendências</span>
+<span>•</span>
+<span>Página 1 de 20</span>
+</div>
+<!-- Paginação FortLuz -->
+<div class="flex items-center gap-1">
+<button class="h-7 px-space-sm rounded bg-surface-container-lowest text-on-surface-variant/40 flex items-center gap-1 font-label-md text-label-md cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[14px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="h-7 w-7 rounded bg-primary-container text-on-primary font-code-dense text-label-md font-bold flex items-center justify-center shadow-sm" type="button">
+          1
+        </button>
+<button class="h-7 w-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-code-dense text-label-md flex items-center justify-center transition-colors" type="button">
+          2
+        </button>
+<button class="h-7 w-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-code-dense text-label-md flex items-center justify-center transition-colors" type="button">
+          3
+        </button>
+<span class="h-7 w-6 flex items-center justify-center font-code-dense text-label-sm text-on-surface-variant">...</span>
+<button class="h-7 w-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-code-dense text-label-md flex items-center justify-center transition-colors" type="button">
+          20
+        </button>
+<button class="h-7 px-space-sm rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-high flex items-center gap-1 font-label-md text-label-md transition-colors" type="button">
+<span>Próximo</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Suporte a atalho de teclado Alt+N e busca Ctrl+K
+  document.addEventListener('keydown', function(e) {
+    if (e.altKey && (e.key === 'n' || e.key === 'N')) {
+      e.preventDefault();
+      alert('Ação FortLuz ERP: Abrir modal de cadastro de [Nova Pendência]');
+    }
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      const busca = document.getElementById('filtro-busca');
+      if (busca) {
+        e.preventDefault();
+        busca.focus();
+        busca.select();
+      }
+    }
+  });
+</script></main><footer class="fixed bottom-0 left-0 right-0 h-6 bg-inverse-surface text-inverse-on-surface z-50 flex items-center justify-between px-space-xl text-[10px] font-code-dense border-t border-inverse-surface"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-[#80d5cb]"><span class="w-1.5 h-1.5 rounded-full bg-[#80d5cb]"></span><span>Servidor: ONLINE</span></div><span class="text-inverse-on-surface/40">|</span><span>Banco: fortluz_db_prod</span><span class="text-inverse-on-surface/40">|</span><span class="text-[#9cf2e8]">SSL 256-BIT</span></div><div class="flex items-center gap-space-md"><span class="text-inverse-on-surface/70">Build: 2025.2.4-web</span><span class="text-inverse-on-surface/40">|</span><span class="text-inverse-on-surface/80">UTF-8 / pt-BR</span><span class="text-inverse-on-surface/40">|</span><span class="bg-surface-container/20 px-1 rounded text-[9px] uppercase tracking-wider text-inverse-on-surface/60">CAPS / NUM</span></div></footer></div></body></html>

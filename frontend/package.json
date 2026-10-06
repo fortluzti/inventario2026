@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "esbuild": "^0.21.5",
+    "esbuild": "^0.28.2",
     "jsdom": "^25.0.1",
-    "vite": "^5.4.11"
+    "vite": "^8.3.3"
   }
 }
