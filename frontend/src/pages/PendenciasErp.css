@@ -1,420 +1,602 @@
+/* Pendências do ERP — Estilo padronizado WinUI 3 (Alta Densidade)
+ * Mesmos tokens e padrões visuais das telas Estações, Toners, Celulares e Impressoras.
+ */
+
+/* ---------- Layout da Página ---------- */
 .pendencias-erp-page {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pendencias-erp-page-header,
+.pendencias-erp-toolbar-row,
+.pendencias-erp-pagination,
+.tnd-dialog-header,
+.tnd-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .pendencias-erp-page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.pendencias-erp-page-header .pendencias-erp-breadcrumb {
-  font-size: 0.875rem;
-  color: var(--on-surface-variant);
-  margin-bottom: 0.5rem;
+  padding: 6px 0 8px;
 }
 
 .pendencias-erp-page-header h1 {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
+  gap: 8px;
+  font-size: 20px;
   font-weight: 600;
-  margin: 0 0 0.25rem 0;
+  margin: 0;
+  color: var(--on-surface);
+}
+
+.pendencias-erp-page-header h1 .mat {
+  color: var(--primary);
 }
 
 .pendencias-erp-page-header p {
-  font-size: 0.875rem;
-  color: var(--on-surface-variant);
-  margin: 0;
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.pendencias-erp-breadcrumb {
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-bottom: 4px;
 }
 
 .pendencias-erp-header-actions {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---------- Botões (Padrão 28px) ---------- */
+.pendencias-erp-btn,
+.tnd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--surface-container-low);
+  color: var(--on-surface);
+  font: 600 11px var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pendencias-erp-btn .mat,
+.tnd-btn .mat {
+  font-size: 16px;
+}
+
+.pendencias-erp-btn:hover:not(:disabled),
+.tnd-btn:hover:not(:disabled) {
+  background: var(--surface-container-high);
+}
+
+.pendencias-erp-btn-primary,
+.pendencias-erp-btn.pendencias-erp-btn-primary,
+.tnd-btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.pendencias-erp-btn-primary:hover:not(:disabled),
+.tnd-btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.pendencias-erp-btn-outline,
+.tnd-btn-outline {
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.pendencias-erp-btn-icon,
+.tnd-btn-icon {
+  width: 26px;
+  min-height: 26px;
+  height: 26px;
+  padding: 2px;
+  background: transparent;
+  border-radius: var(--radius);
+}
+
+.pendencias-erp-btn-icon.danger:hover,
+.tnd-btn-icon.danger:hover {
+  color: var(--crit-fg);
+  background: var(--crit-bg);
+}
+
+.pendencias-erp-btn:disabled,
+.tnd-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pendencias-erp-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Toolbar & Filtros ---------- */
+.pendencias-erp-toolbar,
+.pendencias-erp-grid {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px #0000000d;
 }
 
 .pendencias-erp-toolbar {
-  border-bottom: 1px solid var(--surface-container-high);
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
+  padding: 8px;
 }
 
 .pendencias-erp-toolbar-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .pendencias-erp-search {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 5px;
+  padding-left: 7px;
+  background: var(--surface-container-low);
+  border-radius: var(--radius);
   flex: 1;
+  max-width: 420px;
   min-width: 200px;
 }
 
+.pendencias-erp-search .mat {
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
 .pendencias-erp-search input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--outline-variant);
-  border-radius: 4px;
-  font-size: 0.875rem;
   width: 100%;
-  max-width: 300px;
+  min-width: 0;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  padding: 4px;
+  font: 11px var(--font);
+  color: inherit;
 }
 
 .pendencias-erp-search input:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(153, 27, 27, 0.25);
-}
-
-.pendencias-erp-actions {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.pendencias-erp-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, opacity 0.2s;
-}
-
-.pendencias-erp-btn:hover:not(:disabled) {
-  opacity: 0.9;
-}
-
-.pendencias-erp-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.pendencias-erp-btn-primary {
-  background-color: var(--primary);
-  color: var(--on-primary);
-}
-
-.pendencias-erp-btn-primary:hover:not(:disabled) {
-  background-color: var(--primary-dark, #5a0007);
-}
-
-.pendencias-erp-btn-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
-  background-color: var(--surface-container-lowest);
-  color: var(--on-surface-variant);
-  border: 1px solid var(--outline);
-}
-
-.pendencias-erp-btn-icon:hover:not(:disabled) {
-  background-color: var(--surface-container-low);
-  color: var(--on-surface);
-}
-
-.pendencias-erp-btn-icon.danger {
-  color: var(--error);
-  border-color: var(--error);
-}
-
-.pendencias-erp-btn-icon.danger:hover:not(:disabled) {
-  background-color: var(--error-container);
-  color: var(--on-error);
 }
 
 .pendencias-erp-filters {
-  background-color: var(--surface-container-lowest);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--surface-container-high);
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--surface-container-low);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: var(--radius);
 }
 
 .pendencias-erp-filters-row {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .pendencias-erp-filter-group {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 180px;
+  align-items: center;
 }
 
 .pendencias-erp-filter-group label {
-  font-size: 0.75rem;
+  font-size: 10px;
   font-weight: 600;
-  color: var(--on-surface-variant);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.pendencias-erp-filter-group select {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--outline-variant);
-  border-radius: 4px;
-  font-size: 0.875rem;
-  background-color: var(--surface-container-lowest);
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--on-surface);
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9l3-3h-6z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 12px 12px;
 }
 
-.pendencias-erp-filter-group select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(153, 27, 27, 0.25);
+.pendencias-erp-filter-group select,
+.pendencias-erp-pagination select {
+  max-width: 220px;
+  height: 26px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: white;
+  color: var(--on-surface);
+  font: 11px var(--font);
+  padding: 2px 6px;
 }
 
 .pendencias-erp-filters .pendencias-erp-actions {
-  margin-top: 1.5rem;
   justify-content: flex-end;
 }
 
+/* ---------- Mensagens ---------- */
 .pendencias-erp-message {
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+  padding: 8px 12px;
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.pendencias-erp-message {
-  background-color: var(--surface-container-high);
-  color: var(--on-surface-variant);
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 .pendencias-erp-message.error {
-  background-color: var(--error-container);
-  color: var(--on-error);
-  border: 1px solid var(--error);
+  background: var(--crit-bg);
+  color: var(--crit-fg);
 }
 
-.pendencias-erp-message.error button {
-  background: none;
-  border: none;
-  color: var(--on-error);
-  font-size: 0.875rem;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-}
-
-.pendencias-erp-message.error button:hover {
-  background-color: var(--error);
-  color: var(--on-error-container);
-}
-
-.pendencias-erp-grid {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--surface-container-high);
-}
-
+/* ---------- Tabela Sintética (Compact DataGrid) ---------- */
 .pendencias-erp-table-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: auto;
 }
 
 .pendencias-erp-table {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
-  font-size: 0.875rem;
-}
-
-.pendencias-erp-table th,
-.pendencias-erp-table td {
-  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--surface-container-low);
+  font-size: 11px;
 }
 
 .pendencias-erp-table th {
-  background-color: var(--surface-container-lowest);
-  font-weight: 600;
-  color: var(--on-surface-variant);
+  height: 32px;
+  background: var(--surface-container-low);
+  font-size: 10px;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  font-weight: 600;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-.pendencias-erp-table tbody tr {
-  border-bottom: 1px solid var(--surface-container-low);
+.pendencias-erp-table td {
+  height: 36px;
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.pendencias-erp-table tbody tr:nth-child(even) {
+  background: var(--row-alt);
 }
 
 .pendencias-erp-table tbody tr:hover {
-  background-color: var(--surface-container-low);
+  background: var(--surface-container-low);
 }
 
-.pendencias-erp-table tbody tr:last-child {
-  border-bottom: none;
+.pendencias-erp-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--primary);
+  font-weight: 600;
 }
 
-.pendencias-erp-table td.pendencias-erp-sr-only {
+.pendencias-erp-title {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.pendencias-erp-modulo {
+  font-weight: 500;
+}
+
+.pendencias-erp-setor {
+  font-weight: 500;
+}
+
+.pendencias-erp-abrangencia {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.pendencias-erp-identificado {
+  color: var(--on-surface-variant);
+}
+
+.pendencias-erp-data {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Badges de Prioridade */
+.pendencias-erp-prioridade {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pendencias-erp-prioridade.critica { background: var(--crit-bg); color: var(--crit-fg); border: 1px solid var(--crit-bd); }
+.pendencias-erp-prioridade.alta { background: var(--warn-bg); color: var(--warn-fg); border: 1px solid var(--warn-bd); }
+.pendencias-erp-prioridade.media { background: var(--surface-container-high); color: var(--on-surface); }
+.pendencias-erp-prioridade.baixa { background: var(--surface-container-low); color: var(--text-muted); }
+
+/* Badges de Status */
+.pendencias-erp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--surface-container-high);
+}
+
+.pendencias-erp-status::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pendencias-erp-status.pendente { background: var(--warn-bg); color: var(--warn-fg); }
+.pendencias-erp-status.aguardando-suporte { background: #ffdcc3; color: #904d00; }
+.pendencias-erp-status.em-analise { background: #dce9ff; color: #005852; }
+.pendencias-erp-status.aguardando-testes { background: #e6eeff; color: #003f3a; }
+.pendencias-erp-status.testando { background: #9cf2e8; color: #00201d; }
+.pendencias-erp-status.resolvido { background: var(--ok-bg); color: var(--ok-fg); }
+.pendencias-erp-status.cancelado { background: var(--crit-bg); color: var(--crit-fg); }
+
+.pendencias-erp-muted {
+  padding: 32px 12px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.pendencias-erp-sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
-  margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
-  border: 0;
-}
-
-.pendencias-erp-table td.pendencias-erp-muted {
-  text-align: center;
-  font-style: italic;
-  color: var(--on-surface-variant);
-}
-
-.pendencias-erp-table td.pendencias-erp-name {
-  font-weight: 600;
-  color: var(--on-surface);
-  white-space: nowrap;
-}
-
-.pendencias-erp-table td.pendencias-erp-title {
-  max-width: 250px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  title: attr(title);
-}
-
-.pendencias-erp-table td.pendencias-erp-modulo {
-  font-size: 0.8125rem;
-}
-
-.pendencias-erp-table td.pendencias-erp-prioridade {
-  text-align: center;
-  min-width: 80px;
-}
-
-.pendencias-erp-table td.pendencias-erp-prioridade.critica {
-  background-color: var(--error-container);
-  color: var(--on-error);
-}
-
-.pendencias-erp-table td.pendencias-erp-prioridade.alta {
-  background-color: var(--secondary-container);
-  color: var(--on-secondary);
-}
-
-.pendencias-erp-table td.pendencias-erp-prioridade.media {
-  background-color: var(--tertiary-container);
-  color: var(--on-tertiary);
-}
-
-.pendencias-erp-table td.pendencias-erp-prioridade.baixa {
-  background-color: var(--surface-container-highest);
-  color: var(--on-surface-variant);
-}
-
-.pendencias-erp-table td.pendencias-erp-data {
-  white-space: nowrap;
-}
-
-.pendencias-erp-table td.pendencias-erp-status {
-  text-align: center;
-  min-width: 100px;
-}
-
-.pendencias-erp-table td.pendencias-erp-status.pendente {
-  background-color: var(--surface-container-highest);
-  color: var(--on-surface-variant);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.aguardando-suporte {
-  background-color: var(--secondary-container);
-  color: var(--on-secondary);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.em-analise {
-  background-color: var(--tertiary-container);
-  color: var(--on-tertiary);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.aguardando-testes {
-  background-color: var(--surface-container-high);
-  color: var(--on-surface-variant);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.testando {
-  background-color: var(--surface-container-low);
-  color: var(--on-surface);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.resolvido {
-  background-color: var(--tertiary-container);
-  color: var(--on-tertiary);
-}
-
-.pendencias-erp-table td.pendencias-erp-status.cancelado {
-  background-color: var(--error-container);
-  color: var(--on-error);
-}
-
-.pendencias-erp-table td.pendencias-erp-actions {
-  text-align: center;
-  min-width: 120px;
-}
-
-.pendencias-erp-table td.pendencias-erp-actions .pendencias-erp-btn-icon {
-  margin: 0 0.25rem;
-  width: 2rem;
-  height: 2rem;
-  padding: 0.375rem;
 }
 
 .pendencias-erp-pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--surface-container-lowest);
-  border-top: 1px solid var(--surface-container-high);
-  font-size: 0.875rem;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-top: 1px solid var(--border-light);
+  font-size: 11px;
 }
 
-.pendencias-erp-pagination select {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--outline-variant);
-  border-radius: 4px;
-  font-size: 0.875rem;
-  background-color: var(--surface-container-lowest);
+/* ---------- Modal Dialog (WinUI 3 Layout & Overlay) ---------- */
+.tnd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0d1c2e80;
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.tnd-dialog {
+  width: 820px;
+  height: 620px;
+  max-width: 100%;
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  background: var(--surface-container-lowest);
+  box-shadow: 0 20px 60px #0005;
+  overflow: hidden;
+  outline: none;
+  border: 1px solid var(--border);
+}
+
+.tnd-dialog-header {
+  min-height: 42px;
+  padding: 8px 14px;
+  background: var(--surface-container-low);
+  border-bottom: 1px solid var(--border-light);
+  gap: 8px;
+}
+
+.tnd-dialog-header h2 {
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
   color: var(--on-surface);
 }
 
-.pendencias-erp-pagination select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(153, 27, 27, 0.25);
+.tnd-dialog-icon {
+  font-size: 17px;
+  padding: 4px;
+  background: var(--primary);
+  color: white;
+  border-radius: 4px;
+}
+
+.tnd-mode {
+  background: #005852;
+  color: white;
+  font: 9px var(--font-mono);
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.tnd-dialog-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.tnd-form {
+  padding: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tnd-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tnd-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tnd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tnd-field.full {
+  grid-column: 1 / -1;
+}
+
+.tnd-field label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.tnd-input,
+.tnd-field input,
+.tnd-field select {
+  width: 100%;
+  height: 30px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-light);
+  border-bottom-color: var(--border);
+  border-radius: 4px;
+  font: 12px var(--font);
+  background: white;
+  color: var(--on-surface);
+}
+
+.tnd-textarea {
+  height: auto;
+  min-height: 60px;
+  resize: vertical;
+}
+
+.tnd-input:disabled,
+.tnd-field input:disabled,
+.tnd-field select:disabled {
+  background: var(--row-alt);
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.tnd-fieldset {
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin: 4px 0 0;
+}
+
+.tnd-legend {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.tnd-anexos-list,
+.tnd-anexos-envio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tnd-anexo-item,
+.tnd-anexo-envio-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: var(--surface-container-low);
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.tnd-anexo-info,
+.tnd-anexo-envio-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tnd-anexo-details,
+.tnd-anexo-envio-details {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.tnd-anexo-upload {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tnd-dialog-footer {
+  padding: 10px 14px;
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.tnd-dialog-footer small {
+  color: var(--text-muted);
+  font: 10px var(--font-mono);
+}
+
+.tnd-dialog-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
