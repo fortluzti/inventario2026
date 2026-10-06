@@ -291,7 +291,7 @@ export default function PendenciaErpDialog({
           // Modo edit
           result = await api('pendencias_erp', 'salvar', { 
             method: 'POST', 
-            body: { ...pendenciaData, id: pendenciaId } 
+            body: { ...pendenciaData, id: targetId } 
           })
           
           // Após atualizar, fazer upload de anexos se houver
