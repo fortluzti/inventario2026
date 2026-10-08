@@ -1,4 +1,6 @@
-import { api } from './client.js'
+import { api, getApiKey } from './client.js'
+
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8090/index.php'
 
 /**
  * Salva um atendimento de pendência do ERP (envio ao suporte)
@@ -11,6 +13,61 @@ export function salvar(data, options = {}) {
     method: options.method || 'POST', 
     body: { ...data, ...options.body } 
   })
+}
+
+export function registrarAtendimento(data) {
+  return api('pendencias_erp', 'registrar_atendimento', {
+    method: 'POST',
+    body: data,
+  })
+}
+
+/**
+ * Registra o TESTE da correção no mesmo chamado (ação "Testar correção").
+ * Backend: PendenciasErpHandler::registrarTeste (transação única).
+ * @param {Object} data - { pendencia_id, usuario_id, resultado, oque_foi_testado, observacoes, ... }
+ * @returns {Promise<Object>} { id, pendencia_id, resultado, status }
+ */
+export function registrarTeste(data) {
+  return api('pendencias_erp', 'registrar_teste', {
+    method: 'POST',
+    body: data,
+  })
+}
+
+/**
+ * Envia uma evidência (imagem/arquivo) da pendência — multipart/form-data.
+ * Usa fetch direto (mesmo padrão de configuracoes.uploadLogo), porque o helper
+ * `api()` serializa o corpo como JSON e não serve para FormData.
+ * Backend: PendenciasErpHandler::uploadEvidencia.
+ * @param {FormData} formData - { arquivo, pendencia_id, usuario_id }
+ * @returns {Promise<Object>} { id, nome_arquivo, tipo_arquivo, tamanho_bytes, ... }
+ */
+export async function uploadEvidencia(formData) {
+  const url = new URL(BASE_URL)
+  url.searchParams.set('endpoint', 'pendencias_erp')
+  url.searchParams.set('action', 'upload_evidencia')
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'X-API-KEY': getApiKey() },
+    body: formData,
+  })
+
+  let json
+  try {
+    json = await res.json()
+  } catch {
+    throw new Error(`Resposta inválida da API (HTTP ${res.status})`)
+  }
+  if (!json.success) {
+    const msg = json.message || (json.errors && JSON.stringify(json.errors)) || `Erro HTTP ${res.status}`
+    const err = new Error(msg)
+    err.status = res.status
+    err.data = json.data
+    throw err
+  }
+  return json.data
 }
 
 /**

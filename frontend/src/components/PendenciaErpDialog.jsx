@@ -4,8 +4,10 @@ import { listarUsuarios as buscarUsuarios } from '../api/usuarios.js'
 import { listarOpcoes as buscarFuncionarios } from '../api/funcionarios.js'
 import { listarOpcoes as buscarSetores } from '../api/setores.js'
 import { salvar as salvarAnexo, listar as listarAnexos, excluir as excluirAnexo } from '../api/anexos_erp.js'
+import { registrarAtendimento } from '../api/atendimentos_erp.js'
 import SearchableSelect, { toSearchOptions } from './SearchableSelect.jsx'
 import { abrirModalConfirmacao, mostrarToast } from '../utils/modalUtils'
+import { normalizarStatus, STATUS_AGUARDANDO_SUPORTE, STATUS_INICIAL } from '../utils/erpStatus.js'
 
 const hoje = () => new Date().toISOString().slice(0, 10)
 const agora = () => new Date().toISOString().slice(0, 19).replace('T', ' ')
@@ -45,7 +47,7 @@ export default function PendenciaErpDialog({
     abrangencia: 'Todos os setores',
     identificado_por: '',
     data_identificacao: hoje(),
-    status: 'Pendente',
+    status: STATUS_INICIAL,
     usuario_id: user?.id || '',
     observacoes: ''
   })
@@ -103,7 +105,7 @@ export default function PendenciaErpDialog({
             data_identificacao: pendenciaData.data_identificacao 
               ? new Date(pendenciaData.data_identificacao).toISOString().slice(0, 10) 
               : hoje(),
-            status: pendenciaData.status || 'Pendente',
+            status: normalizarStatus(pendenciaData.status),
             usuario_id: pendenciaData.usuario_id || (user?.id || ''),
             observacoes: pendenciaData.observacoes || ''
           })
@@ -325,9 +327,10 @@ export default function PendenciaErpDialog({
           anexos_ids: anexosParaEnviar.join(',')
         }
         
-        const result = await api('atendimentos_erp', 'salvar', { 
-          method: 'POST', 
-          body: atendimentoData 
+        await registrarAtendimento({
+          ...atendimentoData,
+          tipo_atendimento: 'Envio ao suporte',
+          status_novo: STATUS_AGUARDANDO_SUPORTE
         })
         
         // Marcar anexos como enviados
@@ -538,16 +541,12 @@ export default function PendenciaErpDialog({
                         className="tnd-input"
                         value={form.status}
                         onChange={changeSelect}
-                        disabled={saving || mode === 'view'}
+                        disabled={saving || mode !== 'new'}
                       >
-                        <option value="Pendente">Pendente</option>
-                        <option value="Aguardando Suporte">Aguardando Suporte</option>
-                        <option value="Em Análise">Em Análise</option>
-                        <option value="Aguardando Testes">Aguardando Testes</option>
-                        <option value="Testando">Testando</option>
-                        <option value="Resolvido">Resolvido</option>
-                        <option value="Cancelado">Cancelado</option>
+                        <option value={STATUS_INICIAL}>{STATUS_INICIAL}</option>
+                        {form.status !== STATUS_INICIAL && <option value={form.status}>{form.status}</option>}
                       </select>
+                      {mode !== 'new' && <small>Alterações de status são registradas em Responder / Atendimento.</small>}
                     </div>
                     
                     <div className="tnd-field">

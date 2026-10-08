@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../api/client.js'
-import { excluir, buscarOpcoes as buscarPendenciasErp } from '../api/pendencias_erp.js'
 import PendenciaErpDialog from '../components/PendenciaErpDialog.jsx'
+import AtendimentoErpDialog from '../components/AtendimentoErpDialog.jsx'
+import { STATUS_OFICIAIS, classeStatus, iconeStatus, normalizarStatus, STATUS_AGUARDANDO_TESTES } from '../utils/erpStatus.js'
+import TesteCorrecaoErpDialog from '../components/TesteCorrecaoErpDialog.jsx'
 import './PendenciasErp.css'
 
 const EMPTY = { items: [], total: 0, total_pages: 0 }
@@ -24,10 +26,7 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
   const [dialog, setDialog] = useState(null)
-  /* Operações da tela — TODAS em modal (nenhuma navega para página separada):
-   * 'visualizar' · 'editar' · 'enviar_suporte'. */
   const [opDialog, setOpDialog] = useState(null)
-  const [deleting, setDeleting] = useState(null)
   const searchRef = useRef(null)
   const lastNewRequest = useRef(newRequest)
 
@@ -65,22 +64,6 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
     return () => window.removeEventListener('keydown', onKey)
   }, [dialog, opDialog])
 
-  async function remove(row) {
-    if (deleting || !window.confirm(`Excluir a pendência "${row.codigo}"? Esta ação não pode ser desfeita.`)) return
-    setDeleting(row.id)
-    setMessage('')
-    setError('')
-    try {
-      await excluir(row.id)
-      setMessage('Pendência excluída com sucesso.')
-      setRevision((v) => v + 1)
-      onChanged?.()
-    } catch (e) {
-      setError(e.message)
-    }
-    finally { setDeleting(null) }
-  }
-
   function clear() {
     setSearch(''); setQuery(''); setFilters({}); setDraft({}); setPage(1)
   }
@@ -94,7 +77,6 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
       </div>
       <div className="pendencias-erp-actions pendencias-erp-header-actions">
         <button className="pendencias-erp-btn pendencias-erp-btn-primary" onClick={() => { setMessage(''); setDialog({ mode: 'new' }) }}><span className="mat" aria-hidden="true">add</span>Nova Pendência</button>
-        <button className="pendencias-erp-btn" onClick={() => { setError(''); setMessage(''); setOpDialog({ mode: 'enviar_suporte' }) }}><span className="mat" aria-hidden="true">forward_to_inbox</span>Enviar ao Suporte</button>
       </div>
     </header>
 
@@ -109,7 +91,7 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
       {showFilters && <form id="pendencias-erp-filters" className="pendencias-erp-filters" onSubmit={(e) => { e.preventDefault(); setFilters({ ...draft }); setPage(1) }}>
         <div className="pendencias-erp-filters-row">
           <div className="pendencias-erp-filter-group">
-            <label>Status: <select aria-label="Filtrar por status" value={draft.status || ''} onChange={(e) => setDraft({ ...draft, status: e.target.value })}><option value="">Todos</option><option value="Pendente">Pendente</option><option value="Aguardando Suporte">Aguardando Suporte</option><option value="Em Análise">Em Análise</option><option value="Aguardando Testes">Aguardando Testes</option><option value="Testando">Testando</option><option value="Resolvido">Resolvido</option><option value="Cancelado">Cancelado</option></select></label>
+            <label>Status: <select aria-label="Filtrar por status" value={draft.status || ''} onChange={(e) => setDraft({ ...draft, status: e.target.value })}><option value="">Todos</option>{STATUS_OFICIAIS.map((s) => <option key={s} value={s}>{s}</option>)}</select></label>
           </div>
           <div className="pendencias-erp-filter-group">
             <label>Prioridade: <select aria-label="Filtrar por prioridade" value={draft.prioridade || ''} onChange={(e) => setDraft({ ...draft, prioridade: e.target.value })}><option value="">Todas</option><option value="Baixa">Baixa</option><option value="Média">Média</option><option value="Alta">Alta</option><option value="Crítica">Crítica</option></select></label>
@@ -154,11 +136,18 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
           <td><span className="pendencias-erp-identificado">{row.identificado_por || '—'}</span></td>
           <td className="pendencias-erp-data">{row.data_identificacao ? new Date(row.data_identificacao).toLocaleString('pt-BR') : '—'}</td>
           <td>
-            <span className={`pendencias-erp-status ${row.status === 'Resolvido' ? 'resolvido' : row.status === 'Cancelado' ? 'cancelado' : row.status === 'Aguardando Suporte' ? 'aguardando-suporte' : row.status === 'Em Análise' ? 'em-analise' : row.status === 'Aguardando Testes' ? 'aguardando-testes' : row.status === 'Testando' ? 'testando' : 'pendente'}`}>
-              {row.status || '—'}
+            <span className={`pendencias-erp-status ${classeStatus(row.status)}`}>
+              <span className="mat" aria-hidden="true">{iconeStatus(row.status)}</span>
+              {row.status ? normalizarStatus(row.status) : '—'}
+              {Number(row.ultimo_teste_reprovado) === 1 && normalizarStatus(row.status) === 'Aguardando suporte' && (
+                <span className="pendencias-erp-status-alert" title="Último teste reprovado">
+                  <span className="mat" aria-hidden="true">error</span>
+                  <span className="pendencias-erp-sr-only">Último teste reprovado</span>
+                </span>
+              )}
             </span>
           </td>
-          <td><div className="pendencias-erp-actions"><button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Visualizar" aria-label="Visualizar pendência" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Editar" aria-label="Editar pendência" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button><button className="pendencias-erp-btn pendencias-erp-btn-icon danger" title="Excluir" aria-label="Excluir pendência" disabled={deleting !== null} onClick={() => remove(row)}><span className="mat">delete</span></button></div></td>
+          <td><div className="pendencias-erp-actions"><button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Visualizar" aria-label="Visualizar pendência" onClick={() => setDialog({ mode: 'view', id: row.id })}><span className="mat">visibility</span></button><button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Editar" aria-label="Editar pendência" onClick={() => setDialog({ mode: 'edit', id: row.id })}><span className="mat">edit</span></button><button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Responder / Registrar atendimento" aria-label={`Responder ou registrar atendimento da pendência ${row.codigo}`} onClick={() => setOpDialog({ mode: 'atendimento', id: row.id })}><span className="mat" aria-hidden="true">support_agent</span></button>{normalizarStatus(row.status) === STATUS_AGUARDANDO_TESTES && <button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Testar correção" aria-label={`Testar correção da pendência ${row.codigo}`} onClick={() => setOpDialog({ mode: 'teste', id: row.id })}><span className="mat" aria-hidden="true">fact_check</span></button>}<button className="pendencias-erp-btn pendencias-erp-btn-icon" title="Histórico" aria-label={`Ver histórico da pendência ${row.codigo}`} onClick={() => setOpDialog({ mode: 'historico', id: row.id })}><span className="mat">history</span></button></div></td>
         </tr>)}</tbody>
       </table></div>
       <footer className="pendencias-erp-pagination">
@@ -170,16 +159,19 @@ export default function PendenciasErp({ user, refreshKey = 0, newRequest = 0, on
 
     {dialog && <PendenciaErpDialog {...dialog} user={user} onClose={() => setDialog(null)} onSaved={(text) => { setDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }} />}
 
-    {/* Operações concentradas nesta tela em modal (mesma ideia do legado
-        modules/pendencias_erp/pendencias_erp_list.php) — sem página separada de recebimento
-        nem de histórico de trocas. */}
-    {opDialog?.mode === 'enviar_suporte' && (
-      <PendenciaErpDialog
-        user={user}
-        pendenciaId={opDialog.id}
-        onClose={() => setOpDialog(null)}
-        onSaved={(text) => { setOpDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }}
-      />
-    )}
+    {(opDialog?.mode === 'atendimento' || opDialog?.mode === 'historico') && <AtendimentoErpDialog
+      mode={opDialog.mode}
+      pendenciaId={opDialog.id}
+      user={user}
+      onClose={() => setOpDialog(null)}
+      onSaved={(text) => { setOpDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }}
+    />}
+
+    {opDialog?.mode === 'teste' && <TesteCorrecaoErpDialog
+      pendenciaId={opDialog.id}
+      user={user}
+      onClose={() => setOpDialog(null)}
+      onSaved={(text) => { setOpDialog(null); setMessage(text); setRevision((v) => v + 1); onChanged?.() }}
+    />}
   </section>
 }

@@ -600,3 +600,27 @@
   align-items: center;
   gap: 6px;
 }
+
+.erp-atendimento-dialog { width: 720px; }
+/* Botão "Responder / Registrar atendimento" passou a usar apenas ícone
+   (.pendencias-erp-btn-icon), no mesmo padrão visual dos demais botões de ação
+   da grade — ver frontend/src/pages/PendenciasErp.jsx. */
+.erp-atendimento-context { padding: 10px 14px; color: var(--on-surface); background: var(--surface-container-low); border-bottom: 1px solid var(--border-light); font-size: 12px; }
+.erp-atendimento-context span, .erp-atendimento-note, .tnd-field small { color: var(--text-muted); font-size: 11px; }
+.erp-atendimento-note { margin: 0 0 12px; }
+.erp-atendimento-dialog > .tnd-form { padding: 14px; overflow: auto; }
+.erp-atendimento-dialog .tnd-field textarea { min-height: 100px; resize: vertical; }
+.erp-atendimento-history { overflow: auto; padding: 14px; max-height: 60vh; }
+.erp-atendimento-entry { padding: 12px; margin-bottom: 10px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--surface-container-lowest); }
+.erp-atendimento-entry header { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; }
+.erp-atendimento-entry time { color: var(--text-muted); font-size: 11px; }
+.erp-atendimento-entry p { white-space: pre-wrap; font-size: 12px; }
+.erp-atendimento-entry dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 10px; margin: 0; font-size: 11px; }
+.erp-atendimento-entry dt { color: var(--text-muted); }
+.erp-atendimento-entry dd { margin: 0; }
+.erp-atendimento-dialog .tnd-form-error { margin: 0 14px 12px; }
+
+@media (max-width: 640px) {
+  .erp-atendimento-dialog { width: 96vw; }
+  .erp-atendimento-dialog .tnd-form-grid { grid-template-columns: 1fr; }
+}

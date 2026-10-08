@@ -94,6 +94,11 @@ try {
             SistemaHandler::handle($pdo, $action, $input);
             break;
 
+        case 'pendencias_erp':
+            require __DIR__ . '/../src/handlers/pendencias_erp_handler.php';
+            PendenciasErpHandler::handle($pdo, $action, $input);
+            break;
+
         default:
             // --- Modulos genericos via registry ---
             $modules = require __DIR__ . '/../src/modules.php';
